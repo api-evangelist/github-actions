@@ -1,0 +1,136 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "gh": "https://docs.github.com/en/rest/actions/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Workflow": {
+      "@id": "gh:workflows",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:integer"},
+        "node_id": {"@id": "schema:identifier"},
+        "name": {"@id": "schema:name"},
+        "path": {"@id": "schema:url"},
+        "state": {"@id": "schema:status"},
+        "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+        "url": {"@id": "schema:url", "@type": "@id"},
+        "html_url": {"@id": "schema:url", "@type": "@id"},
+        "badge_url": {"@id": "schema:image", "@type": "@id"}
+      }
+    },
+
+    "WorkflowRun": {
+      "@id": "gh:workflow-runs",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:integer"},
+        "name": {"@id": "schema:name"},
+        "node_id": {"@id": "schema:identifier"},
+        "head_branch": {"@id": "schema:version"},
+        "head_sha": {"@id": "schema:identifier"},
+        "display_title": {"@id": "schema:headline"},
+        "run_number": {"@id": "schema:position", "@type": "xsd:integer"},
+        "run_attempt": {"@id": "schema:position", "@type": "xsd:integer"},
+        "event": {"@id": "schema:potentialAction"},
+        "status": {"@id": "schema:status"},
+        "conclusion": {"@id": "schema:result"},
+        "workflow_id": {"@id": "schema:isPartOf", "@type": "xsd:integer"},
+        "url": {"@id": "schema:url", "@type": "@id"},
+        "html_url": {"@id": "schema:url", "@type": "@id"},
+        "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+        "run_started_at": {"@id": "schema:startDate", "@type": "xsd:dateTime"},
+        "actor": {"@id": "schema:agent", "@type": "@id"},
+        "triggering_actor": {"@id": "schema:agent", "@type": "@id"}
+      }
+    },
+
+    "Job": {
+      "@id": "gh:workflow-jobs",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:integer"},
+        "run_id": {"@id": "schema:isPartOf", "@type": "xsd:integer"},
+        "name": {"@id": "schema:name"},
+        "status": {"@id": "schema:status"},
+        "conclusion": {"@id": "schema:result"},
+        "started_at": {"@id": "schema:startDate", "@type": "xsd:dateTime"},
+        "completed_at": {"@id": "schema:endDate", "@type": "xsd:dateTime"},
+        "steps": {"@id": "schema:step"},
+        "runner_name": {"@id": "schema:instrument"},
+        "labels": {"@id": "schema:keywords"}
+      }
+    },
+
+    "Artifact": {
+      "@id": "gh:artifacts",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:integer"},
+        "name": {"@id": "schema:name"},
+        "size_in_bytes": {"@id": "schema:contentSize", "@type": "xsd:integer"},
+        "url": {"@id": "schema:url", "@type": "@id"},
+        "archive_download_url": {"@id": "schema:downloadUrl", "@type": "@id"},
+        "expired": {"@id": "schema:expires", "@type": "xsd:boolean"},
+        "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "expires_at": {"@id": "schema:expires", "@type": "xsd:dateTime"},
+        "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "Secret": {
+      "@id": "gh:secrets",
+      "@context": {
+        "name": {"@id": "schema:name"},
+        "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+        "visibility": {"@id": "schema:accessMode"}
+      }
+    },
+
+    "Variable": {
+      "@id": "gh:variables",
+      "@context": {
+        "name": {"@id": "schema:name"},
+        "value": {"@id": "schema:value"},
+        "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "SelfHostedRunner": {
+      "@id": "gh:self-hosted-runners",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:integer"},
+        "name": {"@id": "schema:name"},
+        "os": {"@id": "schema:operatingSystem"},
+        "status": {"@id": "schema:status"},
+        "busy": {"@id": "schema:status", "@type": "xsd:boolean"},
+        "labels": {"@id": "schema:keywords"}
+      }
+    },
+
+    "CacheEntry": {
+      "@id": "gh:cache",
+      "@context": {
+        "id": {"@id": "schema:identifier", "@type": "xsd:integer"},
+        "ref": {"@id": "schema:version"},
+        "key": {"@id": "schema:name"},
+        "version": {"@id": "schema:version"},
+        "last_accessed_at": {"@id": "schema:dateRead", "@type": "xsd:dateTime"},
+        "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+        "size_in_bytes": {"@id": "schema:contentSize", "@type": "xsd:integer"}
+      }
+    },
+
+    "SimpleUser": {
+      "@id": "schema:Person",
+      "@context": {
+        "login": {"@id": "schema:alternateName"},
+        "id": {"@id": "schema:identifier", "@type": "xsd:integer"},
+        "avatar_url": {"@id": "schema:image", "@type": "@id"},
+        "url": {"@id": "schema:url", "@type": "@id"},
+        "html_url": {"@id": "schema:url", "@type": "@id"}
+      }
+    }
+  }
+}

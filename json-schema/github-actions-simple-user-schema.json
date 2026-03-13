@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.github.com/actions/simple-user.json",
+  "title": "GitHub Simple User",
+  "description": "A minimal representation of a GitHub user account.",
+  "type": "object",
+  "properties": {
+    "login": {
+      "type": "string",
+      "description": "The username of the user."
+    },
+    "id": {
+      "type": "integer",
+      "description": "The unique identifier of the user."
+    },
+    "node_id": {
+      "type": "string",
+      "description": "The GraphQL node ID of the user."
+    },
+    "avatar_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the user's avatar image."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL of the user."
+    },
+    "html_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The HTML URL of the user's profile on GitHub."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of account.",
+      "enum": ["User", "Organization", "Bot"]
+    }
+  },
+  "required": ["login", "id", "node_id", "avatar_url", "url", "html_url", "type"]
+}

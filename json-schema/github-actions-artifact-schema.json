@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.github.com/actions/artifact.json",
+  "title": "GitHub Actions Artifact",
+  "description": "Represents an artifact produced by a GitHub Actions workflow run.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the artifact."
+    },
+    "node_id": {
+      "type": "string",
+      "description": "The GraphQL node ID of the artifact."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the artifact.",
+      "examples": ["build-output", "test-results", "coverage-report"]
+    },
+    "size_in_bytes": {
+      "type": "integer",
+      "description": "The size in bytes of the artifact.",
+      "minimum": 0
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL of the artifact."
+    },
+    "archive_download_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL to download the artifact archive."
+    },
+    "expired": {
+      "type": "boolean",
+      "description": "Whether the artifact has expired."
+    },
+    "created_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The date and time the artifact was created."
+    },
+    "expires_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The date and time the artifact expires."
+    },
+    "updated_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The date and time the artifact was last updated."
+    },
+    "workflow_run": {
+      "type": ["object", "null"],
+      "description": "Minimal information about the workflow run that produced this artifact.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The workflow run ID."
+        },
+        "repository_id": {
+          "type": "integer",
+          "description": "The repository ID."
+        },
+        "head_repository_id": {
+          "type": "integer",
+          "description": "The head repository ID."
+        },
+        "head_branch": {
+          "type": "string",
+          "description": "The head branch for the workflow run."
+        },
+        "head_sha": {
+          "type": "string",
+          "description": "The head SHA for the workflow run."
+        }
+      }
+    }
+  },
+  "required": ["id", "node_id", "name", "size_in_bytes", "url", "archive_download_url", "expired"]
+}

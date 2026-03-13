@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.github.com/actions/cache-entry.json",
+  "title": "GitHub Actions Cache Entry",
+  "description": "Represents a cached dependency entry in GitHub Actions.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the cache entry."
+    },
+    "ref": {
+      "type": "string",
+      "description": "The Git reference for the cache entry.",
+      "examples": ["refs/heads/main"]
+    },
+    "key": {
+      "type": "string",
+      "description": "The cache key used to identify the cache entry.",
+      "examples": ["node-modules-abc123", "pip-cache-linux-x64-def456"]
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the cache entry."
+    },
+    "last_accessed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the cache was last accessed."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the cache was created."
+    },
+    "size_in_bytes": {
+      "type": "integer",
+      "description": "The size of the cache entry in bytes.",
+      "minimum": 0
+    }
+  },
+  "required": ["id", "ref", "key", "version", "last_accessed_at", "created_at", "size_in_bytes"]
+}

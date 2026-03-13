@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.github.com/actions/workflow.json",
+  "title": "GitHub Actions Workflow",
+  "description": "Represents a GitHub Actions workflow as returned by the REST API.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the workflow."
+    },
+    "node_id": {
+      "type": "string",
+      "description": "The GraphQL node ID of the workflow."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the workflow."
+    },
+    "path": {
+      "type": "string",
+      "description": "The path of the workflow file relative to the root of the repository.",
+      "examples": [".github/workflows/ci.yml"]
+    },
+    "state": {
+      "type": "string",
+      "description": "The current state of the workflow.",
+      "enum": ["active", "deleted", "disabled_fork", "disabled_inactivity", "disabled_manually", "unknown"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the workflow was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the workflow was last updated."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL of the workflow."
+    },
+    "html_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The HTML URL of the workflow on GitHub."
+    },
+    "badge_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the workflow badge image."
+    }
+  },
+  "required": ["id", "node_id", "name", "path", "state", "created_at", "updated_at", "url", "html_url", "badge_url"]
+}

@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.github.com/actions/workflow-run.json",
+  "title": "GitHub Actions Workflow Run",
+  "description": "Represents a single execution of a GitHub Actions workflow.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique identifier of the workflow run."
+    },
+    "name": {
+      "type": ["string", "null"],
+      "description": "The name of the workflow run."
+    },
+    "node_id": {
+      "type": "string",
+      "description": "The GraphQL node ID of the workflow run."
+    },
+    "head_branch": {
+      "type": ["string", "null"],
+      "description": "The branch associated with the workflow run's head commit."
+    },
+    "head_sha": {
+      "type": "string",
+      "description": "The SHA of the head commit that points to the version of the workflow being run."
+    },
+    "path": {
+      "type": "string",
+      "description": "The path of the workflow file."
+    },
+    "display_title": {
+      "type": "string",
+      "description": "The title of the workflow run as displayed in the GitHub UI."
+    },
+    "run_number": {
+      "type": "integer",
+      "description": "The auto-incrementing run number for the workflow run."
+    },
+    "run_attempt": {
+      "type": "integer",
+      "description": "Attempt number of the run. 1 for the first attempt and higher if the workflow was re-run.",
+      "minimum": 1
+    },
+    "event": {
+      "type": "string",
+      "description": "The event that triggered the workflow run.",
+      "examples": ["push", "pull_request", "workflow_dispatch", "schedule", "release"]
+    },
+    "status": {
+      "type": ["string", "null"],
+      "description": "The current status of the workflow run.",
+      "enum": ["queued", "in_progress", "completed", "waiting", "requested", "pending", null]
+    },
+    "conclusion": {
+      "type": ["string", "null"],
+      "description": "The result of the completed workflow run.",
+      "enum": ["success", "failure", "neutral", "cancelled", "skipped", "timed_out", "action_required", "stale", null]
+    },
+    "workflow_id": {
+      "type": "integer",
+      "description": "The ID of the parent workflow."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL of the workflow run."
+    },
+    "html_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The HTML URL of the workflow run on GitHub."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the workflow run was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the workflow run was last updated."
+    },
+    "run_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the workflow run started executing."
+    },
+    "jobs_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL for the jobs in this workflow run."
+    },
+    "logs_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL for the logs of this workflow run."
+    },
+    "artifacts_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL for the artifacts of this workflow run."
+    },
+    "cancel_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL to cancel this workflow run."
+    },
+    "rerun_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL to re-run this workflow run."
+    },
+    "workflow_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL of the parent workflow."
+    },
+    "actor": {
+      "$ref": "github-actions-simple-user-schema.json",
+      "description": "The user who triggered the workflow run."
+    },
+    "triggering_actor": {
+      "$ref": "github-actions-simple-user-schema.json",
+      "description": "The user who triggered the workflow run (may differ from actor for re-runs)."
+    },
+    "head_commit": {
+      "type": ["object", "null"],
+      "description": "The head commit for the workflow run.",
+      "properties": {
+        "id": { "type": "string" },
+        "tree_id": { "type": "string" },
+        "message": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "author": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "email": { "type": "string", "format": "email" }
+          }
+        },
+        "committer": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "email": { "type": "string", "format": "email" }
+          }
+        }
+      }
+    }
+  },
+  "required": ["id", "node_id", "head_sha", "run_number", "event", "status", "workflow_id", "url", "html_url", "created_at", "updated_at"]
+}

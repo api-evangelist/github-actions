@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.github.com/actions/variable.json",
+  "title": "GitHub Actions Variable",
+  "description": "Represents a configuration variable for GitHub Actions workflows.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the variable.",
+      "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+      "examples": ["ENVIRONMENT", "DEPLOY_REGION", "NODE_VERSION"]
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the variable."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the variable was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the variable was last updated."
+    }
+  },
+  "required": ["name", "value", "created_at", "updated_at"]
+}

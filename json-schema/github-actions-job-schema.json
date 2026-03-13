@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.github.com/actions/job.json",
+  "title": "GitHub Actions Job",
+  "description": "Represents a job within a GitHub Actions workflow run.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique identifier of the job."
+    },
+    "run_id": {
+      "type": "integer",
+      "description": "The ID of the associated workflow run."
+    },
+    "run_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL of the associated workflow run."
+    },
+    "run_attempt": {
+      "type": "integer",
+      "description": "Attempt number of the associated workflow run.",
+      "minimum": 1
+    },
+    "node_id": {
+      "type": "string",
+      "description": "The GraphQL node ID of the job."
+    },
+    "head_sha": {
+      "type": "string",
+      "description": "The SHA of the commit being run."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The API URL of the job."
+    },
+    "html_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "The HTML URL of the job on GitHub."
+    },
+    "status": {
+      "type": "string",
+      "description": "The phase of the lifecycle that the job is currently in.",
+      "enum": ["queued", "in_progress", "completed", "waiting", "requested", "pending"]
+    },
+    "conclusion": {
+      "type": ["string", "null"],
+      "description": "The outcome of the job.",
+      "enum": ["success", "failure", "neutral", "cancelled", "skipped", "timed_out", "action_required", null]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time the job was created."
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time that the job started."
+    },
+    "completed_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The time that the job finished."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the job."
+    },
+    "steps": {
+      "type": "array",
+      "description": "Steps in the job.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the job step."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["queued", "in_progress", "completed"],
+            "description": "The phase of the lifecycle that the job step is currently in."
+          },
+          "conclusion": {
+            "type": ["string", "null"],
+            "enum": ["failure", "skipped", "success", "cancelled", null],
+            "description": "The outcome of the job step."
+          },
+          "number": {
+            "type": "integer",
+            "description": "The index of the step in the job."
+          },
+          "started_at": {
+            "type": ["string", "null"],
+            "format": "date-time",
+            "description": "The time the step started."
+          },
+          "completed_at": {
+            "type": ["string", "null"],
+            "format": "date-time",
+            "description": "The time that the step finished."
+          }
+        },
+        "required": ["name", "status", "conclusion", "number"]
+      }
+    },
+    "labels": {
+      "type": "array",
+      "description": "Labels for the workflow job used to identify runner targets.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runner_id": {
+      "type": ["integer", "null"],
+      "description": "The ID of the runner that is running this job."
+    },
+    "runner_name": {
+      "type": ["string", "null"],
+      "description": "The name of the runner that is running this job."
+    },
+    "runner_group_id": {
+      "type": ["integer", "null"],
+      "description": "The ID of the runner group that is running this job."
+    },
+    "runner_group_name": {
+      "type": ["string", "null"],
+      "description": "The name of the runner group that is running this job."
+    },
+    "workflow_name": {
+      "type": ["string", "null"],
+      "description": "The name of the workflow."
+    }
+  },
+  "required": ["id", "run_id", "node_id", "head_sha", "status", "conclusion", "started_at", "name"]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.github.com/actions/self-hosted-runner.json",
+  "title": "GitHub Actions Self-Hosted Runner",
+  "description": "Represents a self-hosted runner configured for GitHub Actions.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique identifier of the runner."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the runner.",
+      "examples": ["my-runner", "linux-build-01"]
+    },
+    "os": {
+      "type": "string",
+      "description": "The operating system of the runner.",
+      "examples": ["linux", "macos", "win"]
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the runner.",
+      "enum": ["online", "offline"]
+    },
+    "busy": {
+      "type": "boolean",
+      "description": "Whether the runner is currently executing a job."
+    },
+    "labels": {
+      "type": "array",
+      "description": "Labels assigned to the runner.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier of the label."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the label.",
+            "examples": ["self-hosted", "linux", "x64", "gpu"]
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of label.",
+            "enum": ["read-only", "custom"]
+          }
+        },
+        "required": ["id", "name", "type"]
+      }
+    }
+  },
+  "required": ["id", "name", "os", "status", "busy", "labels"]
+}
