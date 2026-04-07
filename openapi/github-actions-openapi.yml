@@ -44,7 +44,7 @@ paths:
   /repos/{owner}/{repo}/actions/workflows:
     get:
       operationId: listRepoWorkflows
-      summary: List repository workflows
+      summary: GitHub Actions List repository workflows
       description: Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint.
       tags:
         - Workflows
@@ -70,7 +70,7 @@ paths:
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}:
     get:
       operationId: getWorkflow
-      summary: Get a workflow
+      summary: GitHub Actions Get a workflow
       description: Gets a specific workflow. You can replace workflow_id with the workflow file name.
       tags:
         - Workflows
@@ -88,7 +88,7 @@ paths:
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable:
     put:
       operationId: disableWorkflow
-      summary: Disable a workflow
+      summary: GitHub Actions Disable a workflow
       description: Disables a workflow and sets the state of the workflow to disabled_manually.
       tags:
         - Workflows
@@ -102,7 +102,7 @@ paths:
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable:
     put:
       operationId: enableWorkflow
-      summary: Enable a workflow
+      summary: GitHub Actions Enable a workflow
       description: Enables a workflow and sets the state of the workflow to active.
       tags:
         - Workflows
@@ -116,7 +116,7 @@ paths:
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches:
     post:
       operationId: createWorkflowDispatch
-      summary: Create a workflow dispatch event
+      summary: GitHub Actions Create a workflow dispatch event
       description: Manually triggers a GitHub Actions workflow run. The workflow must be configured to support the workflow_dispatch event.
       tags:
         - Workflows
@@ -147,7 +147,7 @@ paths:
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs:
     get:
       operationId: listWorkflowRuns
-      summary: List workflow runs for a workflow
+      summary: GitHub Actions List workflow runs for a workflow
       description: List all workflow runs for a workflow. You can replace workflow_id with the workflow file name.
       tags:
         - Workflows
@@ -191,7 +191,7 @@ paths:
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing:
     get:
       operationId: getWorkflowUsage
-      summary: Get workflow usage
+      summary: GitHub Actions Get workflow usage
       description: Gets the number of billable minutes used by a specific workflow during the current billing cycle.
       tags:
         - Workflows
@@ -209,7 +209,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs:
     get:
       operationId: listWorkflowRunsForRepo
-      summary: List workflow runs for a repository
+      summary: GitHub Actions List workflow runs for a repository
       description: Lists all workflow runs for a repository. Anyone with read access to the repository can use this endpoint.
       tags:
         - Workflow Runs
@@ -252,7 +252,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}:
     get:
       operationId: getWorkflowRun
-      summary: Get a workflow run
+      summary: GitHub Actions Get a workflow run
       description: Gets a specific workflow run.
       tags:
         - Workflow Runs
@@ -269,7 +269,7 @@ paths:
                 $ref: '#/components/schemas/WorkflowRun'
     delete:
       operationId: deleteWorkflowRun
-      summary: Delete a workflow run
+      summary: GitHub Actions Delete a workflow run
       description: Deletes a specific workflow run. Anyone with write access to the repository can use this endpoint.
       tags:
         - Workflow Runs
@@ -283,7 +283,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/approve:
     post:
       operationId: approveWorkflowRun
-      summary: Approve a workflow run for a fork pull request
+      summary: GitHub Actions Approve a workflow run for a fork pull request
       description: Approves a workflow run for a pull request from a public fork of a first time contributor.
       tags:
         - Workflow Runs
@@ -297,7 +297,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/approvals:
     get:
       operationId: getWorkflowRunApprovals
-      summary: Get the review history for a workflow run
+      summary: GitHub Actions Get the review history for a workflow run
       description: Anyone with read access to the repository can use this endpoint.
       tags:
         - Workflow Runs
@@ -317,7 +317,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}:
     get:
       operationId: getWorkflowRunAttempt
-      summary: Get a workflow run attempt
+      summary: GitHub Actions Get a workflow run attempt
       description: Gets a specific workflow run attempt.
       tags:
         - Workflow Runs
@@ -336,7 +336,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs:
     get:
       operationId: downloadWorkflowRunAttemptLogs
-      summary: Download workflow run attempt logs
+      summary: GitHub Actions Download workflow run attempt logs
       description: Gets a redirect URL to download an archive of log files for a specific workflow run attempt.
       tags:
         - Workflow Runs
@@ -351,7 +351,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/cancel:
     post:
       operationId: cancelWorkflowRun
-      summary: Cancel a workflow run
+      summary: GitHub Actions Cancel a workflow run
       description: Cancels a workflow run using its id.
       tags:
         - Workflow Runs
@@ -365,7 +365,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule:
     post:
       operationId: reviewCustomGatesForRun
-      summary: Review custom deployment protection rules for a workflow run
+      summary: GitHub Actions Review custom deployment protection rules for a workflow run
       description: Approve or reject custom deployment protection rules for a workflow run.
       tags:
         - Workflow Runs
@@ -396,7 +396,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel:
     post:
       operationId: forceCancelWorkflowRun
-      summary: Force cancel a workflow run
+      summary: GitHub Actions Force cancel a workflow run
       description: Force cancels a workflow run. Use this endpoint to force cancel a workflow run that is not responding to a normal cancel request.
       tags:
         - Workflow Runs
@@ -410,7 +410,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/logs:
     get:
       operationId: downloadWorkflowRunLogs
-      summary: Download workflow run logs
+      summary: GitHub Actions Download workflow run logs
       description: Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute.
       tags:
         - Workflow Runs
@@ -423,7 +423,7 @@ paths:
           description: Redirect to log download URL
     delete:
       operationId: deleteWorkflowRunLogs
-      summary: Delete workflow run logs
+      summary: GitHub Actions Delete workflow run logs
       description: Deletes all logs for a workflow run.
       tags:
         - Workflow Runs
@@ -437,7 +437,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments:
     get:
       operationId: getPendingDeployments
-      summary: Get pending deployments for a workflow run
+      summary: GitHub Actions Get pending deployments for a workflow run
       description: Get all deployment environments for a workflow run that are waiting for protection rules to pass.
       tags:
         - Workflow Runs
@@ -456,7 +456,7 @@ paths:
                   $ref: '#/components/schemas/PendingDeployment'
     post:
       operationId: reviewPendingDeployments
-      summary: Review pending deployments for a workflow run
+      summary: GitHub Actions Review pending deployments for a workflow run
       description: Approve or reject pending deployments that are waiting on approval by a required reviewer.
       tags:
         - Workflow Runs
@@ -496,7 +496,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/rerun:
     post:
       operationId: rerunWorkflowRun
-      summary: Re-run a workflow
+      summary: GitHub Actions Re-run a workflow
       description: Re-runs your workflow run using its id.
       tags:
         - Workflow Runs
@@ -519,7 +519,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/rerun-failed-jobs:
     post:
       operationId: rerunFailedJobs
-      summary: Re-run failed jobs from a workflow run
+      summary: GitHub Actions Re-run failed jobs from a workflow run
       description: Re-run all of the failed jobs and their dependent jobs in a workflow run using the id of the workflow run.
       tags:
         - Workflow Runs
@@ -542,7 +542,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/timing:
     get:
       operationId: getWorkflowRunUsage
-      summary: Get workflow run usage
+      summary: GitHub Actions Get workflow run usage
       description: Gets the number of billable minutes and total run time for a specific workflow run.
       tags:
         - Workflow Runs
@@ -560,7 +560,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/jobs:
     get:
       operationId: listJobsForWorkflowRun
-      summary: List jobs for a workflow run
+      summary: GitHub Actions List jobs for a workflow run
       description: Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint.
       tags:
         - Jobs
@@ -593,7 +593,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs:
     get:
       operationId: listJobsForWorkflowRunAttempt
-      summary: List jobs for a workflow run attempt
+      summary: GitHub Actions List jobs for a workflow run attempt
       description: Lists jobs for a specific workflow run attempt.
       tags:
         - Jobs
@@ -621,7 +621,7 @@ paths:
   /repos/{owner}/{repo}/actions/jobs/{job_id}:
     get:
       operationId: getJobForWorkflowRun
-      summary: Get a job for a workflow run
+      summary: GitHub Actions Get a job for a workflow run
       description: Gets a specific job in a workflow run.
       tags:
         - Jobs
@@ -643,7 +643,7 @@ paths:
   /repos/{owner}/{repo}/actions/jobs/{job_id}/logs:
     get:
       operationId: downloadJobLogsForWorkflowRun
-      summary: Download job logs for a workflow run
+      summary: GitHub Actions Download job logs for a workflow run
       description: Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute.
       tags:
         - Jobs
@@ -661,7 +661,7 @@ paths:
   /repos/{owner}/{repo}/actions/jobs/{job_id}/rerun:
     post:
       operationId: rerunJobForWorkflowRun
-      summary: Re-run a job from a workflow run
+      summary: GitHub Actions Re-run a job from a workflow run
       description: Re-run a job and its dependent jobs in a workflow run.
       tags:
         - Jobs
@@ -688,7 +688,7 @@ paths:
   /repos/{owner}/{repo}/actions/artifacts:
     get:
       operationId: listArtifactsForRepo
-      summary: List artifacts for a repository
+      summary: GitHub Actions List artifacts for a repository
       description: Lists all artifacts for a repository.
       tags:
         - Artifacts
@@ -718,7 +718,7 @@ paths:
   /repos/{owner}/{repo}/actions/artifacts/{artifact_id}:
     get:
       operationId: getArtifact
-      summary: Get an artifact
+      summary: GitHub Actions Get an artifact
       description: Gets a specific artifact for a workflow run.
       tags:
         - Artifacts
@@ -735,7 +735,7 @@ paths:
                 $ref: '#/components/schemas/Artifact'
     delete:
       operationId: deleteArtifact
-      summary: Delete an artifact
+      summary: GitHub Actions Delete an artifact
       description: Deletes an artifact for a workflow run.
       tags:
         - Artifacts
@@ -749,7 +749,7 @@ paths:
   /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}:
     get:
       operationId: downloadArtifact
-      summary: Download an artifact
+      summary: GitHub Actions Download an artifact
       description: Gets a redirect URL to download an archive for a repository. The archive_format must be zip.
       tags:
         - Artifacts
@@ -769,7 +769,7 @@ paths:
   /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts:
     get:
       operationId: listWorkflowRunArtifacts
-      summary: List workflow run artifacts
+      summary: GitHub Actions List workflow run artifacts
       description: Lists artifacts for a workflow run.
       tags:
         - Artifacts
@@ -902,7 +902,7 @@ paths:
   /repos/{owner}/{repo}/actions/secrets:
     get:
       operationId: listRepoSecrets
-      summary: List repository secrets
+      summary: GitHub Actions List repository secrets
       description: Lists all secrets available in a repository without revealing their encrypted values.
       tags:
         - Secrets
@@ -928,7 +928,7 @@ paths:
   /repos/{owner}/{repo}/actions/secrets/public-key:
     get:
       operationId: getRepoPublicKey
-      summary: Get a repository public key
+      summary: GitHub Actions Get a repository public key
       description: Gets your public key, which you need to encrypt secrets.
       tags:
         - Secrets
@@ -945,7 +945,7 @@ paths:
   /repos/{owner}/{repo}/actions/secrets/{secret_name}:
     get:
       operationId: getRepoSecret
-      summary: Get a repository secret
+      summary: GitHub Actions Get a repository secret
       description: Gets a single repository secret without revealing its encrypted value.
       tags:
         - Secrets
@@ -962,7 +962,7 @@ paths:
                 $ref: '#/components/schemas/ActionsSecret'
     put:
       operationId: createOrUpdateRepoSecret
-      summary: Create or update a repository secret
+      summary: GitHub Actions Create or update a repository secret
       description: Creates or updates a repository secret with an encrypted value.
       tags:
         - Secrets
@@ -990,7 +990,7 @@ paths:
           description: Secret updated
     delete:
       operationId: deleteRepoSecret
-      summary: Delete a repository secret
+      summary: GitHub Actions Delete a repository secret
       description: Deletes a secret in a repository using the secret name.
       tags:
         - Secrets
@@ -1004,7 +1004,7 @@ paths:
   /repos/{owner}/{repo}/actions/organization-secrets:
     get:
       operationId: listRepoOrgSecrets
-      summary: List repository organization secrets
+      summary: GitHub Actions List repository organization secrets
       description: Lists all organization secrets shared with a repository without revealing their encrypted values.
       tags:
         - Secrets
@@ -1030,7 +1030,7 @@ paths:
   /orgs/{org}/actions/secrets:
     get:
       operationId: listOrgSecrets
-      summary: List organization secrets
+      summary: GitHub Actions List organization secrets
       description: Lists all secrets available in an organization without revealing their encrypted values.
       tags:
         - Secrets
@@ -1055,7 +1055,7 @@ paths:
   /orgs/{org}/actions/secrets/public-key:
     get:
       operationId: getOrgPublicKey
-      summary: Get an organization public key
+      summary: GitHub Actions Get an organization public key
       description: Gets your public key, which you need to encrypt secrets.
       tags:
         - Secrets
@@ -1071,7 +1071,7 @@ paths:
   /orgs/{org}/actions/secrets/{secret_name}:
     get:
       operationId: getOrgSecret
-      summary: Get an organization secret
+      summary: GitHub Actions Get an organization secret
       description: Gets a single organization secret without revealing its encrypted value.
       tags:
         - Secrets
@@ -1087,7 +1087,7 @@ paths:
                 $ref: '#/components/schemas/OrgActionsSecret'
     put:
       operationId: createOrUpdateOrgSecret
-      summary: Create or update an organization secret
+      summary: GitHub Actions Create or update an organization secret
       description: Creates or updates an organization secret with an encrypted value.
       tags:
         - Secrets
@@ -1119,7 +1119,7 @@ paths:
           description: Secret updated
     delete:
       operationId: deleteOrgSecret
-      summary: Delete an organization secret
+      summary: GitHub Actions Delete an organization secret
       description: Deletes a secret in an organization using the secret name.
       tags:
         - Secrets
@@ -1132,7 +1132,7 @@ paths:
   /orgs/{org}/actions/secrets/{secret_name}/repositories:
     get:
       operationId: listSelectedReposForOrgSecret
-      summary: List selected repositories for an organization secret
+      summary: GitHub Actions List selected repositories for an organization secret
       description: Lists all repositories that have been selected when the visibility for repository access to a secret is set to selected.
       tags:
         - Secrets
@@ -1157,7 +1157,7 @@ paths:
                       $ref: '#/components/schemas/MinimalRepository'
     put:
       operationId: setSelectedReposForOrgSecret
-      summary: Set selected repositories for an organization secret
+      summary: GitHub Actions Set selected repositories for an organization secret
       description: Replaces all repositories for an organization secret when the visibility for repository access is set to selected.
       tags:
         - Secrets
@@ -1183,7 +1183,7 @@ paths:
   /repos/{owner}/{repo}/actions/variables:
     get:
       operationId: listRepoVariables
-      summary: List repository variables
+      summary: GitHub Actions List repository variables
       description: Lists all repository variables.
       tags:
         - Variables
@@ -1208,7 +1208,7 @@ paths:
                       $ref: '#/components/schemas/ActionsVariable'
     post:
       operationId: createRepoVariable
-      summary: Create a repository variable
+      summary: GitHub Actions Create a repository variable
       description: Creates a repository variable that you can reference in a GitHub Actions workflow.
       tags:
         - Variables
@@ -1235,7 +1235,7 @@ paths:
   /repos/{owner}/{repo}/actions/variables/{name}:
     get:
       operationId: getRepoVariable
-      summary: Get a repository variable
+      summary: GitHub Actions Get a repository variable
       description: Gets a specific variable in a repository.
       tags:
         - Variables
@@ -1252,7 +1252,7 @@ paths:
                 $ref: '#/components/schemas/ActionsVariable'
     patch:
       operationId: updateRepoVariable
-      summary: Update a repository variable
+      summary: GitHub Actions Update a repository variable
       description: Updates a repository variable that you can reference in a GitHub Actions workflow.
       tags:
         - Variables
@@ -1275,7 +1275,7 @@ paths:
           description: Successfully updated variable
     delete:
       operationId: deleteRepoVariable
-      summary: Delete a repository variable
+      summary: GitHub Actions Delete a repository variable
       description: Deletes a repository variable using the variable name.
       tags:
         - Variables
@@ -1289,7 +1289,7 @@ paths:
   /repos/{owner}/{repo}/actions/runners:
     get:
       operationId: listSelfHostedRunnersForRepo
-      summary: List self-hosted runners for a repository
+      summary: GitHub Actions List self-hosted runners for a repository
       description: Lists all self-hosted runners configured in a repository.
       tags:
         - Self-hosted Runners
@@ -1319,7 +1319,7 @@ paths:
   /repos/{owner}/{repo}/actions/runners/{runner_id}:
     get:
       operationId: getSelfHostedRunnerForRepo
-      summary: Get a self-hosted runner for a repository
+      summary: GitHub Actions Get a self-hosted runner for a repository
       description: Gets a specific self-hosted runner configured in a repository.
       tags:
         - Self-hosted Runners
@@ -1336,7 +1336,7 @@ paths:
                 $ref: '#/components/schemas/SelfHostedRunner'
     delete:
       operationId: deleteSelfHostedRunnerFromRepo
-      summary: Delete a self-hosted runner from a repository
+      summary: GitHub Actions Delete a self-hosted runner from a repository
       description: Forces the removal of a self-hosted runner from a repository.
       tags:
         - Self-hosted Runners
@@ -1350,7 +1350,7 @@ paths:
   /repos/{owner}/{repo}/actions/runners/downloads:
     get:
       operationId: listRunnerApplicationsForRepo
-      summary: List runner applications for a repository
+      summary: GitHub Actions List runner applications for a repository
       description: Lists binaries for the runner application that you can download.
       tags:
         - Self-hosted Runners
@@ -1369,7 +1369,7 @@ paths:
   /repos/{owner}/{repo}/actions/runners/registration-token:
     post:
       operationId: createRegistrationTokenForRepo
-      summary: Create a registration token for a repository
+      summary: GitHub Actions Create a registration token for a repository
       description: Returns a token that you can pass to the config script for a self-hosted runner.
       tags:
         - Self-hosted Runners
@@ -1386,7 +1386,7 @@ paths:
   /repos/{owner}/{repo}/actions/runners/remove-token:
     post:
       operationId: createRemoveTokenForRepo
-      summary: Create a remove token for a repository
+      summary: GitHub Actions Create a remove token for a repository
       description: Returns a token that you can pass to remove a self-hosted runner from a repository.
       tags:
         - Self-hosted Runners
@@ -1403,7 +1403,7 @@ paths:
   /repos/{owner}/{repo}/actions/runners/{runner_id}/labels:
     get:
       operationId: listLabelsForSelfHostedRunnerForRepo
-      summary: List labels for a self-hosted runner for a repository
+      summary: GitHub Actions List labels for a self-hosted runner for a repository
       description: Lists all labels for a self-hosted runner configured in a repository.
       tags:
         - Self-hosted Runners
@@ -1427,7 +1427,7 @@ paths:
                       $ref: '#/components/schemas/RunnerLabel'
     post:
       operationId: addCustomLabelsToSelfHostedRunnerForRepo
-      summary: Add custom labels to a self-hosted runner for a repository
+      summary: GitHub Actions Add custom labels to a self-hosted runner for a repository
       description: Adds custom labels to a self-hosted runner configured in a repository.
       tags:
         - Self-hosted Runners
@@ -1466,7 +1466,7 @@ paths:
                       $ref: '#/components/schemas/RunnerLabel'
     put:
       operationId: setCustomLabelsForSelfHostedRunnerForRepo
-      summary: Set custom labels for a self-hosted runner for a repository
+      summary: GitHub Actions Set custom labels for a self-hosted runner for a repository
       description: Remove all previous custom labels and set the new custom labels for a specific self-hosted runner.
       tags:
         - Self-hosted Runners
@@ -1504,7 +1504,7 @@ paths:
                       $ref: '#/components/schemas/RunnerLabel'
     delete:
       operationId: removeAllCustomLabelsFromSelfHostedRunnerForRepo
-      summary: Remove all custom labels from a self-hosted runner for a repository
+      summary: GitHub Actions Remove all custom labels from a self-hosted runner for a repository
       description: Remove all custom labels from a self-hosted runner configured in a repository.
       tags:
         - Self-hosted Runners
@@ -1529,7 +1529,7 @@ paths:
   /repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}:
     delete:
       operationId: removeCustomLabelFromSelfHostedRunnerForRepo
-      summary: Remove a custom label from a self-hosted runner for a repository
+      summary: GitHub Actions Remove a custom label from a self-hosted runner for a repository
       description: Remove a custom label from a self-hosted runner configured in a repository.
       tags:
         - Self-hosted Runners
@@ -1594,7 +1594,7 @@ paths:
   /repos/{owner}/{repo}/actions/permissions/workflow:
     get:
       operationId: getGithubActionsDefaultWorkflowPermissionsRepo
-      summary: Get default workflow permissions for a repository
+      summary: GitHub Actions Get default workflow permissions for a repository
       description: Gets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository.
       tags:
         - Permissions
@@ -1610,7 +1610,7 @@ paths:
                 $ref: '#/components/schemas/ActionsDefaultWorkflowPermissions'
     put:
       operationId: setGithubActionsDefaultWorkflowPermissionsRepo
-      summary: Set default workflow permissions for a repository
+      summary: GitHub Actions Set default workflow permissions for a repository
       description: Sets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository.
       tags:
         - Permissions
@@ -1629,7 +1629,7 @@ paths:
   /repos/{owner}/{repo}/actions/oidc/customization/sub:
     get:
       operationId: getCustomOidcSubClaimForRepo
-      summary: Get the customization template for an OIDC subject claim for a repository
+      summary: GitHub Actions Get the customization template for an OIDC subject claim for a repository
       description: Gets the customization template for an OpenID Connect (OIDC) subject claim.
       tags:
         - OIDC
@@ -1645,7 +1645,7 @@ paths:
                 $ref: '#/components/schemas/OidcCustomSub'
     put:
       operationId: setCustomOidcSubClaimForRepo
-      summary: Set the customization template for an OIDC subject claim for a repository
+      summary: GitHub Actions Set the customization template for an OIDC subject claim for a repository
       description: Sets the customization template for an OpenID Connect (OIDC) subject claim.
       tags:
         - OIDC
@@ -1664,7 +1664,7 @@ paths:
   /orgs/{org}/actions/oidc/customization/sub:
     get:
       operationId: getCustomOidcSubClaimForOrg
-      summary: Get the customization template for an OIDC subject claim for an organization
+      summary: GitHub Actions Get the customization template for an OIDC subject claim for an organization
       description: Gets the customization template for an OpenID Connect (OIDC) subject claim for an organization.
       tags:
         - OIDC
@@ -1679,7 +1679,7 @@ paths:
                 $ref: '#/components/schemas/OidcCustomSubOrg'
     put:
       operationId: setCustomOidcSubClaimForOrg
-      summary: Set the customization template for an OIDC subject claim for an organization
+      summary: GitHub Actions Set the customization template for an OIDC subject claim for an organization
       description: Creates or updates the customization template for an OpenID Connect (OIDC) subject claim for an organization.
       tags:
         - OIDC
@@ -1730,7 +1730,7 @@ paths:
   /orgs/{org}/actions/runner-groups:
     get:
       operationId: listSelfHostedRunnerGroupsForOrg
-      summary: List self-hosted runner groups for an organization
+      summary: GitHub Actions List self-hosted runner groups for an organization
       description: Lists all self-hosted runner groups configured in an organization.
       tags:
         - Self-hosted Runner Groups
@@ -1754,7 +1754,7 @@ paths:
                       $ref: '#/components/schemas/RunnerGroup'
     post:
       operationId: createSelfHostedRunnerGroupForOrg
-      summary: Create a self-hosted runner group for an organization
+      summary: GitHub Actions Create a self-hosted runner group for an organization
       description: Creates a new self-hosted runner group for an organization.
       tags:
         - Self-hosted Runner Groups
@@ -1792,7 +1792,7 @@ paths:
   /orgs/{org}/actions/runner-groups/{runner_group_id}:
     get:
       operationId: getSelfHostedRunnerGroupForOrg
-      summary: Get a self-hosted runner group for an organization
+      summary: GitHub Actions Get a self-hosted runner group for an organization
       description: Gets a specific self-hosted runner group for an organization.
       tags:
         - Self-hosted Runner Groups
@@ -1808,7 +1808,7 @@ paths:
                 $ref: '#/components/schemas/RunnerGroup'
     patch:
       operationId: updateSelfHostedRunnerGroupForOrg
-      summary: Update a self-hosted runner group for an organization
+      summary: GitHub Actions Update a self-hosted runner group for an organization
       description: Updates the name and visibility of a self-hosted runner group in an organization.
       tags:
         - Self-hosted Runner Groups
@@ -1838,7 +1838,7 @@ paths:
                 $ref: '#/components/schemas/RunnerGroup'
     delete:
       operationId: deleteSelfHostedRunnerGroupFromOrg
-      summary: Delete a self-hosted runner group from an organization
+      summary: GitHub Actions Delete a self-hosted runner group from an organization
       description: Deletes a self-hosted runner group from an organization.
       tags:
         - Self-hosted Runner Groups
