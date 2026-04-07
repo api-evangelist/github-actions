@@ -10,24 +10,21 @@ apis:
   - name: GitHub Actions API
     description: >-
       REST API for managing GitHub Actions workflows, runs, artifacts, and secrets.
-    image: 
-      https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
     humanURL: https://docs.github.com/en/actions
     baseURL: https://api.github.com
     tags:
-      - CI/CD
       - Automation
-      - Workflows
+      - CI/CD
       - DevOps
+      - Workflows
     properties:
       - type: Documentation
         url: https://docs.github.com/en/rest/actions
       - type: OpenAPI
-        url: 
-          https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json
+        url: https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json
       - type: Authentication
-        url: 
-          https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api
+        url: https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api
       - type: Getting Started
         url: https://docs.github.com/en/actions/get-started/quickstart
       - type: API Reference
@@ -47,11 +44,9 @@ apis:
       - type: CLI
         url: https://cli.github.com/manual/gh_workflow_run
       - type: Libraries
-        url: 
-          https://docs.github.com/en/rest/using-the-rest-api/libraries-for-the-rest-api
+        url: https://docs.github.com/en/rest/using-the-rest-api/libraries-for-the-rest-api
       - type: Rate Limits
-        url: 
-          https://docs.github.com/en/rest/overview/rate-limits-for-the-rest-api
+        url: https://docs.github.com/en/rest/overview/rate-limits-for-the-rest-api
       - type: REST API Quickstart
         url: https://docs.github.com/en/rest/quickstart
       - type: OpenAPI
@@ -88,8 +83,7 @@ apis:
           - GET /repos/{owner}/{repo}/actions/workflows
           - GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}
           - GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs
-          - POST 
-            /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
+          - POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
           - PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable
           - PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable
           - GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing
@@ -103,12 +97,9 @@ apis:
           - DELETE /repos/{owner}/{repo}/actions/runs/{run_id}
           - GET /repos/{owner}/{repo}/actions/runs/{run_id}/approvals
           - POST /repos/{owner}/{repo}/actions/runs/{run_id}/approve
-          - GET 
-            /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
-          - GET 
-            /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs
-          - POST 
-            /repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule
+          - GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
+          - GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs
+          - POST /repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule
           - POST /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel
           - GET /repos/{owner}/{repo}/actions/runs/{run_id}/logs
           - DELETE /repos/{owner}/{repo}/actions/runs/{run_id}/logs
@@ -121,8 +112,7 @@ apis:
         methods:
           - GET /repos/{owner}/{repo}/actions/artifacts
           - GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
-          - GET 
-            /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}
+          - GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}
           - DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
           - GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts
       - name: Secrets
@@ -141,19 +131,13 @@ apis:
           - DELETE /orgs/{org}/actions/secrets/{secret_name}
           - GET /orgs/{org}/actions/secrets/{secret_name}/repositories
           - PUT /orgs/{org}/actions/secrets/{secret_name}/repositories
-          - PUT 
-            /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
-          - DELETE 
-            /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
+          - PUT /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
+          - DELETE /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
           - GET /repos/{owner}/{repo}/environments/{environment_name}/secrets
-          - GET 
-            /repos/{owner}/{repo}/environments/{environment_name}/secrets/public-key
-          - GET 
-            /repos/{owner}/{repo}/environments/{environment_name}/secrets/{secret_name}
-          - PUT 
-            /repos/{owner}/{repo}/environments/{environment_name}/secrets/{secret_name}
-          - DELETE 
-            /repos/{owner}/{repo}/environments/{environment_name}/secrets/{secret_name}
+          - GET /repos/{owner}/{repo}/environments/{environment_name}/secrets/public-key
+          - GET /repos/{owner}/{repo}/environments/{environment_name}/secrets/{secret_name}
+          - PUT /repos/{owner}/{repo}/environments/{environment_name}/secrets/{secret_name}
+          - DELETE /repos/{owner}/{repo}/environments/{environment_name}/secrets/{secret_name}
       - name: Self-hosted Runners
         description: Manage self-hosted runners for workflows
         methods:
@@ -168,8 +152,7 @@ apis:
           - POST /repos/{owner}/{repo}/actions/runners/{runner_id}/labels
           - PUT /repos/{owner}/{repo}/actions/runners/{runner_id}/labels
           - DELETE /repos/{owner}/{repo}/actions/runners/{runner_id}/labels
-          - DELETE 
-            /repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}
+          - DELETE /repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}
           - GET /orgs/{org}/actions/runners
           - GET /orgs/{org}/actions/runners/{runner_id}
           - DELETE /orgs/{org}/actions/runners/{runner_id}
@@ -189,8 +172,7 @@ apis:
           - GET /repos/{owner}/{repo}/actions/jobs/{job_id}
           - GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs
           - POST /repos/{owner}/{repo}/actions/jobs/{job_id}/rerun
-          - GET 
-            /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs
+          - GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs
       - name: Cache
         description: Manage workflow dependency caches
         methods:
@@ -209,8 +191,7 @@ apis:
           - GET /organizations/{org}/actions/cache/storage-limit
           - PUT /organizations/{org}/actions/cache/storage-limit
       - name: Variables
-        description: Create and manage workflow variables at organization, 
-          repository, and environment scopes
+        description: Create and manage workflow variables at organization, repository, and environment scopes
         methods:
           - GET /repos/{owner}/{repo}/actions/variables
           - POST /repos/{owner}/{repo}/actions/variables
@@ -225,21 +206,15 @@ apis:
           - DELETE /orgs/{org}/actions/variables/{name}
           - GET /orgs/{org}/actions/variables/{name}/repositories
           - PUT /orgs/{org}/actions/variables/{name}/repositories
-          - PUT 
-            /orgs/{org}/actions/variables/{name}/repositories/{repository_id}
-          - DELETE 
-            /orgs/{org}/actions/variables/{name}/repositories/{repository_id}
+          - PUT /orgs/{org}/actions/variables/{name}/repositories/{repository_id}
+          - DELETE /orgs/{org}/actions/variables/{name}/repositories/{repository_id}
           - GET /repos/{owner}/{repo}/environments/{environment_name}/variables
           - POST /repos/{owner}/{repo}/environments/{environment_name}/variables
-          - GET 
-            /repos/{owner}/{repo}/environments/{environment_name}/variables/{name}
-          - PATCH 
-            /repos/{owner}/{repo}/environments/{environment_name}/variables/{name}
-          - DELETE 
-            /repos/{owner}/{repo}/environments/{environment_name}/variables/{name}
+          - GET /repos/{owner}/{repo}/environments/{environment_name}/variables/{name}
+          - PATCH /repos/{owner}/{repo}/environments/{environment_name}/variables/{name}
+          - DELETE /repos/{owner}/{repo}/environments/{environment_name}/variables/{name}
       - name: Permissions
-        description: Control GitHub Actions enablement, allowed actions, and 
-          workflow permissions at organization and repository levels
+        description: Control GitHub Actions enablement, allowed actions, and workflow permissions at organization and repository levels
         methods:
           - GET /orgs/{org}/actions/permissions
           - PUT /orgs/{org}/actions/permissions
@@ -260,16 +235,14 @@ apis:
           - GET /repos/{owner}/{repo}/actions/permissions/workflow
           - PUT /repos/{owner}/{repo}/actions/permissions/workflow
       - name: OIDC
-        description: Manage OpenID Connect subject claim customization templates
-          for organizations and repositories
+        description: Manage OpenID Connect subject claim customization templates for organizations and repositories
         methods:
           - GET /orgs/{org}/actions/oidc/customization/sub
           - PUT /orgs/{org}/actions/oidc/customization/sub
           - GET /repos/{owner}/{repo}/actions/oidc/customization/sub
           - PUT /repos/{owner}/{repo}/actions/oidc/customization/sub
       - name: Self-hosted Runner Groups
-        description: Create and manage runner groups to control repository 
-          access and organize self-hosted runners
+        description: Create and manage runner groups to control repository access and organize self-hosted runners
         methods:
           - GET /orgs/{org}/actions/runner-groups
           - POST /orgs/{org}/actions/runner-groups
@@ -278,19 +251,14 @@ apis:
           - DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}
           - GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories
           - PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories
-          - PUT 
-            /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
-          - DELETE 
-            /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
+          - PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
+          - DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
           - GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners
           - PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/runners
-          - PUT 
-            /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
-          - DELETE 
-            /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+          - PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+          - DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
       - name: GitHub-hosted Runners
-        description: Provision and manage GitHub-hosted runners, custom images, 
-          and machine specifications for organizations
+        description: Provision and manage GitHub-hosted runners, custom images, and machine specifications for organizations
         methods:
           - GET /orgs/{org}/actions/hosted-runners
           - POST /orgs/{org}/actions/hosted-runners
@@ -300,16 +268,11 @@ apis:
           - GET /orgs/{org}/actions/hosted-runners/images/github-owned
           - GET /orgs/{org}/actions/hosted-runners/images/partner
           - GET /orgs/{org}/actions/hosted-runners/images/custom
-          - GET 
-            /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}
-          - DELETE 
-            /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}
-          - GET 
-            /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions
-          - GET 
-            /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}
-          - DELETE 
-            /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}
+          - GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}
+          - DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}
+          - GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions
+          - GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}
+          - DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}
           - GET /orgs/{org}/actions/hosted-runners/limits
           - GET /orgs/{org}/actions/hosted-runners/machine-sizes
           - GET /orgs/{org}/actions/hosted-runners/platforms
@@ -322,11 +285,9 @@ maintainers:
     email: kin@apievangelist.com
 common:
   - type: Terms of Service
-    url: 
-      https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+    url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
   - type: Privacy Policy
-    url: 
-      https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement
+    url: https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement
   - type: Rate Limits
     url: https://docs.github.com/en/rest/overview/rate-limits-for-the-rest-api
   - type: Blog
@@ -380,8 +341,7 @@ common:
   - type: SDK - Go
     url: https://github.com/google/go-github
   - type: Libraries
-    url: 
-      https://docs.github.com/en/rest/using-the-rest-api/libraries-for-the-rest-api
+    url: https://docs.github.com/en/rest/using-the-rest-api/libraries-for-the-rest-api
   - type: CLI
     url: https://cli.github.com/
   - type: REST API Quickstart
@@ -389,8 +349,7 @@ common:
   - type: Billing
     url: https://docs.github.com/en/rest/billing
   - type: GitHub Actions Usage
-    url: 
-      https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions
+    url: https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions
   - type: Security
     url: https://docs.github.com/en/actions/security-for-github-actions
   - type: JSON-LD Context

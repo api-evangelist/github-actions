@@ -16,30 +16,28 @@ security:
   - bearerAuth: []
   - personalAccessToken: []
 tags:
-  - name: Workflows
-    description: Manage workflow files and workflow runs
-  - name: Workflow Runs
-    description: Manage and monitor workflow run executions
-  - name: Jobs
-    description: Access information about workflow jobs
   - name: Artifacts
     description: Download and manage workflow run artifacts
-  - name: Secrets
-    description: Manage encrypted secrets for Actions
-  - name: Variables
-    description: Create and manage workflow variables
-  - name: Self-hosted Runners
-    description: Manage self-hosted runners for workflows
-  - name: Self-hosted Runner Groups
-    description: Manage runner groups for organizations
-  - name: GitHub-hosted Runners
-    description: Provision and manage GitHub-hosted runners
   - name: Cache
     description: Manage workflow dependency caches
-  - name: Permissions
-    description: Control Actions enablement and permissions
+  - name: Jobs
+    description: Access information about workflow jobs
   - name: OIDC
     description: Manage OIDC subject claim customization
+  - name: Permissions
+    description: Control Actions enablement and permissions
+  - name: Secrets
+    description: Manage encrypted secrets for Actions
+  - name: Self-Hosted Runner Groups
+    description: Manage runner groups for organizations
+  - name: Self-Hosted Runners
+    description: Manage self-hosted runners for workflows
+  - name: Variables
+    description: Create and manage workflow variables
+  - name: Workflow Runs
+    description: Manage and monitor workflow run executions
+  - name: Workflows
+    description: Manage workflow files and workflow runs
 paths:
   /repos/{owner}/{repo}/actions/workflows:
     get:
@@ -1292,7 +1290,7 @@ paths:
       summary: GitHub Actions List self-hosted runners for a repository
       description: Lists all self-hosted runners configured in a repository.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1322,7 +1320,7 @@ paths:
       summary: GitHub Actions Get a self-hosted runner for a repository
       description: Gets a specific self-hosted runner configured in a repository.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1339,7 +1337,7 @@ paths:
       summary: GitHub Actions Delete a self-hosted runner from a repository
       description: Forces the removal of a self-hosted runner from a repository.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1353,7 +1351,7 @@ paths:
       summary: GitHub Actions List runner applications for a repository
       description: Lists binaries for the runner application that you can download.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1372,7 +1370,7 @@ paths:
       summary: GitHub Actions Create a registration token for a repository
       description: Returns a token that you can pass to the config script for a self-hosted runner.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1389,7 +1387,7 @@ paths:
       summary: GitHub Actions Create a remove token for a repository
       description: Returns a token that you can pass to remove a self-hosted runner from a repository.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1406,7 +1404,7 @@ paths:
       summary: GitHub Actions List labels for a self-hosted runner for a repository
       description: Lists all labels for a self-hosted runner configured in a repository.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1430,7 +1428,7 @@ paths:
       summary: GitHub Actions Add custom labels to a self-hosted runner for a repository
       description: Adds custom labels to a self-hosted runner configured in a repository.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1469,7 +1467,7 @@ paths:
       summary: GitHub Actions Set custom labels for a self-hosted runner for a repository
       description: Remove all previous custom labels and set the new custom labels for a specific self-hosted runner.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1507,7 +1505,7 @@ paths:
       summary: GitHub Actions Remove all custom labels from a self-hosted runner for a repository
       description: Remove all custom labels from a self-hosted runner configured in a repository.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1532,7 +1530,7 @@ paths:
       summary: GitHub Actions Remove a custom label from a self-hosted runner for a repository
       description: Remove a custom label from a self-hosted runner configured in a repository.
       tags:
-        - Self-hosted Runners
+        - Self-Hosted Runners
       parameters:
         - $ref: '#/components/parameters/owner'
         - $ref: '#/components/parameters/repo'
@@ -1733,7 +1731,7 @@ paths:
       summary: GitHub Actions List self-hosted runner groups for an organization
       description: Lists all self-hosted runner groups configured in an organization.
       tags:
-        - Self-hosted Runner Groups
+        - Self-Hosted Runner Groups
       parameters:
         - $ref: '#/components/parameters/org'
         - $ref: '#/components/parameters/perPage'
@@ -1757,7 +1755,7 @@ paths:
       summary: GitHub Actions Create a self-hosted runner group for an organization
       description: Creates a new self-hosted runner group for an organization.
       tags:
-        - Self-hosted Runner Groups
+        - Self-Hosted Runner Groups
       parameters:
         - $ref: '#/components/parameters/org'
       requestBody:
@@ -1795,7 +1793,7 @@ paths:
       summary: GitHub Actions Get a self-hosted runner group for an organization
       description: Gets a specific self-hosted runner group for an organization.
       tags:
-        - Self-hosted Runner Groups
+        - Self-Hosted Runner Groups
       parameters:
         - $ref: '#/components/parameters/org'
         - $ref: '#/components/parameters/runnerGroupId'
@@ -1811,7 +1809,7 @@ paths:
       summary: GitHub Actions Update a self-hosted runner group for an organization
       description: Updates the name and visibility of a self-hosted runner group in an organization.
       tags:
-        - Self-hosted Runner Groups
+        - Self-Hosted Runner Groups
       parameters:
         - $ref: '#/components/parameters/org'
         - $ref: '#/components/parameters/runnerGroupId'
@@ -1841,7 +1839,7 @@ paths:
       summary: GitHub Actions Delete a self-hosted runner group from an organization
       description: Deletes a self-hosted runner group from an organization.
       tags:
-        - Self-hosted Runner Groups
+        - Self-Hosted Runner Groups
       parameters:
         - $ref: '#/components/parameters/org'
         - $ref: '#/components/parameters/runnerGroupId'
