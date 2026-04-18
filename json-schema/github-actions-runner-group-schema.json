@@ -1,28 +1,28 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SimpleUser",
+  "title": "RunnerGroup",
   "type": "object",
   "properties": {
-    "login": {
-      "type": "string"
-    },
     "id": {
       "type": "integer"
     },
-    "node_id": {
+    "name": {
       "type": "string"
     },
-    "avatar_url": {
+    "visibility": {
       "type": "string"
     },
-    "url": {
+    "default": {
+      "type": "boolean"
+    },
+    "runners_url": {
       "type": "string"
     },
-    "html_url": {
-      "type": "string"
+    "inherited": {
+      "type": "boolean"
     },
-    "type": {
-      "type": "string"
+    "allows_public_repositories": {
+      "type": "boolean"
     }
   }
 }

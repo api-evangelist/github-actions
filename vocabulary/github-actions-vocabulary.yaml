@@ -1,0 +1,18 @@
+name: github-actions API Vocabulary
+provider: github-actions
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 82
+schemas: 29
+tags:
+- Artifacts
+- Cache
+- Jobs
+- OIDC
+- Permissions
+- Secrets
+- Self-Hosted Runner Groups
+- Self-Hosted Runners
+- Variables
+- Workflow Runs
+- Workflows

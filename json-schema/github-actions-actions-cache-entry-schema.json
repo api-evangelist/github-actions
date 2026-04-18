@@ -1,28 +1,28 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SimpleUser",
+  "title": "ActionsCacheEntry",
   "type": "object",
   "properties": {
-    "login": {
-      "type": "string"
-    },
     "id": {
       "type": "integer"
     },
-    "node_id": {
+    "ref": {
       "type": "string"
     },
-    "avatar_url": {
+    "key": {
       "type": "string"
     },
-    "url": {
+    "version": {
       "type": "string"
     },
-    "html_url": {
+    "last_accessed_at": {
       "type": "string"
     },
-    "type": {
+    "created_at": {
       "type": "string"
+    },
+    "size_in_bytes": {
+      "type": "integer"
     }
   }
 }

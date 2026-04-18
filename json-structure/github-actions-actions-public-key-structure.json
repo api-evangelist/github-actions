@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ActionsPublicKey",
+  "type": "object",
+  "properties": {
+    "key_id": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    }
+  }
+}

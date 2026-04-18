@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RunnerGroup",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "visibility": {
+      "type": "string"
+    },
+    "default": {
+      "type": "boolean"
+    },
+    "runners_url": {
+      "type": "string"
+    },
+    "inherited": {
+      "type": "boolean"
+    },
+    "allows_public_repositories": {
+      "type": "boolean"
+    }
+  }
+}

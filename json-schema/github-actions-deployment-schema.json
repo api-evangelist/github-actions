@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SimpleUser",
+  "title": "Deployment",
   "type": "object",
   "properties": {
-    "login": {
+    "url": {
       "type": "string"
     },
     "id": {
@@ -12,16 +12,19 @@
     "node_id": {
       "type": "string"
     },
-    "avatar_url": {
+    "task": {
       "type": "string"
     },
-    "url": {
+    "environment": {
       "type": "string"
     },
-    "html_url": {
+    "description": {
       "type": "string"
     },
-    "type": {
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
       "type": "string"
     }
   }

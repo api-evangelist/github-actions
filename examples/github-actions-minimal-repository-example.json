@@ -1,0 +1,10 @@
+{
+  "id": "abc123",
+  "node_id": "500123",
+  "name": "Example Title",
+  "full_name": "example_value",
+  "private": true,
+  "html_url": "https://www.example.com",
+  "url": "https://www.example.com",
+  "description": "A sample description."
+}

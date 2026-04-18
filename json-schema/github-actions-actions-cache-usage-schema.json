@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ActionsCacheUsage",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string"
+    },
+    "active_caches_size_in_bytes": {
+      "type": "integer"
+    },
+    "active_caches_count": {
+      "type": "integer"
+    }
+  }
+}

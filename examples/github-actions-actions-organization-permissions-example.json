@@ -1,0 +1,6 @@
+{
+  "enabled_repositories": "example_value",
+  "selected_repositories_url": "https://www.example.com",
+  "allowed_actions": "example_value",
+  "selected_actions_url": "https://www.example.com"
+}

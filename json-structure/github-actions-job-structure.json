@@ -1,15 +1,13 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Job",
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Job",
   "type": "object",
   "properties": {
     "id": {
-      "type": "integer",
-      "description": "The id of the job."
+      "type": "integer"
     },
     "run_id": {
-      "type": "integer",
-      "description": "The id of the associated workflow run."
+      "type": "integer"
     },
     "run_url": {
       "type": "string"
@@ -45,8 +43,7 @@
       "type": "string"
     },
     "name": {
-      "type": "string",
-      "description": "The name of the job."
+      "type": "string"
     },
     "steps": {
       "type": "array"

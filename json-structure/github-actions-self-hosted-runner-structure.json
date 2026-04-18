@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SelfHostedRunner",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "busy": {
+      "type": "boolean"
+    },
+    "labels": {
+      "type": "array"
+    }
+  }
+}

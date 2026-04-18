@@ -1,0 +1,7 @@
+{
+  "environment": "example_value",
+  "wait_timer": 10,
+  "wait_timer_started_at": "2026-01-15T10:30:00Z",
+  "current_user_can_approve": true,
+  "reviewers": []
+}

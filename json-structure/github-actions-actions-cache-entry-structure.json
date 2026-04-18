@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ActionsCacheEntry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "ref": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "last_accessed_at": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "size_in_bytes": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,592 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "GitHub Actions CI/CD Automation"
+  description: "Unified capability for GitHub Actions CI/CD automation combining workflow management, run monitoring, artifact handling, secrets/variables management, and runner administration. Used by DevOps engineers, platform teams, and release managers."
+  tags:
+    - GitHub
+    - Actions
+    - CI/CD
+    - Automation
+    - DevOps
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      GITHUB_TOKEN: GITHUB_TOKEN
+
+capability:
+  consumes:
+    - import: actions
+      location: ./shared/actions.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: ci-cd-automation-api
+      description: "Unified REST API for GitHub Actions CI/CD automation."
+      resources:
+        - path: /v1/workflows
+          name: workflows
+          description: "Workflows"
+          operations:
+            - method: GET
+              name: list-workflows
+              description: "List repository workflows"
+              call: "actions.list-repo-workflows"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/workflows/{workflow_id}
+          name: workflow
+          description: "Single workflow"
+          operations:
+            - method: GET
+              name: get-workflow
+              description: "Get a specific workflow"
+              call: "actions.get-workflow"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                workflow_id: "rest.workflow_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/workflows/{workflow_id}/dispatch
+          name: workflow-dispatch
+          description: "Trigger a workflow"
+          operations:
+            - method: POST
+              name: dispatch
+              description: "Trigger a workflow dispatch"
+              call: "actions.create-workflow-dispatch"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                workflow_id: "rest.workflow_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runs
+          name: runs
+          description: "Workflow runs"
+          operations:
+            - method: GET
+              name: list-runs
+              description: "List workflow runs"
+              call: "actions.list-workflow-runs-for-repo"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runs/{run_id}
+          name: run
+          description: "Single workflow run"
+          operations:
+            - method: GET
+              name: get-run
+              description: "Get a workflow run"
+              call: "actions.get-workflow-run"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                run_id: "rest.run_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-run
+              description: "Delete a workflow run"
+              call: "actions.delete-workflow-run"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                run_id: "rest.run_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runs/{run_id}/cancel
+          name: cancel-run
+          description: "Cancel a workflow run"
+          operations:
+            - method: POST
+              name: cancel
+              description: "Cancel a workflow run"
+              call: "actions.cancel-workflow-run"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                run_id: "rest.run_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runs/{run_id}/rerun
+          name: rerun
+          description: "Re-run a workflow"
+          operations:
+            - method: POST
+              name: rerun
+              description: "Re-run a workflow"
+              call: "actions.rerun-workflow-run"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                run_id: "rest.run_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runs/{run_id}/jobs
+          name: jobs
+          description: "Jobs for a workflow run"
+          operations:
+            - method: GET
+              name: list-jobs
+              description: "List jobs for a workflow run"
+              call: "actions.list-jobs-for-workflow-run"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                run_id: "rest.run_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/artifacts
+          name: artifacts
+          description: "Workflow artifacts"
+          operations:
+            - method: GET
+              name: list-artifacts
+              description: "List artifacts"
+              call: "actions.list-artifacts-for-repo"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/artifacts/{artifact_id}
+          name: artifact
+          description: "Single artifact"
+          operations:
+            - method: GET
+              name: get-artifact
+              description: "Get an artifact"
+              call: "actions.get-artifact"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                artifact_id: "rest.artifact_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-artifact
+              description: "Delete an artifact"
+              call: "actions.delete-artifact"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+                artifact_id: "rest.artifact_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/secrets
+          name: secrets
+          description: "Repository secrets"
+          operations:
+            - method: GET
+              name: list-secrets
+              description: "List repository secrets"
+              call: "actions.list-repo-secrets"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/variables
+          name: variables
+          description: "Repository variables"
+          operations:
+            - method: GET
+              name: list-variables
+              description: "List repository variables"
+              call: "actions.list-repo-variables"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/caches
+          name: caches
+          description: "Action caches"
+          operations:
+            - method: GET
+              name: list-caches
+              description: "List caches"
+              call: "actions.list-actions-caches"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runners
+          name: runners
+          description: "Self-hosted runners"
+          operations:
+            - method: GET
+              name: list-runners
+              description: "List self-hosted runners"
+              call: "actions.list-self-hosted-runners-for-repo"
+              with:
+                owner: "rest.owner"
+                repo: "rest.repo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: ci-cd-automation-mcp
+      transport: http
+      description: "MCP server for AI-assisted GitHub Actions CI/CD automation."
+      tools:
+        - name: list-workflows
+          description: "List repository workflows"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "actions.list-repo-workflows"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-workflow
+          description: "Get a specific workflow by ID or filename"
+          hints:
+            readOnly: true
+          call: "actions.get-workflow"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            workflow_id: "tools.workflow_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: trigger-workflow
+          description: "Trigger a workflow dispatch event"
+          hints:
+            readOnly: false
+          call: "actions.create-workflow-dispatch"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            workflow_id: "tools.workflow_id"
+            ref: "tools.ref"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: disable-workflow
+          description: "Disable a workflow"
+          hints:
+            readOnly: false
+          call: "actions.disable-workflow"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            workflow_id: "tools.workflow_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: enable-workflow
+          description: "Enable a workflow"
+          hints:
+            readOnly: false
+          call: "actions.enable-workflow"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            workflow_id: "tools.workflow_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-runs
+          description: "List workflow runs for a repository"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "actions.list-workflow-runs-for-repo"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-run
+          description: "Get details of a specific workflow run"
+          hints:
+            readOnly: true
+          call: "actions.get-workflow-run"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            run_id: "tools.run_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: cancel-run
+          description: "Cancel a running workflow"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "actions.cancel-workflow-run"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            run_id: "tools.run_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: rerun-workflow
+          description: "Re-run a workflow"
+          hints:
+            readOnly: false
+          call: "actions.rerun-workflow-run"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            run_id: "tools.run_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: rerun-failed-jobs
+          description: "Re-run only the failed jobs from a workflow run"
+          hints:
+            readOnly: false
+          call: "actions.rerun-failed-jobs"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            run_id: "tools.run_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-run
+          description: "Delete a workflow run"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "actions.delete-workflow-run"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            run_id: "tools.run_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-jobs
+          description: "List jobs for a workflow run"
+          hints:
+            readOnly: true
+          call: "actions.list-jobs-for-workflow-run"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            run_id: "tools.run_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-job
+          description: "Get a specific job from a workflow run"
+          hints:
+            readOnly: true
+          call: "actions.get-job-for-workflow-run"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            job_id: "tools.job_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-artifacts
+          description: "List workflow artifacts for a repository"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "actions.list-artifacts-for-repo"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-artifact
+          description: "Get details of a specific artifact"
+          hints:
+            readOnly: true
+          call: "actions.get-artifact"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            artifact_id: "tools.artifact_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-artifact
+          description: "Delete a workflow artifact"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "actions.delete-artifact"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            artifact_id: "tools.artifact_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-secrets
+          description: "List repository secrets (names only, not values)"
+          hints:
+            readOnly: true
+          call: "actions.list-repo-secrets"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-or-update-secret
+          description: "Create or update a repository secret"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "actions.create-or-update-repo-secret"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            secret_name: "tools.secret_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-secret
+          description: "Delete a repository secret"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "actions.delete-repo-secret"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            secret_name: "tools.secret_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-variables
+          description: "List repository variables"
+          hints:
+            readOnly: true
+          call: "actions.list-repo-variables"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-variable
+          description: "Create a repository variable"
+          hints:
+            readOnly: false
+          call: "actions.create-repo-variable"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            name: "tools.name"
+            value: "tools.value"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-variable
+          description: "Delete a repository variable"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "actions.delete-repo-variable"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-caches
+          description: "List Actions caches for a repository"
+          hints:
+            readOnly: true
+          call: "actions.list-actions-caches"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-cache
+          description: "Delete a specific cache entry"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "actions.delete-actions-cache-by-id"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            cache_id: "tools.cache_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-runners
+          description: "List self-hosted runners for a repository"
+          hints:
+            readOnly: true
+          call: "actions.list-self-hosted-runners-for-repo"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-runner
+          description: "Get a specific self-hosted runner"
+          hints:
+            readOnly: true
+          call: "actions.get-self-hosted-runner-for-repo"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            runner_id: "tools.runner_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-runner
+          description: "Remove a self-hosted runner from a repository"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "actions.delete-self-hosted-runner-from-repo"
+          with:
+            owner: "tools.owner"
+            repo: "tools.repo"
+            runner_id: "tools.runner_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

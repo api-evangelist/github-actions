@@ -10,47 +10,47 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
 servers:
-  - url: https://api.github.com
-    description: GitHub REST API
+- url: https://api.github.com
+  description: GitHub REST API
 security:
-  - bearerAuth: []
-  - personalAccessToken: []
+- bearerAuth: []
+- personalAccessToken: []
 tags:
-  - name: Artifacts
-    description: Download and manage workflow run artifacts
-  - name: Cache
-    description: Manage workflow dependency caches
-  - name: Jobs
-    description: Access information about workflow jobs
-  - name: OIDC
-    description: Manage OIDC subject claim customization
-  - name: Permissions
-    description: Control Actions enablement and permissions
-  - name: Secrets
-    description: Manage encrypted secrets for Actions
-  - name: Self-Hosted Runner Groups
-    description: Manage runner groups for organizations
-  - name: Self-Hosted Runners
-    description: Manage self-hosted runners for workflows
-  - name: Variables
-    description: Create and manage workflow variables
-  - name: Workflow Runs
-    description: Manage and monitor workflow run executions
-  - name: Workflows
-    description: Manage workflow files and workflow runs
+- name: Artifacts
+  description: Download and manage workflow run artifacts
+- name: Cache
+  description: Manage workflow dependency caches
+- name: Jobs
+  description: Access information about workflow jobs
+- name: OIDC
+  description: Manage OIDC subject claim customization
+- name: Permissions
+  description: Control Actions enablement and permissions
+- name: Secrets
+  description: Manage encrypted secrets for Actions
+- name: Self-Hosted Runner Groups
+  description: Manage runner groups for organizations
+- name: Self-Hosted Runners
+  description: Manage self-hosted runners for workflows
+- name: Variables
+  description: Create and manage workflow variables
+- name: Workflow Runs
+  description: Manage and monitor workflow run executions
+- name: Workflows
+  description: Manage workflow files and workflow runs
 paths:
   /repos/{owner}/{repo}/actions/workflows:
     get:
       operationId: listRepoWorkflows
-      summary: GitHub Actions List repository workflows
+      summary: Github Actions List Repository Workflows
       description: Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved workflows
@@ -65,17 +65,37 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Workflow'
+              examples:
+                Listrepoworkflows200Example:
+                  summary: Default listRepoWorkflows 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    workflows:
+                    - id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      path: example_value
+                      state: active
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      badge_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}:
     get:
       operationId: getWorkflow
-      summary: GitHub Actions Get a workflow
+      summary: Github Actions Get a Workflow
       description: Gets a specific workflow. You can replace workflow_id with the workflow file name.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/workflowId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/workflowId'
       responses:
         '200':
           description: Successfully retrieved workflow
@@ -83,45 +103,69 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Workflow'
+              examples:
+                Getworkflow200Example:
+                  summary: Default getWorkflow 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    node_id: '500123'
+                    name: Example Title
+                    path: example_value
+                    state: active
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+                    url: https://www.example.com
+                    html_url: https://www.example.com
+                    badge_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable:
     put:
       operationId: disableWorkflow
-      summary: GitHub Actions Disable a workflow
+      summary: Github Actions Disable a Workflow
       description: Disables a workflow and sets the state of the workflow to disabled_manually.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/workflowId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/workflowId'
       responses:
         '204':
           description: Successfully disabled workflow
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable:
     put:
       operationId: enableWorkflow
-      summary: GitHub Actions Enable a workflow
+      summary: Github Actions Enable a Workflow
       description: Enables a workflow and sets the state of the workflow to active.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/workflowId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/workflowId'
       responses:
         '204':
           description: Successfully enabled workflow
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches:
     post:
       operationId: createWorkflowDispatch
-      summary: GitHub Actions Create a workflow dispatch event
+      summary: Github Actions Create a Workflow Dispatch Event
       description: Manually triggers a GitHub Actions workflow run. The workflow must be configured to support the workflow_dispatch event.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/workflowId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/workflowId'
       requestBody:
         required: true
         content:
@@ -129,7 +173,7 @@ paths:
             schema:
               type: object
               required:
-                - ref
+              - ref
               properties:
                 ref:
                   type: string
@@ -139,39 +183,53 @@ paths:
                   description: Input keys and values configured in the workflow file. The maximum number of properties is 10.
                   additionalProperties:
                     type: string
+            examples:
+              CreateworkflowdispatchRequestExample:
+                summary: Default createWorkflowDispatch request
+                x-microcks-default: true
+                value:
+                  ref: example_value
+                  inputs: example_value
       responses:
         '204':
           description: Successfully dispatched workflow
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs:
     get:
       operationId: listWorkflowRuns
-      summary: GitHub Actions List workflow runs for a workflow
+      summary: Github Actions List Workflow Runs for a Workflow
       description: List all workflow runs for a workflow. You can replace workflow_id with the workflow file name.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/workflowId'
-        - name: actor
-          in: query
-          schema:
-            type: string
-        - name: branch
-          in: query
-          schema:
-            type: string
-        - name: event
-          in: query
-          schema:
-            type: string
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [completed, action_required, cancelled, failure, neutral, skipped, stale, success, timed_out, in_progress, queued, requested, waiting, pending]
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/workflowId'
+      - name: actor
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: branch
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: event
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum: [completed, action_required, cancelled, failure, neutral, skipped, stale, success, timed_out, in_progress, queued, requested, waiting, pending]
+        example: completed
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved workflow runs
@@ -186,17 +244,51 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/WorkflowRun'
+              examples:
+                Listworkflowruns200Example:
+                  summary: Default listWorkflowRuns 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    workflow_runs:
+                    - id: abc123
+                      name: Example Title
+                      node_id: '500123'
+                      head_branch: example_value
+                      head_sha: example_value
+                      path: example_value
+                      display_title: example_value
+                      run_number: 10
+                      run_attempt: 10
+                      event: example_value
+                      status: queued
+                      conclusion: success
+                      workflow_id: '500123'
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                      run_started_at: '2026-01-15T10:30:00Z'
+                      jobs_url: https://www.example.com
+                      logs_url: https://www.example.com
+                      artifacts_url: https://www.example.com
+                      cancel_url: https://www.example.com
+                      rerun_url: https://www.example.com
+                      workflow_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing:
     get:
       operationId: getWorkflowUsage
-      summary: GitHub Actions Get workflow usage
+      summary: Github Actions Get Workflow Usage
       description: Gets the number of billable minutes used by a specific workflow during the current billing cycle.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/workflowId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/workflowId'
       responses:
         '200':
           description: Successfully retrieved workflow usage
@@ -204,35 +296,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkflowUsage'
+              examples:
+                Getworkflowusage200Example:
+                  summary: Default getWorkflowUsage 200 response
+                  x-microcks-default: true
+                  value:
+                    billable:
+                      UBUNTU:
+                        total_ms: 10
+                      MACOS:
+                        total_ms: 10
+                      WINDOWS:
+                        total_ms: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs:
     get:
       operationId: listWorkflowRunsForRepo
-      summary: GitHub Actions List workflow runs for a repository
+      summary: Github Actions List Workflow Runs for a Repository
       description: Lists all workflow runs for a repository. Anyone with read access to the repository can use this endpoint.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: actor
-          in: query
-          schema:
-            type: string
-        - name: branch
-          in: query
-          schema:
-            type: string
-        - name: event
-          in: query
-          schema:
-            type: string
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [completed, action_required, cancelled, failure, neutral, skipped, stale, success, timed_out, in_progress, queued, requested, waiting, pending]
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: actor
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: branch
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: event
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum: [completed, action_required, cancelled, failure, neutral, skipped, stale, success, timed_out, in_progress, queued, requested, waiting, pending]
+        example: completed
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved workflow runs
@@ -247,17 +358,51 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/WorkflowRun'
+              examples:
+                Listworkflowrunsforrepo200Example:
+                  summary: Default listWorkflowRunsForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    workflow_runs:
+                    - id: abc123
+                      name: Example Title
+                      node_id: '500123'
+                      head_branch: example_value
+                      head_sha: example_value
+                      path: example_value
+                      display_title: example_value
+                      run_number: 10
+                      run_attempt: 10
+                      event: example_value
+                      status: queued
+                      conclusion: success
+                      workflow_id: '500123'
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                      run_started_at: '2026-01-15T10:30:00Z'
+                      jobs_url: https://www.example.com
+                      logs_url: https://www.example.com
+                      artifacts_url: https://www.example.com
+                      cancel_url: https://www.example.com
+                      rerun_url: https://www.example.com
+                      workflow_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}:
     get:
       operationId: getWorkflowRun
-      summary: GitHub Actions Get a workflow run
+      summary: Github Actions Get a Workflow Run
       description: Gets a specific workflow run.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '200':
           description: Successfully retrieved workflow run
@@ -265,44 +410,127 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkflowRun'
+              examples:
+                Getworkflowrun200Example:
+                  summary: Default getWorkflowRun 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    node_id: '500123'
+                    head_branch: example_value
+                    head_sha: example_value
+                    path: example_value
+                    display_title: example_value
+                    run_number: 10
+                    run_attempt: 10
+                    event: example_value
+                    status: queued
+                    conclusion: success
+                    workflow_id: '500123'
+                    url: https://www.example.com
+                    html_url: https://www.example.com
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+                    run_started_at: '2026-01-15T10:30:00Z'
+                    jobs_url: https://www.example.com
+                    logs_url: https://www.example.com
+                    artifacts_url: https://www.example.com
+                    cancel_url: https://www.example.com
+                    rerun_url: https://www.example.com
+                    workflow_url: https://www.example.com
+                    actor:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    triggering_actor:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    repository:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+                    head_repository:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+                    head_commit:
+                      id: abc123
+                      tree_id: '500123'
+                      message: example_value
+                      timestamp: '2026-01-15T10:30:00Z'
+                      author:
+                        name: Example Title
+                        email: user@example.com
+                      committer:
+                        name: Example Title
+                        email: user@example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteWorkflowRun
-      summary: GitHub Actions Delete a workflow run
+      summary: Github Actions Delete a Workflow Run
       description: Deletes a specific workflow run. Anyone with write access to the repository can use this endpoint.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '204':
           description: Successfully deleted workflow run
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/approve:
     post:
       operationId: approveWorkflowRun
-      summary: GitHub Actions Approve a workflow run for a fork pull request
+      summary: Github Actions Approve a Workflow Run for a Fork Pull Request
       description: Approves a workflow run for a pull request from a public fork of a first time contributor.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '201':
           description: Successfully approved workflow run
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/approvals:
     get:
       operationId: getWorkflowRunApprovals
-      summary: GitHub Actions Get the review history for a workflow run
+      summary: Github Actions Get the Review History for a Workflow Run
       description: Anyone with read access to the repository can use this endpoint.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '200':
           description: Successfully retrieved approvals
@@ -312,18 +540,44 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/EnvironmentApproval'
+              examples:
+                Getworkflowrunapprovals200Example:
+                  summary: Default getWorkflowRunApprovals 200 response
+                  x-microcks-default: true
+                  value:
+                  - environments:
+                    - id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                    state: approved
+                    user:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    comment: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}:
     get:
       operationId: getWorkflowRunAttempt
-      summary: GitHub Actions Get a workflow run attempt
+      summary: Github Actions Get a Workflow Run Attempt
       description: Gets a specific workflow run attempt.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
-        - $ref: '#/components/parameters/attemptNumber'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/attemptNumber'
       responses:
         '200':
           description: Successfully retrieved workflow run attempt
@@ -331,46 +585,129 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkflowRun'
+              examples:
+                Getworkflowrunattempt200Example:
+                  summary: Default getWorkflowRunAttempt 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    node_id: '500123'
+                    head_branch: example_value
+                    head_sha: example_value
+                    path: example_value
+                    display_title: example_value
+                    run_number: 10
+                    run_attempt: 10
+                    event: example_value
+                    status: queued
+                    conclusion: success
+                    workflow_id: '500123'
+                    url: https://www.example.com
+                    html_url: https://www.example.com
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+                    run_started_at: '2026-01-15T10:30:00Z'
+                    jobs_url: https://www.example.com
+                    logs_url: https://www.example.com
+                    artifacts_url: https://www.example.com
+                    cancel_url: https://www.example.com
+                    rerun_url: https://www.example.com
+                    workflow_url: https://www.example.com
+                    actor:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    triggering_actor:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    repository:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+                    head_repository:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+                    head_commit:
+                      id: abc123
+                      tree_id: '500123'
+                      message: example_value
+                      timestamp: '2026-01-15T10:30:00Z'
+                      author:
+                        name: Example Title
+                        email: user@example.com
+                      committer:
+                        name: Example Title
+                        email: user@example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs:
     get:
       operationId: downloadWorkflowRunAttemptLogs
-      summary: GitHub Actions Download workflow run attempt logs
+      summary: Github Actions Download Workflow Run Attempt Logs
       description: Gets a redirect URL to download an archive of log files for a specific workflow run attempt.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
-        - $ref: '#/components/parameters/attemptNumber'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/attemptNumber'
       responses:
         '302':
           description: Redirect to log download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/cancel:
     post:
       operationId: cancelWorkflowRun
-      summary: GitHub Actions Cancel a workflow run
+      summary: Github Actions Cancel a Workflow Run
       description: Cancels a workflow run using its id.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '202':
           description: Successfully requested cancellation
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule:
     post:
       operationId: reviewCustomGatesForRun
-      summary: GitHub Actions Review custom deployment protection rules for a workflow run
+      summary: Github Actions Review Custom Deployment Protection Rules for a Workflow Run
       description: Approve or reject custom deployment protection rules for a workflow run.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       requestBody:
         required: true
         content:
@@ -378,8 +715,8 @@ paths:
             schema:
               type: object
               required:
-                - environment_name
-                - state
+              - environment_name
+              - state
               properties:
                 environment_name:
                   type: string
@@ -388,61 +725,81 @@ paths:
                   enum: [approved, rejected]
                 comment:
                   type: string
+            examples:
+              ReviewcustomgatesforrunRequestExample:
+                summary: Default reviewCustomGatesForRun request
+                x-microcks-default: true
+                value:
+                  environment_name: example_value
+                  state: approved
+                  comment: example_value
       responses:
         '204':
           description: Successfully reviewed deployment protection rule
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel:
     post:
       operationId: forceCancelWorkflowRun
-      summary: GitHub Actions Force cancel a workflow run
+      summary: Github Actions Force Cancel a Workflow Run
       description: Force cancels a workflow run. Use this endpoint to force cancel a workflow run that is not responding to a normal cancel request.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '202':
           description: Successfully requested force cancellation
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/logs:
     get:
       operationId: downloadWorkflowRunLogs
-      summary: GitHub Actions Download workflow run logs
+      summary: Github Actions Download Workflow Run Logs
       description: Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '302':
           description: Redirect to log download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteWorkflowRunLogs
-      summary: GitHub Actions Delete workflow run logs
+      summary: Github Actions Delete Workflow Run Logs
       description: Deletes all logs for a workflow run.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '204':
           description: Successfully deleted workflow run logs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments:
     get:
       operationId: getPendingDeployments
-      summary: GitHub Actions Get pending deployments for a workflow run
+      summary: Github Actions Get Pending Deployments for a Workflow Run
       description: Get all deployment environments for a workflow run that are waiting for protection rules to pass.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '200':
           description: Successfully retrieved pending deployments
@@ -452,16 +809,35 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PendingDeployment'
+              examples:
+                Getpendingdeployments200Example:
+                  summary: Default getPendingDeployments 200 response
+                  x-microcks-default: true
+                  value:
+                  - environment:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                    wait_timer: 10
+                    wait_timer_started_at: '2026-01-15T10:30:00Z'
+                    current_user_can_approve: true
+                    reviewers:
+                    - type: User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: reviewPendingDeployments
-      summary: GitHub Actions Review pending deployments for a workflow run
+      summary: Github Actions Review Pending Deployments for a Workflow Run
       description: Approve or reject pending deployments that are waiting on approval by a required reviewer.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       requestBody:
         required: true
         content:
@@ -469,9 +845,9 @@ paths:
             schema:
               type: object
               required:
-                - environment_ids
-                - state
-                - comment
+              - environment_ids
+              - state
+              - comment
               properties:
                 environment_ids:
                   type: array
@@ -482,6 +858,15 @@ paths:
                   enum: [approved, rejected]
                 comment:
                   type: string
+            examples:
+              ReviewpendingdeploymentsRequestExample:
+                summary: Default reviewPendingDeployments request
+                x-microcks-default: true
+                value:
+                  environment_ids:
+                  - 10
+                  state: approved
+                  comment: example_value
       responses:
         '200':
           description: Successfully reviewed pending deployments
@@ -491,17 +876,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Deployment'
+              examples:
+                Reviewpendingdeployments200Example:
+                  summary: Default reviewPendingDeployments 200 response
+                  x-microcks-default: true
+                  value:
+                  - url: https://www.example.com
+                    id: abc123
+                    node_id: '500123'
+                    task: example_value
+                    environment: example_value
+                    description: A sample description.
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/rerun:
     post:
       operationId: rerunWorkflowRun
-      summary: GitHub Actions Re-run a workflow
+      summary: Github Actions Re-run a Workflow
       description: Re-runs your workflow run using its id.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       requestBody:
         content:
           application/json:
@@ -511,20 +912,29 @@ paths:
                 enable_debug_logging:
                   type: boolean
                   default: false
+            examples:
+              RerunworkflowrunRequestExample:
+                summary: Default rerunWorkflowRun request
+                x-microcks-default: true
+                value:
+                  enable_debug_logging: true
       responses:
         '201':
           description: Successfully re-ran workflow
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/rerun-failed-jobs:
     post:
       operationId: rerunFailedJobs
-      summary: GitHub Actions Re-run failed jobs from a workflow run
+      summary: Github Actions Re-run Failed Jobs From a Workflow Run
       description: Re-run all of the failed jobs and their dependent jobs in a workflow run using the id of the workflow run.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       requestBody:
         content:
           application/json:
@@ -534,20 +944,29 @@ paths:
                 enable_debug_logging:
                   type: boolean
                   default: false
+            examples:
+              RerunfailedjobsRequestExample:
+                summary: Default rerunFailedJobs request
+                x-microcks-default: true
+                value:
+                  enable_debug_logging: true
       responses:
         '201':
           description: Successfully re-ran failed jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/timing:
     get:
       operationId: getWorkflowRunUsage
-      summary: GitHub Actions Get workflow run usage
+      summary: Github Actions Get Workflow Run Usage
       description: Gets the number of billable minutes and total run time for a specific workflow run.
       tags:
-        - Workflow Runs
+      - Workflow Runs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
       responses:
         '200':
           description: Successfully retrieved workflow run usage
@@ -555,25 +974,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkflowRunUsage'
+              examples:
+                Getworkflowrunusage200Example:
+                  summary: Default getWorkflowRunUsage 200 response
+                  x-microcks-default: true
+                  value:
+                    billable:
+                      UBUNTU:
+                        total_ms: 10
+                        jobs: 10
+                      MACOS:
+                        total_ms: 10
+                        jobs: 10
+                      WINDOWS:
+                        total_ms: 10
+                        jobs: 10
+                    run_duration_ms: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/jobs:
     get:
       operationId: listJobsForWorkflowRun
-      summary: GitHub Actions List jobs for a workflow run
+      summary: Github Actions List Jobs for a Workflow Run
       description: Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint.
       tags:
-        - Jobs
+      - Jobs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
-        - name: filter
-          in: query
-          schema:
-            type: string
-            enum: [latest, all]
-            default: latest
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - name: filter
+        in: query
+        schema:
+          type: string
+          enum: [latest, all]
+          default: latest
+        example: latest
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved jobs
@@ -588,20 +1027,53 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Job'
+              examples:
+                Listjobsforworkflowrun200Example:
+                  summary: Default listJobsForWorkflowRun 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    jobs:
+                    - id: abc123
+                      run_id: '500123'
+                      run_url: https://www.example.com
+                      run_attempt: 10
+                      node_id: '500123'
+                      head_sha: example_value
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      status: queued
+                      conclusion: success
+                      created_at: '2026-01-15T10:30:00Z'
+                      started_at: '2026-01-15T10:30:00Z'
+                      completed_at: '2026-01-15T10:30:00Z'
+                      name: Example Title
+                      steps:
+                      - {}
+                      labels:
+                      - {}
+                      runner_id: '500123'
+                      runner_name: example_value
+                      runner_group_id: '500123'
+                      runner_group_name: example_value
+                      workflow_name: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs:
     get:
       operationId: listJobsForWorkflowRunAttempt
-      summary: GitHub Actions List jobs for a workflow run attempt
+      summary: Github Actions List Jobs for a Workflow Run Attempt
       description: Lists jobs for a specific workflow run attempt.
       tags:
-        - Jobs
+      - Jobs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
-        - $ref: '#/components/parameters/attemptNumber'
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/attemptNumber'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved jobs
@@ -616,21 +1088,55 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Job'
+              examples:
+                Listjobsforworkflowrunattempt200Example:
+                  summary: Default listJobsForWorkflowRunAttempt 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    jobs:
+                    - id: abc123
+                      run_id: '500123'
+                      run_url: https://www.example.com
+                      run_attempt: 10
+                      node_id: '500123'
+                      head_sha: example_value
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      status: queued
+                      conclusion: success
+                      created_at: '2026-01-15T10:30:00Z'
+                      started_at: '2026-01-15T10:30:00Z'
+                      completed_at: '2026-01-15T10:30:00Z'
+                      name: Example Title
+                      steps:
+                      - {}
+                      labels:
+                      - {}
+                      runner_id: '500123'
+                      runner_name: example_value
+                      runner_group_id: '500123'
+                      runner_group_name: example_value
+                      workflow_name: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/jobs/{job_id}:
     get:
       operationId: getJobForWorkflowRun
-      summary: GitHub Actions Get a job for a workflow run
+      summary: Github Actions Get a Job for a Workflow Run
       description: Gets a specific job in a workflow run.
       tags:
-        - Jobs
+      - Jobs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: job_id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
       responses:
         '200':
           description: Successfully retrieved job
@@ -638,39 +1144,80 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Job'
+              examples:
+                Getjobforworkflowrun200Example:
+                  summary: Default getJobForWorkflowRun 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    run_id: '500123'
+                    run_url: https://www.example.com
+                    run_attempt: 10
+                    node_id: '500123'
+                    head_sha: example_value
+                    url: https://www.example.com
+                    html_url: https://www.example.com
+                    status: queued
+                    conclusion: success
+                    created_at: '2026-01-15T10:30:00Z'
+                    started_at: '2026-01-15T10:30:00Z'
+                    completed_at: '2026-01-15T10:30:00Z'
+                    name: Example Title
+                    steps:
+                    - name: Example Title
+                      status: queued
+                      conclusion: failure
+                      number: 10
+                      started_at: '2026-01-15T10:30:00Z'
+                      completed_at: '2026-01-15T10:30:00Z'
+                    labels:
+                    - example_value
+                    runner_id: '500123'
+                    runner_name: example_value
+                    runner_group_id: '500123'
+                    runner_group_name: example_value
+                    workflow_name: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/jobs/{job_id}/logs:
     get:
       operationId: downloadJobLogsForWorkflowRun
-      summary: GitHub Actions Download job logs for a workflow run
+      summary: Github Actions Download Job Logs for a Workflow Run
       description: Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute.
       tags:
-        - Jobs
+      - Jobs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: job_id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
       responses:
         '302':
           description: Redirect to log download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/jobs/{job_id}/rerun:
     post:
       operationId: rerunJobForWorkflowRun
-      summary: GitHub Actions Re-run a job from a workflow run
+      summary: Github Actions Re-run a Job From a Workflow Run
       description: Re-run a job and its dependent jobs in a workflow run.
       tags:
-        - Jobs
+      - Jobs
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: job_id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
       requestBody:
         content:
           application/json:
@@ -680,25 +1227,35 @@ paths:
                 enable_debug_logging:
                   type: boolean
                   default: false
+            examples:
+              RerunjobforworkflowrunRequestExample:
+                summary: Default rerunJobForWorkflowRun request
+                x-microcks-default: true
+                value:
+                  enable_debug_logging: true
       responses:
         '201':
           description: Successfully re-ran job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/artifacts:
     get:
       operationId: listArtifactsForRepo
-      summary: GitHub Actions List artifacts for a repository
+      summary: Github Actions List Artifacts for a Repository
       description: Lists all artifacts for a repository.
       tags:
-        - Artifacts
+      - Artifacts
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: name
-          in: query
-          schema:
-            type: string
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: name
+        in: query
+        schema:
+          type: string
+        example: Example Title
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved artifacts
@@ -713,17 +1270,43 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Artifact'
+              examples:
+                Listartifactsforrepo200Example:
+                  summary: Default listArtifactsForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    artifacts:
+                    - id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      size_in_bytes: 10
+                      url: https://www.example.com
+                      archive_download_url: https://www.example.com
+                      expired: true
+                      created_at: '2026-01-15T10:30:00Z'
+                      expires_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                      workflow_run:
+                        id: abc123
+                        repository_id: '500123'
+                        head_repository_id: '500123'
+                        head_branch: example_value
+                        head_sha: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/artifacts/{artifact_id}:
     get:
       operationId: getArtifact
-      summary: GitHub Actions Get an artifact
+      summary: Github Actions Get an Artifact
       description: Gets a specific artifact for a workflow run.
       tags:
-        - Artifacts
+      - Artifacts
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/artifactId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/artifactId'
       responses:
         '200':
           description: Successfully retrieved artifact
@@ -731,56 +1314,88 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Artifact'
+              examples:
+                Getartifact200Example:
+                  summary: Default getArtifact 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    node_id: '500123'
+                    name: Example Title
+                    size_in_bytes: 10
+                    url: https://www.example.com
+                    archive_download_url: https://www.example.com
+                    expired: true
+                    created_at: '2026-01-15T10:30:00Z'
+                    expires_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+                    workflow_run:
+                      id: abc123
+                      repository_id: '500123'
+                      head_repository_id: '500123'
+                      head_branch: example_value
+                      head_sha: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteArtifact
-      summary: GitHub Actions Delete an artifact
+      summary: Github Actions Delete an Artifact
       description: Deletes an artifact for a workflow run.
       tags:
-        - Artifacts
+      - Artifacts
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/artifactId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/artifactId'
       responses:
         '204':
           description: Successfully deleted artifact
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}:
     get:
       operationId: downloadArtifact
-      summary: GitHub Actions Download an artifact
+      summary: Github Actions Download an Artifact
       description: Gets a redirect URL to download an archive for a repository. The archive_format must be zip.
       tags:
-        - Artifacts
+      - Artifacts
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/artifactId'
-        - name: archive_format
-          in: path
-          required: true
-          schema:
-            type: string
-            enum: [zip]
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/artifactId'
+      - name: archive_format
+        in: path
+        required: true
+        schema:
+          type: string
+          enum: [zip]
+        example: zip
       responses:
         '302':
           description: Redirect to artifact download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts:
     get:
       operationId: listWorkflowRunArtifacts
-      summary: GitHub Actions List workflow run artifacts
+      summary: Github Actions List Workflow Run Artifacts
       description: Lists artifacts for a workflow run.
       tags:
-        - Artifacts
+      - Artifacts
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runId'
-        - name: name
-          in: query
-          schema:
-            type: string
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - name: name
+        in: query
+        schema:
+          type: string
+        example: Example Title
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved artifacts
@@ -795,38 +1410,68 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Artifact'
+              examples:
+                Listworkflowrunartifacts200Example:
+                  summary: Default listWorkflowRunArtifacts 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    artifacts:
+                    - id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      size_in_bytes: 10
+                      url: https://www.example.com
+                      archive_download_url: https://www.example.com
+                      expired: true
+                      created_at: '2026-01-15T10:30:00Z'
+                      expires_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                      workflow_run:
+                        id: abc123
+                        repository_id: '500123'
+                        head_repository_id: '500123'
+                        head_branch: example_value
+                        head_sha: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/caches:
     get:
       operationId: listActionsCaches
-      summary: List GitHub Actions caches for a repository
+      summary: List Github Actions Caches for a Repository
       description: Lists the GitHub Actions caches for a repository.
       tags:
-        - Cache
+      - Cache
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: ref
-          in: query
-          schema:
-            type: string
-        - name: key
-          in: query
-          schema:
-            type: string
-        - name: sort
-          in: query
-          schema:
-            type: string
-            enum: [created_at, last_accessed_at, size_in_bytes]
-            default: last_accessed_at
-        - name: direction
-          in: query
-          schema:
-            type: string
-            enum: [asc, desc]
-            default: desc
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: ref
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: key
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum: [created_at, last_accessed_at, size_in_bytes]
+          default: last_accessed_at
+        example: created_at
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum: [asc, desc]
+          default: desc
+        example: asc
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved caches
@@ -841,55 +1486,81 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ActionsCacheEntry'
+              examples:
+                Listactionscaches200Example:
+                  summary: Default listActionsCaches 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    actions_caches:
+                    - id: abc123
+                      ref: example_value
+                      key: example_value
+                      version: example_value
+                      last_accessed_at: '2026-01-15T10:30:00Z'
+                      created_at: '2026-01-15T10:30:00Z'
+                      size_in_bytes: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteActionsCacheByKey
-      summary: Delete GitHub Actions caches for a repository (by key)
+      summary: Delete Github Actions Caches for a Repository (by Key)
       description: Deletes one or more GitHub Actions caches for a repository, using a complete cache key.
       tags:
-        - Cache
+      - Cache
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: key
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: ref
-          in: query
-          schema:
-            type: string
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: key
+        in: query
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - name: ref
+        in: query
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successfully deleted caches
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/caches/{cache_id}:
     delete:
       operationId: deleteActionsCacheById
-      summary: Delete a GitHub Actions cache for a repository (by id)
+      summary: Delete a Github Actions Cache for a Repository (by Id)
       description: Deletes a GitHub Actions cache for a repository, using a cache ID.
       tags:
-        - Cache
+      - Cache
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: cache_id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: cache_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
       responses:
         '204':
           description: Successfully deleted cache
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/cache/usage:
     get:
       operationId: getActionsCacheUsage
-      summary: Get GitHub Actions cache usage for a repository
+      summary: Get Github Actions Cache Usage for a Repository
       description: Gets GitHub Actions cache usage for a repository.
       tags:
-        - Cache
+      - Cache
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       responses:
         '200':
           description: Successfully retrieved cache usage
@@ -897,18 +1568,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActionsCacheUsage'
+              examples:
+                Getactionscacheusage200Example:
+                  summary: Default getActionsCacheUsage 200 response
+                  x-microcks-default: true
+                  value:
+                    full_name: example_value
+                    active_caches_size_in_bytes: 10
+                    active_caches_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/secrets:
     get:
       operationId: listRepoSecrets
-      summary: GitHub Actions List repository secrets
+      summary: Github Actions List Repository Secrets
       description: Lists all secrets available in a repository without revealing their encrypted values.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved secrets
@@ -923,16 +1605,29 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ActionsSecret'
+              examples:
+                Listreposecrets200Example:
+                  summary: Default listRepoSecrets 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    secrets:
+                    - name: Example Title
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/secrets/public-key:
     get:
       operationId: getRepoPublicKey
-      summary: GitHub Actions Get a repository public key
+      summary: Github Actions Get a Repository Public Key
       description: Gets your public key, which you need to encrypt secrets.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       responses:
         '200':
           description: Successfully retrieved public key
@@ -940,17 +1635,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActionsPublicKey'
+              examples:
+                Getrepopublickey200Example:
+                  summary: Default getRepoPublicKey 200 response
+                  x-microcks-default: true
+                  value:
+                    key_id: '500123'
+                    key: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/secrets/{secret_name}:
     get:
       operationId: getRepoSecret
-      summary: GitHub Actions Get a repository secret
+      summary: Github Actions Get a Repository Secret
       description: Gets a single repository secret without revealing its encrypted value.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/secretName'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/secretName'
       responses:
         '200':
           description: Successfully retrieved secret
@@ -958,16 +1663,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActionsSecret'
+              examples:
+                Getreposecret200Example:
+                  summary: Default getRepoSecret 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: createOrUpdateRepoSecret
-      summary: GitHub Actions Create or update a repository secret
+      summary: Github Actions Create or Update a Repository Secret
       description: Creates or updates a repository secret with an encrypted value.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/secretName'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/secretName'
       requestBody:
         required: true
         content:
@@ -981,36 +1697,49 @@ paths:
                 key_id:
                   type: string
                   description: ID of the key you used to encrypt the secret.
+            examples:
+              CreateorupdatereposecretRequestExample:
+                summary: Default createOrUpdateRepoSecret request
+                x-microcks-default: true
+                value:
+                  encrypted_value: example_value
+                  key_id: '500123'
       responses:
         '201':
           description: Secret created
         '204':
           description: Secret updated
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteRepoSecret
-      summary: GitHub Actions Delete a repository secret
+      summary: Github Actions Delete a Repository Secret
       description: Deletes a secret in a repository using the secret name.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/secretName'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/secretName'
       responses:
         '204':
           description: Successfully deleted secret
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/organization-secrets:
     get:
       operationId: listRepoOrgSecrets
-      summary: GitHub Actions List repository organization secrets
+      summary: Github Actions List Repository Organization Secrets
       description: Lists all organization secrets shared with a repository without revealing their encrypted values.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved organization secrets
@@ -1025,17 +1754,30 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ActionsSecret'
+              examples:
+                Listrepoorgsecrets200Example:
+                  summary: Default listRepoOrgSecrets 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    secrets:
+                    - name: Example Title
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /orgs/{org}/actions/secrets:
     get:
       operationId: listOrgSecrets
-      summary: GitHub Actions List organization secrets
+      summary: Github Actions List Organization Secrets
       description: Lists all secrets available in an organization without revealing their encrypted values.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved organization secrets
@@ -1050,15 +1792,30 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/OrgActionsSecret'
+              examples:
+                Listorgsecrets200Example:
+                  summary: Default listOrgSecrets 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    secrets:
+                    - name: Example Title
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                      visibility: all
+                      selected_repositories_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /orgs/{org}/actions/secrets/public-key:
     get:
       operationId: getOrgPublicKey
-      summary: GitHub Actions Get an organization public key
+      summary: Github Actions Get an Organization Public Key
       description: Gets your public key, which you need to encrypt secrets.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/org'
       responses:
         '200':
           description: Successfully retrieved public key
@@ -1066,16 +1823,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActionsPublicKey'
+              examples:
+                Getorgpublickey200Example:
+                  summary: Default getOrgPublicKey 200 response
+                  x-microcks-default: true
+                  value:
+                    key_id: '500123'
+                    key: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /orgs/{org}/actions/secrets/{secret_name}:
     get:
       operationId: getOrgSecret
-      summary: GitHub Actions Get an organization secret
+      summary: Github Actions Get an Organization Secret
       description: Gets a single organization secret without revealing its encrypted value.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/secretName'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/secretName'
       responses:
         '200':
           description: Successfully retrieved secret
@@ -1083,15 +1850,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrgActionsSecret'
+              examples:
+                Getorgsecret200Example:
+                  summary: Default getOrgSecret 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+                    visibility: all
+                    selected_repositories_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: createOrUpdateOrgSecret
-      summary: GitHub Actions Create or update an organization secret
+      summary: Github Actions Create or Update an Organization Secret
       description: Creates or updates an organization secret with an encrypted value.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/secretName'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/secretName'
       requestBody:
         required: true
         content:
@@ -1110,35 +1890,51 @@ paths:
                   type: array
                   items:
                     type: integer
+            examples:
+              CreateorupdateorgsecretRequestExample:
+                summary: Default createOrUpdateOrgSecret request
+                x-microcks-default: true
+                value:
+                  encrypted_value: example_value
+                  key_id: '500123'
+                  visibility: all
+                  selected_repository_ids:
+                  - 10
       responses:
         '201':
           description: Secret created
         '204':
           description: Secret updated
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteOrgSecret
-      summary: GitHub Actions Delete an organization secret
+      summary: Github Actions Delete an Organization Secret
       description: Deletes a secret in an organization using the secret name.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/secretName'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/secretName'
       responses:
         '204':
           description: Successfully deleted secret
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /orgs/{org}/actions/secrets/{secret_name}/repositories:
     get:
       operationId: listSelectedReposForOrgSecret
-      summary: GitHub Actions List selected repositories for an organization secret
+      summary: Github Actions List Selected Repositories for an Organization Secret
       description: Lists all repositories that have been selected when the visibility for repository access to a secret is set to selected.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/secretName'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/secretName'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/perPage'
       responses:
         '200':
           description: Successfully retrieved repositories
@@ -1153,15 +1949,33 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/MinimalRepository'
+              examples:
+                Listselectedreposfororgsecret200Example:
+                  summary: Default listSelectedReposForOrgSecret 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    repositories:
+                    - id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: setSelectedReposForOrgSecret
-      summary: GitHub Actions Set selected repositories for an organization secret
+      summary: Github Actions Set Selected Repositories for an Organization Secret
       description: Replaces all repositories for an organization secret when the visibility for repository access is set to selected.
       tags:
-        - Secrets
+      - Secrets
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/secretName'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/secretName'
       requestBody:
         required: true
         content:
@@ -1169,27 +1983,37 @@ paths:
             schema:
               type: object
               required:
-                - selected_repository_ids
+              - selected_repository_ids
               properties:
                 selected_repository_ids:
                   type: array
                   items:
                     type: integer
+            examples:
+              SetselectedreposfororgsecretRequestExample:
+                summary: Default setSelectedReposForOrgSecret request
+                x-microcks-default: true
+                value:
+                  selected_repository_ids:
+                  - 10
       responses:
         '204':
           description: Successfully set repositories
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/variables:
     get:
       operationId: listRepoVariables
-      summary: GitHub Actions List repository variables
+      summary: Github Actions List Repository Variables
       description: Lists all repository variables.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved variables
@@ -1204,15 +2028,29 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ActionsVariable'
+              examples:
+                Listrepovariables200Example:
+                  summary: Default listRepoVariables 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    variables:
+                    - name: Example Title
+                      value: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createRepoVariable
-      summary: GitHub Actions Create a repository variable
+      summary: Github Actions Create a Repository Variable
       description: Creates a repository variable that you can reference in a GitHub Actions workflow.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       requestBody:
         required: true
         content:
@@ -1220,27 +2058,37 @@ paths:
             schema:
               type: object
               required:
-                - name
-                - value
+              - name
+              - value
               properties:
                 name:
                   type: string
                 value:
                   type: string
+            examples:
+              CreaterepovariableRequestExample:
+                summary: Default createRepoVariable request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  value: example_value
       responses:
         '201':
           description: Successfully created variable
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/variables/{name}:
     get:
       operationId: getRepoVariable
-      summary: GitHub Actions Get a repository variable
+      summary: Github Actions Get a Repository Variable
       description: Gets a specific variable in a repository.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/variableName'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/variableName'
       responses:
         '200':
           description: Successfully retrieved variable
@@ -1248,16 +2096,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActionsVariable'
+              examples:
+                Getrepovariable200Example:
+                  summary: Default getRepoVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    value: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateRepoVariable
-      summary: GitHub Actions Update a repository variable
+      summary: Github Actions Update a Repository Variable
       description: Updates a repository variable that you can reference in a GitHub Actions workflow.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/variableName'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/variableName'
       requestBody:
         content:
           application/json:
@@ -1268,38 +2128,52 @@ paths:
                   type: string
                 value:
                   type: string
+            examples:
+              UpdaterepovariableRequestExample:
+                summary: Default updateRepoVariable request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  value: example_value
       responses:
         '204':
           description: Successfully updated variable
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteRepoVariable
-      summary: GitHub Actions Delete a repository variable
+      summary: Github Actions Delete a Repository Variable
       description: Deletes a repository variable using the variable name.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/variableName'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/variableName'
       responses:
         '204':
           description: Successfully deleted variable
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runners:
     get:
       operationId: listSelfHostedRunnersForRepo
-      summary: GitHub Actions List self-hosted runners for a repository
+      summary: Github Actions List Self-hosted Runners for a Repository
       description: Lists all self-hosted runners configured in a repository.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - name: name
-          in: query
-          schema:
-            type: string
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: name
+        in: query
+        schema:
+          type: string
+        example: Example Title
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved runners
@@ -1314,17 +2188,34 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/SelfHostedRunner'
+              examples:
+                Listselfhostedrunnersforrepo200Example:
+                  summary: Default listSelfHostedRunnersForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    runners:
+                    - id: abc123
+                      name: Example Title
+                      os: example_value
+                      status: example_value
+                      busy: true
+                      labels:
+                      - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runners/{runner_id}:
     get:
       operationId: getSelfHostedRunnerForRepo
-      summary: GitHub Actions Get a self-hosted runner for a repository
+      summary: Github Actions Get a Self-hosted Runner for a Repository
       description: Gets a specific self-hosted runner configured in a repository.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runnerId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
       responses:
         '200':
           description: Successfully retrieved runner
@@ -1332,29 +2223,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SelfHostedRunner'
+              examples:
+                Getselfhostedrunnerforrepo200Example:
+                  summary: Default getSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    os: example_value
+                    status: example_value
+                    busy: true
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSelfHostedRunnerFromRepo
-      summary: GitHub Actions Delete a self-hosted runner from a repository
+      summary: Github Actions Delete a Self-hosted Runner From a Repository
       description: Forces the removal of a self-hosted runner from a repository.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runnerId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
       responses:
         '204':
           description: Successfully deleted runner
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runners/downloads:
     get:
       operationId: listRunnerApplicationsForRepo
-      summary: GitHub Actions List runner applications for a repository
+      summary: Github Actions List Runner Applications for a Repository
       description: Lists binaries for the runner application that you can download.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       responses:
         '200':
           description: Successfully retrieved runner applications
@@ -1364,16 +2275,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/RunnerApplication'
+              examples:
+                Listrunnerapplicationsforrepo200Example:
+                  summary: Default listRunnerApplicationsForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                  - os: example_value
+                    architecture: example_value
+                    download_url: https://www.example.com
+                    filename: example_value
+                    temp_download_token: example_value
+                    sha256_checksum: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runners/registration-token:
     post:
       operationId: createRegistrationTokenForRepo
-      summary: GitHub Actions Create a registration token for a repository
+      summary: Github Actions Create a Registration Token for a Repository
       description: Returns a token that you can pass to the config script for a self-hosted runner.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       responses:
         '201':
           description: Successfully created registration token
@@ -1381,16 +2306,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationToken'
+              examples:
+                Createregistrationtokenforrepo201Example:
+                  summary: Default createRegistrationTokenForRepo 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    expires_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runners/remove-token:
     post:
       operationId: createRemoveTokenForRepo
-      summary: GitHub Actions Create a remove token for a repository
+      summary: Github Actions Create a Remove Token for a Repository
       description: Returns a token that you can pass to remove a self-hosted runner from a repository.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       responses:
         '201':
           description: Successfully created remove token
@@ -1398,17 +2333,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationToken'
+              examples:
+                Createremovetokenforrepo201Example:
+                  summary: Default createRemoveTokenForRepo 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    expires_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runners/{runner_id}/labels:
     get:
       operationId: listLabelsForSelfHostedRunnerForRepo
-      summary: GitHub Actions List labels for a self-hosted runner for a repository
+      summary: Github Actions List Labels for a Self-hosted Runner for a Repository
       description: Lists all labels for a self-hosted runner configured in a repository.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runnerId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
       responses:
         '200':
           description: Successfully retrieved labels
@@ -1423,16 +2368,29 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Listlabelsforselfhostedrunnerforrepo200Example:
+                  summary: Default listLabelsForSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: addCustomLabelsToSelfHostedRunnerForRepo
-      summary: GitHub Actions Add custom labels to a self-hosted runner for a repository
+      summary: Github Actions Add Custom Labels to a Self-hosted Runner for a Repository
       description: Adds custom labels to a self-hosted runner configured in a repository.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runnerId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
       requestBody:
         required: true
         content:
@@ -1440,7 +2398,7 @@ paths:
             schema:
               type: object
               required:
-                - labels
+              - labels
               properties:
                 labels:
                   type: array
@@ -1448,6 +2406,13 @@ paths:
                     type: string
                   minItems: 1
                   maxItems: 100
+            examples:
+              AddcustomlabelstoselfhostedrunnerforrepoRequestExample:
+                summary: Default addCustomLabelsToSelfHostedRunnerForRepo request
+                x-microcks-default: true
+                value:
+                  labels:
+                  - example_value
       responses:
         '200':
           description: Successfully added labels
@@ -1462,16 +2427,29 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Addcustomlabelstoselfhostedrunnerforrepo200Example:
+                  summary: Default addCustomLabelsToSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: setCustomLabelsForSelfHostedRunnerForRepo
-      summary: GitHub Actions Set custom labels for a self-hosted runner for a repository
+      summary: Github Actions Set Custom Labels for a Self-hosted Runner for a Repository
       description: Remove all previous custom labels and set the new custom labels for a specific self-hosted runner.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runnerId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
       requestBody:
         required: true
         content:
@@ -1479,13 +2457,20 @@ paths:
             schema:
               type: object
               required:
-                - labels
+              - labels
               properties:
                 labels:
                   type: array
                   items:
                     type: string
                   maxItems: 100
+            examples:
+              SetcustomlabelsforselfhostedrunnerforrepoRequestExample:
+                summary: Default setCustomLabelsForSelfHostedRunnerForRepo request
+                x-microcks-default: true
+                value:
+                  labels:
+                  - example_value
       responses:
         '200':
           description: Successfully set labels
@@ -1500,16 +2485,29 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Setcustomlabelsforselfhostedrunnerforrepo200Example:
+                  summary: Default setCustomLabelsForSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: removeAllCustomLabelsFromSelfHostedRunnerForRepo
-      summary: GitHub Actions Remove all custom labels from a self-hosted runner for a repository
+      summary: Github Actions Remove All Custom Labels From a Self-hosted Runner for a Repository
       description: Remove all custom labels from a self-hosted runner configured in a repository.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runnerId'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
       responses:
         '200':
           description: Successfully removed all custom labels
@@ -1524,22 +2522,36 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Removeallcustomlabelsfromselfhostedrunnerforrepo200Example:
+                  summary: Default removeAllCustomLabelsFromSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}:
     delete:
       operationId: removeCustomLabelFromSelfHostedRunnerForRepo
-      summary: GitHub Actions Remove a custom label from a self-hosted runner for a repository
+      summary: Github Actions Remove a Custom Label From a Self-hosted Runner for a Repository
       description: Remove a custom label from a self-hosted runner configured in a repository.
       tags:
-        - Self-Hosted Runners
+      - Self-Hosted Runners
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
-        - $ref: '#/components/parameters/runnerId'
-        - name: name
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Example Title
       responses:
         '200':
           description: Successfully removed label
@@ -1554,16 +2566,29 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Removecustomlabelfromselfhostedrunnerforrepo200Example:
+                  summary: Default removeCustomLabelFromSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/permissions:
     get:
       operationId: getGithubActionsPermissionsRepo
-      summary: Get GitHub Actions permissions for a repository
+      summary: Get Github Actions Permissions for a Repository
       description: Gets the GitHub Actions permissions policy for a repository.
       tags:
-        - Permissions
+      - Permissions
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       responses:
         '200':
           description: Successfully retrieved permissions
@@ -1571,34 +2596,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActionsRepositoryPermissions'
+              examples:
+                Getgithubactionspermissionsrepo200Example:
+                  summary: Default getGithubActionsPermissionsRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    enabled: true
+                    allowed_actions: all
+                    selected_actions_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: setGithubActionsPermissionsRepo
-      summary: Set GitHub Actions permissions for a repository
+      summary: Set Github Actions Permissions for a Repository
       description: Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions and reusable workflows in the repository.
       tags:
-        - Permissions
+      - Permissions
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ActionsRepositoryPermissions'
+            examples:
+              SetgithubactionspermissionsrepoRequestExample:
+                summary: Default setGithubActionsPermissionsRepo request
+                x-microcks-default: true
+                value:
+                  enabled: true
+                  allowed_actions: all
+                  selected_actions_url: https://www.example.com
       responses:
         '204':
           description: Successfully set permissions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/permissions/workflow:
     get:
       operationId: getGithubActionsDefaultWorkflowPermissionsRepo
-      summary: GitHub Actions Get default workflow permissions for a repository
+      summary: Github Actions Get Default Workflow Permissions for a Repository
       description: Gets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository.
       tags:
-        - Permissions
+      - Permissions
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       responses:
         '200':
           description: Successfully retrieved default workflow permissions
@@ -1606,34 +2653,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActionsDefaultWorkflowPermissions'
+              examples:
+                Getgithubactionsdefaultworkflowpermissionsrepo200Example:
+                  summary: Default getGithubActionsDefaultWorkflowPermissionsRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    default_workflow_permissions: read
+                    can_approve_pull_request_reviews: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: setGithubActionsDefaultWorkflowPermissionsRepo
-      summary: GitHub Actions Set default workflow permissions for a repository
+      summary: Github Actions Set Default Workflow Permissions for a Repository
       description: Sets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository.
       tags:
-        - Permissions
+      - Permissions
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ActionsDefaultWorkflowPermissions'
+            examples:
+              SetgithubactionsdefaultworkflowpermissionsrepoRequestExample:
+                summary: Default setGithubActionsDefaultWorkflowPermissionsRepo request
+                x-microcks-default: true
+                value:
+                  default_workflow_permissions: read
+                  can_approve_pull_request_reviews: true
       responses:
         '204':
           description: Successfully set default workflow permissions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /repos/{owner}/{repo}/actions/oidc/customization/sub:
     get:
       operationId: getCustomOidcSubClaimForRepo
-      summary: GitHub Actions Get the customization template for an OIDC subject claim for a repository
+      summary: Github Actions Get the Customization Template for an Oidc Subject Claim for a Repository
       description: Gets the customization template for an OpenID Connect (OIDC) subject claim.
       tags:
-        - OIDC
+      - OIDC
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       responses:
         '200':
           description: Successfully retrieved OIDC customization
@@ -1641,33 +2708,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OidcCustomSub'
+              examples:
+                Getcustomoidcsubclaimforrepo200Example:
+                  summary: Default getCustomOidcSubClaimForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    use_default: true
+                    include_claim_keys:
+                    - example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: setCustomOidcSubClaimForRepo
-      summary: GitHub Actions Set the customization template for an OIDC subject claim for a repository
+      summary: Github Actions Set the Customization Template for an Oidc Subject Claim for a Repository
       description: Sets the customization template for an OpenID Connect (OIDC) subject claim.
       tags:
-        - OIDC
+      - OIDC
       parameters:
-        - $ref: '#/components/parameters/owner'
-        - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/OidcCustomSub'
+            examples:
+              SetcustomoidcsubclaimforrepoRequestExample:
+                summary: Default setCustomOidcSubClaimForRepo request
+                x-microcks-default: true
+                value:
+                  use_default: true
+                  include_claim_keys:
+                  - example_value
       responses:
         '201':
           description: Successfully set OIDC customization
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /orgs/{org}/actions/oidc/customization/sub:
     get:
       operationId: getCustomOidcSubClaimForOrg
-      summary: GitHub Actions Get the customization template for an OIDC subject claim for an organization
+      summary: Github Actions Get the Customization Template for an Oidc Subject Claim for an Organization
       description: Gets the customization template for an OpenID Connect (OIDC) subject claim for an organization.
       tags:
-        - OIDC
+      - OIDC
       parameters:
-        - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/org'
       responses:
         '200':
           description: Successfully retrieved OIDC customization
@@ -1675,32 +2764,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OidcCustomSubOrg'
+              examples:
+                Getcustomoidcsubclaimfororg200Example:
+                  summary: Default getCustomOidcSubClaimForOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    include_claim_keys:
+                    - example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: setCustomOidcSubClaimForOrg
-      summary: GitHub Actions Set the customization template for an OIDC subject claim for an organization
+      summary: Github Actions Set the Customization Template for an Oidc Subject Claim for an Organization
       description: Creates or updates the customization template for an OpenID Connect (OIDC) subject claim for an organization.
       tags:
-        - OIDC
+      - OIDC
       parameters:
-        - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/org'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/OidcCustomSubOrg'
+            examples:
+              SetcustomoidcsubclaimfororgRequestExample:
+                summary: Default setCustomOidcSubClaimForOrg request
+                x-microcks-default: true
+                value:
+                  include_claim_keys:
+                  - example_value
       responses:
         '201':
           description: Successfully set OIDC customization
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /orgs/{org}/actions/permissions:
     get:
       operationId: getGithubActionsPermissionsOrg
-      summary: Get GitHub Actions permissions for an organization
+      summary: Get Github Actions Permissions for an Organization
       description: Gets the GitHub Actions permissions policy for repositories and allowed actions and reusable workflows in an organization.
       tags:
-        - Permissions
+      - Permissions
       parameters:
-        - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/org'
       responses:
         '200':
           description: Successfully retrieved permissions
@@ -1708,34 +2817,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActionsOrganizationPermissions'
+              examples:
+                Getgithubactionspermissionsorg200Example:
+                  summary: Default getGithubActionsPermissionsOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    enabled_repositories: all
+                    selected_repositories_url: https://www.example.com
+                    allowed_actions: all
+                    selected_actions_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: setGithubActionsPermissionsOrg
-      summary: Set GitHub Actions permissions for an organization
+      summary: Set Github Actions Permissions for an Organization
       description: Sets the GitHub Actions permissions policy for repositories and allowed actions and reusable workflows in an organization.
       tags:
-        - Permissions
+      - Permissions
       parameters:
-        - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/org'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ActionsOrganizationPermissions'
+            examples:
+              SetgithubactionspermissionsorgRequestExample:
+                summary: Default setGithubActionsPermissionsOrg request
+                x-microcks-default: true
+                value:
+                  enabled_repositories: all
+                  selected_repositories_url: https://www.example.com
+                  allowed_actions: all
+                  selected_actions_url: https://www.example.com
       responses:
         '204':
           description: Successfully set permissions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /orgs/{org}/actions/runner-groups:
     get:
       operationId: listSelfHostedRunnerGroupsForOrg
-      summary: GitHub Actions List self-hosted runner groups for an organization
+      summary: Github Actions List Self-hosted Runner Groups for an Organization
       description: Lists all self-hosted runner groups configured in an organization.
       tags:
-        - Self-Hosted Runner Groups
+      - Self-Hosted Runner Groups
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/perPage'
-        - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: Successfully retrieved runner groups
@@ -1750,14 +2883,31 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RunnerGroup'
+              examples:
+                Listselfhostedrunnergroupsfororg200Example:
+                  summary: Default listSelfHostedRunnerGroupsForOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    runner_groups:
+                    - id: abc123
+                      name: Example Title
+                      visibility: example_value
+                      default: true
+                      runners_url: https://www.example.com
+                      inherited: true
+                      allows_public_repositories: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSelfHostedRunnerGroupForOrg
-      summary: GitHub Actions Create a self-hosted runner group for an organization
+      summary: Github Actions Create a Self-hosted Runner Group for an Organization
       description: Creates a new self-hosted runner group for an organization.
       tags:
-        - Self-Hosted Runner Groups
+      - Self-Hosted Runner Groups
       parameters:
-        - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/org'
       requestBody:
         required: true
         content:
@@ -1765,7 +2915,7 @@ paths:
             schema:
               type: object
               required:
-                - name
+              - name
               properties:
                 name:
                   type: string
@@ -1780,6 +2930,17 @@ paths:
                   type: array
                   items:
                     type: integer
+            examples:
+              CreateselfhostedrunnergroupfororgRequestExample:
+                summary: Default createSelfHostedRunnerGroupForOrg request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  visibility: selected
+                  selected_repository_ids:
+                  - 10
+                  runners:
+                  - 10
       responses:
         '201':
           description: Successfully created runner group
@@ -1787,16 +2948,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RunnerGroup'
+              examples:
+                Createselfhostedrunnergroupfororg201Example:
+                  summary: Default createSelfHostedRunnerGroupForOrg 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    visibility: example_value
+                    default: true
+                    runners_url: https://www.example.com
+                    inherited: true
+                    allows_public_repositories: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /orgs/{org}/actions/runner-groups/{runner_group_id}:
     get:
       operationId: getSelfHostedRunnerGroupForOrg
-      summary: GitHub Actions Get a self-hosted runner group for an organization
+      summary: Github Actions Get a Self-hosted Runner Group for an Organization
       description: Gets a specific self-hosted runner group for an organization.
       tags:
-        - Self-Hosted Runner Groups
+      - Self-Hosted Runner Groups
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/runnerGroupId'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/runnerGroupId'
       responses:
         '200':
           description: Successfully retrieved runner group
@@ -1804,15 +2980,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RunnerGroup'
+              examples:
+                Getselfhostedrunnergroupfororg200Example:
+                  summary: Default getSelfHostedRunnerGroupForOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    visibility: example_value
+                    default: true
+                    runners_url: https://www.example.com
+                    inherited: true
+                    allows_public_repositories: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateSelfHostedRunnerGroupForOrg
-      summary: GitHub Actions Update a self-hosted runner group for an organization
+      summary: Github Actions Update a Self-hosted Runner Group for an Organization
       description: Updates the name and visibility of a self-hosted runner group in an organization.
       tags:
-        - Self-Hosted Runner Groups
+      - Self-Hosted Runner Groups
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/runnerGroupId'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/runnerGroupId'
       requestBody:
         required: true
         content:
@@ -1820,13 +3011,20 @@ paths:
             schema:
               type: object
               required:
-                - name
+              - name
               properties:
                 name:
                   type: string
                 visibility:
                   type: string
                   enum: [selected, all, private]
+            examples:
+              UpdateselfhostedrunnergroupfororgRequestExample:
+                summary: Default updateSelfHostedRunnerGroupForOrg request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  visibility: selected
       responses:
         '200':
           description: Successfully updated runner group
@@ -1834,18 +3032,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RunnerGroup'
+              examples:
+                Updateselfhostedrunnergroupfororg200Example:
+                  summary: Default updateSelfHostedRunnerGroupForOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    visibility: example_value
+                    default: true
+                    runners_url: https://www.example.com
+                    inherited: true
+                    allows_public_repositories: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSelfHostedRunnerGroupFromOrg
-      summary: GitHub Actions Delete a self-hosted runner group from an organization
+      summary: Github Actions Delete a Self-hosted Runner Group From an Organization
       description: Deletes a self-hosted runner group from an organization.
       tags:
-        - Self-Hosted Runner Groups
+      - Self-Hosted Runner Groups
       parameters:
-        - $ref: '#/components/parameters/org'
-        - $ref: '#/components/parameters/runnerGroupId'
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/runnerGroupId'
       responses:
         '204':
           description: Successfully deleted runner group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -1884,8 +3100,8 @@ components:
       required: true
       schema:
         oneOf:
-          - type: integer
-          - type: string
+        - type: integer
+        - type: string
       description: The ID of the workflow or the workflow file name.
     runId:
       name: run_id
@@ -1958,104 +3174,138 @@ components:
         id:
           type: integer
           description: Unique identifier of the workflow.
+          example: abc123
         node_id:
           type: string
+          example: '500123'
         name:
           type: string
           description: The name of the workflow.
+          example: Example Title
         path:
           type: string
           description: The path of the workflow file relative to the root of the repository.
+          example: example_value
         state:
           type: string
           enum: [active, deleted, disabled_fork, disabled_inactivity, disabled_manually, unknown]
+          example: active
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         url:
           type: string
           format: uri
+          example: https://www.example.com
         html_url:
           type: string
           format: uri
+          example: https://www.example.com
         badge_url:
           type: string
           format: uri
+          example: https://www.example.com
     WorkflowRun:
       type: object
       properties:
         id:
           type: integer
           description: The ID of the workflow run.
+          example: abc123
         name:
           type: string
           description: The name of the workflow run.
+          example: Example Title
         node_id:
           type: string
+          example: '500123'
         head_branch:
           type: string
+          example: example_value
         head_sha:
           type: string
           description: The SHA of the head commit that points to the version of the workflow being run.
+          example: example_value
         path:
           type: string
+          example: example_value
         display_title:
           type: string
           description: The title of the workflow run displayed in the UI.
+          example: example_value
         run_number:
           type: integer
           description: The auto incrementing run number for the workflow run.
+          example: 10
         run_attempt:
           type: integer
           description: Attempt number of the run, 1 for first attempt and higher if the workflow was re-run.
+          example: 10
         event:
           type: string
           description: The event that triggered the workflow run.
+          example: example_value
         status:
           type: string
           enum: [queued, in_progress, completed, waiting, requested, pending]
+          example: queued
         conclusion:
           type: string
           nullable: true
           enum: [success, failure, neutral, cancelled, skipped, timed_out, action_required, stale, null]
+          example: success
         workflow_id:
           type: integer
+          example: '500123'
         url:
           type: string
           format: uri
+          example: https://www.example.com
         html_url:
           type: string
           format: uri
+          example: https://www.example.com
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         run_started_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         jobs_url:
           type: string
           format: uri
+          example: https://www.example.com
         logs_url:
           type: string
           format: uri
+          example: https://www.example.com
         artifacts_url:
           type: string
           format: uri
+          example: https://www.example.com
         cancel_url:
           type: string
           format: uri
+          example: https://www.example.com
         rerun_url:
           type: string
           format: uri
+          example: https://www.example.com
         workflow_url:
           type: string
           format: uri
+          example: https://www.example.com
         actor:
           $ref: '#/components/schemas/SimpleUser'
         triggering_actor:
@@ -2072,123 +3322,160 @@ components:
         id:
           type: integer
           description: The id of the job.
+          example: abc123
         run_id:
           type: integer
           description: The id of the associated workflow run.
+          example: '500123'
         run_url:
           type: string
           format: uri
+          example: https://www.example.com
         run_attempt:
           type: integer
+          example: 10
         node_id:
           type: string
+          example: '500123'
         head_sha:
           type: string
+          example: example_value
         url:
           type: string
           format: uri
+          example: https://www.example.com
         html_url:
           type: string
           format: uri
           nullable: true
+          example: https://www.example.com
         status:
           type: string
           enum: [queued, in_progress, completed, waiting, requested, pending]
+          example: queued
         conclusion:
           type: string
           nullable: true
           enum: [success, failure, neutral, cancelled, skipped, timed_out, action_required, null]
+          example: success
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         started_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         completed_at:
           type: string
           format: date-time
           nullable: true
+          example: '2026-01-15T10:30:00Z'
         name:
           type: string
           description: The name of the job.
+          example: Example Title
         steps:
           type: array
           items:
             $ref: '#/components/schemas/JobStep'
+          example: []
         labels:
           type: array
           items:
             type: string
+          example: []
         runner_id:
           type: integer
           nullable: true
+          example: '500123'
         runner_name:
           type: string
           nullable: true
+          example: example_value
         runner_group_id:
           type: integer
           nullable: true
+          example: '500123'
         runner_group_name:
           type: string
           nullable: true
+          example: example_value
         workflow_name:
           type: string
           nullable: true
+          example: example_value
     JobStep:
       type: object
       properties:
         name:
           type: string
+          example: Example Title
         status:
           type: string
           enum: [queued, in_progress, completed]
+          example: queued
         conclusion:
           type: string
           nullable: true
           enum: [failure, skipped, success, cancelled, null]
+          example: failure
         number:
           type: integer
+          example: 10
         started_at:
           type: string
           format: date-time
           nullable: true
+          example: '2026-01-15T10:30:00Z'
         completed_at:
           type: string
           format: date-time
           nullable: true
+          example: '2026-01-15T10:30:00Z'
     Artifact:
       type: object
       properties:
         id:
           type: integer
+          example: abc123
         node_id:
           type: string
+          example: '500123'
         name:
           type: string
           description: The name of the artifact.
+          example: Example Title
         size_in_bytes:
           type: integer
           description: The size in bytes of the artifact.
+          example: 10
         url:
           type: string
           format: uri
+          example: https://www.example.com
         archive_download_url:
           type: string
           format: uri
+          example: https://www.example.com
         expired:
           type: boolean
+          example: true
         created_at:
           type: string
           format: date-time
           nullable: true
+          example: '2026-01-15T10:30:00Z'
         expires_at:
           type: string
           format: date-time
           nullable: true
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
           nullable: true
+          example: '2026-01-15T10:30:00Z'
         workflow_run:
           type: object
           nullable: true
@@ -2203,160 +3490,209 @@ components:
               type: string
             head_sha:
               type: string
+          example: example_value
     ActionsSecret:
       type: object
       properties:
         name:
           type: string
           description: The name of the secret.
+          example: Example Title
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     OrgActionsSecret:
       type: object
       properties:
         name:
           type: string
+          example: Example Title
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         visibility:
           type: string
           enum: [all, private, selected]
+          example: all
         selected_repositories_url:
           type: string
           format: uri
+          example: https://www.example.com
     ActionsPublicKey:
       type: object
       properties:
         key_id:
           type: string
           description: The identifier for the key.
+          example: '500123'
         key:
           type: string
           description: The Base64 encoded public key.
+          example: example_value
     ActionsVariable:
       type: object
       properties:
         name:
           type: string
           description: The name of the variable.
+          example: Example Title
         value:
           type: string
           description: The value of the variable.
+          example: example_value
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     ActionsCacheEntry:
       type: object
       properties:
         id:
           type: integer
+          example: abc123
         ref:
           type: string
+          example: example_value
         key:
           type: string
+          example: example_value
         version:
           type: string
+          example: example_value
         last_accessed_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         size_in_bytes:
           type: integer
+          example: 10
     ActionsCacheUsage:
       type: object
       properties:
         full_name:
           type: string
+          example: example_value
         active_caches_size_in_bytes:
           type: integer
+          example: 10
         active_caches_count:
           type: integer
+          example: 10
     SelfHostedRunner:
       type: object
       properties:
         id:
           type: integer
           description: The id of the runner.
+          example: abc123
         name:
           type: string
           description: The name of the runner.
+          example: Example Title
         os:
           type: string
           description: The operating system of the runner.
+          example: example_value
         status:
           type: string
           description: The status of the runner.
+          example: example_value
         busy:
           type: boolean
+          example: true
         labels:
           type: array
           items:
             $ref: '#/components/schemas/RunnerLabel'
+          example: []
     RunnerLabel:
       type: object
       properties:
         id:
           type: integer
+          example: abc123
         name:
           type: string
+          example: Example Title
         type:
           type: string
           enum: [read-only, custom]
+          example: read-only
     RunnerApplication:
       type: object
       properties:
         os:
           type: string
+          example: example_value
         architecture:
           type: string
+          example: example_value
         download_url:
           type: string
           format: uri
+          example: https://www.example.com
         filename:
           type: string
+          example: example_value
         temp_download_token:
           type: string
+          example: example_value
         sha256_checksum:
           type: string
+          example: example_value
     AuthenticationToken:
       type: object
       properties:
         token:
           type: string
+          example: example_value
         expires_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     RunnerGroup:
       type: object
       properties:
         id:
           type: integer
+          example: abc123
         name:
           type: string
+          example: Example Title
         visibility:
           type: string
+          example: example_value
         default:
           type: boolean
+          example: true
         runners_url:
           type: string
           format: uri
+          example: https://www.example.com
         inherited:
           type: boolean
+          example: true
         allows_public_repositories:
           type: boolean
+          example: true
     WorkflowUsage:
       type: object
       properties:
@@ -2378,6 +3714,7 @@ components:
               properties:
                 total_ms:
                   type: integer
+          example: example_value
     WorkflowRunUsage:
       type: object
       properties:
@@ -2405,51 +3742,64 @@ components:
                   type: integer
                 jobs:
                   type: integer
+          example: example_value
         run_duration_ms:
           type: integer
+          example: 10
     ActionsRepositoryPermissions:
       type: object
       properties:
         enabled:
           type: boolean
+          example: true
         allowed_actions:
           type: string
           enum: [all, local_only, selected]
+          example: all
         selected_actions_url:
           type: string
           format: uri
+          example: https://www.example.com
     ActionsOrganizationPermissions:
       type: object
       properties:
         enabled_repositories:
           type: string
           enum: [all, none, selected]
+          example: all
         selected_repositories_url:
           type: string
           format: uri
+          example: https://www.example.com
         allowed_actions:
           type: string
           enum: [all, local_only, selected]
+          example: all
         selected_actions_url:
           type: string
           format: uri
+          example: https://www.example.com
     ActionsDefaultWorkflowPermissions:
       type: object
       properties:
         default_workflow_permissions:
           type: string
           enum: [read, write]
+          example: read
         can_approve_pull_request_reviews:
           type: boolean
+          example: true
     OidcCustomSub:
       type: object
       properties:
         use_default:
           type: boolean
+          example: true
         include_claim_keys:
           type: array
           items:
             type: string
+          example: []
     OidcCustomSubOrg:
       type: object
       properties:
@@ -2457,6 +3807,7 @@ components:
           type: array
           items:
             type: string
+          example: []
     EnvironmentApproval:
       type: object
       properties:
@@ -2483,13 +3834,16 @@ components:
               updated_at:
                 type: string
                 format: date-time
+          example: []
         state:
           type: string
           enum: [approved, rejected, pending]
+          example: approved
         user:
           $ref: '#/components/schemas/SimpleUser'
         comment:
           type: string
+          example: example_value
     PendingDeployment:
       type: object
       properties:
@@ -2508,14 +3862,18 @@ components:
             html_url:
               type: string
               format: uri
+          example: example_value
         wait_timer:
           type: integer
+          example: 10
         wait_timer_started_at:
           type: string
           format: date-time
           nullable: true
+          example: '2026-01-15T10:30:00Z'
         current_user_can_approve:
           type: boolean
+          example: true
         reviewers:
           type: array
           items:
@@ -2526,85 +3884,113 @@ components:
                 enum: [User, Team]
               reviewer:
                 $ref: '#/components/schemas/SimpleUser'
+          example: []
     Deployment:
       type: object
       properties:
         url:
           type: string
           format: uri
+          example: https://www.example.com
         id:
           type: integer
+          example: abc123
         node_id:
           type: string
+          example: '500123'
         task:
           type: string
+          example: example_value
         environment:
           type: string
+          example: example_value
         description:
           type: string
           nullable: true
+          example: A sample description.
         created_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         updated_at:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     SimpleUser:
       type: object
       properties:
         login:
           type: string
+          example: example_value
         id:
           type: integer
+          example: abc123
         node_id:
           type: string
+          example: '500123'
         avatar_url:
           type: string
           format: uri
+          example: https://www.example.com
         url:
           type: string
           format: uri
+          example: https://www.example.com
         html_url:
           type: string
           format: uri
+          example: https://www.example.com
         type:
           type: string
+          example: example_value
     MinimalRepository:
       type: object
       properties:
         id:
           type: integer
+          example: abc123
         node_id:
           type: string
+          example: '500123'
         name:
           type: string
+          example: Example Title
         full_name:
           type: string
+          example: example_value
         owner:
           $ref: '#/components/schemas/SimpleUser'
         private:
           type: boolean
+          example: true
         html_url:
           type: string
           format: uri
+          example: https://www.example.com
         url:
           type: string
           format: uri
+          example: https://www.example.com
         description:
           type: string
           nullable: true
+          example: A sample description.
     SimpleCommit:
       type: object
       properties:
         id:
           type: string
+          example: abc123
         tree_id:
           type: string
+          example: '500123'
         message:
           type: string
+          example: example_value
         timestamp:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         author:
           type: object
           properties:
@@ -2613,6 +3999,7 @@ components:
             email:
               type: string
               format: email
+          example: example_value
         committer:
           type: object
           properties:
@@ -2621,3 +4008,4 @@ components:
             email:
               type: string
               format: email
+          example: example_value

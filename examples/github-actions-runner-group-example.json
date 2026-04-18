@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "name": "Example Title",
+  "visibility": "example_value",
+  "default": true,
+  "runners_url": "https://www.example.com",
+  "inherited": true,
+  "allows_public_repositories": true
+}

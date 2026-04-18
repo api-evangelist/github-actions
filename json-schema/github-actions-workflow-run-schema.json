@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WorkflowRun",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The ID of the workflow run."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the workflow run."
+    },
+    "node_id": {
+      "type": "string"
+    },
+    "head_branch": {
+      "type": "string"
+    },
+    "head_sha": {
+      "type": "string",
+      "description": "The SHA of the head commit that points to the version of the workflow being run."
+    },
+    "path": {
+      "type": "string"
+    },
+    "display_title": {
+      "type": "string",
+      "description": "The title of the workflow run displayed in the UI."
+    },
+    "run_number": {
+      "type": "integer",
+      "description": "The auto incrementing run number for the workflow run."
+    },
+    "run_attempt": {
+      "type": "integer",
+      "description": "Attempt number of the run, 1 for first attempt and higher if the workflow was re-run."
+    },
+    "event": {
+      "type": "string",
+      "description": "The event that triggered the workflow run."
+    },
+    "status": {
+      "type": "string"
+    },
+    "conclusion": {
+      "type": "string"
+    },
+    "workflow_id": {
+      "type": "integer"
+    },
+    "url": {
+      "type": "string"
+    },
+    "html_url": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "run_started_at": {
+      "type": "string"
+    },
+    "jobs_url": {
+      "type": "string"
+    },
+    "logs_url": {
+      "type": "string"
+    },
+    "artifacts_url": {
+      "type": "string"
+    },
+    "cancel_url": {
+      "type": "string"
+    },
+    "rerun_url": {
+      "type": "string"
+    },
+    "workflow_url": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "enabled": true,
+  "allowed_actions": "example_value",
+  "selected_actions_url": "https://www.example.com"
+}

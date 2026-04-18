@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ActionsRepositoryPermissions",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean"
+    },
+    "allowed_actions": {
+      "type": "string"
+    },
+    "selected_actions_url": {
+      "type": "string"
+    }
+  }
+}

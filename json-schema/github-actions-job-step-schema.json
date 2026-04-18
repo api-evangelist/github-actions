@@ -1,27 +1,24 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SimpleUser",
+  "title": "JobStep",
   "type": "object",
   "properties": {
-    "login": {
+    "name": {
       "type": "string"
     },
-    "id": {
+    "status": {
+      "type": "string"
+    },
+    "conclusion": {
+      "type": "string"
+    },
+    "number": {
       "type": "integer"
     },
-    "node_id": {
+    "started_at": {
       "type": "string"
     },
-    "avatar_url": {
-      "type": "string"
-    },
-    "url": {
-      "type": "string"
-    },
-    "html_url": {
-      "type": "string"
-    },
-    "type": {
+    "completed_at": {
       "type": "string"
     }
   }

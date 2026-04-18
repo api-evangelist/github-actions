@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "status": "example_value",
+  "conclusion": "example_value",
+  "number": 10,
+  "started_at": "2026-01-15T10:30:00Z",
+  "completed_at": "2026-01-15T10:30:00Z"
+}

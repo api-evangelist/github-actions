@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SimpleCommit",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "tree_id": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "author": {
+      "type": "object"
+    },
+    "committer": {
+      "type": "object"
+    }
+  }
+}

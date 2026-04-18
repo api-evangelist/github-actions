@@ -1,27 +1,24 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SimpleUser",
+  "title": "RunnerApplication",
   "type": "object",
   "properties": {
-    "login": {
+    "os": {
       "type": "string"
     },
-    "id": {
-      "type": "integer"
-    },
-    "node_id": {
+    "architecture": {
       "type": "string"
     },
-    "avatar_url": {
+    "download_url": {
       "type": "string"
     },
-    "url": {
+    "filename": {
       "type": "string"
     },
-    "html_url": {
+    "temp_download_token": {
       "type": "string"
     },
-    "type": {
+    "sha256_checksum": {
       "type": "string"
     }
   }

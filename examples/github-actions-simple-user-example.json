@@ -1,0 +1,9 @@
+{
+  "login": "example_value",
+  "id": "abc123",
+  "node_id": "500123",
+  "avatar_url": "https://www.example.com",
+  "url": "https://www.example.com",
+  "html_url": "https://www.example.com",
+  "type": "example_value"
+}

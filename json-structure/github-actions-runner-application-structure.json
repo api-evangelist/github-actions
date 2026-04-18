@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RunnerApplication",
+  "type": "object",
+  "properties": {
+    "os": {
+      "type": "string"
+    },
+    "architecture": {
+      "type": "string"
+    },
+    "download_url": {
+      "type": "string"
+    },
+    "filename": {
+      "type": "string"
+    },
+    "temp_download_token": {
+      "type": "string"
+    },
+    "sha256_checksum": {
+      "type": "string"
+    }
+  }
+}

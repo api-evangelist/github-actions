@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Artifact",
+  "title": "MinimalRepository",
   "type": "object",
   "properties": {
     "id": {
@@ -10,33 +10,22 @@
       "type": "string"
     },
     "name": {
-      "type": "string",
-      "description": "The name of the artifact."
+      "type": "string"
     },
-    "size_in_bytes": {
-      "type": "integer",
-      "description": "The size in bytes of the artifact."
+    "full_name": {
+      "type": "string"
+    },
+    "private": {
+      "type": "boolean"
+    },
+    "html_url": {
+      "type": "string"
     },
     "url": {
       "type": "string"
     },
-    "archive_download_url": {
+    "description": {
       "type": "string"
-    },
-    "expired": {
-      "type": "boolean"
-    },
-    "created_at": {
-      "type": "string"
-    },
-    "expires_at": {
-      "type": "string"
-    },
-    "updated_at": {
-      "type": "string"
-    },
-    "workflow_run": {
-      "type": "object"
     }
   }
 }

@@ -1,0 +1,8 @@
+{
+  "os": "example_value",
+  "architecture": "example_value",
+  "download_url": "https://www.example.com",
+  "filename": "example_value",
+  "temp_download_token": "example_value",
+  "sha256_checksum": "example_value"
+}

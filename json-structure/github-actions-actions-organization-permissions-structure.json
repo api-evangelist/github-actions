@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ActionsOrganizationPermissions",
+  "type": "object",
+  "properties": {
+    "enabled_repositories": {
+      "type": "string"
+    },
+    "selected_repositories_url": {
+      "type": "string"
+    },
+    "allowed_actions": {
+      "type": "string"
+    },
+    "selected_actions_url": {
+      "type": "string"
+    }
+  }
+}

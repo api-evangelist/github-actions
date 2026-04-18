@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnvironmentApproval",
+  "type": "object",
+  "properties": {
+    "environments": {
+      "type": "array"
+    },
+    "state": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    }
+  }
+}

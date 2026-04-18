@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "WorkflowRun",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "node_id": {
+      "type": "string"
+    },
+    "head_branch": {
+      "type": "string"
+    },
+    "head_sha": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "display_title": {
+      "type": "string"
+    },
+    "run_number": {
+      "type": "integer"
+    },
+    "run_attempt": {
+      "type": "integer"
+    },
+    "event": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "conclusion": {
+      "type": "string"
+    },
+    "workflow_id": {
+      "type": "integer"
+    },
+    "url": {
+      "type": "string"
+    },
+    "html_url": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "run_started_at": {
+      "type": "string"
+    },
+    "jobs_url": {
+      "type": "string"
+    },
+    "logs_url": {
+      "type": "string"
+    },
+    "artifacts_url": {
+      "type": "string"
+    },
+    "cancel_url": {
+      "type": "string"
+    },
+    "rerun_url": {
+      "type": "string"
+    },
+    "workflow_url": {
+      "type": "string"
+    }
+  }
+}

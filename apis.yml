@@ -4,7 +4,7 @@ description: >-
 image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 url: https://docs.github.com/en/rest/actions
 created: '2024'
-modified: '2026-03-03'
+modified: '2026-04-18'
 specificationVersion: '0.18'
 apis:
   - name: GitHub Actions API
@@ -25,56 +25,54 @@ apis:
         url: https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json
       - type: Authentication
         url: https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.github.com/en/actions/get-started/quickstart
-      - type: API Reference
+      - type: APIReference
         url: https://docs.github.com/en/rest/actions
-      - type: Change Log
+      - type: ChangeLog
         url: https://github.blog/changelog/label/actions/
-      - type: SDK - JavaScript
+      - type: SDK
         url: https://github.com/octokit/octokit.js
-      - type: SDK - Ruby
+        title: JavaScript SDK
+      - type: SDK
         url: https://github.com/octokit/octokit.rb
-      - type: SDK - .NET
+        title: Ruby SDK
+      - type: SDK
         url: https://github.com/octokit/octokit.net
-      - type: SDK - Go
+        title: .NET SDK
+      - type: SDK
         url: https://github.com/google/go-github
-      - type: SDK - GitHub Actions
-        url: https://github.com/octokit/action.js
+        title: Go SDK
       - type: CLI
         url: https://cli.github.com/manual/gh_workflow_run
-      - type: Libraries
-        url: https://docs.github.com/en/rest/using-the-rest-api/libraries-for-the-rest-api
-      - type: Rate Limits
+      - type: RateLimits
         url: https://docs.github.com/en/rest/overview/rate-limits-for-the-rest-api
-      - type: REST API Quickstart
-        url: https://docs.github.com/en/rest/quickstart
       - type: OpenAPI
         url: openapi/github-actions-openapi.yml
-      - type: JSON Schema - Workflow
+      - type: JSONSchema
         url: json-schema/github-actions-workflow-schema.json
-      - type: JSON Schema - Workflow Run
+      - type: JSONSchema
         url: json-schema/github-actions-run-schema.json
-      - type: JSON Schema - Job
+      - type: JSONSchema
         url: json-schema/github-actions-job-schema.json
-      - type: JSON Schema - Artifact
+      - type: JSONSchema
         url: json-schema/github-actions-artifact-schema.json
-      - type: JSON Schema - Secret
+      - type: JSONSchema
         url: json-schema/github-actions-secret-schema.json
-      - type: JSON Schema - Runner
+      - type: JSONSchema
         url: json-schema/github-actions-runner-schema.json
-      - type: JSON Schema - Variable
+      - type: JSONSchema
         url: json-schema/github-actions-variable-schema.json
-      - type: JSON Schema - Cache
+      - type: JSONSchema
         url: json-schema/github-actions-cache-schema.json
-      - type: JSON Schema - Simple User
+      - type: JSONSchema
         url: json-schema/github-actions-simple-user-schema.json
-      - type: JSON-LD Context
+      - type: JSONLD
         url: json-ld/github-actions-context.jsonld
     contact:
       - type: Support
         url: https://support.github.com
-      - type: API Status
+      - type: StatusPage
         url: https://www.githubstatus.com
     endpoints:
       - name: Workflows
@@ -284,19 +282,19 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement
-  - type: Rate Limits
+  - type: RateLimits
     url: https://docs.github.com/en/rest/overview/rate-limits-for-the-rest-api
   - type: Blog
     url: https://github.blog/category/product/actions/
-  - type: GitHub Status
+  - type: StatusPage
     url: https://www.githubstatus.com
-  - type: Changelog
+  - type: ChangeLog
     url: https://github.blog/changelog/label/actions/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.github.com/en/actions/get-started/quickstart
   - type: Authentication
     url: https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api
@@ -304,71 +302,95 @@ common:
     url: https://support.github.com
   - type: Pricing
     url: https://github.com/pricing
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/github
-  - type: OpenAPI Source
-    url: https://github.com/github/rest-api-description
-  - type: Webhooks
-    url: https://docs.github.com/en/webhooks
-  - type: GitHub Actions Feature Page
-    url: https://github.com/features/actions
   - type: Portal
     url: https://docs.github.com/en/rest
-  - type: Website
-    url: https://github.com
   - type: Documentation
     url: https://docs.github.com/en/actions
-  - type: Sign Up
+  - type: SignUp
     url: https://github.com/signup
   - type: Login
     url: https://github.com/login
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developer.github.com/
-  - type: GitHub Actions Marketplace
+  - type: Marketplace
     url: https://github.com/marketplace?type=actions
-  - type: Community Forum
-    url: https://github.com/orgs/community/discussions
-  - type: Stack Overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/github-actions
   - type: YouTube
     url: https://www.youtube.com/github
-  - type: SDK - JavaScript
+  - type: SDK
     url: https://github.com/octokit/octokit.js
-  - type: SDK - Ruby
+    title: JavaScript SDK
+  - type: SDK
     url: https://github.com/octokit/octokit.rb
-  - type: SDK - .NET
+    title: Ruby SDK
+  - type: SDK
     url: https://github.com/octokit/octokit.net
-  - type: SDK - Go
+    title: .NET SDK
+  - type: SDK
     url: https://github.com/google/go-github
-  - type: Libraries
-    url: https://docs.github.com/en/rest/using-the-rest-api/libraries-for-the-rest-api
+    title: Go SDK
   - type: CLI
     url: https://cli.github.com/
-  - type: REST API Quickstart
+  - type: Quickstart
     url: https://docs.github.com/en/rest/quickstart
-  - type: Billing
-    url: https://docs.github.com/en/rest/billing
-  - type: GitHub Actions Usage
-    url: https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions
   - type: Security
     url: https://docs.github.com/en/actions/security-for-github-actions
-  - type: JSON-LD Context
+  - type: JSONLD
     url: json-ld/github-actions-context.jsonld
-  - type: JSON Schema - Workflow
+  - type: JSONSchema
     url: json-schema/github-actions-workflow-schema.json
-  - type: JSON Schema - Workflow Run
+  - type: JSONSchema
     url: json-schema/github-actions-run-schema.json
-  - type: JSON Schema - Job
+  - type: JSONSchema
     url: json-schema/github-actions-job-schema.json
-  - type: JSON Schema - Artifact
+  - type: JSONSchema
     url: json-schema/github-actions-artifact-schema.json
-  - type: JSON Schema - Secret
+  - type: JSONSchema
     url: json-schema/github-actions-secret-schema.json
-  - type: JSON Schema - Runner
+  - type: JSONSchema
     url: json-schema/github-actions-runner-schema.json
-  - type: JSON Schema - Variable
+  - type: JSONSchema
     url: json-schema/github-actions-variable-schema.json
-  - type: JSON Schema - Cache
+  - type: JSONSchema
     url: json-schema/github-actions-cache-schema.json
-  - type: JSON Schema - Simple User
+  - type: JSONSchema
     url: json-schema/github-actions-simple-user-schema.json
+  - type: Capabilities
+    url: capabilities/ci-cd-automation.yaml
+    title: CI/CD Automation Capability
+  - type: Capabilities
+    url: capabilities/shared/actions.yaml
+    title: Actions API Shared Definition
+  - type: Features
+    data:
+      - Automated CI/CD workflows triggered by repository events
+      - Matrix builds across multiple OS and language versions
+      - Reusable workflows and composite actions
+      - Encrypted secrets and variables at repo, org, and environment scopes
+      - Self-hosted and GitHub-hosted runner management
+      - Workflow artifact storage and sharing
+      - Deployment protection rules and environment approvals
+      - OIDC integration for cloud provider authentication
+      - Dependency caching for faster builds
+      - Runner groups for organizational access control
+  - type: UseCases
+    data:
+      - Continuous integration and testing on every push or pull request
+      - Automated deployment to cloud environments
+      - Scheduled maintenance and cleanup workflows
+      - Building and publishing container images
+      - Automated code quality and security scanning
+      - Release management and artifact publishing
+  - type: Integrations
+    data:
+      - AWS (via OIDC)
+      - Azure (via OIDC)
+      - Google Cloud (via OIDC)
+      - Docker Hub
+      - npm
+      - PyPI
+      - Slack
+      - Jira

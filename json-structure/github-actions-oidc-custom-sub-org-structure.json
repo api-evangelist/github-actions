@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "OidcCustomSubOrg",
+  "type": "object",
+  "properties": {
+    "include_claim_keys": {
+      "type": "array"
+    }
+  }
+}

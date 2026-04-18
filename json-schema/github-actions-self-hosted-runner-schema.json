@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SelfHostedRunner",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The id of the runner."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the runner."
+    },
+    "os": {
+      "type": "string",
+      "description": "The operating system of the runner."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the runner."
+    },
+    "busy": {
+      "type": "boolean"
+    },
+    "labels": {
+      "type": "array"
+    }
+  }
+}

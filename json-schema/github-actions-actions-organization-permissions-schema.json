@@ -1,27 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SimpleUser",
+  "title": "ActionsOrganizationPermissions",
   "type": "object",
   "properties": {
-    "login": {
+    "enabled_repositories": {
       "type": "string"
     },
-    "id": {
-      "type": "integer"
-    },
-    "node_id": {
+    "selected_repositories_url": {
       "type": "string"
     },
-    "avatar_url": {
+    "allowed_actions": {
       "type": "string"
     },
-    "url": {
-      "type": "string"
-    },
-    "html_url": {
-      "type": "string"
-    },
-    "type": {
+    "selected_actions_url": {
       "type": "string"
     }
   }

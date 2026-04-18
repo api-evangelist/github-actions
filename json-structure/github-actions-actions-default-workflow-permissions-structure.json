@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ActionsDefaultWorkflowPermissions",
+  "type": "object",
+  "properties": {
+    "default_workflow_permissions": {
+      "type": "string"
+    },
+    "can_approve_pull_request_reviews": {
+      "type": "boolean"
+    }
+  }
+}

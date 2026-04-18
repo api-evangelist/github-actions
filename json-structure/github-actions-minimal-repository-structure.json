@@ -1,27 +1,30 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SimpleUser",
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "MinimalRepository",
   "type": "object",
   "properties": {
-    "login": {
-      "type": "string"
-    },
     "id": {
       "type": "integer"
     },
     "node_id": {
       "type": "string"
     },
-    "avatar_url": {
+    "name": {
+      "type": "string"
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "private": {
+      "type": "boolean"
+    },
+    "html_url": {
       "type": "string"
     },
     "url": {
       "type": "string"
     },
-    "html_url": {
-      "type": "string"
-    },
-    "type": {
+    "description": {
       "type": "string"
     }
   }
