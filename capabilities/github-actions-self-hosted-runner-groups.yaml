@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitHub Actions API — Self-Hosted Runner Groups
+  description: 'GitHub Actions API — Self-Hosted Runner Groups. 5 operations. Lead operation: Github Actions List Self-hosted
+    Runner Groups for an Organization. Self-contained Naftiko capability covering one Github Actions business surface.'
+  tags:
+  - Github Actions
+  - Self-Hosted Runner Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITHUB_ACTIONS_API_KEY: GITHUB_ACTIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: github-actions-self-hosted-runner-groups
+    baseUri: https://api.github.com
+    description: GitHub Actions API — Self-Hosted Runner Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: orgs-org-actions-runner-groups
+      path: /orgs/{org}/actions/runner-groups
+      operations:
+      - name: listselfhostedrunnergroupsfororg
+        method: GET
+        description: Github Actions List Self-hosted Runner Groups for an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createselfhostedrunnergroupfororg
+        method: POST
+        description: Github Actions Create a Self-hosted Runner Group for an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: orgs-org-actions-runner-groups-runner_group_id
+      path: /orgs/{org}/actions/runner-groups/{runner_group_id}
+      operations:
+      - name: getselfhostedrunnergroupfororg
+        method: GET
+        description: Github Actions Get a Self-hosted Runner Group for an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateselfhostedrunnergroupfororg
+        method: PATCH
+        description: Github Actions Update a Self-hosted Runner Group for an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteselfhostedrunnergroupfromorg
+        method: DELETE
+        description: Github Actions Delete a Self-hosted Runner Group From an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GITHUB_ACTIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: github-actions-self-hosted-runner-groups-rest
+    port: 8080
+    description: REST adapter for GitHub Actions API — Self-Hosted Runner Groups. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/orgs/{org}/actions/runner-groups
+      name: orgs-org-actions-runner-groups
+      description: REST surface for orgs-org-actions-runner-groups.
+      operations:
+      - method: GET
+        name: listselfhostedrunnergroupsfororg
+        description: Github Actions List Self-hosted Runner Groups for an Organization
+        call: github-actions-self-hosted-runner-groups.listselfhostedrunnergroupsfororg
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createselfhostedrunnergroupfororg
+        description: Github Actions Create a Self-hosted Runner Group for an Organization
+        call: github-actions-self-hosted-runner-groups.createselfhostedrunnergroupfororg
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/orgs/{org}/actions/runner-groups/{runner-group-id}
+      name: orgs-org-actions-runner-groups-runner-group-id
+      description: REST surface for orgs-org-actions-runner-groups-runner_group_id.
+      operations:
+      - method: GET
+        name: getselfhostedrunnergroupfororg
+        description: Github Actions Get a Self-hosted Runner Group for an Organization
+        call: github-actions-self-hosted-runner-groups.getselfhostedrunnergroupfororg
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateselfhostedrunnergroupfororg
+        description: Github Actions Update a Self-hosted Runner Group for an Organization
+        call: github-actions-self-hosted-runner-groups.updateselfhostedrunnergroupfororg
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteselfhostedrunnergroupfromorg
+        description: Github Actions Delete a Self-hosted Runner Group From an Organization
+        call: github-actions-self-hosted-runner-groups.deleteselfhostedrunnergroupfromorg
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: github-actions-self-hosted-runner-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitHub Actions API — Self-Hosted Runner Groups. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: github-actions-list-self-hosted
+      description: Github Actions List Self-hosted Runner Groups for an Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-self-hosted-runner-groups.listselfhostedrunnergroupsfororg
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-create-self-hosted
+      description: Github Actions Create a Self-hosted Runner Group for an Organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-self-hosted-runner-groups.createselfhostedrunnergroupfororg
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-self-hosted
+      description: Github Actions Get a Self-hosted Runner Group for an Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-self-hosted-runner-groups.getselfhostedrunnergroupfororg
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-update-self-hosted
+      description: Github Actions Update a Self-hosted Runner Group for an Organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: github-actions-self-hosted-runner-groups.updateselfhostedrunnergroupfororg
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-delete-self-hosted
+      description: Github Actions Delete a Self-hosted Runner Group From an Organization
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: github-actions-self-hosted-runner-groups.deleteselfhostedrunnergroupfromorg
+      outputParameters:
+      - type: object
+        mapping: $.

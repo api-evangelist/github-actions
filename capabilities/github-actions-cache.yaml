@@ -1,0 +1,205 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitHub Actions API — Cache
+  description: 'GitHub Actions API — Cache. 4 operations. Lead operation: Get Github Actions Cache Usage for a Repository.
+    Self-contained Naftiko capability covering one Github Actions business surface.'
+  tags:
+  - Github Actions
+  - Cache
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITHUB_ACTIONS_API_KEY: GITHUB_ACTIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: github-actions-cache
+    baseUri: https://api.github.com
+    description: GitHub Actions API — Cache business capability. Self-contained, no shared references.
+    resources:
+    - name: repos-owner-repo-actions-cache-usage
+      path: /repos/{owner}/{repo}/actions/cache/usage
+      operations:
+      - name: getactionscacheusage
+        method: GET
+        description: Get Github Actions Cache Usage for a Repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-caches
+      path: /repos/{owner}/{repo}/actions/caches
+      operations:
+      - name: listactionscaches
+        method: GET
+        description: List Github Actions Caches for a Repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ref
+          in: query
+          type: string
+        - name: key
+          in: query
+          type: string
+        - name: sort
+          in: query
+          type: string
+        - name: direction
+          in: query
+          type: string
+      - name: deleteactionscachebykey
+        method: DELETE
+        description: Delete Github Actions Caches for a Repository (by Key)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: query
+          type: string
+          required: true
+        - name: ref
+          in: query
+          type: string
+    - name: repos-owner-repo-actions-caches-cache_id
+      path: /repos/{owner}/{repo}/actions/caches/{cache_id}
+      operations:
+      - name: deleteactionscachebyid
+        method: DELETE
+        description: Delete a Github Actions Cache for a Repository (by Id)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cache_id
+          in: path
+          type: integer
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GITHUB_ACTIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: github-actions-cache-rest
+    port: 8080
+    description: REST adapter for GitHub Actions API — Cache. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/repos/{owner}/{repo}/actions/cache/usage
+      name: repos-owner-repo-actions-cache-usage
+      description: REST surface for repos-owner-repo-actions-cache-usage.
+      operations:
+      - method: GET
+        name: getactionscacheusage
+        description: Get Github Actions Cache Usage for a Repository
+        call: github-actions-cache.getactionscacheusage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/caches
+      name: repos-owner-repo-actions-caches
+      description: REST surface for repos-owner-repo-actions-caches.
+      operations:
+      - method: GET
+        name: listactionscaches
+        description: List Github Actions Caches for a Repository
+        call: github-actions-cache.listactionscaches
+        with:
+          ref: rest.ref
+          key: rest.key
+          sort: rest.sort
+          direction: rest.direction
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteactionscachebykey
+        description: Delete Github Actions Caches for a Repository (by Key)
+        call: github-actions-cache.deleteactionscachebykey
+        with:
+          key: rest.key
+          ref: rest.ref
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/caches/{cache-id}
+      name: repos-owner-repo-actions-caches-cache-id
+      description: REST surface for repos-owner-repo-actions-caches-cache_id.
+      operations:
+      - method: DELETE
+        name: deleteactionscachebyid
+        description: Delete a Github Actions Cache for a Repository (by Id)
+        call: github-actions-cache.deleteactionscachebyid
+        with:
+          cache_id: rest.cache_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: github-actions-cache-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitHub Actions API — Cache. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-github-actions-cache-usage
+      description: Get Github Actions Cache Usage for a Repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-cache.getactionscacheusage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-github-actions-caches-repository
+      description: List Github Actions Caches for a Repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-cache.listactionscaches
+      with:
+        ref: tools.ref
+        key: tools.key
+        sort: tools.sort
+        direction: tools.direction
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-github-actions-caches-repository
+      description: Delete Github Actions Caches for a Repository (by Key)
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: github-actions-cache.deleteactionscachebykey
+      with:
+        key: tools.key
+        ref: tools.ref
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-github-actions-cache-repository
+      description: Delete a Github Actions Cache for a Repository (by Id)
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: github-actions-cache.deleteactionscachebyid
+      with:
+        cache_id: tools.cache_id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitHub Actions API — Variables
+  description: 'GitHub Actions API — Variables. 5 operations. Lead operation: Github Actions List Repository Variables. Self-contained
+    Naftiko capability covering one Github Actions business surface.'
+  tags:
+  - Github Actions
+  - Variables
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITHUB_ACTIONS_API_KEY: GITHUB_ACTIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: github-actions-variables
+    baseUri: https://api.github.com
+    description: GitHub Actions API — Variables business capability. Self-contained, no shared references.
+    resources:
+    - name: repos-owner-repo-actions-variables
+      path: /repos/{owner}/{repo}/actions/variables
+      operations:
+      - name: listrepovariables
+        method: GET
+        description: Github Actions List Repository Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createrepovariable
+        method: POST
+        description: Github Actions Create a Repository Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: repos-owner-repo-actions-variables-name
+      path: /repos/{owner}/{repo}/actions/variables/{name}
+      operations:
+      - name: getrepovariable
+        method: GET
+        description: Github Actions Get a Repository Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updaterepovariable
+        method: PATCH
+        description: Github Actions Update a Repository Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleterepovariable
+        method: DELETE
+        description: Github Actions Delete a Repository Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GITHUB_ACTIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: github-actions-variables-rest
+    port: 8080
+    description: REST adapter for GitHub Actions API — Variables. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/repos/{owner}/{repo}/actions/variables
+      name: repos-owner-repo-actions-variables
+      description: REST surface for repos-owner-repo-actions-variables.
+      operations:
+      - method: GET
+        name: listrepovariables
+        description: Github Actions List Repository Variables
+        call: github-actions-variables.listrepovariables
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrepovariable
+        description: Github Actions Create a Repository Variable
+        call: github-actions-variables.createrepovariable
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/variables/{name}
+      name: repos-owner-repo-actions-variables-name
+      description: REST surface for repos-owner-repo-actions-variables-name.
+      operations:
+      - method: GET
+        name: getrepovariable
+        description: Github Actions Get a Repository Variable
+        call: github-actions-variables.getrepovariable
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updaterepovariable
+        description: Github Actions Update a Repository Variable
+        call: github-actions-variables.updaterepovariable
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleterepovariable
+        description: Github Actions Delete a Repository Variable
+        call: github-actions-variables.deleterepovariable
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: github-actions-variables-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitHub Actions API — Variables. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: github-actions-list-repository-variables
+      description: Github Actions List Repository Variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-variables.listrepovariables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-create-repository-variable
+      description: Github Actions Create a Repository Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-variables.createrepovariable
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-repository-variable
+      description: Github Actions Get a Repository Variable
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-variables.getrepovariable
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-update-repository-variable
+      description: Github Actions Update a Repository Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: github-actions-variables.updaterepovariable
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-delete-repository-variable
+      description: Github Actions Delete a Repository Variable
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: github-actions-variables.deleterepovariable
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,295 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitHub Actions API — Workflows
+  description: 'GitHub Actions API — Workflows. 7 operations. Lead operation: Github Actions List Repository Workflows. Self-contained
+    Naftiko capability covering one Github Actions business surface.'
+  tags:
+  - Github Actions
+  - Workflows
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITHUB_ACTIONS_API_KEY: GITHUB_ACTIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: github-actions-workflows
+    baseUri: https://api.github.com
+    description: GitHub Actions API — Workflows business capability. Self-contained, no shared references.
+    resources:
+    - name: repos-owner-repo-actions-workflows
+      path: /repos/{owner}/{repo}/actions/workflows
+      operations:
+      - name: listrepoworkflows
+        method: GET
+        description: Github Actions List Repository Workflows
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-workflows-workflow_id
+      path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}
+      operations:
+      - name: getworkflow
+        method: GET
+        description: Github Actions Get a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-workflows-workflow_id-disable
+      path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable
+      operations:
+      - name: disableworkflow
+        method: PUT
+        description: Github Actions Disable a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-workflows-workflow_id-dispatches
+      path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
+      operations:
+      - name: createworkflowdispatch
+        method: POST
+        description: Github Actions Create a Workflow Dispatch Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: repos-owner-repo-actions-workflows-workflow_id-enable
+      path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable
+      operations:
+      - name: enableworkflow
+        method: PUT
+        description: Github Actions Enable a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-workflows-workflow_id-runs
+      path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs
+      operations:
+      - name: listworkflowruns
+        method: GET
+        description: Github Actions List Workflow Runs for a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: actor
+          in: query
+          type: string
+        - name: branch
+          in: query
+          type: string
+        - name: event
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+    - name: repos-owner-repo-actions-workflows-workflow_id-timing
+      path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing
+      operations:
+      - name: getworkflowusage
+        method: GET
+        description: Github Actions Get Workflow Usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GITHUB_ACTIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: github-actions-workflows-rest
+    port: 8080
+    description: REST adapter for GitHub Actions API — Workflows. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/repos/{owner}/{repo}/actions/workflows
+      name: repos-owner-repo-actions-workflows
+      description: REST surface for repos-owner-repo-actions-workflows.
+      operations:
+      - method: GET
+        name: listrepoworkflows
+        description: Github Actions List Repository Workflows
+        call: github-actions-workflows.listrepoworkflows
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/workflows/{workflow-id}
+      name: repos-owner-repo-actions-workflows-workflow-id
+      description: REST surface for repos-owner-repo-actions-workflows-workflow_id.
+      operations:
+      - method: GET
+        name: getworkflow
+        description: Github Actions Get a Workflow
+        call: github-actions-workflows.getworkflow
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/workflows/{workflow-id}/disable
+      name: repos-owner-repo-actions-workflows-workflow-id-disable
+      description: REST surface for repos-owner-repo-actions-workflows-workflow_id-disable.
+      operations:
+      - method: PUT
+        name: disableworkflow
+        description: Github Actions Disable a Workflow
+        call: github-actions-workflows.disableworkflow
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/workflows/{workflow-id}/dispatches
+      name: repos-owner-repo-actions-workflows-workflow-id-dispatches
+      description: REST surface for repos-owner-repo-actions-workflows-workflow_id-dispatches.
+      operations:
+      - method: POST
+        name: createworkflowdispatch
+        description: Github Actions Create a Workflow Dispatch Event
+        call: github-actions-workflows.createworkflowdispatch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/workflows/{workflow-id}/enable
+      name: repos-owner-repo-actions-workflows-workflow-id-enable
+      description: REST surface for repos-owner-repo-actions-workflows-workflow_id-enable.
+      operations:
+      - method: PUT
+        name: enableworkflow
+        description: Github Actions Enable a Workflow
+        call: github-actions-workflows.enableworkflow
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/workflows/{workflow-id}/runs
+      name: repos-owner-repo-actions-workflows-workflow-id-runs
+      description: REST surface for repos-owner-repo-actions-workflows-workflow_id-runs.
+      operations:
+      - method: GET
+        name: listworkflowruns
+        description: Github Actions List Workflow Runs for a Workflow
+        call: github-actions-workflows.listworkflowruns
+        with:
+          actor: rest.actor
+          branch: rest.branch
+          event: rest.event
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/workflows/{workflow-id}/timing
+      name: repos-owner-repo-actions-workflows-workflow-id-timing
+      description: REST surface for repos-owner-repo-actions-workflows-workflow_id-timing.
+      operations:
+      - method: GET
+        name: getworkflowusage
+        description: Github Actions Get Workflow Usage
+        call: github-actions-workflows.getworkflowusage
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: github-actions-workflows-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitHub Actions API — Workflows. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: github-actions-list-repository-workflows
+      description: Github Actions List Repository Workflows
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflows.listrepoworkflows
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-workflow
+      description: Github Actions Get a Workflow
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflows.getworkflow
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-disable-workflow
+      description: Github Actions Disable a Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: github-actions-workflows.disableworkflow
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-create-workflow-dispatch
+      description: Github Actions Create a Workflow Dispatch Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-workflows.createworkflowdispatch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-enable-workflow
+      description: Github Actions Enable a Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: github-actions-workflows.enableworkflow
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-list-workflow-runs
+      description: Github Actions List Workflow Runs for a Workflow
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflows.listworkflowruns
+      with:
+        actor: tools.actor
+        branch: tools.branch
+        event: tools.event
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-workflow-usage
+      description: Github Actions Get Workflow Usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflows.getworkflowusage
+      outputParameters:
+      - type: object
+        mapping: $.

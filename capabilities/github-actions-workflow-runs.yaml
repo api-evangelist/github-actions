@@ -1,0 +1,624 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitHub Actions API — Workflow Runs
+  description: 'GitHub Actions API — Workflow Runs. 17 operations. Lead operation: Github Actions List Workflow Runs for a
+    Repository. Self-contained Naftiko capability covering one Github Actions business surface.'
+  tags:
+  - Github Actions
+  - Workflow Runs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GITHUB_ACTIONS_API_KEY: GITHUB_ACTIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: github-actions-workflow-runs
+    baseUri: https://api.github.com
+    description: GitHub Actions API — Workflow Runs business capability. Self-contained, no shared references.
+    resources:
+    - name: repos-owner-repo-actions-runs
+      path: /repos/{owner}/{repo}/actions/runs
+      operations:
+      - name: listworkflowrunsforrepo
+        method: GET
+        description: Github Actions List Workflow Runs for a Repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: actor
+          in: query
+          type: string
+        - name: branch
+          in: query
+          type: string
+        - name: event
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+    - name: repos-owner-repo-actions-runs-run_id
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}
+      operations:
+      - name: getworkflowrun
+        method: GET
+        description: Github Actions Get a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteworkflowrun
+        method: DELETE
+        description: Github Actions Delete a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-runs-run_id-approvals
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/approvals
+      operations:
+      - name: getworkflowrunapprovals
+        method: GET
+        description: Github Actions Get the Review History for a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-runs-run_id-approve
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/approve
+      operations:
+      - name: approveworkflowrun
+        method: POST
+        description: Github Actions Approve a Workflow Run for a Fork Pull Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-runs-run_id-attempts-attempt_number
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
+      operations:
+      - name: getworkflowrunattempt
+        method: GET
+        description: Github Actions Get a Workflow Run Attempt
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-runs-run_id-attempts-attempt_number-logs
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs
+      operations:
+      - name: downloadworkflowrunattemptlogs
+        method: GET
+        description: Github Actions Download Workflow Run Attempt Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-runs-run_id-cancel
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/cancel
+      operations:
+      - name: cancelworkflowrun
+        method: POST
+        description: Github Actions Cancel a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-runs-run_id-deployment_protection_rule
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule
+      operations:
+      - name: reviewcustomgatesforrun
+        method: POST
+        description: Github Actions Review Custom Deployment Protection Rules for a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: repos-owner-repo-actions-runs-run_id-force-cancel
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel
+      operations:
+      - name: forcecancelworkflowrun
+        method: POST
+        description: Github Actions Force Cancel a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-runs-run_id-logs
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/logs
+      operations:
+      - name: downloadworkflowrunlogs
+        method: GET
+        description: Github Actions Download Workflow Run Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteworkflowrunlogs
+        method: DELETE
+        description: Github Actions Delete Workflow Run Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: repos-owner-repo-actions-runs-run_id-pending_deployments
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
+      operations:
+      - name: getpendingdeployments
+        method: GET
+        description: Github Actions Get Pending Deployments for a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: reviewpendingdeployments
+        method: POST
+        description: Github Actions Review Pending Deployments for a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: repos-owner-repo-actions-runs-run_id-rerun
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/rerun
+      operations:
+      - name: rerunworkflowrun
+        method: POST
+        description: Github Actions Re-run a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: repos-owner-repo-actions-runs-run_id-rerun-failed-jobs
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/rerun-failed-jobs
+      operations:
+      - name: rerunfailedjobs
+        method: POST
+        description: Github Actions Re-run Failed Jobs From a Workflow Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: repos-owner-repo-actions-runs-run_id-timing
+      path: /repos/{owner}/{repo}/actions/runs/{run_id}/timing
+      operations:
+      - name: getworkflowrunusage
+        method: GET
+        description: Github Actions Get Workflow Run Usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GITHUB_ACTIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: github-actions-workflow-runs-rest
+    port: 8080
+    description: REST adapter for GitHub Actions API — Workflow Runs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/repos/{owner}/{repo}/actions/runs
+      name: repos-owner-repo-actions-runs
+      description: REST surface for repos-owner-repo-actions-runs.
+      operations:
+      - method: GET
+        name: listworkflowrunsforrepo
+        description: Github Actions List Workflow Runs for a Repository
+        call: github-actions-workflow-runs.listworkflowrunsforrepo
+        with:
+          actor: rest.actor
+          branch: rest.branch
+          event: rest.event
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}
+      name: repos-owner-repo-actions-runs-run-id
+      description: REST surface for repos-owner-repo-actions-runs-run_id.
+      operations:
+      - method: GET
+        name: getworkflowrun
+        description: Github Actions Get a Workflow Run
+        call: github-actions-workflow-runs.getworkflowrun
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteworkflowrun
+        description: Github Actions Delete a Workflow Run
+        call: github-actions-workflow-runs.deleteworkflowrun
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/approvals
+      name: repos-owner-repo-actions-runs-run-id-approvals
+      description: REST surface for repos-owner-repo-actions-runs-run_id-approvals.
+      operations:
+      - method: GET
+        name: getworkflowrunapprovals
+        description: Github Actions Get the Review History for a Workflow Run
+        call: github-actions-workflow-runs.getworkflowrunapprovals
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/approve
+      name: repos-owner-repo-actions-runs-run-id-approve
+      description: REST surface for repos-owner-repo-actions-runs-run_id-approve.
+      operations:
+      - method: POST
+        name: approveworkflowrun
+        description: Github Actions Approve a Workflow Run for a Fork Pull Request
+        call: github-actions-workflow-runs.approveworkflowrun
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/attempts/{attempt-number}
+      name: repos-owner-repo-actions-runs-run-id-attempts-attempt-number
+      description: REST surface for repos-owner-repo-actions-runs-run_id-attempts-attempt_number.
+      operations:
+      - method: GET
+        name: getworkflowrunattempt
+        description: Github Actions Get a Workflow Run Attempt
+        call: github-actions-workflow-runs.getworkflowrunattempt
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/attempts/{attempt-number}/logs
+      name: repos-owner-repo-actions-runs-run-id-attempts-attempt-number-logs
+      description: REST surface for repos-owner-repo-actions-runs-run_id-attempts-attempt_number-logs.
+      operations:
+      - method: GET
+        name: downloadworkflowrunattemptlogs
+        description: Github Actions Download Workflow Run Attempt Logs
+        call: github-actions-workflow-runs.downloadworkflowrunattemptlogs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/cancel
+      name: repos-owner-repo-actions-runs-run-id-cancel
+      description: REST surface for repos-owner-repo-actions-runs-run_id-cancel.
+      operations:
+      - method: POST
+        name: cancelworkflowrun
+        description: Github Actions Cancel a Workflow Run
+        call: github-actions-workflow-runs.cancelworkflowrun
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/deployment-protection-rule
+      name: repos-owner-repo-actions-runs-run-id-deployment-protection-rule
+      description: REST surface for repos-owner-repo-actions-runs-run_id-deployment_protection_rule.
+      operations:
+      - method: POST
+        name: reviewcustomgatesforrun
+        description: Github Actions Review Custom Deployment Protection Rules for a Workflow Run
+        call: github-actions-workflow-runs.reviewcustomgatesforrun
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/force-cancel
+      name: repos-owner-repo-actions-runs-run-id-force-cancel
+      description: REST surface for repos-owner-repo-actions-runs-run_id-force-cancel.
+      operations:
+      - method: POST
+        name: forcecancelworkflowrun
+        description: Github Actions Force Cancel a Workflow Run
+        call: github-actions-workflow-runs.forcecancelworkflowrun
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/logs
+      name: repos-owner-repo-actions-runs-run-id-logs
+      description: REST surface for repos-owner-repo-actions-runs-run_id-logs.
+      operations:
+      - method: GET
+        name: downloadworkflowrunlogs
+        description: Github Actions Download Workflow Run Logs
+        call: github-actions-workflow-runs.downloadworkflowrunlogs
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteworkflowrunlogs
+        description: Github Actions Delete Workflow Run Logs
+        call: github-actions-workflow-runs.deleteworkflowrunlogs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/pending-deployments
+      name: repos-owner-repo-actions-runs-run-id-pending-deployments
+      description: REST surface for repos-owner-repo-actions-runs-run_id-pending_deployments.
+      operations:
+      - method: GET
+        name: getpendingdeployments
+        description: Github Actions Get Pending Deployments for a Workflow Run
+        call: github-actions-workflow-runs.getpendingdeployments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: reviewpendingdeployments
+        description: Github Actions Review Pending Deployments for a Workflow Run
+        call: github-actions-workflow-runs.reviewpendingdeployments
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/rerun
+      name: repos-owner-repo-actions-runs-run-id-rerun
+      description: REST surface for repos-owner-repo-actions-runs-run_id-rerun.
+      operations:
+      - method: POST
+        name: rerunworkflowrun
+        description: Github Actions Re-run a Workflow
+        call: github-actions-workflow-runs.rerunworkflowrun
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/rerun-failed-jobs
+      name: repos-owner-repo-actions-runs-run-id-rerun-failed-jobs
+      description: REST surface for repos-owner-repo-actions-runs-run_id-rerun-failed-jobs.
+      operations:
+      - method: POST
+        name: rerunfailedjobs
+        description: Github Actions Re-run Failed Jobs From a Workflow Run
+        call: github-actions-workflow-runs.rerunfailedjobs
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/repos/{owner}/{repo}/actions/runs/{run-id}/timing
+      name: repos-owner-repo-actions-runs-run-id-timing
+      description: REST surface for repos-owner-repo-actions-runs-run_id-timing.
+      operations:
+      - method: GET
+        name: getworkflowrunusage
+        description: Github Actions Get Workflow Run Usage
+        call: github-actions-workflow-runs.getworkflowrunusage
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: github-actions-workflow-runs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for GitHub Actions API — Workflow Runs. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: github-actions-list-workflow-runs
+      description: Github Actions List Workflow Runs for a Repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflow-runs.listworkflowrunsforrepo
+      with:
+        actor: tools.actor
+        branch: tools.branch
+        event: tools.event
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-workflow-run
+      description: Github Actions Get a Workflow Run
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflow-runs.getworkflowrun
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-delete-workflow-run
+      description: Github Actions Delete a Workflow Run
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: github-actions-workflow-runs.deleteworkflowrun
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-review-history
+      description: Github Actions Get the Review History for a Workflow Run
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflow-runs.getworkflowrunapprovals
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-approve-workflow-run
+      description: Github Actions Approve a Workflow Run for a Fork Pull Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-workflow-runs.approveworkflowrun
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-workflow-run-2
+      description: Github Actions Get a Workflow Run Attempt
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflow-runs.getworkflowrunattempt
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-download-workflow-run
+      description: Github Actions Download Workflow Run Attempt Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflow-runs.downloadworkflowrunattemptlogs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-cancel-workflow-run
+      description: Github Actions Cancel a Workflow Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-workflow-runs.cancelworkflowrun
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-review-custom-deployment
+      description: Github Actions Review Custom Deployment Protection Rules for a Workflow Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-workflow-runs.reviewcustomgatesforrun
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-force-cancel-workflow
+      description: Github Actions Force Cancel a Workflow Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-workflow-runs.forcecancelworkflowrun
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-download-workflow-run-2
+      description: Github Actions Download Workflow Run Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflow-runs.downloadworkflowrunlogs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-delete-workflow-run-2
+      description: Github Actions Delete Workflow Run Logs
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: github-actions-workflow-runs.deleteworkflowrunlogs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-pending-deployments
+      description: Github Actions Get Pending Deployments for a Workflow Run
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflow-runs.getpendingdeployments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-review-pending-deployments
+      description: Github Actions Review Pending Deployments for a Workflow Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-workflow-runs.reviewpendingdeployments
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-re-run-workflow
+      description: Github Actions Re-run a Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-workflow-runs.rerunworkflowrun
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-re-run-failed
+      description: Github Actions Re-run Failed Jobs From a Workflow Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: github-actions-workflow-runs.rerunfailedjobs
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: github-actions-get-workflow-run-3
+      description: Github Actions Get Workflow Run Usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: github-actions-workflow-runs.getworkflowrunusage
+      outputParameters:
+      - type: object
+        mapping: $.
