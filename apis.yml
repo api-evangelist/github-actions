@@ -415,3 +415,5 @@ common:
   - PyPI
   - Slack
   - Jira
+- type: LLMsTxt
+  url: https://docs.github.com/llms.txt
