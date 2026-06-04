@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: GitHub Actions Register a Self-hosted Runner
+  summary: List the available runner application binaries, mint a registration token, then list the repository's runners.
+  description: >-
+    Prepares everything an operator needs to bring a self-hosted runner online.
+    The workflow lists the runner application binaries available for download,
+    creates a short-lived registration token to pass to the runner config
+    script, and lists the repository's currently registered runners so the
+    operator can confirm the inventory before and after configuration. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: githubActionsApi
+  url: ../openapi/github-actions-openapi.yml
+  type: openapi
+workflows:
+- workflowId: register-runner
+  summary: Gather runner binaries and a registration token for a repository.
+  description: >-
+    Lists downloadable runner applications, mints a registration token, and
+    lists the repository's self-hosted runners.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - owner
+    - repo
+    properties:
+      accessToken:
+        type: string
+        description: GitHub bearer token with repository administration access.
+      owner:
+        type: string
+        description: The account owner of the repository.
+      repo:
+        type: string
+        description: The name of the repository without the .git extension.
+  steps:
+  - stepId: listRunnerApplications
+    description: >-
+      List the runner application binaries available for download so the right
+      OS/architecture package can be chosen.
+    operationId: listRunnerApplicationsForRepo
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstDownloadUrl: $response.body#/0/download_url
+      firstOs: $response.body#/0/os
+  - stepId: createRegistrationToken
+    description: >-
+      Create a registration token to pass to the self-hosted runner config
+      script. Returns 201 with a token and its expiry.
+    operationId: createRegistrationTokenForRepo
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      token: $response.body#/token
+      expiresAt: $response.body#/expires_at
+  - stepId: listRunners
+    description: >-
+      List the repository's currently registered self-hosted runners to confirm
+      the existing inventory.
+    operationId: listSelfHostedRunnersForRepo
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalRunners: $response.body#/total_count
+      runners: $response.body#/runners
+  outputs:
+    registrationToken: $steps.createRegistrationToken.outputs.token
+    tokenExpiresAt: $steps.createRegistrationToken.outputs.expiresAt
+    runners: $steps.listRunners.outputs.runners

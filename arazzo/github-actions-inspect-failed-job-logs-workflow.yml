@@ -1,0 +1,152 @@
+arazzo: 1.0.1
+info:
+  title: GitHub Actions Inspect Failed Job Logs
+  summary: Find the latest failed run, list its jobs, get the failing job, and resolve its log download URL.
+  description: >-
+    A debugging pattern that drills from a failed run down to the log file of the
+    job that broke. The workflow lists runs filtered to a failure status, lists
+    the jobs of that run, fetches the first job to confirm its details, and
+    requests the job log download which the API answers with a 302 redirect to a
+    short-lived URL. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: githubActionsApi
+  url: ../openapi/github-actions-openapi.yml
+  type: openapi
+workflows:
+- workflowId: inspect-failed-job-logs
+  summary: Resolve the log download URL for a job in the latest failed run.
+  description: >-
+    Locates the most recent failed run, lists its jobs, gets the first job, and
+    resolves a redirect URL to download that job's logs.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - owner
+    - repo
+    properties:
+      accessToken:
+        type: string
+        description: GitHub bearer token with read access to the repository.
+      owner:
+        type: string
+        description: The account owner of the repository.
+      repo:
+        type: string
+        description: The name of the repository without the .git extension.
+  steps:
+  - stepId: findFailedRun
+    description: >-
+      List the repository's runs filtered to the failure status and capture the
+      newest failed run id. Branch to the end when there are no failures.
+    operationId: listWorkflowRunsForRepo
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: status
+      in: query
+      value: failure
+    - name: per_page
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/workflow_runs/0/id
+      totalCount: $response.body#/total_count
+    onSuccess:
+    - name: noFailures
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.total_count == 0
+        type: jsonpath
+    - name: hasFailure
+      type: goto
+      stepId: listJobs
+      criteria:
+      - context: $response.body
+        condition: $.total_count > 0
+        type: jsonpath
+  - stepId: listJobs
+    description: >-
+      List the jobs of the failed run and capture the id of the first job.
+    operationId: listJobsForWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $steps.findFailedRun.outputs.runId
+    - name: filter
+      in: query
+      value: latest
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobId: $response.body#/jobs/0/id
+  - stepId: getJob
+    description: >-
+      Fetch the first job to confirm its conclusion and name before pulling its
+      logs.
+    operationId: getJobForWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: job_id
+      in: path
+      value: $steps.listJobs.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobName: $response.body#/name
+      conclusion: $response.body#/conclusion
+  - stepId: downloadJobLogs
+    description: >-
+      Request the job log file. The API responds with a 302 redirect to a
+      short-lived download URL.
+    operationId: downloadJobLogsForWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: job_id
+      in: path
+      value: $steps.listJobs.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 302
+    outputs:
+      logLocation: $response.header.Location
+  outputs:
+    runId: $steps.findFailedRun.outputs.runId
+    jobId: $steps.listJobs.outputs.jobId
+    logLocation: $steps.downloadJobLogs.outputs.logLocation

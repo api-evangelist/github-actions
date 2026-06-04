@@ -1,0 +1,146 @@
+arazzo: 1.0.1
+info:
+  title: GitHub Actions Re-run Failed Jobs and Track
+  summary: Find the most recent failed run, re-run only its failed jobs, and poll the run until it completes again.
+  description: >-
+    A self-healing CI pattern. The workflow lists runs filtered to a failed
+    status to locate the most recent failure, re-runs only the failed jobs and
+    their dependents, and then polls the run until it reaches a terminal status
+    so the new outcome can be reported. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: githubActionsApi
+  url: ../openapi/github-actions-openapi.yml
+  type: openapi
+workflows:
+- workflowId: rerun-failed-run
+  summary: Re-run the failed jobs of the latest failed run and follow it to completion.
+  description: >-
+    Lists the repository's failed runs, re-runs the failed jobs of the newest
+    one, and polls the run until its status is completed.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - owner
+    - repo
+    properties:
+      accessToken:
+        type: string
+        description: GitHub bearer token with Actions write access.
+      owner:
+        type: string
+        description: The account owner of the repository.
+      repo:
+        type: string
+        description: The name of the repository without the .git extension.
+      enableDebugLogging:
+        type: boolean
+        description: Whether to enable debug logging on the re-run.
+  steps:
+  - stepId: findFailedRun
+    description: >-
+      List the repository's runs filtered to the failure status and capture the
+      id of the most recent failed run. Branch to the end when none are failed.
+    operationId: listWorkflowRunsForRepo
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: status
+      in: query
+      value: failure
+    - name: per_page
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/workflow_runs/0/id
+      totalCount: $response.body#/total_count
+    onSuccess:
+    - name: noFailures
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.total_count == 0
+        type: jsonpath
+    - name: hasFailure
+      type: goto
+      stepId: rerunFailed
+      criteria:
+      - context: $response.body
+        condition: $.total_count > 0
+        type: jsonpath
+  - stepId: rerunFailed
+    description: >-
+      Re-run all failed jobs and their dependents for the selected run. Returns
+      201 when the re-run is accepted.
+    operationId: rerunFailedJobs
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $steps.findFailedRun.outputs.runId
+    requestBody:
+      contentType: application/json
+      payload:
+        enable_debug_logging: $inputs.enableDebugLogging
+    successCriteria:
+    - condition: $statusCode == 201
+  - stepId: pollRun
+    description: >-
+      Poll the run until it reaches the terminal completed status, looping back
+      to itself while it is still in progress.
+    operationId: getWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $steps.findFailedRun.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      conclusion: $response.body#/conclusion
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.status != "completed"
+        type: jsonpath
+    - name: completed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "completed"
+        type: jsonpath
+  outputs:
+    runId: $steps.findFailedRun.outputs.runId
+    conclusion: $steps.pollRun.outputs.conclusion

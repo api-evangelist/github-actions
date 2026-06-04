@@ -1,0 +1,153 @@
+arazzo: 1.0.1
+info:
+  title: GitHub Actions Upsert a Repository Variable
+  summary: Look up a repository variable by name and either create it or update it, then read it back.
+  description: >-
+    A configuration-management pattern for Actions variables. The workflow reads
+    the variable directly by name, branches on whether it already exists, creates
+    it when missing or patches it when present, and finally reads it back to
+    confirm the final value. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: githubActionsApi
+  url: ../openapi/github-actions-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upsert-repo-variable
+  summary: Create or update a repository variable by name and confirm its value.
+  description: >-
+    Probes the variable by name, branches to create or update accordingly, and
+    reads the variable back to verify the stored value.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - owner
+    - repo
+    - variableName
+    - variableValue
+    properties:
+      accessToken:
+        type: string
+        description: GitHub bearer token with Actions variables write access.
+      owner:
+        type: string
+        description: The account owner of the repository.
+      repo:
+        type: string
+        description: The name of the repository without the .git extension.
+      variableName:
+        type: string
+        description: The name of the variable to create or update.
+      variableValue:
+        type: string
+        description: The value to store on the variable.
+  steps:
+  - stepId: probeVariable
+    description: >-
+      Read the variable by name. A 200 means it exists and should be updated; a
+      404 means it does not exist and should be created.
+    operationId: getRepoVariable
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: name
+      in: path
+      value: $inputs.variableName
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 404
+    outputs:
+      existingValue: $response.body#/value
+    onSuccess:
+    - name: exists
+      type: goto
+      stepId: updateVariable
+      criteria:
+      - condition: $statusCode == 200
+    - name: missing
+      type: goto
+      stepId: createVariable
+      criteria:
+      - condition: $statusCode == 404
+  - stepId: updateVariable
+    description: >-
+      Patch the existing variable with the new value. Returns 204 with no body.
+    operationId: updateRepoVariable
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: name
+      in: path
+      value: $inputs.variableName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.variableName
+        value: $inputs.variableValue
+    successCriteria:
+    - condition: $statusCode == 204
+    onSuccess:
+    - name: confirmAfterUpdate
+      type: goto
+      stepId: confirmVariable
+  - stepId: createVariable
+    description: >-
+      Create the variable with the supplied name and value. Returns 201.
+    operationId: createRepoVariable
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.variableName
+        value: $inputs.variableValue
+    successCriteria:
+    - condition: $statusCode == 201
+  - stepId: confirmVariable
+    description: >-
+      Read the variable back to confirm the stored value after the upsert.
+    operationId: getRepoVariable
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: name
+      in: path
+      value: $inputs.variableName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      name: $response.body#/name
+      value: $response.body#/value
+  outputs:
+    variableName: $steps.confirmVariable.outputs.name
+    variableValue: $steps.confirmVariable.outputs.value

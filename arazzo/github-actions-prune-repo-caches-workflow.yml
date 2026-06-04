@@ -1,0 +1,124 @@
+arazzo: 1.0.1
+info:
+  title: GitHub Actions Prune Repository Caches
+  summary: Read cache usage, list the largest caches, and delete the largest one by id to reclaim space.
+  description: >-
+    A housekeeping pattern for reclaiming GitHub Actions cache storage. The
+    workflow reads the repository's overall cache usage, lists caches sorted by
+    size so the largest sits first, and deletes that cache by its id. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: githubActionsApi
+  url: ../openapi/github-actions-openapi.yml
+  type: openapi
+workflows:
+- workflowId: prune-repo-caches
+  summary: Find and delete the largest Actions cache in a repository.
+  description: >-
+    Reports cache usage, lists caches ordered by size descending, and deletes
+    the largest cache by id when one exists.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - owner
+    - repo
+    properties:
+      accessToken:
+        type: string
+        description: GitHub bearer token with Actions write access.
+      owner:
+        type: string
+        description: The account owner of the repository.
+      repo:
+        type: string
+        description: The name of the repository without the .git extension.
+  steps:
+  - stepId: getCacheUsage
+    description: >-
+      Read the repository's aggregate Actions cache usage to report how much
+      space is currently consumed.
+    operationId: getActionsCacheUsage
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      activeCachesSize: $response.body#/active_caches_size_in_bytes
+      activeCachesCount: $response.body#/active_caches_count
+  - stepId: listCaches
+    description: >-
+      List caches sorted by size in descending order so the largest cache is the
+      first entry. Branch to the end when there are no caches.
+    operationId: listActionsCaches
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: sort
+      in: query
+      value: size_in_bytes
+    - name: direction
+      in: query
+      value: desc
+    - name: per_page
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      largestCacheId: $response.body#/actions_caches/0/id
+      largestCacheKey: $response.body#/actions_caches/0/key
+      totalCount: $response.body#/total_count
+    onSuccess:
+    - name: noCaches
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.total_count == 0
+        type: jsonpath
+    - name: hasCaches
+      type: goto
+      stepId: deleteLargestCache
+      criteria:
+      - context: $response.body
+        condition: $.total_count > 0
+        type: jsonpath
+  - stepId: deleteLargestCache
+    description: >-
+      Delete the largest cache by its id. Returns 204 with no body on success.
+    operationId: deleteActionsCacheById
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: cache_id
+      in: path
+      value: $steps.listCaches.outputs.largestCacheId
+    successCriteria:
+    - condition: $statusCode == 204
+  outputs:
+    activeCachesSize: $steps.getCacheUsage.outputs.activeCachesSize
+    deletedCacheKey: $steps.listCaches.outputs.largestCacheKey

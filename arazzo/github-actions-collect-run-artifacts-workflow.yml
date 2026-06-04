@@ -1,0 +1,155 @@
+arazzo: 1.0.1
+info:
+  title: GitHub Actions Collect Workflow Run Artifacts
+  summary: Find the latest run for a repository, confirm it, list its artifacts, and resolve a download URL.
+  description: >-
+    Retrieves build outputs produced by a workflow run. The workflow lists the
+    repository's runs to select the newest one, fetches that run to confirm it,
+    enumerates the artifacts attached to it, and finally requests the artifact
+    archive download which the API answers with a 302 redirect to a short-lived
+    download URL. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: githubActionsApi
+  url: ../openapi/github-actions-openapi.yml
+  type: openapi
+workflows:
+- workflowId: collect-run-artifacts
+  summary: Resolve the download URL for the first artifact of the latest run.
+  description: >-
+    Lists repository runs, gets the newest run, lists its artifacts, and
+    resolves a redirect download URL for the first artifact in zip format.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - owner
+    - repo
+    properties:
+      accessToken:
+        type: string
+        description: GitHub bearer token with read access to the repository.
+      owner:
+        type: string
+        description: The account owner of the repository.
+      repo:
+        type: string
+        description: The name of the repository without the .git extension.
+      branch:
+        type: string
+        description: Optional branch filter for the run listing.
+  steps:
+  - stepId: listRuns
+    description: >-
+      List the most recent workflow runs for the repository and capture the id
+      of the newest run.
+    operationId: listWorkflowRunsForRepo
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: branch
+      in: query
+      value: $inputs.branch
+    - name: per_page
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runId: $response.body#/workflow_runs/0/id
+  - stepId: getRun
+    description: >-
+      Fetch the selected run to confirm it exists and read its conclusion before
+      gathering artifacts.
+    operationId: getWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $steps.listRuns.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      conclusion: $response.body#/conclusion
+  - stepId: listArtifacts
+    description: >-
+      List the artifacts produced by the run and capture the id of the first
+      artifact. Branch to the end when the run produced no artifacts.
+    operationId: listWorkflowRunArtifacts
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $steps.listRuns.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      artifactId: $response.body#/artifacts/0/id
+      totalArtifacts: $response.body#/total_count
+    onSuccess:
+    - name: noArtifacts
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.total_count == 0
+        type: jsonpath
+    - name: hasArtifacts
+      type: goto
+      stepId: downloadArtifact
+      criteria:
+      - context: $response.body
+        condition: $.total_count > 0
+        type: jsonpath
+  - stepId: downloadArtifact
+    description: >-
+      Request the zip archive for the first artifact. The API responds with a
+      302 redirect to a short-lived download URL.
+    operationId: downloadArtifact
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: artifact_id
+      in: path
+      value: $steps.listArtifacts.outputs.artifactId
+    - name: archive_format
+      in: path
+      value: zip
+    successCriteria:
+    - condition: $statusCode == 302
+    outputs:
+      downloadLocation: $response.header.Location
+  outputs:
+    runId: $steps.listRuns.outputs.runId
+    artifactId: $steps.listArtifacts.outputs.artifactId
+    downloadLocation: $steps.downloadArtifact.outputs.downloadLocation

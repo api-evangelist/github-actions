@@ -1,0 +1,152 @@
+arazzo: 1.0.1
+info:
+  title: GitHub Actions Cancel a Workflow Run and Confirm
+  summary: Get a run, request cancellation, poll until it is no longer in progress, and force-cancel if it gets stuck.
+  description: >-
+    Stops a workflow run and verifies that it actually stopped. The workflow
+    fetches the run, requests a normal cancellation, polls the run until it
+    leaves the in_progress state, and falls back to a force cancel when the run
+    refuses to respond to the normal cancel request. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: githubActionsApi
+  url: ../openapi/github-actions-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cancel-run
+  summary: Cancel a run and confirm it stopped, force-cancelling if necessary.
+  description: >-
+    Reads the run, requests cancellation, polls until it is no longer in
+    progress, and force-cancels when the normal cancel does not take effect.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - owner
+    - repo
+    - runId
+    properties:
+      accessToken:
+        type: string
+        description: GitHub bearer token with Actions write access.
+      owner:
+        type: string
+        description: The account owner of the repository.
+      repo:
+        type: string
+        description: The name of the repository without the .git extension.
+      runId:
+        type: integer
+        description: The unique identifier of the workflow run to cancel.
+  steps:
+  - stepId: getRun
+    description: >-
+      Fetch the run to confirm it exists and read its current status before
+      attempting cancellation.
+    operationId: getWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  - stepId: cancelRun
+    description: >-
+      Request a normal cancellation of the run. The API returns 202 to
+      acknowledge the cancellation request.
+    operationId: cancelWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 202
+  - stepId: pollRun
+    description: >-
+      Poll the run until it is no longer in_progress. Loop while still running;
+      force-cancel if it remains queued and end once it has stopped.
+    operationId: getWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      conclusion: $response.body#/conclusion
+    onSuccess:
+    - name: stoppedNormally
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "completed"
+        type: jsonpath
+    - name: stuckCancelling
+      type: goto
+      stepId: forceCancelRun
+      criteria:
+      - context: $response.body
+        condition: $.status == "queued"
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.status == "in_progress"
+        type: jsonpath
+  - stepId: forceCancelRun
+    description: >-
+      Force cancel the run when the normal cancel request did not take effect.
+      The API returns 202 to acknowledge the force cancellation request.
+    operationId: forceCancelWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 202
+  outputs:
+    runId: $inputs.runId
+    finalStatus: $steps.pollRun.outputs.status

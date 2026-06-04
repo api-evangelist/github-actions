@@ -1,0 +1,178 @@
+arazzo: 1.0.1
+info:
+  title: GitHub Actions Approve a Pending Deployment
+  summary: Get a run, find its pending deployment environments, approve them, then poll the run to completion.
+  description: >-
+    Drives a gated deployment past its required reviewer step. The workflow
+    fetches the run, lists the deployment environments waiting on protection
+    rules, approves them with a reviewer comment, and polls the run until it
+    reaches a terminal status so the deployment outcome can be reported. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: githubActionsApi
+  url: ../openapi/github-actions-openapi.yml
+  type: openapi
+workflows:
+- workflowId: approve-pending-deployment
+  summary: Approve the pending deployment environments for a run and follow it to completion.
+  description: >-
+    Reads the run, lists pending deployments, approves the waiting environment,
+    and polls the run until its status is completed.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - owner
+    - repo
+    - runId
+    - environmentId
+    - comment
+    properties:
+      accessToken:
+        type: string
+        description: GitHub bearer token with deployment review access.
+      owner:
+        type: string
+        description: The account owner of the repository.
+      repo:
+        type: string
+        description: The name of the repository without the .git extension.
+      runId:
+        type: integer
+        description: The workflow run that has pending deployments.
+      environmentId:
+        type: integer
+        description: The environment id to approve.
+      comment:
+        type: string
+        description: A required reviewer comment recorded with the approval.
+  steps:
+  - stepId: getRun
+    description: >-
+      Fetch the run to confirm it exists and is waiting before reviewing its
+      pending deployments.
+    operationId: getWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  - stepId: getPendingDeployments
+    description: >-
+      List the deployment environments for the run that are waiting on
+      protection rules. Branch to the end when nothing is pending.
+    operationId: getPendingDeployments
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstEnvironmentName: $response.body#/0/environment/name
+    onSuccess:
+    - name: nonePending
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.length == 0
+        type: jsonpath
+    - name: hasPending
+      type: goto
+      stepId: approveDeployment
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+  - stepId: approveDeployment
+    description: >-
+      Approve the waiting environment for the run with the supplied reviewer
+      comment. Returns 200 with the created deployments.
+    operationId: reviewPendingDeployments
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $inputs.runId
+    requestBody:
+      contentType: application/json
+      payload:
+        environment_ids:
+        - $inputs.environmentId
+        state: approved
+        comment: $inputs.comment
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentId: $response.body#/0/id
+  - stepId: pollRun
+    description: >-
+      Poll the run until it reaches the terminal completed status, looping back
+      to itself while it is still in progress.
+    operationId: getWorkflowRun
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: owner
+      in: path
+      value: $inputs.owner
+    - name: repo
+      in: path
+      value: $inputs.repo
+    - name: run_id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      conclusion: $response.body#/conclusion
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.status != "completed"
+        type: jsonpath
+    - name: completed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "completed"
+        type: jsonpath
+  outputs:
+    deploymentId: $steps.approveDeployment.outputs.deploymentId
+    conclusion: $steps.pollRun.outputs.conclusion
