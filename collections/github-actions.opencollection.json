@@ -1,0 +1,2750 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Repository Workflows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ]
+          },
+          "docs": "Gets a specific workflow. You can replace workflow_id with the workflow file name."
+        },
+        {
+          "info": {
+            "name": "Github Actions Disable a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/disable",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ]
+          },
+          "docs": "Disables a workflow and sets the state of the workflow to disabled_manually."
+        },
+        {
+          "info": {
+            "name": "Github Actions Enable a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/enable",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ]
+          },
+          "docs": "Enables a workflow and sets the state of the workflow to active."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Workflow Dispatch Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/dispatches",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manually triggers a GitHub Actions workflow run. The workflow must be configured to support the workflow_dispatch event."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Workflow Runs for a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/runs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              },
+              {
+                "name": "actor",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "branch",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "event",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "completed",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "List all workflow runs for a workflow. You can replace workflow_id with the workflow file name."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get Workflow Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/timing",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ]
+          },
+          "docs": "Gets the number of billable minutes used by a specific workflow during the current billing cycle."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workflow Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Workflow Runs for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "actor",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "branch",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "event",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "completed",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all workflow runs for a repository. Anyone with read access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets a specific workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Deletes a specific workflow run. Anyone with write access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions Approve a Workflow Run for a Fork Pull Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/approve",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Approves a workflow run for a pull request from a public fork of a first time contributor."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get the Review History for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/approvals",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Anyone with read access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Workflow Run Attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/attempts/:attempt_number",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "attempt_number",
+                "value": "",
+                "type": "path",
+                "description": "The attempt number of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets a specific workflow run attempt."
+        },
+        {
+          "info": {
+            "name": "Github Actions Download Workflow Run Attempt Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/attempts/:attempt_number/logs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "attempt_number",
+                "value": "",
+                "type": "path",
+                "description": "The attempt number of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets a redirect URL to download an archive of log files for a specific workflow run attempt."
+        },
+        {
+          "info": {
+            "name": "Github Actions Cancel a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/cancel",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Cancels a workflow run using its id."
+        },
+        {
+          "info": {
+            "name": "Github Actions Review Custom Deployment Protection Rules for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/deployment_protection_rule",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approve or reject custom deployment protection rules for a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Force Cancel a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/force-cancel",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Force cancels a workflow run. Use this endpoint to force cancel a workflow run that is not responding to a normal cancel request."
+        },
+        {
+          "info": {
+            "name": "Github Actions Download Workflow Run Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/logs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete Workflow Run Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/logs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Deletes all logs for a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get Pending Deployments for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/pending_deployments",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Get all deployment environments for a workflow run that are waiting for protection rules to pass."
+        },
+        {
+          "info": {
+            "name": "Github Actions Review Pending Deployments for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/pending_deployments",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approve or reject pending deployments that are waiting on approval by a required reviewer."
+        },
+        {
+          "info": {
+            "name": "Github Actions Re-run a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/rerun",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-runs your workflow run using its id."
+        },
+        {
+          "info": {
+            "name": "Github Actions Re-run Failed Jobs From a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/rerun-failed-jobs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-run all of the failed jobs and their dependent jobs in a workflow run using the id of the workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get Workflow Run Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/timing",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets the number of billable minutes and total run time for a specific workflow run."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Jobs for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/jobs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "filter",
+                "value": "latest",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Jobs for a Workflow Run Attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/attempts/:attempt_number/jobs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "attempt_number",
+                "value": "",
+                "type": "path",
+                "description": "The attempt number of the workflow run."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists jobs for a specific workflow run attempt."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Job for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/jobs/:job_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "job_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a specific job in a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Download Job Logs for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/jobs/:job_id/logs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "job_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute."
+        },
+        {
+          "info": {
+            "name": "Github Actions Re-run a Job From a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/jobs/:job_id/rerun",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "job_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-run a job and its dependent jobs in a workflow run."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Artifacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Artifacts for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/artifacts",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all artifacts for a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get an Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/artifacts/:artifact_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the artifact."
+              }
+            ]
+          },
+          "docs": "Gets a specific artifact for a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete an Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/artifacts/:artifact_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the artifact."
+              }
+            ]
+          },
+          "docs": "Deletes an artifact for a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Download an Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/artifacts/:artifact_id/:archive_format",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the artifact."
+              },
+              {
+                "name": "archive_format",
+                "value": "zip",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a redirect URL to download an archive for a repository. The archive_format must be zip."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Workflow Run Artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/artifacts",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists artifacts for a workflow run."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cache",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Github Actions Caches for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/caches",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "ref",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "key",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "created_at",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "asc",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists the GitHub Actions caches for a repository."
+        },
+        {
+          "info": {
+            "name": "Delete Github Actions Caches for a Repository (by Key)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/caches",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "key",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "ref",
+                "value": "example_value",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes one or more GitHub Actions caches for a repository, using a complete cache key."
+        },
+        {
+          "info": {
+            "name": "Delete a Github Actions Cache for a Repository (by Id)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/caches/:cache_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "cache_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a GitHub Actions cache for a repository, using a cache ID."
+        },
+        {
+          "info": {
+            "name": "Get Github Actions Cache Usage for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/cache/usage",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Gets GitHub Actions cache usage for a repository."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Secrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Repository Secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/secrets",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all secrets available in a repository without revealing their encrypted values."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Repository Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/secrets/public-key",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Gets your public key, which you need to encrypt secrets."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Repository Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/secrets/:secret_name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the secret."
+              }
+            ]
+          },
+          "docs": "Gets a single repository secret without revealing its encrypted value."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create or Update a Repository Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/secrets/:secret_name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the secret."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a repository secret with an encrypted value."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete a Repository Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/secrets/:secret_name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the secret."
+              }
+            ]
+          },
+          "docs": "Deletes a secret in a repository using the secret name."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Repository Organization Secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/organization-secrets",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all organization secrets shared with a repository without revealing their encrypted values."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Organization Secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/secrets",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all secrets available in an organization without revealing their encrypted values."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get an Organization Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/secrets/public-key",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ]
+          },
+          "docs": "Gets your public key, which you need to encrypt secrets."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get an Organization Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/secrets/:secret_name",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the secret."
+              }
+            ]
+          },
+          "docs": "Gets a single organization secret without revealing its encrypted value."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create or Update an Organization Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/orgs/:org/actions/secrets/:secret_name",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the secret."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates an organization secret with an encrypted value."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete an Organization Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/orgs/:org/actions/secrets/:secret_name",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the secret."
+              }
+            ]
+          },
+          "docs": "Deletes a secret in an organization using the secret name."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Selected Repositories for an Organization Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/secrets/:secret_name/repositories",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the secret."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              }
+            ]
+          },
+          "docs": "Lists all repositories that have been selected when the visibility for repository access to a secret is set to selected."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set Selected Repositories for an Organization Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/orgs/:org/actions/secrets/:secret_name/repositories",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the secret."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces all repositories for an organization secret when the visibility for repository access is set to selected."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Variables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Repository Variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/variables",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all repository variables."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Repository Variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/variables",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a repository variable that you can reference in a GitHub Actions workflow."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Repository Variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/variables/:name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the variable."
+              }
+            ]
+          },
+          "docs": "Gets a specific variable in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Update a Repository Variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/variables/:name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the variable."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a repository variable that you can reference in a GitHub Actions workflow."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete a Repository Variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/variables/:name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the variable."
+              }
+            ]
+          },
+          "docs": "Deletes a repository variable using the variable name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Self-Hosted Runners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Self-hosted Runners for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all self-hosted runners configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ]
+          },
+          "docs": "Gets a specific self-hosted runner configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete a Self-hosted Runner From a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ]
+          },
+          "docs": "Forces the removal of a self-hosted runner from a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Runner Applications for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/downloads",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Lists binaries for the runner application that you can download."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Registration Token for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/registration-token",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Returns a token that you can pass to the config script for a self-hosted runner."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Remove Token for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/remove-token",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Returns a token that you can pass to remove a self-hosted runner from a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Labels for a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ]
+          },
+          "docs": "Lists all labels for a self-hosted runner configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Add Custom Labels to a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds custom labels to a self-hosted runner configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set Custom Labels for a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove all previous custom labels and set the new custom labels for a specific self-hosted runner."
+        },
+        {
+          "info": {
+            "name": "Github Actions Remove All Custom Labels From a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ]
+          },
+          "docs": "Remove all custom labels from a self-hosted runner configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Remove a Custom Label From a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels/:name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a custom label from a self-hosted runner configured in a repository."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Github Actions Permissions for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/permissions",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Gets the GitHub Actions permissions policy for a repository."
+        },
+        {
+          "info": {
+            "name": "Set Github Actions Permissions for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/permissions",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions and reusable workflows in the repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get Default Workflow Permissions for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/permissions/workflow",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Gets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set Default Workflow Permissions for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/permissions/workflow",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository."
+        },
+        {
+          "info": {
+            "name": "Get Github Actions Permissions for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/permissions",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ]
+          },
+          "docs": "Gets the GitHub Actions permissions policy for repositories and allowed actions and reusable workflows in an organization."
+        },
+        {
+          "info": {
+            "name": "Set Github Actions Permissions for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/orgs/:org/actions/permissions",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the GitHub Actions permissions policy for repositories and allowed actions and reusable workflows in an organization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OIDC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions Get the Customization Template for an Oidc Subject Claim for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/oidc/customization/sub",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Gets the customization template for an OpenID Connect (OIDC) subject claim."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set the Customization Template for an Oidc Subject Claim for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/oidc/customization/sub",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the customization template for an OpenID Connect (OIDC) subject claim."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get the Customization Template for an Oidc Subject Claim for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/oidc/customization/sub",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ]
+          },
+          "docs": "Gets the customization template for an OpenID Connect (OIDC) subject claim for an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set the Customization Template for an Oidc Subject Claim for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/orgs/:org/actions/oidc/customization/sub",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates the customization template for an OpenID Connect (OIDC) subject claim for an organization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Self-Hosted Runner Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Self-hosted Runner Groups for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all self-hosted runner groups configured in an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Self-hosted Runner Group for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new self-hosted runner group for an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Self-hosted Runner Group for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups/:runner_group_id",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "runner_group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner group."
+              }
+            ]
+          },
+          "docs": "Gets a specific self-hosted runner group for an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Update a Self-hosted Runner Group for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups/:runner_group_id",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "runner_group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the name and visibility of a self-hosted runner group in an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete a Self-hosted Runner Group From an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups/:runner_group_id",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "runner_group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner group."
+              }
+            ]
+          },
+          "docs": "Deletes a self-hosted runner group from an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
