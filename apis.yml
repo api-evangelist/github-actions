@@ -30,16 +30,16 @@ apis:
         url: https://docs.github.com/en/rest/actions
       - type: ChangeLog
         url: https://github.blog/changelog/label/actions/
-      - type: SDK
+      - type: SDKs
         url: https://github.com/octokit/octokit.js
         title: JavaScript SDK
-      - type: SDK
+      - type: SDKs
         url: https://github.com/octokit/octokit.rb
         title: Ruby SDK
-      - type: SDK
+      - type: SDKs
         url: https://github.com/octokit/octokit.net
         title: .NET SDK
-      - type: SDK
+      - type: SDKs
         url: https://github.com/google/go-github
         title: Go SDK
       - type: CLI
@@ -285,44 +285,39 @@ maintainers:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/github-actions/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/github-actions-approve-pending-deployment-workflow.yml
-        name: GitHub Actions Approve a Pending Deployment
-        summary: Get a run, find its pending deployment environments, approve them, then poll the run to completion.
-      - url: arazzo/github-actions-cancel-run-workflow.yml
-        name: GitHub Actions Cancel a Workflow Run and Confirm
-        summary: Get a run, request cancellation, poll until it is no longer in progress, and force-cancel if it gets stuck.
-      - url: arazzo/github-actions-collect-run-artifacts-workflow.yml
-        name: GitHub Actions Collect Workflow Run Artifacts
-        summary: Find the latest run for a repository, confirm it, list its artifacts, and resolve a download URL.
-      - url: arazzo/github-actions-dispatch-and-track-run-workflow.yml
-        name: GitHub Actions Dispatch and Track a Workflow Run
-        summary: Manually dispatch a workflow, find the run it created, poll until it completes, then list its jobs.
-      - url: arazzo/github-actions-inspect-failed-job-logs-workflow.yml
-        name: GitHub Actions Inspect Failed Job Logs
-        summary: Find the latest failed run, list its jobs, get the failing job, and resolve its log download URL.
-      - url: arazzo/github-actions-prune-repo-caches-workflow.yml
-        name: GitHub Actions Prune Repository Caches
-        summary: Read cache usage, list the largest caches, and delete the largest one by id to reclaim space.
-      - url: arazzo/github-actions-register-runner-workflow.yml
-        name: GitHub Actions Register a Self-hosted Runner
-        summary: List the available runner application binaries, mint a registration token, then list the repository's runners.
-      - url: arazzo/github-actions-rerun-failed-run-workflow.yml
-        name: GitHub Actions Re-run Failed Jobs and Track
-        summary: Find the most recent failed run, re-run only its failed jobs, and poll the run until it completes again.
-      - url: arazzo/github-actions-share-org-secret-workflow.yml
-        name: GitHub Actions Share an Organization Secret with Selected Repositories
-        summary: >-
-          Fetch the org public key, create or update a selected-visibility org secret, scope it to repositories, and
-          list them.
-      - url: arazzo/github-actions-upsert-repo-secret-workflow.yml
-        name: GitHub Actions Upsert a Repository Secret
-        summary: Fetch the repository public key, create or update an encrypted secret, then confirm it exists.
-      - url: arazzo/github-actions-upsert-repo-variable-workflow.yml
-        name: GitHub Actions Upsert a Repository Variable
-        summary: Look up a repository variable by name and either create it or update it, then read it back.
+  - type: Arazzo
+    url: arazzo/github-actions-approve-pending-deployment-workflow.yml
+    name: GitHub Actions Approve a Pending Deployment
+  - type: Arazzo
+    url: arazzo/github-actions-cancel-run-workflow.yml
+    name: GitHub Actions Cancel a Workflow Run and Confirm
+  - type: Arazzo
+    url: arazzo/github-actions-collect-run-artifacts-workflow.yml
+    name: GitHub Actions Collect Workflow Run Artifacts
+  - type: Arazzo
+    url: arazzo/github-actions-dispatch-and-track-run-workflow.yml
+    name: GitHub Actions Dispatch and Track a Workflow Run
+  - type: Arazzo
+    url: arazzo/github-actions-inspect-failed-job-logs-workflow.yml
+    name: GitHub Actions Inspect Failed Job Logs
+  - type: Arazzo
+    url: arazzo/github-actions-prune-repo-caches-workflow.yml
+    name: GitHub Actions Prune Repository Caches
+  - type: Arazzo
+    url: arazzo/github-actions-register-runner-workflow.yml
+    name: GitHub Actions Register a Self-hosted Runner
+  - type: Arazzo
+    url: arazzo/github-actions-rerun-failed-run-workflow.yml
+    name: GitHub Actions Re-run Failed Jobs and Track
+  - type: Arazzo
+    url: arazzo/github-actions-share-org-secret-workflow.yml
+    name: GitHub Actions Share an Organization Secret with Selected Repositories
+  - type: Arazzo
+    url: arazzo/github-actions-upsert-repo-secret-workflow.yml
+    name: GitHub Actions Upsert a Repository Secret
+  - type: Arazzo
+    url: arazzo/github-actions-upsert-repo-variable-workflow.yml
+    name: GitHub Actions Upsert a Repository Variable
   - type: TermsOfService
     url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
   - type: PrivacyPolicy
@@ -349,7 +344,7 @@ common:
     url: https://docs.github.com/en/rest
   - type: Documentation
     url: https://docs.github.com/en/actions
-  - type: SignUp
+  - type: Signup
     url: https://github.com/signup
   - type: Login
     url: https://github.com/login
@@ -361,21 +356,21 @@ common:
     url: https://stackoverflow.com/questions/tagged/github-actions
   - type: YouTube
     url: https://www.youtube.com/github
-  - type: SDK
+  - type: SDKs
     url: https://github.com/octokit/octokit.js
     title: JavaScript SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/octokit/octokit.rb
     title: Ruby SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/octokit/octokit.net
     title: .NET SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/google/go-github
     title: Go SDK
   - type: CLI
     url: https://cli.github.com/
-  - type: Quickstart
+  - type: GettingStarted
     url: https://docs.github.com/en/rest/quickstart
   - type: Security
     url: https://docs.github.com/en/actions/security-for-github-actions
@@ -435,5 +430,5 @@ common:
       - PyPI
       - Slack
       - Jira
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.github.com/llms.txt
