@@ -283,6 +283,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: Authentication
+    url: authentication/github-actions-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/github-actions/overview
   - type: Arazzo

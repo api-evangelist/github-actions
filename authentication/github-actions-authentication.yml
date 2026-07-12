@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/github-actions-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: GitHub personal access token or OAuth token
+  sources:
+  - openapi/github-actions-openapi.yml
