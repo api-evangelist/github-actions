@@ -1,0 +1,1076 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/github-actions-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 82
+  by_action_class:
+    connected: 43
+    acting: 39
+  by_consequence:
+    read: 43
+    safety-critical: 2
+    write: 35
+    physical: 2
+  human_in_the_loop_required: 2
+operations:
+- path: /repos/{owner}/{repo}/actions/workflows
+  method: get
+  operationId: listRepoWorkflows
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}
+  method: get
+  operationId: getWorkflow
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable
+  method: put
+  operationId: disableWorkflow
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable
+  method: put
+  operationId: enableWorkflow
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
+  method: post
+  operationId: createWorkflowDispatch
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs
+  method: get
+  operationId: listWorkflowRuns
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing
+  method: get
+  operationId: getWorkflowUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs
+  method: get
+  operationId: listWorkflowRunsForRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}
+  method: get
+  operationId: getWorkflowRun
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}
+  method: delete
+  operationId: deleteWorkflowRun
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/approve
+  method: post
+  operationId: approveWorkflowRun
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/approvals
+  method: get
+  operationId: getWorkflowRunApprovals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}
+  method: get
+  operationId: getWorkflowRunAttempt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs
+  method: get
+  operationId: downloadWorkflowRunAttemptLogs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/cancel
+  method: post
+  operationId: cancelWorkflowRun
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule
+  method: post
+  operationId: reviewCustomGatesForRun
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel
+  method: post
+  operationId: forceCancelWorkflowRun
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/logs
+  method: get
+  operationId: downloadWorkflowRunLogs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/logs
+  method: delete
+  operationId: deleteWorkflowRunLogs
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
+  method: get
+  operationId: getPendingDeployments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
+  method: post
+  operationId: reviewPendingDeployments
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/rerun
+  method: post
+  operationId: rerunWorkflowRun
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/rerun-failed-jobs
+  method: post
+  operationId: rerunFailedJobs
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/timing
+  method: get
+  operationId: getWorkflowRunUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/jobs
+  method: get
+  operationId: listJobsForWorkflowRun
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs
+  method: get
+  operationId: listJobsForWorkflowRunAttempt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/jobs/{job_id}
+  method: get
+  operationId: getJobForWorkflowRun
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/jobs/{job_id}/logs
+  method: get
+  operationId: downloadJobLogsForWorkflowRun
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/jobs/{job_id}/rerun
+  method: post
+  operationId: rerunJobForWorkflowRun
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/artifacts
+  method: get
+  operationId: listArtifactsForRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
+  method: get
+  operationId: getArtifact
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
+  method: delete
+  operationId: deleteArtifact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}
+  method: get
+  operationId: downloadArtifact
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts
+  method: get
+  operationId: listWorkflowRunArtifacts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/caches
+  method: get
+  operationId: listActionsCaches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/caches
+  method: delete
+  operationId: deleteActionsCacheByKey
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/caches/{cache_id}
+  method: delete
+  operationId: deleteActionsCacheById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/cache/usage
+  method: get
+  operationId: getActionsCacheUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/secrets
+  method: get
+  operationId: listRepoSecrets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/secrets/public-key
+  method: get
+  operationId: getRepoPublicKey
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/secrets/{secret_name}
+  method: get
+  operationId: getRepoSecret
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/secrets/{secret_name}
+  method: put
+  operationId: createOrUpdateRepoSecret
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/secrets/{secret_name}
+  method: delete
+  operationId: deleteRepoSecret
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/organization-secrets
+  method: get
+  operationId: listRepoOrgSecrets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/secrets
+  method: get
+  operationId: listOrgSecrets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/secrets/public-key
+  method: get
+  operationId: getOrgPublicKey
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/secrets/{secret_name}
+  method: get
+  operationId: getOrgSecret
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/secrets/{secret_name}
+  method: put
+  operationId: createOrUpdateOrgSecret
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orgs/{org}/actions/secrets/{secret_name}
+  method: delete
+  operationId: deleteOrgSecret
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orgs/{org}/actions/secrets/{secret_name}/repositories
+  method: get
+  operationId: listSelectedReposForOrgSecret
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/secrets/{secret_name}/repositories
+  method: put
+  operationId: setSelectedReposForOrgSecret
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/variables
+  method: get
+  operationId: listRepoVariables
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/variables
+  method: post
+  operationId: createRepoVariable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/variables/{name}
+  method: get
+  operationId: getRepoVariable
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/variables/{name}
+  method: patch
+  operationId: updateRepoVariable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/variables/{name}
+  method: delete
+  operationId: deleteRepoVariable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runners
+  method: get
+  operationId: listSelfHostedRunnersForRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runners/{runner_id}
+  method: get
+  operationId: getSelfHostedRunnerForRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runners/{runner_id}
+  method: delete
+  operationId: deleteSelfHostedRunnerFromRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runners/downloads
+  method: get
+  operationId: listRunnerApplicationsForRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runners/registration-token
+  method: post
+  operationId: createRegistrationTokenForRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runners/remove-token
+  method: post
+  operationId: createRemoveTokenForRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runners/{runner_id}/labels
+  method: get
+  operationId: listLabelsForSelfHostedRunnerForRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/runners/{runner_id}/labels
+  method: post
+  operationId: addCustomLabelsToSelfHostedRunnerForRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runners/{runner_id}/labels
+  method: put
+  operationId: setCustomLabelsForSelfHostedRunnerForRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runners/{runner_id}/labels
+  method: delete
+  operationId: removeAllCustomLabelsFromSelfHostedRunnerForRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}
+  method: delete
+  operationId: removeCustomLabelFromSelfHostedRunnerForRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/permissions
+  method: get
+  operationId: getGithubActionsPermissionsRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/permissions
+  method: put
+  operationId: setGithubActionsPermissionsRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/permissions/workflow
+  method: get
+  operationId: getGithubActionsDefaultWorkflowPermissionsRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/permissions/workflow
+  method: put
+  operationId: setGithubActionsDefaultWorkflowPermissionsRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /repos/{owner}/{repo}/actions/oidc/customization/sub
+  method: get
+  operationId: getCustomOidcSubClaimForRepo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /repos/{owner}/{repo}/actions/oidc/customization/sub
+  method: put
+  operationId: setCustomOidcSubClaimForRepo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orgs/{org}/actions/oidc/customization/sub
+  method: get
+  operationId: getCustomOidcSubClaimForOrg
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/oidc/customization/sub
+  method: put
+  operationId: setCustomOidcSubClaimForOrg
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orgs/{org}/actions/permissions
+  method: get
+  operationId: getGithubActionsPermissionsOrg
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/permissions
+  method: put
+  operationId: setGithubActionsPermissionsOrg
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orgs/{org}/actions/runner-groups
+  method: get
+  operationId: listSelfHostedRunnerGroupsForOrg
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/runner-groups
+  method: post
+  operationId: createSelfHostedRunnerGroupForOrg
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orgs/{org}/actions/runner-groups/{runner_group_id}
+  method: get
+  operationId: getSelfHostedRunnerGroupForOrg
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /orgs/{org}/actions/runner-groups/{runner_group_id}
+  method: patch
+  operationId: updateSelfHostedRunnerGroupForOrg
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /orgs/{org}/actions/runner-groups/{runner_group_id}
+  method: delete
+  operationId: deleteSelfHostedRunnerGroupFromOrg
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
