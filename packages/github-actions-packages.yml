@@ -1,0 +1,62 @@
+generated: '2026-06-20'
+method: searched
+source: https://docs.github.com/en/rest/overview/libraries-for-the-rest-api
+description: >-
+  First-party GitHub client libraries (the Octokit family) plus the official
+  GitHub CLI, all of which cover the Actions REST API surface. Verified against
+  the public package registries. GitHub does not ship a first-party Python SDK;
+  PyGithub is the widely used community library and is marked official: false.
+packages:
+  - language: javascript
+    registry: npm
+    name: octokit
+    url: https://www.npmjs.com/package/octokit
+    source: https://github.com/octokit/octokit.js
+    install: npm install octokit
+    official: true
+    note: All-batteries-included Octokit SDK for browser, Node.js and Deno.
+  - language: javascript
+    registry: npm
+    name: "@octokit/rest"
+    url: https://www.npmjs.com/package/@octokit/rest
+    source: https://github.com/octokit/rest.js
+    install: npm install @octokit/rest
+    official: true
+  - language: ruby
+    registry: rubygems
+    name: octokit
+    url: https://rubygems.org/gems/octokit
+    source: https://github.com/octokit/octokit.rb
+    install: gem install octokit
+    official: true
+  - language: dotnet
+    registry: nuget
+    name: Octokit
+    url: https://www.nuget.org/packages/Octokit
+    source: https://github.com/octokit/octokit.net
+    install: dotnet add package Octokit
+    official: true
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/google/go-github
+    url: https://pkg.go.dev/github.com/google/go-github/v74/github
+    source: https://github.com/google/go-github
+    install: go get github.com/google/go-github/v74/github
+    official: true
+    note: Maintained by Google; the de-facto official Go client referenced by GitHub docs.
+  - language: cli
+    registry: homebrew
+    name: gh
+    url: https://cli.github.com/
+    source: https://github.com/cli/cli
+    install: brew install gh
+    official: true
+    note: Official GitHub CLI; command surface catalogued in cli/github-actions-cli.yml.
+  - language: python
+    registry: pypi
+    name: PyGithub
+    url: https://pypi.org/project/PyGithub/
+    source: https://github.com/PyGithub/PyGithub
+    install: pip install PyGithub
+    official: false
+    note: Community-maintained; GitHub ships no first-party Python SDK.

@@ -1,0 +1,52 @@
+generated: '2026-06-20'
+method: derived
+source: arazzo/*.yml
+description: >-
+  Catalog of the native Arazzo 1.0.1 workflows in this repo, each stitching
+  GitHub Actions API operations (from openapi/github-actions-openapi.yml) into a
+  real multi-step use case.
+workflows:
+  - file: github-actions-approve-pending-deployment-workflow.yml
+    workflowId: approve-pending-deployment
+    title: GitHub Actions Approve a Pending Deployment
+    summary: Get a run, find its pending deployment environments, approve them, then poll the run to completion.
+  - file: github-actions-cancel-run-workflow.yml
+    workflowId: cancel-run
+    title: GitHub Actions Cancel a Workflow Run and Confirm
+    summary: Get a run, request cancellation, poll until it is no longer in progress, and force-cancel if it gets stuck.
+  - file: github-actions-collect-run-artifacts-workflow.yml
+    workflowId: collect-run-artifacts
+    title: GitHub Actions Collect Workflow Run Artifacts
+    summary: Find the latest run for a repository, confirm it, list its artifacts, and resolve a download URL.
+  - file: github-actions-dispatch-and-track-run-workflow.yml
+    workflowId: dispatch-and-track-run
+    title: GitHub Actions Dispatch and Track a Workflow Run
+    summary: Manually dispatch a workflow, find the run it created, poll until it completes, then list its jobs.
+  - file: github-actions-inspect-failed-job-logs-workflow.yml
+    workflowId: inspect-failed-job-logs
+    title: GitHub Actions Inspect Failed Job Logs
+    summary: Find the latest failed run, list its jobs, get the failing job, and resolve its log download URL.
+  - file: github-actions-prune-repo-caches-workflow.yml
+    workflowId: prune-repo-caches
+    title: GitHub Actions Prune Repository Caches
+    summary: Read cache usage, list the largest caches, and delete the largest one by id to reclaim space.
+  - file: github-actions-register-runner-workflow.yml
+    workflowId: register-runner
+    title: GitHub Actions Register a Self-hosted Runner
+    summary: List the available runner application binaries, mint a registration token, then list the repository's runners.
+  - file: github-actions-rerun-failed-run-workflow.yml
+    workflowId: rerun-failed-run
+    title: GitHub Actions Re-run Failed Jobs and Track
+    summary: Find the most recent failed run, re-run only its failed jobs, and poll the run until it completes again.
+  - file: github-actions-share-org-secret-workflow.yml
+    workflowId: share-org-secret
+    title: GitHub Actions Share an Organization Secret with Selected Repositories
+    summary: Fetch the org public key, create or update a selected-visibility org secret, scope it to repositories, and list them.
+  - file: github-actions-upsert-repo-secret-workflow.yml
+    workflowId: upsert-repo-secret
+    title: GitHub Actions Upsert a Repository Secret
+    summary: Fetch the repository public key, create or update an encrypted secret, then confirm it exists.
+  - file: github-actions-upsert-repo-variable-workflow.yml
+    workflowId: upsert-repo-variable
+    title: GitHub Actions Upsert a Repository Variable
+    summary: Look up a repository variable by name and either create it or update it, then read it back.

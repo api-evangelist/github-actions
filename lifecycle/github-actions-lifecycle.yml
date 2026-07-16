@@ -1,0 +1,40 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.github.com/en/rest/about-the-rest-api/api-versions,
+  https://github.blog/changelog/label/actions/, https://www.githubstatus.com
+versioning:
+  scheme: date-based header
+  mechanism: X-GitHub-Api-Version request header
+  default: '2022-11-28'
+  current: '2026-03-10'
+  supported:
+    - {version: '2026-03-10', end_of_support: null}
+    - {version: '2022-11-28', end_of_support: '2028-03-10'}
+  docs: https://docs.github.com/en/rest/about-the-rest-api/api-versions
+  notes: >-
+    Versions are supported for at least 24 months after a newer version ships.
+    Requests using an unsupported version receive 410 Gone. Breaking changes
+    (removed operations, renamed/required params, auth changes) are cut into a
+    new dated version; additive changes are available across all supported
+    versions.
+deprecation:
+  policy_url: https://docs.github.com/en/rest/about-the-rest-api/api-versions
+  breaking_changes_changelog: https://docs.github.com/en/rest/overview/breaking-changes
+  sunset_header: true
+  deprecation_header: true
+  rfc8594: true
+  notes: >-
+    As a version approaches retirement GitHub emits Deprecation (scheduled
+    closure) and Sunset (removal date) response headers per RFC 8594; both are
+    listed in access-control-expose-headers on api.github.com.
+sla:
+  url: https://github.com/customer-terms/github-online-services-sla
+  public_uptime_target: null
+  notes: >-
+    A numeric uptime SLA is offered under GitHub Enterprise agreements, not for
+    standard accounts. Monthly availability is published in the GitHub
+    Availability Report on the blog.
+status_page: https://www.githubstatus.com
+changelog: changelog/github-actions-changelog.yml
+deprecated_operations: []

@@ -1,0 +1,54 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/github-actions-openapi.yml (securitySchemes, headers,
+  pagination parameters) and GitHub REST API documentation claims
+  (docs.github.com/en/rest, api-versions, rate-limits, OIDC for Actions).
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      GitHub supports OAuth 2.0 apps and fine-grained tokens for API access;
+      the REST spec authenticates with bearer tokens (OAuth/PAT). See
+      scopes/github-actions-scopes.yml.
+  - id: oidc
+    conforms: true
+    evidence: >-
+      GitHub Actions is an OIDC identity provider — workflows mint short-lived
+      OIDC tokens (token.actions.githubusercontent.com) for cloud federation;
+      the API manages the OIDC subject-claim customization templates.
+  - id: http-bearer-auth
+    conforms: true
+    evidence: openapi securitySchemes define bearerAuth and personalAccessToken (http bearer).
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Page-based pagination via per_page/page query params and RFC 5988 Link
+      response headers (rel=next/prev/last/first).
+  - id: rfc8594-sunset-deprecation
+    conforms: true
+    evidence: >-
+      API-version deprecations emit Deprecation and Sunset response headers;
+      both are listed in access-control-expose-headers on api.github.com.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use GitHub's own {message, documentation_url, errors[]} envelope,
+      not application/problem+json. See errors/github-actions-error-codes.yml.
+  - id: rate-limit-headers
+    conforms: true
+    evidence: >-
+      X-RateLimit-Limit / -Remaining / -Used / -Reset / -Resource response
+      headers on every request (confirmed live on api.github.com).
+  - id: idempotency-key
+    conforms: false
+    evidence: >-
+      The REST API does not support a client-supplied Idempotency-Key header;
+      PUT/DELETE operations are idempotent by HTTP semantics only.
+  - id: fhir-r4
+    conforms: false
+  - id: scim2
+    conforms: true
+    evidence: >-
+      GitHub implements SCIM 2.0 for enterprise/org user provisioning (separate
+      API surface, not part of the Actions endpoints).

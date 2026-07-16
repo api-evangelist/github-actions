@@ -1,0 +1,23 @@
+generated: '2026-06-20'
+method: searched
+probe: true
+source: https://github.com/trust-center
+description: >-
+  GitHub publishes a Trust Center and, for GitHub Enterprise Cloud, a dedicated
+  compliance portal (ghec.github.trust.page) where organization owners can pull
+  SOC reports and the CSA CAIQ self-assessment. Certifications captured from
+  GitHub's published compliance documentation.
+url: https://github.com/trust-center
+enterprise_trust_portal: https://ghec.github.trust.page/
+compliance_reports: https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/accessing-compliance-reports-for-your-organization
+certifications:
+  - SOC 1 Type 2
+  - SOC 2 Type 2
+  - SOC 3
+  - ISO/IEC 27001:2013
+  - ISO/IEC 42001:2023
+  - CSA STAR Level 2
+  - FedRAMP LI-SaaS (ATO)
+evidence:
+  - {source: https://github.com/trust-center, keywords: [trust center, responsible ai]}
+  - {source: https://ghec.github.trust.page/, keywords: [soc 2, iso 27001, csa star, compliance]}

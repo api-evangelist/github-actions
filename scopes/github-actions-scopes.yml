@@ -1,0 +1,27 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps
+  and https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens
+docs: https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens
+description: >-
+  The OpenAPI declares http-bearer auth without oauth2 flow objects, so scopes
+  are captured from the GitHub docs. GitHub exposes two parallel authorization
+  models: classic OAuth scopes (coarse) and fine-grained token / GitHub App
+  permissions (per-resource read|write). Both relevant to the Actions API are
+  listed here.
+oauth_scopes:
+  - {scope: repo, description: Full control of private repositories, including workflow runs, artifacts, secrets and variables in private repos.}
+  - {scope: workflow, description: Grants the ability to add and update GitHub Actions workflow files. Required to push .github/workflows changes.}
+  - {scope: 'admin:org', description: Manage org-level Actions settings, org secrets/variables, runner groups and self-hosted runners.}
+  - {scope: 'read:org', description: Read org membership and org-level Actions configuration.}
+fine_grained_permissions:
+  - {permission: actions, access: 'read|write', description: 'Workflows, workflow runs, artifacts, caches, job logs and run reruns. Write manages run state and artifacts.'}
+  - {permission: secrets, access: 'read|write', description: Repository-level Actions secrets (list metadata / create-update-delete).}
+  - {permission: variables, access: 'read|write', description: Repository-level Actions variables.}
+  - {permission: environments, access: 'read|write', description: Deployment environments, environment secrets and variables, protection rules.}
+  - {permission: administration, access: 'read|write', description: 'Actions permissions/policy, cache limits, self-hosted runner registration and OIDC subject-claim customization.'}
+  - {permission: organization_secrets, access: 'read|write', description: Organization Actions secrets.}
+  - {permission: organization_self_hosted_runners, access: 'read|write', description: Organization self-hosted runners and runner groups.}
+notes:
+  - GITHUB_TOKEN (the automatic token inside a workflow run) is governed by the workflow's `permissions:` block, which maps onto these fine-grained permissions.

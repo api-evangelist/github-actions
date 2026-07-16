@@ -1,0 +1,32 @@
+generated: '2026-06-20'
+method: searched
+source: live probes of the GitHub hosts
+description: >-
+  Probe of the /.well-known/ discovery surface for the GitHub Actions API host
+  (api.github.com), the docs host (docs.github.com) and the primary web domain
+  (github.com). Only github.com publishes a security.txt (RFC 9116); the API host
+  exposes no OIDC/OAuth discovery documents at the well-known paths (GitHub's own
+  Actions OIDC provider lives at token.actions.githubusercontent.com, not on the
+  REST API host).
+hosts:
+  - host: https://api.github.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://docs.github.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+  - host: https://github.com
+    documents:
+      - {path: /.well-known/security.txt, status: 200, file: github-actions-security.txt}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}

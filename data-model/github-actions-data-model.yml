@@ -1,0 +1,51 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from the component schemas and id-reference fields in
+  openapi/github-actions-openapi.yml and the GitHub Actions REST object
+  reference (docs.github.com/en/rest/actions). Captures the entity-relationship
+  graph behind the Actions automation domain.
+docs: https://docs.github.com/en/rest/actions
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field
+  name; direction is from the entity that owns the reference.
+entities:
+  - {name: Repository, domain: core, description: The repository that owns workflows, runs, secrets, variables, runners and caches.}
+  - {name: Organization, domain: core, description: Org scope for Actions settings, secrets, variables, runner groups and hosted runners.}
+  - {name: Workflow, domain: automation, description: A workflow definition (.github/workflows/*.yml) in a repository.}
+  - {name: WorkflowRun, domain: automation, description: A single execution of a workflow, triggered by an event or dispatch.}
+  - {name: Job, domain: automation, description: A job within a workflow run, executed on a runner.}
+  - {name: JobStep, domain: automation, description: An individual step within a job.}
+  - {name: Artifact, domain: automation, description: A file bundle produced by and downloadable from a workflow run.}
+  - {name: ActionsSecret, domain: security, description: An encrypted secret at repo, org or environment scope.}
+  - {name: ActionsVariable, domain: config, description: A plaintext configuration variable at repo, org or environment scope.}
+  - {name: ActionsPublicKey, domain: security, description: The public key used to encrypt secrets before upload.}
+  - {name: SelfHostedRunner, domain: infrastructure, description: A self-hosted runner registered to a repo or org.}
+  - {name: RunnerGroup, domain: infrastructure, description: A group organizing self-hosted runners and their repo access.}
+  - {name: RunnerLabel, domain: infrastructure, description: A label attached to a runner for routing jobs.}
+  - {name: HostedRunner, domain: infrastructure, description: A GitHub-hosted runner provisioned for an organization.}
+  - {name: ActionsCacheEntry, domain: infrastructure, description: A dependency cache entry for a repository.}
+  - {name: Environment, domain: automation, description: A deployment environment with protection rules and pending deployments.}
+  - {name: PendingDeployment, domain: automation, description: A deployment awaiting approval under an environment protection rule.}
+  - {name: OidcCustomSub, domain: security, description: The OIDC subject-claim customization template for a repo or org.}
+relationships:
+  - {from: Repository, to: Workflow, kind: has_many, via: repo}
+  - {from: Repository, to: WorkflowRun, kind: has_many, via: repo}
+  - {from: Repository, to: SelfHostedRunner, kind: has_many, via: repo}
+  - {from: Repository, to: ActionsSecret, kind: has_many, via: repo}
+  - {from: Repository, to: ActionsVariable, kind: has_many, via: repo}
+  - {from: Repository, to: ActionsCacheEntry, kind: has_many, via: repo}
+  - {from: Workflow, to: WorkflowRun, kind: has_many, via: workflow_id}
+  - {from: WorkflowRun, to: Job, kind: has_many, via: run_id}
+  - {from: WorkflowRun, to: Artifact, kind: has_many, via: run_id}
+  - {from: Job, to: JobStep, kind: has_many, via: steps}
+  - {from: Job, to: WorkflowRun, kind: belongs_to, via: run_id}
+  - {from: Job, to: SelfHostedRunner, kind: belongs_to, via: runner_id}
+  - {from: Organization, to: RunnerGroup, kind: has_many, via: org}
+  - {from: Organization, to: HostedRunner, kind: has_many, via: org}
+  - {from: Organization, to: ActionsSecret, kind: has_many, via: org}
+  - {from: Organization, to: ActionsVariable, kind: has_many, via: org}
+  - {from: RunnerGroup, to: SelfHostedRunner, kind: has_many, via: runner_group_id}
+  - {from: SelfHostedRunner, to: RunnerLabel, kind: has_many, via: runner_id}
+  - {from: Environment, to: PendingDeployment, kind: has_many, via: environment_name}
+  - {from: Environment, to: ActionsSecret, kind: has_many, via: environment_name}

@@ -3,7 +3,7 @@ description: APIs for GitHub Actions - automation and CI/CD platform.
 image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 url: https://docs.github.com/en/rest/actions
 created: '2024'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.18'
 apis:
   - name: GitHub Actions API
@@ -436,3 +436,37 @@ common:
       - Jira
   - type: LlmsText
     url: https://docs.github.com/llms.txt
+  - type: LLMsTxt
+    url: llms/github-actions-llms.txt
+  - type: Packages
+    url: packages/github-actions-packages.yml
+  - type: WellKnown
+    url: well-known/github-actions-well-known.yml
+  - type: SecurityTxt
+    url: well-known/github-actions-security.txt
+  - type: MCPServer
+    url: mcp/github-actions-mcp.yml
+  - type: Overlay
+    url: overlays/github-actions-openapi-overlay.yaml
+  - type: Conformance
+    url: conformance/github-actions-conformance.yml
+  - type: ErrorCatalog
+    url: errors/github-actions-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/github-actions-lifecycle.yml
+  - type: OAuthScopes
+    url: scopes/github-actions-scopes.yml
+  - type: DomainSecurity
+    url: security/github-actions-domain-security.yml
+  - type: VulnerabilityDisclosure
+    url: security/github-actions-vulnerability-disclosure.yml
+  - type: TrustCenter
+    url: security/github-actions-trust-center.yml
+  - type: Conventions
+    url: conventions/github-actions-conventions.yml
+  - type: ChangeLog
+    url: changelog/github-actions-changelog.yml
+  - type: CLI
+    url: cli/github-actions-cli.yml
+  - type: DataModel
+    url: data-model/github-actions-data-model.yml

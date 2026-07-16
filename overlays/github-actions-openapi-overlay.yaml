@@ -1,0 +1,39 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for GitHub Actions API
+  version: 1.0.0
+extends: openapi/github-actions-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: github-actions
+      x-apievangelist-artifacts:
+        conventions: conventions/github-actions-conventions.yml
+        authentication: authentication/github-actions-authentication.yml
+        scopes: scopes/github-actions-scopes.yml
+        errors: errors/github-actions-error-codes.yml
+        lifecycle: lifecycle/github-actions-lifecycle.yml
+        data_model: data-model/github-actions-data-model.yml
+        mcp: mcp/github-actions-mcp.yml
+  - target: $.info
+    update:
+      x-github-api-version-header: X-GitHub-Api-Version
+      x-github-default-api-version: '2022-11-28'
+      x-github-media-type: application/vnd.github+json
+  - target: $.servers[0]
+    update:
+      x-rate-limit-headers:
+        - X-RateLimit-Limit
+        - X-RateLimit-Remaining
+        - X-RateLimit-Used
+        - X-RateLimit-Reset
+        - X-RateLimit-Resource
+      x-request-id-header: X-GitHub-Request-Id
+  - target: $.components.securitySchemes
+    update:
+      x-token-types:
+        - fine-grained-pat
+        - classic-pat
+        - oauth-user-token
+        - github-app-installation-token
+        - github-actions-job-token

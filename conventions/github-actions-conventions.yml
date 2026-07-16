@@ -1,0 +1,66 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api
+  and live inspection of api.github.com response headers.
+description: >-
+  Cross-cutting request/response conventions for the GitHub REST API (which the
+  Actions endpoints inherit): authentication, media types, pagination, rate-limit
+  signaling, conditional requests, request tracing, versioning and the error
+  envelope. These are the runtime semantics OpenAPI does not fully express.
+base_url: https://api.github.com
+api_style: REST over HTTPS, JSON request/response bodies
+
+authentication:
+  scheme: 'Bearer token (Authorization: Bearer <token>)'
+  token_types: [fine-grained PAT, classic PAT, OAuth user token, GitHub App installation token, GITHUB_TOKEN (Actions job token)]
+  docs: https://docs.github.com/en/rest/authentication/authenticating-to-the-rest-api
+  detail: authentication/github-actions-authentication.yml
+  scopes: scopes/github-actions-scopes.yml
+
+media_type:
+  request: application/json
+  response: application/vnd.github+json
+  header: 'Accept: application/vnd.github+json'
+  media_type_versioning: X-GitHub-Media-Type response header reports github.v3
+
+idempotency:
+  supported: false
+  mechanism: none (no client-supplied Idempotency-Key header)
+  notes: PUT and DELETE operations are idempotent by HTTP semantics; POST operations are not.
+
+pagination:
+  style: page-number
+  request_params:
+    per_page: 1-100, default 30
+    page: 1-based page number
+  response_mechanism: RFC 5988 Link header with rel=next/prev/first/last
+  notes: Some endpoints (e.g. list caches, list artifacts) also return a total_count field alongside the resource array.
+  docs: https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api
+
+conditional_requests:
+  supported: true
+  mechanism: ETag + If-None-Match, Last-Modified + If-Modified-Since
+  benefit: A 304 Not Modified does not count against the primary rate limit.
+
+request_tracing:
+  request_id_header: X-GitHub-Request-Id
+  description: Every response carries a unique X-GitHub-Request-Id used for support and log correlation.
+
+rate_limiting:
+  primary_headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Reset, X-RateLimit-Resource]
+  secondary: Abuse/secondary limits return 403/429 with a Retry-After header.
+  detail: rate-limits/github-actions-rate-limits.yml
+  docs: https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
+
+versioning:
+  scheme: date-based
+  mechanism: X-GitHub-Api-Version request header
+  default: '2022-11-28'
+  detail: lifecycle/github-actions-lifecycle.yml
+  changelog: changelog/github-actions-changelog.yml
+
+error_envelope:
+  media_type: application/json
+  shape: '{ message, documentation_url, status?, errors[]? }'
+  detail: errors/github-actions-error-codes.yml

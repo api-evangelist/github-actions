@@ -1,0 +1,55 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.github.com/en/rest/using-the-rest-api/troubleshooting-the-rest-api
+  and https://docs.github.com/en/rest/overview/resources-in-the-rest-api
+format: github
+description: >-
+  GitHub's REST API does not use RFC 9457 problem+json. Errors are returned as a
+  JSON envelope with a human message, a documentation_url, and (for validation
+  failures) a structured errors[] array. The OpenAPI in this repo does not
+  enumerate 4xx/5xx responses, so this catalogue is captured from the GitHub REST
+  troubleshooting docs and applies to every Actions operation.
+envelope:
+  media_type: application/json
+  fields:
+    message: Human-readable summary of the error.
+    documentation_url: Link to the relevant REST API documentation.
+    status: HTTP status code (string), present on some responses.
+    errors: Array of validation error objects (on 422).
+  validation_error_object:
+    resource: The object type the error relates to.
+    field: The field that failed validation.
+    code: >-
+      One of missing, missing_field, invalid, already_exists, unprocessable,
+      custom.
+problems:
+  - status: 304
+    title: Not Modified
+    detail: Returned when a conditional request (If-None-Match / If-Modified-Since) matches; the ETag is unchanged. Does not count against the rate limit.
+  - status: 401
+    title: Requires authentication / Bad credentials
+    detail: Missing or invalid token. Repeated invalid credentials may trigger temporary throttling.
+  - status: 403
+    title: Forbidden
+    detail: Authenticated but not permitted — insufficient token scope/permission, or a secondary rate limit / abuse-detection trip (see Retry-After / X-RateLimit headers).
+  - status: 404
+    title: Not Found
+    detail: Resource does not exist, or is hidden to avoid leaking existence to unauthorized callers (private repos return 404 rather than 403).
+  - status: 409
+    title: Conflict
+    detail: The request conflicts with the current state (e.g. empty repository, git ref conflict).
+  - status: 422
+    title: Unprocessable Entity / Validation Failed
+    detail: The request body parsed but failed validation; the errors[] array names each offending field and code.
+  - status: 429
+    title: Too Many Requests
+    detail: Primary or secondary rate limit exceeded; honor Retry-After and X-RateLimit-Reset before retrying.
+  - status: 503
+    title: Service Unavailable
+    detail: Transient server-side unavailability; retry with backoff. Track status at githubstatus.com.
+  - status: 410
+    title: Gone
+    detail: The requested X-GitHub-Api-Version is no longer supported. Upgrade to a supported version.
+notes:
+  - Rate-limit state is signaled by X-RateLimit-Limit/-Remaining/-Used/-Reset/-Resource headers; see conventions/github-actions-conventions.yml and rate-limits/github-actions-rate-limits.yml.

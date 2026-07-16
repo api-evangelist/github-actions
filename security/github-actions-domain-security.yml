@@ -1,0 +1,20 @@
+generated: '2026-06-20'
+method: probed
+source: live DNS/TLS/HTTP probes of the GitHub API, docs and web hosts
+description: >-
+  Manual probe of GitHub's hosts. The shared probe-domain-security.py excludes
+  github.com as a domain (it is treated as a code-host for other providers), so
+  these values were captured directly with dig / openssl / HTTP HEAD.
+hosts:
+  - {host: api.github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-09-29', hsts: true, hsts_max_age: 31536000, hsts_preload: true, hsts_include_subdomains: true}
+  - {host: docs.github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-09-02', hsts: true, hsts_max_age: 31557600, hsts_preload: false}
+  - {host: github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-09-30', hsts: true, hsts_max_age: 31536000, hsts_preload: true, hsts_include_subdomains: true}
+domains:
+  - domain: github.com
+    dnssec: false
+    caa: ['globalsign.com', 'letsencrypt.org', 'sectigo.com', 'digicert.com']
+    caa_wildcard: ['digicert.com', 'letsencrypt.org', 'sectigo.com']
+    spf: true
+    dmarc: true
+    dmarc_policy: quarantine
+    dmarc_subdomain_policy: reject

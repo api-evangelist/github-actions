@@ -1,0 +1,24 @@
+generated: '2026-06-20'
+method: searched
+source: https://github.blog/changelog/label/actions/
+description: >-
+  Structured capture of GitHub's dated changelog filtered to the Actions label.
+  GitHub ships product changes continuously and posts them to the changelog; the
+  REST API itself is versioned separately by date (X-GitHub-Api-Version). This
+  records the recent window; the live changelog is the source of truth.
+docs: https://github.blog/changelog/label/actions/
+api_versioning:
+  scheme: date-based header
+  header: X-GitHub-Api-Version
+  current: '2026-03-10'
+  default: '2022-11-28'
+  detail: lifecycle/github-actions-lifecycle.yml
+entries:
+  - {date: '2026-07-16', title: 'Xcode 27 runner image now in public preview'}
+  - {date: '2026-07-08', title: 'setup-java v5.5.0: signature verification, Kona JDK, and Maven fixes'}
+  - {date: '2026-06-26', title: 'Read-only Actions cache for untrusted triggers', security: true}
+  - {date: '2026-06-25', title: 'More control over your GitHub-hosted runners'}
+  - {date: '2026-06-25', title: 'Actions steps can now be run in parallel'}
+  - {date: '2026-06-25', title: 'Red Hat Enterprise Linux runner images are now in public preview'}
+  - {date: '2026-06-18', title: 'Safer pull_request_target defaults for GitHub Actions checkout', security: true}
+  - {date: '2026-06-18', title: 'Control who and what triggers GitHub Actions workflows'}
