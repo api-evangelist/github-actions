@@ -1,0 +1,277 @@
+openapi: 3.1.0
+info:
+  title: GitHub Actions Artifacts Permissions API
+  description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
+  version: 1.0.0
+  contact:
+    name: GitHub Support
+    url: https://support.github.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://api.github.com
+  description: GitHub REST API
+security:
+- bearerAuth: []
+- personalAccessToken: []
+tags:
+- name: Permissions
+  description: Control Actions enablement and permissions
+paths:
+  /repos/{owner}/{repo}/actions/permissions:
+    get:
+      operationId: getGithubActionsPermissionsRepo
+      summary: Get Github Actions Permissions for a Repository
+      description: Gets the GitHub Actions permissions policy for a repository.
+      tags:
+      - Permissions
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      responses:
+        '200':
+          description: Successfully retrieved permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionsRepositoryPermissions'
+              examples:
+                Getgithubactionspermissionsrepo200Example:
+                  summary: Default getGithubActionsPermissionsRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    enabled: true
+                    allowed_actions: all
+                    selected_actions_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setGithubActionsPermissionsRepo
+      summary: Set Github Actions Permissions for a Repository
+      description: Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions and reusable workflows in the repository.
+      tags:
+      - Permissions
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionsRepositoryPermissions'
+            examples:
+              SetgithubactionspermissionsrepoRequestExample:
+                summary: Default setGithubActionsPermissionsRepo request
+                x-microcks-default: true
+                value:
+                  enabled: true
+                  allowed_actions: all
+                  selected_actions_url: https://www.example.com
+      responses:
+        '204':
+          description: Successfully set permissions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/permissions/workflow:
+    get:
+      operationId: getGithubActionsDefaultWorkflowPermissionsRepo
+      summary: Github Actions Get Default Workflow Permissions for a Repository
+      description: Gets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository.
+      tags:
+      - Permissions
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      responses:
+        '200':
+          description: Successfully retrieved default workflow permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionsDefaultWorkflowPermissions'
+              examples:
+                Getgithubactionsdefaultworkflowpermissionsrepo200Example:
+                  summary: Default getGithubActionsDefaultWorkflowPermissionsRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    default_workflow_permissions: read
+                    can_approve_pull_request_reviews: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setGithubActionsDefaultWorkflowPermissionsRepo
+      summary: Github Actions Set Default Workflow Permissions for a Repository
+      description: Sets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository.
+      tags:
+      - Permissions
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionsDefaultWorkflowPermissions'
+            examples:
+              SetgithubactionsdefaultworkflowpermissionsrepoRequestExample:
+                summary: Default setGithubActionsDefaultWorkflowPermissionsRepo request
+                x-microcks-default: true
+                value:
+                  default_workflow_permissions: read
+                  can_approve_pull_request_reviews: true
+      responses:
+        '204':
+          description: Successfully set default workflow permissions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orgs/{org}/actions/permissions:
+    get:
+      operationId: getGithubActionsPermissionsOrg
+      summary: Get Github Actions Permissions for an Organization
+      description: Gets the GitHub Actions permissions policy for repositories and allowed actions and reusable workflows in an organization.
+      tags:
+      - Permissions
+      parameters:
+      - $ref: '#/components/parameters/org'
+      responses:
+        '200':
+          description: Successfully retrieved permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionsOrganizationPermissions'
+              examples:
+                Getgithubactionspermissionsorg200Example:
+                  summary: Default getGithubActionsPermissionsOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    enabled_repositories: all
+                    selected_repositories_url: https://www.example.com
+                    allowed_actions: all
+                    selected_actions_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setGithubActionsPermissionsOrg
+      summary: Set Github Actions Permissions for an Organization
+      description: Sets the GitHub Actions permissions policy for repositories and allowed actions and reusable workflows in an organization.
+      tags:
+      - Permissions
+      parameters:
+      - $ref: '#/components/parameters/org'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionsOrganizationPermissions'
+            examples:
+              SetgithubactionspermissionsorgRequestExample:
+                summary: Default setGithubActionsPermissionsOrg request
+                x-microcks-default: true
+                value:
+                  enabled_repositories: all
+                  selected_repositories_url: https://www.example.com
+                  allowed_actions: all
+                  selected_actions_url: https://www.example.com
+      responses:
+        '204':
+          description: Successfully set permissions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+  schemas:
+    ActionsOrganizationPermissions:
+      type: object
+      properties:
+        enabled_repositories:
+          type: string
+          enum:
+          - all
+          - none
+          - selected
+          example: all
+        selected_repositories_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        allowed_actions:
+          type: string
+          enum:
+          - all
+          - local_only
+          - selected
+          example: all
+        selected_actions_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+    ActionsRepositoryPermissions:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        allowed_actions:
+          type: string
+          enum:
+          - all
+          - local_only
+          - selected
+          example: all
+        selected_actions_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+    ActionsDefaultWorkflowPermissions:
+      type: object
+      properties:
+        default_workflow_permissions:
+          type: string
+          enum:
+          - read
+          - write
+          example: read
+        can_approve_pull_request_reviews:
+          type: boolean
+          example: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: GitHub personal access token or OAuth token
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: Fine-grained personal access token with Actions permissions

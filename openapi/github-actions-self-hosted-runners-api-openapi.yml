@@ -1,0 +1,565 @@
+openapi: 3.1.0
+info:
+  title: GitHub Actions Artifacts Self-Hosted Runners API
+  description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
+  version: 1.0.0
+  contact:
+    name: GitHub Support
+    url: https://support.github.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://api.github.com
+  description: GitHub REST API
+security:
+- bearerAuth: []
+- personalAccessToken: []
+tags:
+- name: Self-Hosted Runners
+  description: Manage self-hosted runners for workflows
+paths:
+  /repos/{owner}/{repo}/actions/runners:
+    get:
+      operationId: listSelfHostedRunnersForRepo
+      summary: Github Actions List Self-hosted Runners for a Repository
+      description: Lists all self-hosted runners configured in a repository.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: name
+        in: query
+        schema:
+          type: string
+        example: Example Title
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Successfully retrieved runners
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  runners:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SelfHostedRunner'
+              examples:
+                Listselfhostedrunnersforrepo200Example:
+                  summary: Default listSelfHostedRunnersForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    runners:
+                    - id: abc123
+                      name: Example Title
+                      os: example_value
+                      status: example_value
+                      busy: true
+                      labels:
+                      - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runners/{runner_id}:
+    get:
+      operationId: getSelfHostedRunnerForRepo
+      summary: Github Actions Get a Self-hosted Runner for a Repository
+      description: Gets a specific self-hosted runner configured in a repository.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
+      responses:
+        '200':
+          description: Successfully retrieved runner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfHostedRunner'
+              examples:
+                Getselfhostedrunnerforrepo200Example:
+                  summary: Default getSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    os: example_value
+                    status: example_value
+                    busy: true
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSelfHostedRunnerFromRepo
+      summary: Github Actions Delete a Self-hosted Runner From a Repository
+      description: Forces the removal of a self-hosted runner from a repository.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
+      responses:
+        '204':
+          description: Successfully deleted runner
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runners/downloads:
+    get:
+      operationId: listRunnerApplicationsForRepo
+      summary: Github Actions List Runner Applications for a Repository
+      description: Lists binaries for the runner application that you can download.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      responses:
+        '200':
+          description: Successfully retrieved runner applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RunnerApplication'
+              examples:
+                Listrunnerapplicationsforrepo200Example:
+                  summary: Default listRunnerApplicationsForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                  - os: example_value
+                    architecture: example_value
+                    download_url: https://www.example.com
+                    filename: example_value
+                    temp_download_token: example_value
+                    sha256_checksum: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runners/registration-token:
+    post:
+      operationId: createRegistrationTokenForRepo
+      summary: Github Actions Create a Registration Token for a Repository
+      description: Returns a token that you can pass to the config script for a self-hosted runner.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      responses:
+        '201':
+          description: Successfully created registration token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationToken'
+              examples:
+                Createregistrationtokenforrepo201Example:
+                  summary: Default createRegistrationTokenForRepo 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    expires_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runners/remove-token:
+    post:
+      operationId: createRemoveTokenForRepo
+      summary: Github Actions Create a Remove Token for a Repository
+      description: Returns a token that you can pass to remove a self-hosted runner from a repository.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      responses:
+        '201':
+          description: Successfully created remove token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationToken'
+              examples:
+                Createremovetokenforrepo201Example:
+                  summary: Default createRemoveTokenForRepo 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    expires_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runners/{runner_id}/labels:
+    get:
+      operationId: listLabelsForSelfHostedRunnerForRepo
+      summary: Github Actions List Labels for a Self-hosted Runner for a Repository
+      description: Lists all labels for a self-hosted runner configured in a repository.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
+      responses:
+        '200':
+          description: Successfully retrieved labels
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  labels:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Listlabelsforselfhostedrunnerforrepo200Example:
+                  summary: Default listLabelsForSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: addCustomLabelsToSelfHostedRunnerForRepo
+      summary: Github Actions Add Custom Labels to a Self-hosted Runner for a Repository
+      description: Adds custom labels to a self-hosted runner configured in a repository.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - labels
+              properties:
+                labels:
+                  type: array
+                  items:
+                    type: string
+                  minItems: 1
+                  maxItems: 100
+            examples:
+              AddcustomlabelstoselfhostedrunnerforrepoRequestExample:
+                summary: Default addCustomLabelsToSelfHostedRunnerForRepo request
+                x-microcks-default: true
+                value:
+                  labels:
+                  - example_value
+      responses:
+        '200':
+          description: Successfully added labels
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  labels:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Addcustomlabelstoselfhostedrunnerforrepo200Example:
+                  summary: Default addCustomLabelsToSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setCustomLabelsForSelfHostedRunnerForRepo
+      summary: Github Actions Set Custom Labels for a Self-hosted Runner for a Repository
+      description: Remove all previous custom labels and set the new custom labels for a specific self-hosted runner.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - labels
+              properties:
+                labels:
+                  type: array
+                  items:
+                    type: string
+                  maxItems: 100
+            examples:
+              SetcustomlabelsforselfhostedrunnerforrepoRequestExample:
+                summary: Default setCustomLabelsForSelfHostedRunnerForRepo request
+                x-microcks-default: true
+                value:
+                  labels:
+                  - example_value
+      responses:
+        '200':
+          description: Successfully set labels
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  labels:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Setcustomlabelsforselfhostedrunnerforrepo200Example:
+                  summary: Default setCustomLabelsForSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: removeAllCustomLabelsFromSelfHostedRunnerForRepo
+      summary: Github Actions Remove All Custom Labels From a Self-hosted Runner for a Repository
+      description: Remove all custom labels from a self-hosted runner configured in a repository.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
+      responses:
+        '200':
+          description: Successfully removed all custom labels
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  labels:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Removeallcustomlabelsfromselfhostedrunnerforrepo200Example:
+                  summary: Default removeAllCustomLabelsFromSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}:
+    delete:
+      operationId: removeCustomLabelFromSelfHostedRunnerForRepo
+      summary: Github Actions Remove a Custom Label From a Self-hosted Runner for a Repository
+      description: Remove a custom label from a self-hosted runner configured in a repository.
+      tags:
+      - Self-Hosted Runners
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runnerId'
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        example: Example Title
+      responses:
+        '200':
+          description: Successfully removed label
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  labels:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RunnerLabel'
+              examples:
+                Removecustomlabelfromselfhostedrunnerforrepo200Example:
+                  summary: Default removeCustomLabelFromSelfHostedRunnerForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    labels:
+                    - id: abc123
+                      name: Example Title
+                      type: read-only
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RunnerLabel:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - read-only
+          - custom
+          example: read-only
+    RunnerApplication:
+      type: object
+      properties:
+        os:
+          type: string
+          example: example_value
+        architecture:
+          type: string
+          example: example_value
+        download_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        filename:
+          type: string
+          example: example_value
+        temp_download_token:
+          type: string
+          example: example_value
+        sha256_checksum:
+          type: string
+          example: example_value
+    SelfHostedRunner:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The id of the runner.
+          example: abc123
+        name:
+          type: string
+          description: The name of the runner.
+          example: Example Title
+        os:
+          type: string
+          description: The operating system of the runner.
+          example: example_value
+        status:
+          type: string
+          description: The status of the runner.
+          example: example_value
+        busy:
+          type: boolean
+          example: true
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunnerLabel'
+          example: []
+    AuthenticationToken:
+      type: object
+      properties:
+        token:
+          type: string
+          example: example_value
+        expires_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    runnerId:
+      name: runner_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner.
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: GitHub personal access token or OAuth token
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: Fine-grained personal access token with Actions permissions

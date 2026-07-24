@@ -1,0 +1,463 @@
+openapi: 3.1.0
+info:
+  title: GitHub Actions Artifacts Jobs API
+  description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
+  version: 1.0.0
+  contact:
+    name: GitHub Support
+    url: https://support.github.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://api.github.com
+  description: GitHub REST API
+security:
+- bearerAuth: []
+- personalAccessToken: []
+tags:
+- name: Jobs
+  description: Access information about workflow jobs
+paths:
+  /repos/{owner}/{repo}/actions/runs/{run_id}/jobs:
+    get:
+      operationId: listJobsForWorkflowRun
+      summary: Github Actions List Jobs for a Workflow Run
+      description: Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint.
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - name: filter
+        in: query
+        schema:
+          type: string
+          enum:
+          - latest
+          - all
+          default: latest
+        example: latest
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Successfully retrieved jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+              examples:
+                Listjobsforworkflowrun200Example:
+                  summary: Default listJobsForWorkflowRun 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    jobs:
+                    - id: abc123
+                      run_id: '500123'
+                      run_url: https://www.example.com
+                      run_attempt: 10
+                      node_id: '500123'
+                      head_sha: example_value
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      status: queued
+                      conclusion: success
+                      created_at: '2026-01-15T10:30:00Z'
+                      started_at: '2026-01-15T10:30:00Z'
+                      completed_at: '2026-01-15T10:30:00Z'
+                      name: Example Title
+                      steps:
+                      - {}
+                      labels:
+                      - {}
+                      runner_id: '500123'
+                      runner_name: example_value
+                      runner_group_id: '500123'
+                      runner_group_name: example_value
+                      workflow_name: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs:
+    get:
+      operationId: listJobsForWorkflowRunAttempt
+      summary: Github Actions List Jobs for a Workflow Run Attempt
+      description: Lists jobs for a specific workflow run attempt.
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/attemptNumber'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Successfully retrieved jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+              examples:
+                Listjobsforworkflowrunattempt200Example:
+                  summary: Default listJobsForWorkflowRunAttempt 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    jobs:
+                    - id: abc123
+                      run_id: '500123'
+                      run_url: https://www.example.com
+                      run_attempt: 10
+                      node_id: '500123'
+                      head_sha: example_value
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      status: queued
+                      conclusion: success
+                      created_at: '2026-01-15T10:30:00Z'
+                      started_at: '2026-01-15T10:30:00Z'
+                      completed_at: '2026-01-15T10:30:00Z'
+                      name: Example Title
+                      steps:
+                      - {}
+                      labels:
+                      - {}
+                      runner_id: '500123'
+                      runner_name: example_value
+                      runner_group_id: '500123'
+                      runner_group_name: example_value
+                      workflow_name: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/jobs/{job_id}:
+    get:
+      operationId: getJobForWorkflowRun
+      summary: Github Actions Get a Job for a Workflow Run
+      description: Gets a specific job in a workflow run.
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
+      responses:
+        '200':
+          description: Successfully retrieved job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+              examples:
+                Getjobforworkflowrun200Example:
+                  summary: Default getJobForWorkflowRun 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    run_id: '500123'
+                    run_url: https://www.example.com
+                    run_attempt: 10
+                    node_id: '500123'
+                    head_sha: example_value
+                    url: https://www.example.com
+                    html_url: https://www.example.com
+                    status: queued
+                    conclusion: success
+                    created_at: '2026-01-15T10:30:00Z'
+                    started_at: '2026-01-15T10:30:00Z'
+                    completed_at: '2026-01-15T10:30:00Z'
+                    name: Example Title
+                    steps:
+                    - name: Example Title
+                      status: queued
+                      conclusion: failure
+                      number: 10
+                      started_at: '2026-01-15T10:30:00Z'
+                      completed_at: '2026-01-15T10:30:00Z'
+                    labels:
+                    - example_value
+                    runner_id: '500123'
+                    runner_name: example_value
+                    runner_group_id: '500123'
+                    runner_group_name: example_value
+                    workflow_name: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/jobs/{job_id}/logs:
+    get:
+      operationId: downloadJobLogsForWorkflowRun
+      summary: Github Actions Download Job Logs for a Workflow Run
+      description: Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute.
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
+      responses:
+        '302':
+          description: Redirect to log download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/jobs/{job_id}/rerun:
+    post:
+      operationId: rerunJobForWorkflowRun
+      summary: Github Actions Re-run a Job From a Workflow Run
+      description: Re-run a job and its dependent jobs in a workflow run.
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enable_debug_logging:
+                  type: boolean
+                  default: false
+            examples:
+              RerunjobforworkflowrunRequestExample:
+                summary: Default rerunJobForWorkflowRun request
+                x-microcks-default: true
+                value:
+                  enable_debug_logging: true
+      responses:
+        '201':
+          description: Successfully re-ran job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The id of the job.
+          example: abc123
+        run_id:
+          type: integer
+          description: The id of the associated workflow run.
+          example: '500123'
+        run_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        run_attempt:
+          type: integer
+          example: 10
+        node_id:
+          type: string
+          example: '500123'
+        head_sha:
+          type: string
+          example: example_value
+        url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        html_url:
+          type: string
+          format: uri
+          nullable: true
+          example: https://www.example.com
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          - waiting
+          - requested
+          - pending
+          example: queued
+        conclusion:
+          type: string
+          nullable: true
+          enum:
+          - success
+          - failure
+          - neutral
+          - cancelled
+          - skipped
+          - timed_out
+          - action_required
+          - null
+          example: success
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        started_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-01-15T10:30:00Z'
+        name:
+          type: string
+          description: The name of the job.
+          example: Example Title
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobStep'
+          example: []
+        labels:
+          type: array
+          items:
+            type: string
+          example: []
+        runner_id:
+          type: integer
+          nullable: true
+          example: '500123'
+        runner_name:
+          type: string
+          nullable: true
+          example: example_value
+        runner_group_id:
+          type: integer
+          nullable: true
+          example: '500123'
+        runner_group_name:
+          type: string
+          nullable: true
+          example: example_value
+        workflow_name:
+          type: string
+          nullable: true
+          example: example_value
+    JobStep:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          example: queued
+        conclusion:
+          type: string
+          nullable: true
+          enum:
+          - failure
+          - skipped
+          - success
+          - cancelled
+          - null
+          example: failure
+        number:
+          type: integer
+          example: 10
+        started_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-01-15T10:30:00Z'
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-01-15T10:30:00Z'
+  parameters:
+    runId:
+      name: run_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The unique identifier of the workflow run.
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    attemptNumber:
+      name: attempt_number
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The attempt number of the workflow run.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: GitHub personal access token or OAuth token
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: Fine-grained personal access token with Actions permissions

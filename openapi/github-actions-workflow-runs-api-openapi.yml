@@ -1,0 +1,1134 @@
+openapi: 3.1.0
+info:
+  title: GitHub Actions Artifacts Workflow Runs API
+  description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
+  version: 1.0.0
+  contact:
+    name: GitHub Support
+    url: https://support.github.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://api.github.com
+  description: GitHub REST API
+security:
+- bearerAuth: []
+- personalAccessToken: []
+tags:
+- name: Workflow Runs
+  description: Manage and monitor workflow run executions
+paths:
+  /repos/{owner}/{repo}/actions/runs:
+    get:
+      operationId: listWorkflowRunsForRepo
+      summary: Github Actions List Workflow Runs for a Repository
+      description: Lists all workflow runs for a repository. Anyone with read access to the repository can use this endpoint.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: actor
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: branch
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: event
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - completed
+          - action_required
+          - cancelled
+          - failure
+          - neutral
+          - skipped
+          - stale
+          - success
+          - timed_out
+          - in_progress
+          - queued
+          - requested
+          - waiting
+          - pending
+        example: completed
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Successfully retrieved workflow runs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  workflow_runs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WorkflowRun'
+              examples:
+                Listworkflowrunsforrepo200Example:
+                  summary: Default listWorkflowRunsForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    workflow_runs:
+                    - id: abc123
+                      name: Example Title
+                      node_id: '500123'
+                      head_branch: example_value
+                      head_sha: example_value
+                      path: example_value
+                      display_title: example_value
+                      run_number: 10
+                      run_attempt: 10
+                      event: example_value
+                      status: queued
+                      conclusion: success
+                      workflow_id: '500123'
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                      run_started_at: '2026-01-15T10:30:00Z'
+                      jobs_url: https://www.example.com
+                      logs_url: https://www.example.com
+                      artifacts_url: https://www.example.com
+                      cancel_url: https://www.example.com
+                      rerun_url: https://www.example.com
+                      workflow_url: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}:
+    get:
+      operationId: getWorkflowRun
+      summary: Github Actions Get a Workflow Run
+      description: Gets a specific workflow run.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '200':
+          description: Successfully retrieved workflow run
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRun'
+              examples:
+                Getworkflowrun200Example:
+                  summary: Default getWorkflowRun 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    node_id: '500123'
+                    head_branch: example_value
+                    head_sha: example_value
+                    path: example_value
+                    display_title: example_value
+                    run_number: 10
+                    run_attempt: 10
+                    event: example_value
+                    status: queued
+                    conclusion: success
+                    workflow_id: '500123'
+                    url: https://www.example.com
+                    html_url: https://www.example.com
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+                    run_started_at: '2026-01-15T10:30:00Z'
+                    jobs_url: https://www.example.com
+                    logs_url: https://www.example.com
+                    artifacts_url: https://www.example.com
+                    cancel_url: https://www.example.com
+                    rerun_url: https://www.example.com
+                    workflow_url: https://www.example.com
+                    actor:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    triggering_actor:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    repository:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+                    head_repository:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+                    head_commit:
+                      id: abc123
+                      tree_id: '500123'
+                      message: example_value
+                      timestamp: '2026-01-15T10:30:00Z'
+                      author:
+                        name: Example Title
+                        email: user@example.com
+                      committer:
+                        name: Example Title
+                        email: user@example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteWorkflowRun
+      summary: Github Actions Delete a Workflow Run
+      description: Deletes a specific workflow run. Anyone with write access to the repository can use this endpoint.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '204':
+          description: Successfully deleted workflow run
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/approve:
+    post:
+      operationId: approveWorkflowRun
+      summary: Github Actions Approve a Workflow Run for a Fork Pull Request
+      description: Approves a workflow run for a pull request from a public fork of a first time contributor.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '201':
+          description: Successfully approved workflow run
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/approvals:
+    get:
+      operationId: getWorkflowRunApprovals
+      summary: Github Actions Get the Review History for a Workflow Run
+      description: Anyone with read access to the repository can use this endpoint.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '200':
+          description: Successfully retrieved approvals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnvironmentApproval'
+              examples:
+                Getworkflowrunapprovals200Example:
+                  summary: Default getWorkflowRunApprovals 200 response
+                  x-microcks-default: true
+                  value:
+                  - environments:
+                    - id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                    state: approved
+                    user:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    comment: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}:
+    get:
+      operationId: getWorkflowRunAttempt
+      summary: Github Actions Get a Workflow Run Attempt
+      description: Gets a specific workflow run attempt.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/attemptNumber'
+      responses:
+        '200':
+          description: Successfully retrieved workflow run attempt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRun'
+              examples:
+                Getworkflowrunattempt200Example:
+                  summary: Default getWorkflowRunAttempt 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    node_id: '500123'
+                    head_branch: example_value
+                    head_sha: example_value
+                    path: example_value
+                    display_title: example_value
+                    run_number: 10
+                    run_attempt: 10
+                    event: example_value
+                    status: queued
+                    conclusion: success
+                    workflow_id: '500123'
+                    url: https://www.example.com
+                    html_url: https://www.example.com
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+                    run_started_at: '2026-01-15T10:30:00Z'
+                    jobs_url: https://www.example.com
+                    logs_url: https://www.example.com
+                    artifacts_url: https://www.example.com
+                    cancel_url: https://www.example.com
+                    rerun_url: https://www.example.com
+                    workflow_url: https://www.example.com
+                    actor:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    triggering_actor:
+                      login: example_value
+                      id: abc123
+                      node_id: '500123'
+                      avatar_url: https://www.example.com
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                      type: example_value
+                    repository:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+                    head_repository:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      full_name: example_value
+                      private: true
+                      html_url: https://www.example.com
+                      url: https://www.example.com
+                      description: A sample description.
+                    head_commit:
+                      id: abc123
+                      tree_id: '500123'
+                      message: example_value
+                      timestamp: '2026-01-15T10:30:00Z'
+                      author:
+                        name: Example Title
+                        email: user@example.com
+                      committer:
+                        name: Example Title
+                        email: user@example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs:
+    get:
+      operationId: downloadWorkflowRunAttemptLogs
+      summary: Github Actions Download Workflow Run Attempt Logs
+      description: Gets a redirect URL to download an archive of log files for a specific workflow run attempt.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      - $ref: '#/components/parameters/attemptNumber'
+      responses:
+        '302':
+          description: Redirect to log download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/cancel:
+    post:
+      operationId: cancelWorkflowRun
+      summary: Github Actions Cancel a Workflow Run
+      description: Cancels a workflow run using its id.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '202':
+          description: Successfully requested cancellation
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/deployment_protection_rule:
+    post:
+      operationId: reviewCustomGatesForRun
+      summary: Github Actions Review Custom Deployment Protection Rules for a Workflow Run
+      description: Approve or reject custom deployment protection rules for a workflow run.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - environment_name
+              - state
+              properties:
+                environment_name:
+                  type: string
+                state:
+                  type: string
+                  enum:
+                  - approved
+                  - rejected
+                comment:
+                  type: string
+            examples:
+              ReviewcustomgatesforrunRequestExample:
+                summary: Default reviewCustomGatesForRun request
+                x-microcks-default: true
+                value:
+                  environment_name: example_value
+                  state: approved
+                  comment: example_value
+      responses:
+        '204':
+          description: Successfully reviewed deployment protection rule
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/force-cancel:
+    post:
+      operationId: forceCancelWorkflowRun
+      summary: Github Actions Force Cancel a Workflow Run
+      description: Force cancels a workflow run. Use this endpoint to force cancel a workflow run that is not responding to a normal cancel request.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '202':
+          description: Successfully requested force cancellation
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/logs:
+    get:
+      operationId: downloadWorkflowRunLogs
+      summary: Github Actions Download Workflow Run Logs
+      description: Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '302':
+          description: Redirect to log download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteWorkflowRunLogs
+      summary: Github Actions Delete Workflow Run Logs
+      description: Deletes all logs for a workflow run.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '204':
+          description: Successfully deleted workflow run logs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments:
+    get:
+      operationId: getPendingDeployments
+      summary: Github Actions Get Pending Deployments for a Workflow Run
+      description: Get all deployment environments for a workflow run that are waiting for protection rules to pass.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '200':
+          description: Successfully retrieved pending deployments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PendingDeployment'
+              examples:
+                Getpendingdeployments200Example:
+                  summary: Default getPendingDeployments 200 response
+                  x-microcks-default: true
+                  value:
+                  - environment:
+                      id: abc123
+                      node_id: '500123'
+                      name: Example Title
+                      url: https://www.example.com
+                      html_url: https://www.example.com
+                    wait_timer: 10
+                    wait_timer_started_at: '2026-01-15T10:30:00Z'
+                    current_user_can_approve: true
+                    reviewers:
+                    - type: User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: reviewPendingDeployments
+      summary: Github Actions Review Pending Deployments for a Workflow Run
+      description: Approve or reject pending deployments that are waiting on approval by a required reviewer.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - environment_ids
+              - state
+              - comment
+              properties:
+                environment_ids:
+                  type: array
+                  items:
+                    type: integer
+                state:
+                  type: string
+                  enum:
+                  - approved
+                  - rejected
+                comment:
+                  type: string
+            examples:
+              ReviewpendingdeploymentsRequestExample:
+                summary: Default reviewPendingDeployments request
+                x-microcks-default: true
+                value:
+                  environment_ids:
+                  - 10
+                  state: approved
+                  comment: example_value
+      responses:
+        '200':
+          description: Successfully reviewed pending deployments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Deployment'
+              examples:
+                Reviewpendingdeployments200Example:
+                  summary: Default reviewPendingDeployments 200 response
+                  x-microcks-default: true
+                  value:
+                  - url: https://www.example.com
+                    id: abc123
+                    node_id: '500123'
+                    task: example_value
+                    environment: example_value
+                    description: A sample description.
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/rerun:
+    post:
+      operationId: rerunWorkflowRun
+      summary: Github Actions Re-run a Workflow
+      description: Re-runs your workflow run using its id.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enable_debug_logging:
+                  type: boolean
+                  default: false
+            examples:
+              RerunworkflowrunRequestExample:
+                summary: Default rerunWorkflowRun request
+                x-microcks-default: true
+                value:
+                  enable_debug_logging: true
+      responses:
+        '201':
+          description: Successfully re-ran workflow
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/rerun-failed-jobs:
+    post:
+      operationId: rerunFailedJobs
+      summary: Github Actions Re-run Failed Jobs From a Workflow Run
+      description: Re-run all of the failed jobs and their dependent jobs in a workflow run using the id of the workflow run.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enable_debug_logging:
+                  type: boolean
+                  default: false
+            examples:
+              RerunfailedjobsRequestExample:
+                summary: Default rerunFailedJobs request
+                x-microcks-default: true
+                value:
+                  enable_debug_logging: true
+      responses:
+        '201':
+          description: Successfully re-ran failed jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/runs/{run_id}/timing:
+    get:
+      operationId: getWorkflowRunUsage
+      summary: Github Actions Get Workflow Run Usage
+      description: Gets the number of billable minutes and total run time for a specific workflow run.
+      tags:
+      - Workflow Runs
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/runId'
+      responses:
+        '200':
+          description: Successfully retrieved workflow run usage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunUsage'
+              examples:
+                Getworkflowrunusage200Example:
+                  summary: Default getWorkflowRunUsage 200 response
+                  x-microcks-default: true
+                  value:
+                    billable:
+                      UBUNTU:
+                        total_ms: 10
+                        jobs: 10
+                      MACOS:
+                        total_ms: 10
+                        jobs: 10
+                      WINDOWS:
+                        total_ms: 10
+                        jobs: 10
+                    run_duration_ms: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SimpleUser:
+      type: object
+      properties:
+        login:
+          type: string
+          example: example_value
+        id:
+          type: integer
+          example: abc123
+        node_id:
+          type: string
+          example: '500123'
+        avatar_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        html_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        type:
+          type: string
+          example: example_value
+    WorkflowRunUsage:
+      type: object
+      properties:
+        billable:
+          type: object
+          properties:
+            UBUNTU:
+              type: object
+              properties:
+                total_ms:
+                  type: integer
+                jobs:
+                  type: integer
+            MACOS:
+              type: object
+              properties:
+                total_ms:
+                  type: integer
+                jobs:
+                  type: integer
+            WINDOWS:
+              type: object
+              properties:
+                total_ms:
+                  type: integer
+                jobs:
+                  type: integer
+          example: example_value
+        run_duration_ms:
+          type: integer
+          example: 10
+    EnvironmentApproval:
+      type: object
+      properties:
+        environments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              node_id:
+                type: string
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              html_url:
+                type: string
+                format: uri
+              created_at:
+                type: string
+                format: date-time
+              updated_at:
+                type: string
+                format: date-time
+          example: []
+        state:
+          type: string
+          enum:
+          - approved
+          - rejected
+          - pending
+          example: approved
+        user:
+          $ref: '#/components/schemas/SimpleUser'
+        comment:
+          type: string
+          example: example_value
+    SimpleCommit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        tree_id:
+          type: string
+          example: '500123'
+        message:
+          type: string
+          example: example_value
+        timestamp:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+          example: example_value
+        committer:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+          example: example_value
+    PendingDeployment:
+      type: object
+      properties:
+        environment:
+          type: object
+          properties:
+            id:
+              type: integer
+            node_id:
+              type: string
+            name:
+              type: string
+            url:
+              type: string
+              format: uri
+            html_url:
+              type: string
+              format: uri
+          example: example_value
+        wait_timer:
+          type: integer
+          example: 10
+        wait_timer_started_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-01-15T10:30:00Z'
+        current_user_can_approve:
+          type: boolean
+          example: true
+        reviewers:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - User
+                - Team
+              reviewer:
+                $ref: '#/components/schemas/SimpleUser'
+          example: []
+    MinimalRepository:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: abc123
+        node_id:
+          type: string
+          example: '500123'
+        name:
+          type: string
+          example: Example Title
+        full_name:
+          type: string
+          example: example_value
+        owner:
+          $ref: '#/components/schemas/SimpleUser'
+        private:
+          type: boolean
+          example: true
+        html_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        description:
+          type: string
+          nullable: true
+          example: A sample description.
+    WorkflowRun:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the workflow run.
+          example: abc123
+        name:
+          type: string
+          description: The name of the workflow run.
+          example: Example Title
+        node_id:
+          type: string
+          example: '500123'
+        head_branch:
+          type: string
+          example: example_value
+        head_sha:
+          type: string
+          description: The SHA of the head commit that points to the version of the workflow being run.
+          example: example_value
+        path:
+          type: string
+          example: example_value
+        display_title:
+          type: string
+          description: The title of the workflow run displayed in the UI.
+          example: example_value
+        run_number:
+          type: integer
+          description: The auto incrementing run number for the workflow run.
+          example: 10
+        run_attempt:
+          type: integer
+          description: Attempt number of the run, 1 for first attempt and higher if the workflow was re-run.
+          example: 10
+        event:
+          type: string
+          description: The event that triggered the workflow run.
+          example: example_value
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          - waiting
+          - requested
+          - pending
+          example: queued
+        conclusion:
+          type: string
+          nullable: true
+          enum:
+          - success
+          - failure
+          - neutral
+          - cancelled
+          - skipped
+          - timed_out
+          - action_required
+          - stale
+          - null
+          example: success
+        workflow_id:
+          type: integer
+          example: '500123'
+        url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        html_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        run_started_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        jobs_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        logs_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        artifacts_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        cancel_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        rerun_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        workflow_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        actor:
+          $ref: '#/components/schemas/SimpleUser'
+        triggering_actor:
+          $ref: '#/components/schemas/SimpleUser'
+        repository:
+          $ref: '#/components/schemas/MinimalRepository'
+        head_repository:
+          $ref: '#/components/schemas/MinimalRepository'
+        head_commit:
+          $ref: '#/components/schemas/SimpleCommit'
+    Deployment:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        id:
+          type: integer
+          example: abc123
+        node_id:
+          type: string
+          example: '500123'
+        task:
+          type: string
+          example: example_value
+        environment:
+          type: string
+          example: example_value
+        description:
+          type: string
+          nullable: true
+          example: A sample description.
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+  parameters:
+    runId:
+      name: run_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The unique identifier of the workflow run.
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    attemptNumber:
+      name: attempt_number
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The attempt number of the workflow run.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: GitHub personal access token or OAuth token
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: Fine-grained personal access token with Actions permissions

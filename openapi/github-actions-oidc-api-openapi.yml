@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: GitHub Actions Artifacts OIDC API
+  description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
+  version: 1.0.0
+  contact:
+    name: GitHub Support
+    url: https://support.github.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://api.github.com
+  description: GitHub REST API
+security:
+- bearerAuth: []
+- personalAccessToken: []
+tags:
+- name: OIDC
+  description: Manage OIDC subject claim customization
+paths:
+  /repos/{owner}/{repo}/actions/oidc/customization/sub:
+    get:
+      operationId: getCustomOidcSubClaimForRepo
+      summary: Github Actions Get the Customization Template for an Oidc Subject Claim for a Repository
+      description: Gets the customization template for an OpenID Connect (OIDC) subject claim.
+      tags:
+      - OIDC
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      responses:
+        '200':
+          description: Successfully retrieved OIDC customization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OidcCustomSub'
+              examples:
+                Getcustomoidcsubclaimforrepo200Example:
+                  summary: Default getCustomOidcSubClaimForRepo 200 response
+                  x-microcks-default: true
+                  value:
+                    use_default: true
+                    include_claim_keys:
+                    - example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setCustomOidcSubClaimForRepo
+      summary: Github Actions Set the Customization Template for an Oidc Subject Claim for a Repository
+      description: Sets the customization template for an OpenID Connect (OIDC) subject claim.
+      tags:
+      - OIDC
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OidcCustomSub'
+            examples:
+              SetcustomoidcsubclaimforrepoRequestExample:
+                summary: Default setCustomOidcSubClaimForRepo request
+                x-microcks-default: true
+                value:
+                  use_default: true
+                  include_claim_keys:
+                  - example_value
+      responses:
+        '201':
+          description: Successfully set OIDC customization
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orgs/{org}/actions/oidc/customization/sub:
+    get:
+      operationId: getCustomOidcSubClaimForOrg
+      summary: Github Actions Get the Customization Template for an Oidc Subject Claim for an Organization
+      description: Gets the customization template for an OpenID Connect (OIDC) subject claim for an organization.
+      tags:
+      - OIDC
+      parameters:
+      - $ref: '#/components/parameters/org'
+      responses:
+        '200':
+          description: Successfully retrieved OIDC customization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OidcCustomSubOrg'
+              examples:
+                Getcustomoidcsubclaimfororg200Example:
+                  summary: Default getCustomOidcSubClaimForOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    include_claim_keys:
+                    - example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setCustomOidcSubClaimForOrg
+      summary: Github Actions Set the Customization Template for an Oidc Subject Claim for an Organization
+      description: Creates or updates the customization template for an OpenID Connect (OIDC) subject claim for an organization.
+      tags:
+      - OIDC
+      parameters:
+      - $ref: '#/components/parameters/org'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OidcCustomSubOrg'
+            examples:
+              SetcustomoidcsubclaimfororgRequestExample:
+                summary: Default setCustomOidcSubClaimForOrg request
+                x-microcks-default: true
+                value:
+                  include_claim_keys:
+                  - example_value
+      responses:
+        '201':
+          description: Successfully set OIDC customization
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+  schemas:
+    OidcCustomSub:
+      type: object
+      properties:
+        use_default:
+          type: boolean
+          example: true
+        include_claim_keys:
+          type: array
+          items:
+            type: string
+          example: []
+    OidcCustomSubOrg:
+      type: object
+      properties:
+        include_claim_keys:
+          type: array
+          items:
+            type: string
+          example: []
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: GitHub personal access token or OAuth token
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: Fine-grained personal access token with Actions permissions

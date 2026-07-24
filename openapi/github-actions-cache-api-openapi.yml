@@ -1,0 +1,248 @@
+openapi: 3.1.0
+info:
+  title: GitHub Actions Artifacts Cache API
+  description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
+  version: 1.0.0
+  contact:
+    name: GitHub Support
+    url: https://support.github.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://api.github.com
+  description: GitHub REST API
+security:
+- bearerAuth: []
+- personalAccessToken: []
+tags:
+- name: Cache
+  description: Manage workflow dependency caches
+paths:
+  /repos/{owner}/{repo}/actions/caches:
+    get:
+      operationId: listActionsCaches
+      summary: List Github Actions Caches for a Repository
+      description: Lists the GitHub Actions caches for a repository.
+      tags:
+      - Cache
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: ref
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: key
+        in: query
+        schema:
+          type: string
+        example: example_value
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - created_at
+          - last_accessed_at
+          - size_in_bytes
+          default: last_accessed_at
+        example: created_at
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        example: asc
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Successfully retrieved caches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  actions_caches:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActionsCacheEntry'
+              examples:
+                Listactionscaches200Example:
+                  summary: Default listActionsCaches 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    actions_caches:
+                    - id: abc123
+                      ref: example_value
+                      key: example_value
+                      version: example_value
+                      last_accessed_at: '2026-01-15T10:30:00Z'
+                      created_at: '2026-01-15T10:30:00Z'
+                      size_in_bytes: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteActionsCacheByKey
+      summary: Delete Github Actions Caches for a Repository (by Key)
+      description: Deletes one or more GitHub Actions caches for a repository, using a complete cache key.
+      tags:
+      - Cache
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: key
+        in: query
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - name: ref
+        in: query
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successfully deleted caches
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/caches/{cache_id}:
+    delete:
+      operationId: deleteActionsCacheById
+      summary: Delete a Github Actions Cache for a Repository (by Id)
+      description: Deletes a GitHub Actions cache for a repository, using a cache ID.
+      tags:
+      - Cache
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - name: cache_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: '500123'
+      responses:
+        '204':
+          description: Successfully deleted cache
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/cache/usage:
+    get:
+      operationId: getActionsCacheUsage
+      summary: Get Github Actions Cache Usage for a Repository
+      description: Gets GitHub Actions cache usage for a repository.
+      tags:
+      - Cache
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      responses:
+        '200':
+          description: Successfully retrieved cache usage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionsCacheUsage'
+              examples:
+                Getactionscacheusage200Example:
+                  summary: Default getActionsCacheUsage 200 response
+                  x-microcks-default: true
+                  value:
+                    full_name: example_value
+                    active_caches_size_in_bytes: 10
+                    active_caches_count: 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+  schemas:
+    ActionsCacheUsage:
+      type: object
+      properties:
+        full_name:
+          type: string
+          example: example_value
+        active_caches_size_in_bytes:
+          type: integer
+          example: 10
+        active_caches_count:
+          type: integer
+          example: 10
+    ActionsCacheEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: abc123
+        ref:
+          type: string
+          example: example_value
+        key:
+          type: string
+          example: example_value
+        version:
+          type: string
+          example: example_value
+        last_accessed_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        size_in_bytes:
+          type: integer
+          example: 10
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: GitHub personal access token or OAuth token
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: Fine-grained personal access token with Actions permissions

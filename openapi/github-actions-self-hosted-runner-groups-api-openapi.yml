@@ -1,0 +1,297 @@
+openapi: 3.1.0
+info:
+  title: GitHub Actions Artifacts Self-Hosted Runner Groups API
+  description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
+  version: 1.0.0
+  contact:
+    name: GitHub Support
+    url: https://support.github.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://api.github.com
+  description: GitHub REST API
+security:
+- bearerAuth: []
+- personalAccessToken: []
+tags:
+- name: Self-Hosted Runner Groups
+  description: Manage runner groups for organizations
+paths:
+  /orgs/{org}/actions/runner-groups:
+    get:
+      operationId: listSelfHostedRunnerGroupsForOrg
+      summary: Github Actions List Self-hosted Runner Groups for an Organization
+      description: Lists all self-hosted runner groups configured in an organization.
+      tags:
+      - Self-Hosted Runner Groups
+      parameters:
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Successfully retrieved runner groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  runner_groups:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RunnerGroup'
+              examples:
+                Listselfhostedrunnergroupsfororg200Example:
+                  summary: Default listSelfHostedRunnerGroupsForOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    runner_groups:
+                    - id: abc123
+                      name: Example Title
+                      visibility: example_value
+                      default: true
+                      runners_url: https://www.example.com
+                      inherited: true
+                      allows_public_repositories: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSelfHostedRunnerGroupForOrg
+      summary: Github Actions Create a Self-hosted Runner Group for an Organization
+      description: Creates a new self-hosted runner group for an organization.
+      tags:
+      - Self-Hosted Runner Groups
+      parameters:
+      - $ref: '#/components/parameters/org'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                visibility:
+                  type: string
+                  enum:
+                  - selected
+                  - all
+                  - private
+                selected_repository_ids:
+                  type: array
+                  items:
+                    type: integer
+                runners:
+                  type: array
+                  items:
+                    type: integer
+            examples:
+              CreateselfhostedrunnergroupfororgRequestExample:
+                summary: Default createSelfHostedRunnerGroupForOrg request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  visibility: selected
+                  selected_repository_ids:
+                  - 10
+                  runners:
+                  - 10
+      responses:
+        '201':
+          description: Successfully created runner group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunnerGroup'
+              examples:
+                Createselfhostedrunnergroupfororg201Example:
+                  summary: Default createSelfHostedRunnerGroupForOrg 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    visibility: example_value
+                    default: true
+                    runners_url: https://www.example.com
+                    inherited: true
+                    allows_public_repositories: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orgs/{org}/actions/runner-groups/{runner_group_id}:
+    get:
+      operationId: getSelfHostedRunnerGroupForOrg
+      summary: Github Actions Get a Self-hosted Runner Group for an Organization
+      description: Gets a specific self-hosted runner group for an organization.
+      tags:
+      - Self-Hosted Runner Groups
+      parameters:
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/runnerGroupId'
+      responses:
+        '200':
+          description: Successfully retrieved runner group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunnerGroup'
+              examples:
+                Getselfhostedrunnergroupfororg200Example:
+                  summary: Default getSelfHostedRunnerGroupForOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    visibility: example_value
+                    default: true
+                    runners_url: https://www.example.com
+                    inherited: true
+                    allows_public_repositories: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateSelfHostedRunnerGroupForOrg
+      summary: Github Actions Update a Self-hosted Runner Group for an Organization
+      description: Updates the name and visibility of a self-hosted runner group in an organization.
+      tags:
+      - Self-Hosted Runner Groups
+      parameters:
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/runnerGroupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                visibility:
+                  type: string
+                  enum:
+                  - selected
+                  - all
+                  - private
+            examples:
+              UpdateselfhostedrunnergroupfororgRequestExample:
+                summary: Default updateSelfHostedRunnerGroupForOrg request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  visibility: selected
+      responses:
+        '200':
+          description: Successfully updated runner group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunnerGroup'
+              examples:
+                Updateselfhostedrunnergroupfororg200Example:
+                  summary: Default updateSelfHostedRunnerGroupForOrg 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    visibility: example_value
+                    default: true
+                    runners_url: https://www.example.com
+                    inherited: true
+                    allows_public_repositories: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSelfHostedRunnerGroupFromOrg
+      summary: Github Actions Delete a Self-hosted Runner Group From an Organization
+      description: Deletes a self-hosted runner group from an organization.
+      tags:
+      - Self-Hosted Runner Groups
+      parameters:
+      - $ref: '#/components/parameters/org'
+      - $ref: '#/components/parameters/runnerGroupId'
+      responses:
+        '204':
+          description: Successfully deleted runner group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    runnerGroupId:
+      name: runner_group_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner group.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+  schemas:
+    RunnerGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        visibility:
+          type: string
+          example: example_value
+        default:
+          type: boolean
+          example: true
+        runners_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        inherited:
+          type: boolean
+          example: true
+        allows_public_repositories:
+          type: boolean
+          example: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: GitHub personal access token or OAuth token
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: Fine-grained personal access token with Actions permissions

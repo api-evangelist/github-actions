@@ -1,0 +1,243 @@
+openapi: 3.1.0
+info:
+  title: GitHub Actions Artifacts Variables API
+  description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
+  version: 1.0.0
+  contact:
+    name: GitHub Support
+    url: https://support.github.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://api.github.com
+  description: GitHub REST API
+security:
+- bearerAuth: []
+- personalAccessToken: []
+tags:
+- name: Variables
+  description: Create and manage workflow variables
+paths:
+  /repos/{owner}/{repo}/actions/variables:
+    get:
+      operationId: listRepoVariables
+      summary: Github Actions List Repository Variables
+      description: Lists all repository variables.
+      tags:
+      - Variables
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/perPage'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Successfully retrieved variables
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  variables:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActionsVariable'
+              examples:
+                Listrepovariables200Example:
+                  summary: Default listRepoVariables 200 response
+                  x-microcks-default: true
+                  value:
+                    total_count: 10
+                    variables:
+                    - name: Example Title
+                      value: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createRepoVariable
+      summary: Github Actions Create a Repository Variable
+      description: Creates a repository variable that you can reference in a GitHub Actions workflow.
+      tags:
+      - Variables
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - value
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+            examples:
+              CreaterepovariableRequestExample:
+                summary: Default createRepoVariable request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  value: example_value
+      responses:
+        '201':
+          description: Successfully created variable
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /repos/{owner}/{repo}/actions/variables/{name}:
+    get:
+      operationId: getRepoVariable
+      summary: Github Actions Get a Repository Variable
+      description: Gets a specific variable in a repository.
+      tags:
+      - Variables
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/variableName'
+      responses:
+        '200':
+          description: Successfully retrieved variable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionsVariable'
+              examples:
+                Getrepovariable200Example:
+                  summary: Default getRepoVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Title
+                    value: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+                    updated_at: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateRepoVariable
+      summary: Github Actions Update a Repository Variable
+      description: Updates a repository variable that you can reference in a GitHub Actions workflow.
+      tags:
+      - Variables
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/variableName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+            examples:
+              UpdaterepovariableRequestExample:
+                summary: Default updateRepoVariable request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  value: example_value
+      responses:
+        '204':
+          description: Successfully updated variable
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteRepoVariable
+      summary: Github Actions Delete a Repository Variable
+      description: Deletes a repository variable using the variable name.
+      tags:
+      - Variables
+      parameters:
+      - $ref: '#/components/parameters/owner'
+      - $ref: '#/components/parameters/repo'
+      - $ref: '#/components/parameters/variableName'
+      responses:
+        '204':
+          description: Successfully deleted variable
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    variableName:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the variable.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+  schemas:
+    ActionsVariable:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the variable.
+          example: Example Title
+        value:
+          type: string
+          description: The value of the variable.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: GitHub personal access token or OAuth token
+    personalAccessToken:
+      type: http
+      scheme: bearer
+      description: Fine-grained personal access token with Actions permissions
