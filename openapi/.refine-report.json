@@ -1,0 +1,34 @@
+{
+  "provider": "github-actions",
+  "sources": [
+    "github-actions-artifacts-api-openapi.yml",
+    "github-actions-cache-api-openapi.yml",
+    "github-actions-jobs-api-openapi.yml",
+    "github-actions-oidc-api-openapi.yml",
+    "github-actions-permissions-api-openapi.yml",
+    "github-actions-secrets-api-openapi.yml",
+    "github-actions-self-hosted-runner-groups-api-openapi.yml",
+    "github-actions-self-hosted-runners-api-openapi.yml",
+    "github-actions-variables-api-openapi.yml",
+    "github-actions-workflow-runs-api-openapi.yml",
+    "github-actions-workflows-api-openapi.yml"
+  ],
+  "outputs": [
+    "github-actions-artifacts-api-openapi.yml",
+    "github-actions-cache-api-openapi.yml",
+    "github-actions-jobs-api-openapi.yml",
+    "github-actions-oidc-api-openapi.yml",
+    "github-actions-permissions-api-openapi.yml",
+    "github-actions-secrets-api-openapi.yml",
+    "github-actions-self-hosted-runner-groups-api-openapi.yml",
+    "github-actions-self-hosted-runners-api-openapi.yml",
+    "github-actions-variables-api-openapi.yml",
+    "github-actions-workflow-runs-api-openapi.yml",
+    "github-actions-workflows-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
