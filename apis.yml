@@ -714,12 +714,6 @@ common:
     url: json-schema/github-actions-cache-schema.json
   - type: JSONSchema
     url: json-schema/github-actions-simple-user-schema.json
-  - type: Capabilities
-    url: capabilities/ci-cd-automation.yaml
-    title: CI/CD Automation Capability
-  - type: Capabilities
-    url: capabilities/shared/actions.yaml
-    title: Actions API Shared Definition
   - type: Features
     data:
       - Automated CI/CD workflows triggered by repository events
