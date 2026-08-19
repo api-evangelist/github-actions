@@ -1,0 +1,605 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions Artifacts Workflow Runs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflow Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Workflow Runs for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "actor",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "branch",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "event",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "completed",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all workflow runs for a repository. Anyone with read access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets a specific workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Deletes a specific workflow run. Anyone with write access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions Approve a Workflow Run for a Fork Pull Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/approve",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Approves a workflow run for a pull request from a public fork of a first time contributor."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get the Review History for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/approvals",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Anyone with read access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Workflow Run Attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/attempts/:attempt_number",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "attempt_number",
+                "value": "",
+                "type": "path",
+                "description": "The attempt number of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets a specific workflow run attempt."
+        },
+        {
+          "info": {
+            "name": "Github Actions Download Workflow Run Attempt Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/attempts/:attempt_number/logs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "attempt_number",
+                "value": "",
+                "type": "path",
+                "description": "The attempt number of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets a redirect URL to download an archive of log files for a specific workflow run attempt."
+        },
+        {
+          "info": {
+            "name": "Github Actions Cancel a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/cancel",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Cancels a workflow run using its id."
+        },
+        {
+          "info": {
+            "name": "Github Actions Review Custom Deployment Protection Rules for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/deployment_protection_rule",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approve or reject custom deployment protection rules for a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Force Cancel a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/force-cancel",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Force cancels a workflow run. Use this endpoint to force cancel a workflow run that is not responding to a normal cancel request."
+        },
+        {
+          "info": {
+            "name": "Github Actions Download Workflow Run Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/logs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete Workflow Run Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/logs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Deletes all logs for a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get Pending Deployments for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/pending_deployments",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Get all deployment environments for a workflow run that are waiting for protection rules to pass."
+        },
+        {
+          "info": {
+            "name": "Github Actions Review Pending Deployments for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/pending_deployments",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approve or reject pending deployments that are waiting on approval by a required reviewer."
+        },
+        {
+          "info": {
+            "name": "Github Actions Re-run a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/rerun",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-runs your workflow run using its id."
+        },
+        {
+          "info": {
+            "name": "Github Actions Re-run Failed Jobs From a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/rerun-failed-jobs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-run all of the failed jobs and their dependent jobs in a workflow run using the id of the workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get Workflow Run Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/timing",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              }
+            ]
+          },
+          "docs": "Gets the number of billable minutes and total run time for a specific workflow run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

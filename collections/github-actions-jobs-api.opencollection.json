@@ -1,0 +1,215 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions Artifacts Jobs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Jobs for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/jobs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "filter",
+                "value": "latest",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Jobs for a Workflow Run Attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/attempts/:attempt_number/jobs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "attempt_number",
+                "value": "",
+                "type": "path",
+                "description": "The attempt number of the workflow run."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists jobs for a specific workflow run attempt."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Job for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/jobs/:job_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "job_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a specific job in a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Download Job Logs for a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/jobs/:job_id/logs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "job_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute."
+        },
+        {
+          "info": {
+            "name": "Github Actions Re-run a Job From a Workflow Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/jobs/:job_id/rerun",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "job_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-run a job and its dependent jobs in a workflow run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

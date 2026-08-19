@@ -1,0 +1,212 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions Artifacts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artifacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Artifacts for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/artifacts",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all artifacts for a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get an Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/artifacts/:artifact_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the artifact."
+              }
+            ]
+          },
+          "docs": "Gets a specific artifact for a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete an Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/artifacts/:artifact_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the artifact."
+              }
+            ]
+          },
+          "docs": "Deletes an artifact for a workflow run."
+        },
+        {
+          "info": {
+            "name": "Github Actions Download an Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/artifacts/:artifact_id/:archive_format",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the artifact."
+              },
+              {
+                "name": "archive_format",
+                "value": "zip",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a redirect URL to download an archive for a repository. The archive_format must be zip."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Workflow Run Artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runs/:run_id/artifacts",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the workflow run."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists artifacts for a workflow run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

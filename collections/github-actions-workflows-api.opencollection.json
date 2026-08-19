@@ -1,0 +1,283 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions Artifacts Workflows API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Repository Workflows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ]
+          },
+          "docs": "Gets a specific workflow. You can replace workflow_id with the workflow file name."
+        },
+        {
+          "info": {
+            "name": "Github Actions Disable a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/disable",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ]
+          },
+          "docs": "Disables a workflow and sets the state of the workflow to disabled_manually."
+        },
+        {
+          "info": {
+            "name": "Github Actions Enable a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/enable",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ]
+          },
+          "docs": "Enables a workflow and sets the state of the workflow to active."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Workflow Dispatch Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/dispatches",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manually triggers a GitHub Actions workflow run. The workflow must be configured to support the workflow_dispatch event."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Workflow Runs for a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/runs",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              },
+              {
+                "name": "actor",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "branch",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "event",
+                "value": "example_value",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "completed",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "List all workflow runs for a workflow. You can replace workflow_id with the workflow file name."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get Workflow Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/workflows/:workflow_id/timing",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "workflow_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workflow or the workflow file name."
+              }
+            ]
+          },
+          "docs": "Gets the number of billable minutes used by a specific workflow during the current billing cycle."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions Artifacts Permissions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Github Actions Permissions for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/permissions",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Gets the GitHub Actions permissions policy for a repository."
+        },
+        {
+          "info": {
+            "name": "Set Github Actions Permissions for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/permissions",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions and reusable workflows in the repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get Default Workflow Permissions for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/permissions/workflow",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Gets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set Default Workflow Permissions for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/permissions/workflow",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the default workflow permissions granted to the GITHUB_TOKEN when running workflows in a repository."
+        },
+        {
+          "info": {
+            "name": "Get Github Actions Permissions for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/permissions",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ]
+          },
+          "docs": "Gets the GitHub Actions permissions policy for repositories and allowed actions and reusable workflows in an organization."
+        },
+        {
+          "info": {
+            "name": "Set Github Actions Permissions for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/orgs/:org/actions/permissions",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the GitHub Actions permissions policy for repositories and allowed actions and reusable workflows in an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

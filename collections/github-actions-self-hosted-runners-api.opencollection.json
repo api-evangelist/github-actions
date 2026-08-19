@@ -1,0 +1,371 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions Artifacts Self-Hosted Runners API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Self-Hosted Runners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Self-hosted Runners for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all self-hosted runners configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ]
+          },
+          "docs": "Gets a specific self-hosted runner configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete a Self-hosted Runner From a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ]
+          },
+          "docs": "Forces the removal of a self-hosted runner from a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Runner Applications for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/downloads",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Lists binaries for the runner application that you can download."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Registration Token for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/registration-token",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Returns a token that you can pass to the config script for a self-hosted runner."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Remove Token for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/remove-token",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Returns a token that you can pass to remove a self-hosted runner from a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions List Labels for a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ]
+          },
+          "docs": "Lists all labels for a self-hosted runner configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Add Custom Labels to a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds custom labels to a self-hosted runner configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set Custom Labels for a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove all previous custom labels and set the new custom labels for a specific self-hosted runner."
+        },
+        {
+          "info": {
+            "name": "Github Actions Remove All Custom Labels From a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              }
+            ]
+          },
+          "docs": "Remove all custom labels from a self-hosted runner configured in a repository."
+        },
+        {
+          "info": {
+            "name": "Github Actions Remove a Custom Label From a Self-hosted Runner for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/runners/:runner_id/labels/:name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a custom label from a self-hosted runner configured in a repository."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions Artifacts OIDC API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OIDC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions Get the Customization Template for an Oidc Subject Claim for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/oidc/customization/sub",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ]
+          },
+          "docs": "Gets the customization template for an OpenID Connect (OIDC) subject claim."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set the Customization Template for an Oidc Subject Claim for a Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/repos/:owner/:repo/actions/oidc/customization/sub",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The account owner of the repository."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The name of the repository without the .git extension."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the customization template for an OpenID Connect (OIDC) subject claim."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get the Customization Template for an Oidc Subject Claim for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/oidc/customization/sub",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ]
+          },
+          "docs": "Gets the customization template for an OpenID Connect (OIDC) subject claim for an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Set the Customization Template for an Oidc Subject Claim for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.github.com/orgs/:org/actions/oidc/customization/sub",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates the customization template for an OpenID Connect (OIDC) subject claim for an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

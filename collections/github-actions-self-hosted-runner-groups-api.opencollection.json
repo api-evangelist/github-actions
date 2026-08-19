@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GitHub Actions Artifacts Self-Hosted Runner Groups API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Self-Hosted Runner Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Github Actions List Self-hosted Runner Groups for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page (max 100)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of the results to fetch."
+              }
+            ]
+          },
+          "docs": "Lists all self-hosted runner groups configured in an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Create a Self-hosted Runner Group for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new self-hosted runner group for an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Get a Self-hosted Runner Group for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups/:runner_group_id",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "runner_group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner group."
+              }
+            ]
+          },
+          "docs": "Gets a specific self-hosted runner group for an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Update a Self-hosted Runner Group for an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups/:runner_group_id",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "runner_group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the name and visibility of a self-hosted runner group in an organization."
+        },
+        {
+          "info": {
+            "name": "Github Actions Delete a Self-hosted Runner Group From an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.github.com/orgs/:org/actions/runner-groups/:runner_group_id",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "The organization name."
+              },
+              {
+                "name": "runner_group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the self-hosted runner group."
+              }
+            ]
+          },
+          "docs": "Deletes a self-hosted runner group from an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
