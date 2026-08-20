@@ -129,6 +129,8 @@ apis:
   humanURL: https://docs.github.com/en/actions
   baseURL: https://api.github.com
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
