@@ -1,0 +1,75 @@
+slug: github-actions
+provider: GitHub Actions
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Secrets
+  spec_file: github-actions-secrets-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.85
+  evidence: '''Github Actions Create or Update a Repository Secret'', ''Github Actions Get an Organization
+    Public Key'' (ActionsSecret, ActionsPublicKey)'
+  reason: Storing and rotating encrypted secrets consumed by pipelines is Configuration & Secrets Management.
+- tag: Workflows
+  spec_file: github-actions-workflows-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.85
+  evidence: '"List Repository Workflows", "Enable a Workflow", "Create a Workflow Dispatch Event", "List
+    Workflow Runs for a Workflow" — REST API for managing GitHub Actions workflows, runs, artifacts'
+  reason: CI/CD workflow definition, enablement and run listing is build-pipeline management, i.e. continuous
+    integration management for software delivery.
+- tag: Artifacts
+  spec_file: github-actions-artifacts-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.8
+  evidence: '''Github Actions List Workflow Run Artifacts'' / ''Github Actions Download an Artifact''
+    with schema Artifact'
+  reason: Managing build artefacts produced by CI workflow runs is squarely Continuous Integration Management
+    ('build pipelines, artefact production').
+- tag: Jobs
+  spec_file: github-actions-jobs-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.8
+  evidence: '''Github Actions List Jobs for a Workflow Run'', ''Download Job Logs for a Workflow Run'',
+    ''Re-run a Job From a Workflow Run'''
+  reason: Inspecting, logging and re-running CI workflow jobs is the execution surface of build pipelines
+    — Continuous Integration Management.
+- tag: Workflow Runs
+  spec_file: github-actions-workflow-runs-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.8
+  evidence: '''Github Actions List Workflow Runs for a Repository'', ''Cancel a Workflow Run'', ''Download
+    Workflow Run Logs'' (schema WorkflowRun)'
+  reason: Triggering, cancelling, approving and inspecting CI workflow runs is the core of Continuous
+    Integration Management (build pipelines and pipeline policy).
+- tag: Variables
+  spec_file: github-actions-variables-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.75
+  evidence: '''Github Actions Create a Repository Variable'' / ''Github Actions Update a Repository Variable''
+    (ActionsVariable)'
+  reason: Repository-level non-secret configuration values consumed by pipelines fall under Configuration
+    & Secrets Management.

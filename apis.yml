@@ -1,5 +1,17 @@
 name: GitHub Actions
 description: APIs for GitHub Actions - automation and CI/CD platform.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -601,6 +613,9 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: CapabilityMap
+    url: capabilities/github-actions-capability-edges.yml
+    name: GitHub Actions Business Capability Map
   - type: AgenticAccess
     url: agentic-access/github-actions-agentic-access.yml
   - type: Authentication
