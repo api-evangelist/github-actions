@@ -10,8 +10,8 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: githubActionsApi
-  url: ../openapi/github-actions-openapi.yml
+- name: cacheApi
+  url: ../openapi/github-actions-cache-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: prune-repo-caches

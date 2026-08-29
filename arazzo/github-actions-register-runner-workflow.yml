@@ -12,8 +12,8 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: githubActionsApi
-  url: ../openapi/github-actions-openapi.yml
+- name: selfHostedRunnersApi
+  url: ../openapi/github-actions-self-hosted-runners-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: register-runner

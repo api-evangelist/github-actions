@@ -1,7 +1,7 @@
-generated: '2026-06-20'
-method: derived
-source: arazzo/*.yml
-description: >-
+x-generated: '2026-06-20'
+x-method: derived
+x-source: arazzo/*.yml
+x-description: >-
   Catalog of the native Arazzo 1.0.1 workflows in this repo, each stitching
   GitHub Actions API operations (from openapi/github-actions-openapi.yml) into a
   real multi-step use case.
