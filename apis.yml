@@ -23,7 +23,9 @@ accessModel:
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - scopes
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 url: https://docs.github.com/en/rest/actions
