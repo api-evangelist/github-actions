@@ -1,4 +1,5 @@
 name: GitHub Actions
+x-parent: github
 description: APIs for GitHub Actions - automation and CI/CD platform.
 deliveryModel:
   model: saas
