@@ -31,7 +31,7 @@ accessModel:
 image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 url: https://docs.github.com/en/rest/actions
 created: '2024'
-modified: '2026-06-20'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: github-actions:github-actions-artifacts-api
@@ -609,194 +609,196 @@ apis:
   - type: JSONLD
     url: json-ld/github-actions-context.jsonld
 maintainers:
-  - type: GitHub
-    name: GitHub, Inc.
-    url: https://github.com
-    email: support@github.com
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- type: GitHub
+  name: GitHub, Inc.
+  url: https://github.com
+  email: support@github.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 common:
-  - type: CapabilityMap
-    url: capabilities/github-actions-capability-edges.yml
-    name: GitHub Actions Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/github-actions-agentic-access.yml
-  - type: Authentication
-    url: authentication/github-actions-authentication.yml
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/github-actions/overview
-  - type: Arazzo
-    url: arazzo/github-actions-approve-pending-deployment-workflow.yml
-    name: GitHub Actions Approve a Pending Deployment
-  - type: Arazzo
-    url: arazzo/github-actions-cancel-run-workflow.yml
-    name: GitHub Actions Cancel a Workflow Run and Confirm
-  - type: Arazzo
-    url: arazzo/github-actions-collect-run-artifacts-workflow.yml
-    name: GitHub Actions Collect Workflow Run Artifacts
-  - type: Arazzo
-    url: arazzo/github-actions-dispatch-and-track-run-workflow.yml
-    name: GitHub Actions Dispatch and Track a Workflow Run
-  - type: Arazzo
-    url: arazzo/github-actions-inspect-failed-job-logs-workflow.yml
-    name: GitHub Actions Inspect Failed Job Logs
-  - type: Arazzo
-    url: arazzo/github-actions-prune-repo-caches-workflow.yml
-    name: GitHub Actions Prune Repository Caches
-  - type: Arazzo
-    url: arazzo/github-actions-register-runner-workflow.yml
-    name: GitHub Actions Register a Self-hosted Runner
-  - type: Arazzo
-    url: arazzo/github-actions-rerun-failed-run-workflow.yml
-    name: GitHub Actions Re-run Failed Jobs and Track
-  - type: Arazzo
-    url: arazzo/github-actions-share-org-secret-workflow.yml
-    name: GitHub Actions Share an Organization Secret with Selected Repositories
-  - type: Arazzo
-    url: arazzo/github-actions-upsert-repo-secret-workflow.yml
-    name: GitHub Actions Upsert a Repository Secret
-  - type: Arazzo
-    url: arazzo/github-actions-upsert-repo-variable-workflow.yml
-    name: GitHub Actions Upsert a Repository Variable
-  - type: TermsOfService
-    url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
-  - type: PrivacyPolicy
-    url: https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement
-  - type: RateLimits
-    url: https://docs.github.com/en/rest/overview/rate-limits-for-the-rest-api
-  - type: Blog
-    url: https://github.blog/category/product/actions/
-  - type: StatusPage
-    url: https://www.githubstatus.com
-  - type: ChangeLog
-    url: https://github.blog/changelog/label/actions/
-  - type: GettingStarted
-    url: https://docs.github.com/en/actions/get-started/quickstart
-  - type: Authentication
-    url: https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api
-  - type: Support
-    url: https://support.github.com
-  - type: Pricing
-    url: https://github.com/pricing
-  - type: GitHubOrganization
-    url: https://github.com/github
-  - type: Portal
-    url: https://docs.github.com/en/rest
-  - type: Documentation
-    url: https://docs.github.com/en/actions
-  - type: Signup
-    url: https://github.com/signup
-  - type: Login
-    url: https://github.com/login
-  - type: DeveloperPortal
-    url: https://developer.github.com/
-  - type: Marketplace
-    url: https://github.com/marketplace?type=actions
-  - type: StackOverflow
-    url: https://stackoverflow.com/questions/tagged/github-actions
-  - type: YouTube
-    url: https://www.youtube.com/github
-  - type: SDKs
-    url: https://github.com/octokit/octokit.js
-    title: JavaScript SDK
-  - type: SDKs
-    url: https://github.com/octokit/octokit.rb
-    title: Ruby SDK
-  - type: SDKs
-    url: https://github.com/octokit/octokit.net
-    title: .NET SDK
-  - type: SDKs
-    url: https://github.com/google/go-github
-    title: Go SDK
-  - type: CLI
-    url: https://cli.github.com/
-  - type: GettingStarted
-    url: https://docs.github.com/en/rest/quickstart
-  - type: Security
-    url: https://docs.github.com/en/actions/security-for-github-actions
-  - type: JSONLD
-    url: json-ld/github-actions-context.jsonld
-  - type: JSONSchema
-    url: json-schema/github-actions-workflow-schema.json
-  - type: JSONSchema
-    url: json-schema/github-actions-run-schema.json
-  - type: JSONSchema
-    url: json-schema/github-actions-job-schema.json
-  - type: JSONSchema
-    url: json-schema/github-actions-artifact-schema.json
-  - type: JSONSchema
-    url: json-schema/github-actions-secret-schema.json
-  - type: JSONSchema
-    url: json-schema/github-actions-runner-schema.json
-  - type: JSONSchema
-    url: json-schema/github-actions-variable-schema.json
-  - type: JSONSchema
-    url: json-schema/github-actions-cache-schema.json
-  - type: JSONSchema
-    url: json-schema/github-actions-simple-user-schema.json
-  - type: Features
-    data:
-      - Automated CI/CD workflows triggered by repository events
-      - Matrix builds across multiple OS and language versions
-      - Reusable workflows and composite actions
-      - Encrypted secrets and variables at repo, org, and environment scopes
-      - Self-hosted and GitHub-hosted runner management
-      - Workflow artifact storage and sharing
-      - Deployment protection rules and environment approvals
-      - OIDC integration for cloud provider authentication
-      - Dependency caching for faster builds
-      - Runner groups for organizational access control
-  - type: UseCases
-    data:
-      - Continuous integration and testing on every push or pull request
-      - Automated deployment to cloud environments
-      - Scheduled maintenance and cleanup workflows
-      - Building and publishing container images
-      - Automated code quality and security scanning
-      - Release management and artifact publishing
-  - type: Integrations
-    data:
-      - AWS (via OIDC)
-      - Azure (via OIDC)
-      - Google Cloud (via OIDC)
-      - Docker Hub
-      - npm
-      - PyPI
-      - Slack
-      - Jira
-  - type: LlmsText
-    url: https://docs.github.com/llms.txt
-  - type: LLMsTxt
-    url: llms/github-actions-llms.txt
-  - type: Packages
-    url: packages/github-actions-packages.yml
-  - type: WellKnown
-    url: well-known/github-actions-well-known.yml
-  - type: SecurityTxt
-    url: well-known/github-actions-security.txt
-  - type: MCPServer
-    url: mcp/github-actions-mcp.yml
-  - type: Overlay
-    url: overlays/github-actions-openapi-overlay.yaml
-  - type: Conformance
-    url: conformance/github-actions-conformance.yml
-  - type: ErrorCatalog
-    url: errors/github-actions-error-codes.yml
-  - type: Lifecycle
-    url: lifecycle/github-actions-lifecycle.yml
-  - type: OAuthScopes
-    url: scopes/github-actions-scopes.yml
-  - type: DomainSecurity
-    url: security/github-actions-domain-security.yml
-  - type: VulnerabilityDisclosure
-    url: security/github-actions-vulnerability-disclosure.yml
-  - type: TrustCenter
-    url: security/github-actions-trust-center.yml
-  - type: Conventions
-    url: conventions/github-actions-conventions.yml
-  - type: ChangeLog
-    url: changelog/github-actions-changelog.yml
-  - type: CLI
-    url: cli/github-actions-cli.yml
-  - type: DataModel
-    url: data-model/github-actions-data-model.yml
+- type: Website
+  url: https://github.blog
+- type: CapabilityMap
+  url: capabilities/github-actions-capability-edges.yml
+  name: GitHub Actions Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/github-actions-agentic-access.yml
+- type: Authentication
+  url: authentication/github-actions-authentication.yml
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/github-actions/overview
+- type: Arazzo
+  url: arazzo/github-actions-approve-pending-deployment-workflow.yml
+  name: GitHub Actions Approve a Pending Deployment
+- type: Arazzo
+  url: arazzo/github-actions-cancel-run-workflow.yml
+  name: GitHub Actions Cancel a Workflow Run and Confirm
+- type: Arazzo
+  url: arazzo/github-actions-collect-run-artifacts-workflow.yml
+  name: GitHub Actions Collect Workflow Run Artifacts
+- type: Arazzo
+  url: arazzo/github-actions-dispatch-and-track-run-workflow.yml
+  name: GitHub Actions Dispatch and Track a Workflow Run
+- type: Arazzo
+  url: arazzo/github-actions-inspect-failed-job-logs-workflow.yml
+  name: GitHub Actions Inspect Failed Job Logs
+- type: Arazzo
+  url: arazzo/github-actions-prune-repo-caches-workflow.yml
+  name: GitHub Actions Prune Repository Caches
+- type: Arazzo
+  url: arazzo/github-actions-register-runner-workflow.yml
+  name: GitHub Actions Register a Self-hosted Runner
+- type: Arazzo
+  url: arazzo/github-actions-rerun-failed-run-workflow.yml
+  name: GitHub Actions Re-run Failed Jobs and Track
+- type: Arazzo
+  url: arazzo/github-actions-share-org-secret-workflow.yml
+  name: GitHub Actions Share an Organization Secret with Selected Repositories
+- type: Arazzo
+  url: arazzo/github-actions-upsert-repo-secret-workflow.yml
+  name: GitHub Actions Upsert a Repository Secret
+- type: Arazzo
+  url: arazzo/github-actions-upsert-repo-variable-workflow.yml
+  name: GitHub Actions Upsert a Repository Variable
+- type: TermsOfService
+  url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+- type: PrivacyPolicy
+  url: https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement
+- type: RateLimits
+  url: https://docs.github.com/en/rest/overview/rate-limits-for-the-rest-api
+- type: Blog
+  url: https://github.blog/category/product/actions/
+- type: StatusPage
+  url: https://www.githubstatus.com
+- type: ChangeLog
+  url: https://github.blog/changelog/label/actions/
+- type: GettingStarted
+  url: https://docs.github.com/en/actions/get-started/quickstart
+- type: Authentication
+  url: https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api
+- type: Support
+  url: https://support.github.com
+- type: Pricing
+  url: https://github.com/pricing
+- type: GitHubOrganization
+  url: https://github.com/github
+- type: Portal
+  url: https://docs.github.com/en/rest
+- type: Documentation
+  url: https://docs.github.com/en/actions
+- type: Signup
+  url: https://github.com/signup
+- type: Login
+  url: https://github.com/login
+- type: DeveloperPortal
+  url: https://developer.github.com/
+- type: Marketplace
+  url: https://github.com/marketplace?type=actions
+- type: StackOverflow
+  url: https://stackoverflow.com/questions/tagged/github-actions
+- type: YouTube
+  url: https://www.youtube.com/github
+- type: SDKs
+  url: https://github.com/octokit/octokit.js
+  title: JavaScript SDK
+- type: SDKs
+  url: https://github.com/octokit/octokit.rb
+  title: Ruby SDK
+- type: SDKs
+  url: https://github.com/octokit/octokit.net
+  title: .NET SDK
+- type: SDKs
+  url: https://github.com/google/go-github
+  title: Go SDK
+- type: CLI
+  url: https://cli.github.com/
+- type: GettingStarted
+  url: https://docs.github.com/en/rest/quickstart
+- type: Security
+  url: https://docs.github.com/en/actions/security-for-github-actions
+- type: JSONLD
+  url: json-ld/github-actions-context.jsonld
+- type: JSONSchema
+  url: json-schema/github-actions-workflow-schema.json
+- type: JSONSchema
+  url: json-schema/github-actions-run-schema.json
+- type: JSONSchema
+  url: json-schema/github-actions-job-schema.json
+- type: JSONSchema
+  url: json-schema/github-actions-artifact-schema.json
+- type: JSONSchema
+  url: json-schema/github-actions-secret-schema.json
+- type: JSONSchema
+  url: json-schema/github-actions-runner-schema.json
+- type: JSONSchema
+  url: json-schema/github-actions-variable-schema.json
+- type: JSONSchema
+  url: json-schema/github-actions-cache-schema.json
+- type: JSONSchema
+  url: json-schema/github-actions-simple-user-schema.json
+- type: Features
+  data:
+  - Automated CI/CD workflows triggered by repository events
+  - Matrix builds across multiple OS and language versions
+  - Reusable workflows and composite actions
+  - Encrypted secrets and variables at repo, org, and environment scopes
+  - Self-hosted and GitHub-hosted runner management
+  - Workflow artifact storage and sharing
+  - Deployment protection rules and environment approvals
+  - OIDC integration for cloud provider authentication
+  - Dependency caching for faster builds
+  - Runner groups for organizational access control
+- type: UseCases
+  data:
+  - Continuous integration and testing on every push or pull request
+  - Automated deployment to cloud environments
+  - Scheduled maintenance and cleanup workflows
+  - Building and publishing container images
+  - Automated code quality and security scanning
+  - Release management and artifact publishing
+- type: Integrations
+  data:
+  - AWS (via OIDC)
+  - Azure (via OIDC)
+  - Google Cloud (via OIDC)
+  - Docker Hub
+  - npm
+  - PyPI
+  - Slack
+  - Jira
+- type: LlmsText
+  url: https://docs.github.com/llms.txt
+- type: LLMsTxt
+  url: llms/github-actions-llms.txt
+- type: Packages
+  url: packages/github-actions-packages.yml
+- type: WellKnown
+  url: well-known/github-actions-well-known.yml
+- type: SecurityTxt
+  url: well-known/github-actions-security.txt
+- type: MCPServer
+  url: mcp/github-actions-mcp.yml
+- type: Overlay
+  url: overlays/github-actions-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/github-actions-conformance.yml
+- type: ErrorCatalog
+  url: errors/github-actions-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/github-actions-lifecycle.yml
+- type: OAuthScopes
+  url: scopes/github-actions-scopes.yml
+- type: DomainSecurity
+  url: security/github-actions-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/github-actions-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/github-actions-trust-center.yml
+- type: Conventions
+  url: conventions/github-actions-conventions.yml
+- type: ChangeLog
+  url: changelog/github-actions-changelog.yml
+- type: CLI
+  url: cli/github-actions-cli.yml
+- type: DataModel
+  url: data-model/github-actions-data-model.yml
