@@ -1,6 +1,18 @@
 name: GitHub Actions
 x-parent: github
-description: APIs for GitHub Actions - automation and CI/CD platform.
+description: >-
+  GitHub Actions is GitHub's hosted CI/CD and workflow automation platform, and
+  this record covers the REST API surface that drives it. Eighty-two operations
+  across eleven resource areas let a caller dispatch and cancel workflow runs,
+  poll runs and jobs, read and prune logs, artifacts and caches, seal and rotate
+  encrypted secrets and variables, set Actions permissions and default workflow
+  token scopes, customize the OIDC subject claim used for cloud federation, and
+  register, label and retire self-hosted runners and runner groups. The API is
+  authenticated with bearer tokens (fine-grained or classic PATs, OAuth user
+  tokens, GitHub App installation tokens, or the workflow's own GITHUB_TOKEN),
+  versioned by a dated X-GitHub-Api-Version header, rate limited per hour by
+  authentication method, and paired with a nine-event webhook surface that
+  carries the run and job lifecycle plus the deployment approval callback.
 deliveryModel:
   model: saas
   open_source: false
@@ -31,7 +43,20 @@ accessModel:
 image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 url: https://docs.github.com/en/rest/actions
 created: '2024'
-modified: '2026-09-16'
+tags:
+- CI/CD
+- Continuous Integration
+- Continuous Deployment
+- DevOps
+- Pipelines
+- Workflows
+- Automation
+- Developer Tools
+- Software Development
+- Build Automation
+- T1
+- GitHub
+modified: '2026-09-17'
 specificationVersion: '0.23'
 apis:
 - aid: github-actions:github-actions-artifacts-api
@@ -44,6 +69,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-artifacts-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-artifacts-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -96,6 +123,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-cache-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-cache-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -150,6 +179,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-jobs-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-jobs-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -202,6 +233,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-oidc-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-oidc-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -254,6 +287,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-permissions-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-permissions-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -306,6 +341,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-secrets-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-secrets-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -358,6 +395,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-self-hosted-runner-groups-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-self-hosted-runner-groups-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -410,6 +449,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-self-hosted-runners-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-self-hosted-runners-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -462,6 +503,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-variables-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-variables-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -514,6 +557,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-workflow-runs-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-workflow-runs-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -566,6 +611,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/github-actions-workflows-api-openapi.yml
+  - type: Overlay
+    url: overlays/github-actions-workflows-api-overlay.yaml
   - type: Documentation
     url: https://docs.github.com/en/rest/actions
   - type: Authentication
@@ -609,7 +656,8 @@ apis:
   - type: JSONLD
     url: json-ld/github-actions-context.jsonld
 maintainers:
-- type: GitHub
+- FN: GitHub Support
+  type: GitHub
   name: GitHub, Inc.
   url: https://github.com
   email: support@github.com
@@ -617,7 +665,7 @@ maintainers:
   email: kin@apievangelist.com
 common:
 - type: Website
-  url: https://github.blog
+  url: https://github.com
 - type: CapabilityMap
   url: capabilities/github-actions-capability-edges.yml
   name: GitHub Actions Business Capability Map
@@ -667,7 +715,7 @@ common:
 - type: RateLimits
   url: https://docs.github.com/en/rest/overview/rate-limits-for-the-rest-api
 - type: Blog
-  url: https://github.blog/category/product/actions/
+  url: https://github.blog/tag/github-actions/
 - type: StatusPage
   url: https://www.githubstatus.com
 - type: ChangeLog
@@ -778,8 +826,6 @@ common:
   url: well-known/github-actions-security.txt
 - type: MCPServer
   url: mcp/github-actions-mcp.yml
-- type: Overlay
-  url: overlays/github-actions-openapi-overlay.yaml
 - type: Conformance
   url: conformance/github-actions-conformance.yml
 - type: ErrorCatalog
@@ -802,3 +848,57 @@ common:
   url: cli/github-actions-cli.yml
 - type: DataModel
   url: data-model/github-actions-data-model.yml
+- type: Webhooks
+  url: asyncapi/github-actions-webhooks.yml
+  name: GitHub Actions webhook event catalog
+- type: AgentSkill
+  url: skills/_index.yml
+  name: GitHub Actions Agent Skills
+- type: ToolCrosswalk
+  url: mcp/github-actions-tool-crosswalk.yml
+  name: MCP tool to REST operation crosswalk
+- type: Plans
+  url: plans/github-actions-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/github-actions-rate-limits.yml
+  name: Published rate limits (structured)
+- type: Vocabulary
+  url: vocabulary/github-actions-vocabulary.yaml
+- type: SpectralRules
+  url: rules/github-actions-spectral-rules.yml
+- type: SpectralRules
+  url: rules/github-actions-jsonschema-spectral-rules.yml
+- type: FinOps
+  url: finops/github-actions-finops.yml
+- type: Deprecation
+  url: https://docs.github.com/en/rest/about-the-rest-api/api-versions
+  name: REST API versions and deprecation policy
+- type: Compliance
+  url: https://github.com/trust-center
+  name: GitHub Trust Center — SOC, ISO and FedRAMP reporting
+- type: Roadmap
+  url: https://github.com/orgs/github/projects/4247
+  name: GitHub Public Roadmap
+- type: Postman
+  url: https://www.postman.com/kinlaneapi/github-actions/overview
+- type: Examples
+  url: examples/github-actions-workflow-run-example.json
+- type: Examples
+  url: examples/github-actions-job-example.json
+- type: Examples
+  url: examples/github-actions-artifact-example.json
+- type: Examples
+  url: examples/github-actions-actions-secret-example.json
+- type: Examples
+  url: examples/github-actions-self-hosted-runner-example.json
+- type: WellKnown
+  url: well-known/github-actions-oauth-protected-resource.json
+  name: RFC 9728 protected-resource metadata for the GitHub MCP server
+- type: WellKnown
+  url: well-known/github-actions-oauth-authorization-server.json
+  name: RFC 8414 authorization-server metadata for github.com/login/oauth
+x-enrichment:
+  date: '2026-09-17'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v3
