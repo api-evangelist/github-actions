@@ -1,17 +1,7 @@
 {
   "provider": "github-actions",
   "sources": [
-    "github-actions-artifacts-api-openapi.yml",
-    "github-actions-cache-api-openapi.yml",
-    "github-actions-jobs-api-openapi.yml",
-    "github-actions-oidc-api-openapi.yml",
-    "github-actions-permissions-api-openapi.yml",
-    "github-actions-secrets-api-openapi.yml",
-    "github-actions-self-hosted-runner-groups-api-openapi.yml",
-    "github-actions-self-hosted-runners-api-openapi.yml",
-    "github-actions-variables-api-openapi.yml",
-    "github-actions-workflow-runs-api-openapi.yml",
-    "github-actions-workflows-api-openapi.yml"
+    "_original/github-actions-openapi.yml"
   ],
   "outputs": [
     "github-actions-artifacts-api-openapi.yml",
@@ -29,6 +19,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "github-actions-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "github-actions-artifacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-cache-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-oidc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-permissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-secrets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-self-hosted-runner-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-self-hosted-runners-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-variables-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-workflow-runs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "github-actions-workflows-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

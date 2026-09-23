@@ -1,20 +1,32 @@
-generated: '2026-06-20'
+generated: '2026-09-17'
 method: probed
-source: live DNS/TLS/HTTP probes of the GitHub API, docs and web hosts
+source: live DNS/TLS/HTTP probes of the GitHub API, docs, web and MCP hosts
 description: >-
   Manual probe of GitHub's hosts. The shared probe-domain-security.py excludes
   github.com as a domain (it is treated as a code-host for other providers), so
-  these values were captured directly with dig / openssl / HTTP HEAD.
+  these values were captured directly with openssl s_client, dig and an HTTP
+  HEAD on 2026-09-17. api.githubcopilot.com is new this round — it is the host
+  that serves GitHub's MCP server and its RFC 9728 protected-resource document,
+  and it was not in the probe set before.
 hosts:
-  - {host: api.github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-09-29', hsts: true, hsts_max_age: 31536000, hsts_preload: true, hsts_include_subdomains: true}
-  - {host: docs.github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-09-02', hsts: true, hsts_max_age: 31557600, hsts_preload: false}
-  - {host: github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-09-30', hsts: true, hsts_max_age: 31536000, hsts_preload: true, hsts_include_subdomains: true}
+  - {host: api.github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-11-27', cert_issuer: Sectigo Public Server Authentication CA DV E36, hsts: true, hsts_max_age: 31536000, hsts_preload: true, hsts_include_subdomains: true}
+  - {host: docs.github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-10-31', cert_issuer: Let's Encrypt YR1, hsts: true, hsts_max_age: 31557600, hsts_preload: false, hsts_include_subdomains: false}
+  - {host: github.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-11-29', cert_issuer: Sectigo Public Server Authentication CA DV E36, hsts: true, hsts_max_age: 31536000, hsts_preload: true, hsts_include_subdomains: true}
+  - {host: api.githubcopilot.com, https: true, tls_version: TLSv1.3, cert_not_after: '2026-10-28', cert_issuer: Sectigo Public Server Authentication CA DV R36, hsts: false, note: 'No Strict-Transport-Security header was returned on the root; the host answers 404 at / and serves only the MCP surface.'}
 domains:
   - domain: github.com
     dnssec: false
-    caa: ['globalsign.com', 'letsencrypt.org', 'sectigo.com', 'digicert.com']
+    dnssec_note: No RRSIG records returned for github.com with +dnssec on 2026-09-17.
+    caa: ['digicert.com', 'globalsign.com', 'letsencrypt.org', 'sectigo.com']
     caa_wildcard: ['digicert.com', 'letsencrypt.org', 'sectigo.com']
     spf: true
+    spf_policy: ~all
+    spf_note: >-
+      v=spf1 with ip4 ranges plus includes for Outlook, Google, Zendesk,
+      Salesforce, Mailchimp (servers.mcsv.net), Marketo and SendGrid, ending
+      ~all (softfail) rather than -all.
     dmarc: true
     dmarc_policy: quarantine
     dmarc_subdomain_policy: reject
+    dmarc_pct: 100
+    dmarc_rua: mailto:dmarc@github.com

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: GitHub Actions Artifacts OIDC API
+  title: GitHub Actions OIDC API
   description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
   version: 1.0.0
   contact:
@@ -22,7 +22,7 @@ paths:
   /repos/{owner}/{repo}/actions/oidc/customization/sub:
     get:
       operationId: getCustomOidcSubClaimForRepo
-      summary: Github Actions Get the Customization Template for an Oidc Subject Claim for a Repository
+      summary: Github Actions Get the Customization Template for an Oidc Subject Claim for a…
       description: Gets the customization template for an OpenID Connect (OIDC) subject claim.
       tags:
       - OIDC
@@ -49,7 +49,7 @@ paths:
         dispatcher: FALLBACK
     put:
       operationId: setCustomOidcSubClaimForRepo
-      summary: Github Actions Set the Customization Template for an Oidc Subject Claim for a Repository
+      summary: Github Actions Set the Customization Template for an Oidc Subject Claim for a…
       description: Sets the customization template for an OpenID Connect (OIDC) subject claim.
       tags:
       - OIDC
@@ -79,7 +79,7 @@ paths:
   /orgs/{org}/actions/oidc/customization/sub:
     get:
       operationId: getCustomOidcSubClaimForOrg
-      summary: Github Actions Get the Customization Template for an Oidc Subject Claim for an Organization
+      summary: Github Actions Get the Customization Template for an Oidc Subject Claim for an…
       description: Gets the customization template for an OpenID Connect (OIDC) subject claim for an organization.
       tags:
       - OIDC
@@ -104,7 +104,7 @@ paths:
         dispatcher: FALLBACK
     put:
       operationId: setCustomOidcSubClaimForOrg
-      summary: Github Actions Set the Customization Template for an Oidc Subject Claim for an Organization
+      summary: Github Actions Set the Customization Template for an Oidc Subject Claim for an…
       description: Creates or updates the customization template for an OpenID Connect (OIDC) subject claim for an organization.
       tags:
       - OIDC

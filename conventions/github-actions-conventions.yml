@@ -1,4 +1,4 @@
-generated: '2026-06-20'
+generated: '2026-09-17'
 method: searched
 source: >-
   https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api
@@ -26,8 +26,155 @@ media_type:
 
 idempotency:
   supported: false
-  mechanism: none (no client-supplied Idempotency-Key header)
-  notes: PUT and DELETE operations are idempotent by HTTP semantics; POST operations are not.
+  coverage: none
+  mechanism: none (no client-supplied Idempotency-Key header anywhere on the REST API)
+  scope: []
+  notes: >-
+    PUT and DELETE operations are idempotent by HTTP semantics, but that is a
+    property of the verb, not replay protection the API offers. The mutating
+    operations that actually matter to an agent are POSTs and they are NOT
+    replay-safe: createWorkflowDispatch starts a second run on a blind retry,
+    rerunWorkflowRun and rerunFailedJobs start a second attempt, and
+    reviewPendingDeployments casts a second review. There is no request id an
+    agent can present to make a retry safe.
+  agent_guidance: >-
+    Retry by READING, not by re-posting. After an ambiguous POST, list the
+    affected resource (listWorkflowRuns filtered on ref/event, or
+    getWorkflowRunApprovals) and confirm whether the effect already landed
+    before sending the request again.
+  docs: https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api
+
+dry_run_mode:
+  supported: false
+  coverage: none
+  notes: >-
+    No REST operation accepts a dry-run / validate-only / preview flag. An agent
+    cannot rehearse a dispatch, a re-run or a deployment review. The nearest
+    approximation is running the workflow against a throwaway branch, which is a
+    real run with real side effects, not a rehearsal.
+
+reversibility:
+  coverage: partial
+  grade: verified
+  notes: >-
+    Reversal is uneven across the write surface and the boundary matters: run
+    execution is cancellable inside a window, configuration writes are
+    overwritable, and deletions of secrets, artifacts, caches and runners are
+    permanent with no restore path at all.
+  surfaces:
+    - write: createWorkflowDispatch
+      reversal: cancelWorkflowRun
+      escalation: forceCancelWorkflowRun
+      window: >-
+        Only while the run is queued or in_progress. Once status is completed
+        there is no reversal, and side effects the run already produced
+        (deployments, published packages, pushed commits) are outside GitHub's
+        ability to undo regardless.
+      docs: https://docs.github.com/en/rest/actions/workflow-runs
+      grade: verified
+    - write: rerunWorkflowRun / rerunFailedJobs / rerunJobForWorkflowRun
+      reversal: cancelWorkflowRun
+      window: while the new attempt is queued or in_progress
+      note: >-
+        A re-run creates a new ATTEMPT on the same run id. The previous attempt
+        is not destroyed — getWorkflowRunAttempt and
+        listJobsForWorkflowRunAttempt still read it — so the history is
+        recoverable even though the execution is not.
+      grade: verified
+    - write: reviewPendingDeployments (state=approved)
+      reversal: none
+      window: none
+      note: >-
+        An approval cannot be revoked. There is no un-approve operation. The
+        only remaining lever is cancelling the run that is now deploying, which
+        may be too late. This is the highest-consequence irreversible write in
+        the API and the reason the matching Agent Skill requires explicit human
+        confirmation.
+      grade: verified
+    - write: reviewCustomGatesForRun
+      reversal: none
+      window: none
+      note: A custom-gate decision is final for that deployment, same as a reviewer approval.
+      grade: verified
+    - write: createOrUpdateRepoSecret / createOrUpdateOrgSecret
+      reversal: overwrite with the previous value
+      window: >-
+        Unbounded, BUT only if the caller still holds the plaintext. The API
+        never returns a secret value, so there is nothing to restore FROM — the
+        previous value is unrecoverable from GitHub.
+      grade: documented
+    - write: deleteRepoSecret / deleteOrgSecret
+      reversal: none
+      window: none
+      note: No trash, no restore window. The value must be re-sealed from a copy held elsewhere.
+      grade: verified
+    - write: createRepoVariable / updateRepoVariable
+      reversal: updateRepoVariable
+      window: unbounded — variable values ARE readable via getRepoVariable, so the prior value can be captured before writing
+      grade: verified
+    - write: deleteRepoVariable
+      reversal: createRepoVariable
+      window: unbounded, if the value was read first
+      grade: verified
+    - write: setGithubActionsPermissionsRepo / setGithubActionsPermissionsOrg / setGithubActionsDefaultWorkflowPermissionsRepo
+      reversal: the matching set* operation
+      window: unbounded — read the current state with the matching get* operation first and it is fully restorable
+      grade: verified
+    - write: setCustomOidcSubClaimForRepo / setCustomOidcSubClaimForOrg
+      reversal: the matching set* operation with the prior template
+      window: unbounded, if the prior template was read with the matching get* operation first
+      grade: verified
+    - write: setCustomLabelsForSelfHostedRunnerForRepo
+      reversal: setCustomLabelsForSelfHostedRunnerForRepo with the prior label set
+      window: >-
+        Unbounded, but the PUT overwrites the whole custom label set and does
+        not return the old one — read listLabelsForSelfHostedRunnerForRepo first
+        or the prior set is lost.
+      grade: verified
+    - write: addCustomLabelsToSelfHostedRunnerForRepo
+      reversal: removeCustomLabelFromSelfHostedRunnerForRepo / removeAllCustomLabelsFromSelfHostedRunnerForRepo
+      window: unbounded
+      grade: verified
+    - write: deleteSelfHostedRunnerFromRepo
+      reversal: none
+      window: >-
+        None. Re-adding the machine requires a fresh registration token from
+        createRegistrationTokenForRepo and a re-run of config.sh on the host.
+      grade: verified
+    - write: deleteArtifact
+      reversal: none
+      window: none
+      note: >-
+        Permanent and immediate. Unrelated to the 90-day retention expiry, which
+        is also irreversible.
+      grade: verified
+    - write: deleteActionsCacheById / deleteActionsCacheByKey
+      reversal: none
+      window: none
+      note: Permanent, but cheap in practice — the next run repopulates the cache more slowly.
+      grade: verified
+    - write: deleteWorkflowRun / deleteWorkflowRunLogs
+      reversal: none
+      window: none
+      note: A deleted run and its logs are gone from the API and the UI.
+      grade: verified
+    - write: disableWorkflow
+      reversal: enableWorkflow
+      window: unbounded — a fully symmetric pair
+      grade: verified
+    - write: deleteSelfHostedRunnerGroupFromOrg
+      reversal: none
+      window: none
+      note: Re-create with createSelfHostedRunnerGroupForOrg and re-assign its runners and repositories by hand.
+      grade: verified
+  summary:
+    reversible_writes: 9
+    irreversible_writes: 9
+    conditionally_reversible: 3
+    note: >-
+      Conditionally reversible means the operation CAN be undone, but only if
+      the caller read the prior state before writing — the API offers no history
+      to read it back from afterwards.
 
 pagination:
   style: page-number

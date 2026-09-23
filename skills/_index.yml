@@ -1,0 +1,55 @@
+generated: '2026-09-17'
+method: generated
+source: >-
+  Packaged Agent Skills generated from this repo's openapi/*.yml and the eleven
+  native Arazzo workflows in ../arazzo/. Every operationId in every skill was
+  verified verbatim against the specs before the file was written; cross-cutting
+  rules cite ../conventions/, ../errors/, ../authentication/, ../scopes/,
+  ../rate-limits/, ../lifecycle/ and ../asyncapi/.
+description: >-
+  Six skills covering the marquee GitHub Actions flows, chosen to span the whole
+  consequence range: two are read-only (diagnose, collect), three mutate
+  configuration or capacity, and one — approve a pending deployment — releases
+  code to an environment and cannot be taken back. Each skill carries the
+  reversibility of its own write surface, because the API has no
+  Idempotency-Key header and several of its deletes are permanent.
+skills:
+  - file: github-actions-dispatch-and-track-run.md
+    name: Dispatch a workflow and track the run
+    api: openapi/github-actions-workflows-api-openapi.yml
+    consequence: write
+    operations: [createWorkflowDispatch, listWorkflowRuns, getWorkflowRun, listJobsForWorkflowRun]
+  - file: github-actions-inspect-failed-run.md
+    name: Diagnose a failed workflow run
+    api: openapi/github-actions-workflow-runs-api-openapi.yml
+    consequence: read-only
+    operations: [listWorkflowRunsForRepo, listJobsForWorkflowRun, getJobForWorkflowRun, downloadJobLogsForWorkflowRun, downloadWorkflowRunLogs]
+  - file: github-actions-upsert-repo-secret.md
+    name: Store a repository secret
+    api: openapi/github-actions-secrets-api-openapi.yml
+    consequence: write-credential
+    operations: [getRepoPublicKey, createOrUpdateRepoSecret, getRepoSecret, listRepoSecrets, deleteRepoSecret]
+  - file: github-actions-approve-pending-deployment.md
+    name: Approve a pending deployment
+    api: openapi/github-actions-workflow-runs-api-openapi.yml
+    consequence: irreversible
+    operations: [getWorkflowRun, getPendingDeployments, reviewPendingDeployments, getWorkflowRunApprovals, reviewCustomGatesForRun, cancelWorkflowRun]
+  - file: github-actions-manage-self-hosted-runners.md
+    name: Register and manage a self-hosted runner
+    api: openapi/github-actions-self-hosted-runners-api-openapi.yml
+    consequence: write-infrastructure
+    operations: [listRunnerApplicationsForRepo, createRegistrationTokenForRepo, listSelfHostedRunnersForRepo, getSelfHostedRunnerForRepo, addCustomLabelsToSelfHostedRunnerForRepo, setCustomLabelsForSelfHostedRunnerForRepo, createRemoveTokenForRepo, deleteSelfHostedRunnerFromRepo]
+  - file: github-actions-collect-run-artifacts.md
+    name: Collect artifacts from a workflow run
+    api: openapi/github-actions-artifacts-api-openapi.yml
+    consequence: read-then-destructive
+    operations: [listWorkflowRunsForRepo, listWorkflowRunArtifacts, getArtifact, downloadArtifact, listArtifactsForRepo, deleteArtifact, getActionsCacheUsage, listActionsCaches, deleteActionsCacheById]
+skill_count: 6
+provider_published:
+  searched: true
+  found: false
+  note: >-
+    GitHub publishes no AGENTS.md or Agent Skills package for the Actions REST
+    API. It does ship an MCP server (mcp/github-actions-mcp.yml), which covers
+    only 17 of the 82 REST operations — see mcp/github-actions-tool-crosswalk.yml.
+    These skills are generated, not harvested, and are marked as such.

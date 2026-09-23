@@ -1,11 +1,27 @@
-generated: '2026-06-20'
+generated: '2026-09-17'
 method: searched
-source: https://docs.github.com/en/rest/overview/libraries-for-the-rest-api
+source: >-
+  https://docs.github.com/en/rest/about-the-rest-api/libraries-for-the-rest-api
+  plus live registry metadata reads on 2026-09-17 —
+  registry.npmjs.org, rubygems.org/api/v1, api.nuget.org/v3,
+  proxy.golang.org, pypi.org/pypi and the GitHub releases API.
 description: >-
   First-party GitHub client libraries (the Octokit family) plus the official
-  GitHub CLI, all of which cover the Actions REST API surface. Verified against
-  the public package registries. GitHub does not ship a first-party Python SDK;
-  PyGithub is the widely used community library and is marked official: false.
+  GitHub CLI, all of which cover the Actions REST API surface. Versions and
+  publication dates below were read from each registry's own metadata endpoint,
+  not from the docs. GitHub ships no first-party Python SDK; PyGithub is the
+  widely used community library and is marked official: false.
+currency_finding: >-
+  The three SDKs GitHub itself maintains have all gone quiet while the API they
+  wrap keeps shipping. octokit (npm) and @octokit/rest last published
+  2025-10-31, ten and a half months ago; octokit.rb last shipped 2025-04-24,
+  nearly seventeen months ago; Octokit .NET last shipped 2025-01-08, over
+  twenty months ago. Over the same window go-github — maintained by Google, not
+  GitHub — released majors v74 through v92, the latest on 2026-09-14, and the
+  GitHub CLI shipped v2.101.0 on 2026-09-15. So the gap is not GitHub-wide
+  neglect; it is specific to the Octokit SDK family, and it is the strongest
+  decay signal available on this provider because it is provider-published and
+  reliably dated.
 packages:
   - language: javascript
     registry: npm
@@ -14,7 +30,12 @@ packages:
     source: https://github.com/octokit/octokit.js
     install: npm install octokit
     official: true
-    note: All-batteries-included Octokit SDK for browser, Node.js and Deno.
+    version: 5.0.5
+    published: '2025-10-31'
+    note: >-
+      All-batteries-included Octokit SDK for browser, Node.js and Deno. Read
+      from registry.npmjs.org dist-tags.latest; the package's `modified`
+      timestamp is the same date, so nothing has been published on any tag since.
   - language: javascript
     registry: npm
     name: "@octokit/rest"
@@ -22,6 +43,8 @@ packages:
     source: https://github.com/octokit/rest.js
     install: npm install @octokit/rest
     official: true
+    version: 22.0.1
+    published: '2025-10-31'
   - language: ruby
     registry: rubygems
     name: octokit
@@ -29,6 +52,8 @@ packages:
     source: https://github.com/octokit/octokit.rb
     install: gem install octokit
     official: true
+    version: 10.0.0
+    published: '2025-04-24'
   - language: dotnet
     registry: nuget
     name: Octokit
@@ -36,14 +61,23 @@ packages:
     source: https://github.com/octokit/octokit.net
     install: dotnet add package Octokit
     official: true
+    version: 14.0.0
+    published: '2025-01-08'
+    note: Read from the NuGet v3 registration catalog entry for the latest stable version.
   - language: go
     registry: pkg.go.dev
     name: github.com/google/go-github
-    url: https://pkg.go.dev/github.com/google/go-github/v74/github
+    url: https://pkg.go.dev/github.com/google/go-github/v92/github
     source: https://github.com/google/go-github
-    install: go get github.com/google/go-github/v74/github
+    install: go get github.com/google/go-github/v92/github
     official: true
-    note: Maintained by Google; the de-facto official Go client referenced by GitHub docs.
+    version: v92.0.0
+    published: '2026-09-14'
+    note: >-
+      Maintained by Google; the de-facto official Go client referenced by
+      GitHub's own docs. Version read from proxy.golang.org/@latest. The module
+      path carries the major version, so an entry pinned at v74 (as this file
+      previously recorded) points consumers eighteen majors behind.
   - language: cli
     registry: homebrew
     name: gh
@@ -51,7 +85,41 @@ packages:
     source: https://github.com/cli/cli
     install: brew install gh
     official: true
-    note: Official GitHub CLI; command surface catalogued in cli/github-actions-cli.yml.
+    version: v2.101.0
+    published: '2026-09-15'
+    note: >-
+      Official GitHub CLI; command surface catalogued in
+      cli/github-actions-cli.yml. Homebrew has no unauthenticated metadata
+      endpoint for a formula version, so the version here is the upstream
+      release tag from the GitHub releases API, which is what the formula tracks.
+  - language: go
+    registry: ghcr
+    name: github/github-mcp-server
+    url: https://github.com/github/github-mcp-server
+    source: https://github.com/github/github-mcp-server
+    install: docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server
+    official: true
+    version: v1.12.2
+    published: '2026-09-16'
+    note: >-
+      Not an SDK — the self-hosted build of GitHub's MCP server, the local half
+      of the `both` deployment recorded in mcp/github-actions-mcp.yml. Version
+      from the GitHub releases API; the container image itself is distributed
+      through ghcr.io, which has no unauthenticated version metadata endpoint.
+  - language: javascript
+    registry: npm
+    name: "@octokit/webhooks-schemas"
+    url: https://www.npmjs.com/package/@octokit/webhooks-schemas
+    source: https://github.com/octokit/webhooks
+    install: npm install @octokit/webhooks-schemas
+    official: true
+    version: 7.6.1
+    published: '2024-10-03'
+    note: >-
+      JSON Schemas for every webhook event and action — the machine-readable
+      event contract catalogued in asyncapi/github-actions-webhooks.yml. Nearly
+      two years behind the repository it is generated from, so consumers wanting
+      current schemas read payload-schemas/ in the repo directly.
   - language: python
     registry: pypi
     name: PyGithub
@@ -59,4 +127,10 @@ packages:
     source: https://github.com/PyGithub/PyGithub
     install: pip install PyGithub
     official: false
-    note: Community-maintained; GitHub ships no first-party Python SDK.
+    version: 2.10.0
+    published: '2026-08-20'
+    note: >-
+      Community-maintained; GitHub ships no first-party Python SDK. Notably the
+      most current client library in this list bar go-github and the CLI.
+package_count: 9
+official_count: 8

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: GitHub Actions Artifacts Self-Hosted Runner Groups API
+  title: GitHub Actions Self-Hosted Runner Groups API
   description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
   version: 1.0.0
   contact:
@@ -246,13 +246,6 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
-    runnerGroupId:
-      name: runner_group_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique identifier of the self-hosted runner group.
     page:
       name: page
       in: query
@@ -260,6 +253,13 @@ components:
         type: integer
         default: 1
       description: The page number of the results to fetch.
+    runnerGroupId:
+      name: runner_group_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner group.
   schemas:
     RunnerGroup:
       type: object

@@ -1,0 +1,190 @@
+generated: '2026-09-17'
+method: derived
+source: >-
+  MCP tool + method surface read from github/github-mcp-server (README.md and
+  pkg/github/actions.go, main branch, release v1.12.2 2026-09-16); REST
+  operationIds read from this repo's openapi/*.yml. The live tools/list
+  endpoint is auth-gated (401), so the tool set was read from the server's own
+  source rather than from an authenticated introspection.
+description: >-
+  Binds every tool in the GitHub MCP server's `actions` toolset to the GitHub
+  Actions REST operations that back it, and records what each surface can do
+  that the other cannot. The headline finding: the MCP server consolidates 82
+  REST operations into FOUR tools with a `method` discriminator — 15 method
+  values in total — so 67 of the 82 REST operations have no MCP tool at all.
+  Everything the Secrets, Variables, Permissions, OIDC, Runner and Runner-Group
+  APIs do is REST-only; an agent on MCP can watch and drive workflow runs but
+  cannot manage the configuration that runs them.
+surfaces:
+  openapi:
+    files: openapi/*.yml
+    operations: 82
+    base: https://api.github.com
+    gated: false
+  mcp:
+    url: https://api.githubcopilot.com/mcp/
+    toolset: actions
+    tools: 4
+    methods: 15
+    gated: true
+    gate: 'tools/list returns 401 without an Authorization header; OAuth or PAT required'
+  graphql:
+    url: https://api.github.com/graphql
+    note: >-
+      GitHub's GraphQL API does not expose the Actions administration surface
+      (workflows, runs, jobs, secrets, runners); it is not a projection of
+      these operations and is out of scope for this crosswalk.
+crosswalk:
+  - tool: actions_list
+    method: list_workflows
+    category: discovery
+    rest: [listRepoWorkflows]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_list
+    method: list_workflow_runs
+    category: discovery
+    rest: [listWorkflowRuns, listWorkflowRunsForRepo]
+    binding: 1:n
+    confidence: high
+    note: >-
+      One method covers two REST operations — resource_id present selects the
+      per-workflow operation, omitted selects the repository-wide one.
+  - tool: actions_list
+    method: list_workflow_jobs
+    category: discovery
+    rest: [listJobsForWorkflowRun]
+    binding: '1:1'
+    confidence: high
+    note: >-
+      listJobsForWorkflowRunAttempt (per-attempt jobs) has no method; the tool
+      takes a workflow run ID only.
+  - tool: actions_list
+    method: list_workflow_run_artifacts
+    category: discovery
+    rest: [listWorkflowRunArtifacts]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_get
+    method: get_workflow
+    category: read
+    rest: [getWorkflow]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_get
+    method: get_workflow_run
+    category: read
+    rest: [getWorkflowRun]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_get
+    method: get_workflow_job
+    category: read
+    rest: [getJobForWorkflowRun]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_get
+    method: get_workflow_run_usage
+    category: read
+    rest: [getWorkflowRunUsage]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_get
+    method: get_workflow_run_logs_url
+    category: read
+    rest: [downloadWorkflowRunLogs]
+    binding: '1:1'
+    confidence: medium
+    note: >-
+      The tool returns the redirect URL rather than streaming the archive, so
+      the response shape differs from the REST 302.
+  - tool: actions_get
+    method: download_workflow_run_artifact
+    category: read
+    rest: [downloadArtifact]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_run_trigger
+    method: run_workflow
+    category: write
+    rest: [createWorkflowDispatch]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_run_trigger
+    method: rerun_workflow_run
+    category: write
+    rest: [rerunWorkflowRun]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_run_trigger
+    method: rerun_failed_jobs
+    category: write
+    rest: [rerunFailedJobs]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_run_trigger
+    method: cancel_workflow_run
+    category: write
+    rest: [cancelWorkflowRun]
+    binding: '1:1'
+    confidence: high
+  - tool: actions_run_trigger
+    method: delete_workflow_run_logs
+    category: write
+    rest: [deleteWorkflowRunLogs]
+    binding: '1:1'
+    confidence: high
+  - tool: get_job_logs
+    category: read
+    rest: [downloadJobLogsForWorkflowRun, listJobsForWorkflowRun]
+    binding: composite
+    confidence: high
+    note: >-
+      With failed_only=true the tool lists the run's jobs, filters to failures
+      and fetches each job's log — two REST operations behind one call, which
+      is the clearest case in this crosswalk of the MCP surface being more than
+      a rename of the REST one.
+mcp_only:
+  - tool: get_job_logs
+    reason: >-
+      failed_only / tail_lines / return_content have no REST equivalent — the
+      REST API returns a redirect to a full log archive, not filtered or
+      tailed content.
+rest_only:
+  - operations: [listJobsForWorkflowRunAttempt, getWorkflowRunAttempt, downloadWorkflowRunAttemptLogs]
+    reason: per-attempt run inspection has no tool
+  - operations: [rerunJobForWorkflowRun]
+    reason: >-
+      re-running a SINGLE job is REST-only; actions_run_trigger re-runs a whole
+      run or all of its failed jobs, never one named job
+  - operations: [approveWorkflowRun, getWorkflowRunApprovals, getPendingDeployments, reviewPendingDeployments, reviewCustomGatesForRun, forceCancelWorkflowRun, deleteWorkflowRun]
+    reason: >-
+      deployment approval and destructive run management are REST-only — the
+      MCP server exposes no way to approve a pending deployment or force-cancel
+      a run
+  - operations: [enableWorkflow, disableWorkflow, getWorkflowUsage]
+    reason: workflow enablement and per-workflow timing are REST-only
+  - operations: [listArtifactsForRepo, getArtifact, deleteArtifact]
+    reason: repository-wide artifact listing and artifact deletion are REST-only
+  - operations: [listActionsCaches, deleteActionsCacheByKey, deleteActionsCacheById, getActionsCacheUsage]
+    reason: the entire Cache API is REST-only
+  - operations: [listRepoSecrets, getRepoPublicKey, getRepoSecret, createOrUpdateRepoSecret, deleteRepoSecret, listRepoOrgSecrets, listOrgSecrets, getOrgPublicKey, getOrgSecret, createOrUpdateOrgSecret, deleteOrgSecret, listSelectedReposForOrgSecret, setSelectedReposForOrgSecret]
+    reason: the entire Secrets API is REST-only
+  - operations: [listRepoVariables, createRepoVariable, getRepoVariable, updateRepoVariable, deleteRepoVariable]
+    reason: the entire Variables API is REST-only
+  - operations: [getGithubActionsPermissionsRepo, setGithubActionsPermissionsRepo, getGithubActionsDefaultWorkflowPermissionsRepo, setGithubActionsDefaultWorkflowPermissionsRepo, getGithubActionsPermissionsOrg, setGithubActionsPermissionsOrg]
+    reason: the entire Permissions API is REST-only
+  - operations: [getCustomOidcSubClaimForRepo, setCustomOidcSubClaimForRepo, getCustomOidcSubClaimForOrg, setCustomOidcSubClaimForOrg]
+    reason: the entire OIDC subject-claim API is REST-only
+  - operations: [listSelfHostedRunnersForRepo, getSelfHostedRunnerForRepo, deleteSelfHostedRunnerFromRepo, listRunnerApplicationsForRepo, createRegistrationTokenForRepo, createRemoveTokenForRepo, listLabelsForSelfHostedRunnerForRepo, addCustomLabelsToSelfHostedRunnerForRepo, setCustomLabelsForSelfHostedRunnerForRepo, removeAllCustomLabelsFromSelfHostedRunnerForRepo, removeCustomLabelFromSelfHostedRunnerForRepo]
+    reason: the entire Self-Hosted Runners API is REST-only
+  - operations: [listSelfHostedRunnerGroupsForOrg, createSelfHostedRunnerGroupForOrg, getSelfHostedRunnerGroupForOrg, updateSelfHostedRunnerGroupForOrg, deleteSelfHostedRunnerGroupFromOrg]
+    reason: the entire Self-Hosted Runner Groups API is REST-only
+coverage:
+  rest_operations: 82
+  mcp_tools: 4
+  mcp_methods: 15
+  rest_operations_reachable_via_mcp: 17
+  rest_only_operations: 65
+  mcp_only_capabilities: 1
+  percent_rest_reachable_via_mcp: 20.7

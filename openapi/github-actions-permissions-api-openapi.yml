@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: GitHub Actions Artifacts Permissions API
+  title: GitHub Actions Permissions API
   description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
   version: 1.0.0
   contact:
@@ -237,6 +237,18 @@ components:
           type: string
           format: uri
           example: https://www.example.com
+    ActionsDefaultWorkflowPermissions:
+      type: object
+      properties:
+        default_workflow_permissions:
+          type: string
+          enum:
+          - read
+          - write
+          example: read
+        can_approve_pull_request_reviews:
+          type: boolean
+          example: true
     ActionsRepositoryPermissions:
       type: object
       properties:
@@ -254,18 +266,6 @@ components:
           type: string
           format: uri
           example: https://www.example.com
-    ActionsDefaultWorkflowPermissions:
-      type: object
-      properties:
-        default_workflow_permissions:
-          type: string
-          enum:
-          - read
-          - write
-          example: read
-        can_approve_pull_request_reviews:
-          type: boolean
-          example: true
   securitySchemes:
     bearerAuth:
       type: http

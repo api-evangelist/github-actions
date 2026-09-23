@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: GitHub Actions Artifacts Self-Hosted Runners API
+  title: GitHub Actions Self-Hosted Runners API
   description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
   version: 1.0.0
   contact:
@@ -362,7 +362,7 @@ paths:
         dispatcher: FALLBACK
     delete:
       operationId: removeAllCustomLabelsFromSelfHostedRunnerForRepo
-      summary: Github Actions Remove All Custom Labels From a Self-hosted Runner for a Repository
+      summary: Github Actions Remove All Custom Labels From a Self-hosted Runner for a…
       description: Remove all custom labels from a self-hosted runner configured in a repository.
       tags:
       - Self-Hosted Runners
@@ -443,21 +443,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RunnerLabel:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: abc123
-        name:
-          type: string
-          example: Example Title
-        type:
-          type: string
-          enum:
-          - read-only
-          - custom
-          example: read-only
     RunnerApplication:
       type: object
       properties:
@@ -480,6 +465,21 @@ components:
         sha256_checksum:
           type: string
           example: example_value
+    RunnerLabel:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - read-only
+          - custom
+          example: read-only
     SelfHostedRunner:
       type: object
       properties:
@@ -526,13 +526,6 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
-    runnerId:
-      name: runner_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique identifier of the self-hosted runner.
     repo:
       name: repo
       in: path
@@ -540,13 +533,6 @@ components:
       schema:
         type: string
       description: The name of the repository without the .git extension.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
     owner:
       name: owner
       in: path
@@ -554,6 +540,20 @@ components:
       schema:
         type: string
       description: The account owner of the repository.
+    runnerId:
+      name: runner_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,0 +1,74 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for GitHub Actions Permissions API
+  version: 1.0.1
+  x-generated: '2026-09-17'
+  x-method: generated
+  x-source: >-
+    Generated from openapi/github-actions-permissions-api-openapi.yml plus the artifacts in this repo. Captures the
+    runtime semantics the OpenAPI does not express — versioning header, media
+    type, rate-limit and request-id headers, token types, the absence of an
+    idempotency mechanism, and the reversibility of each write operation. The
+    original specification is never mutated.
+extends: openapi/github-actions-permissions-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: github-actions
+      x-apievangelist-artifacts:
+        conventions: conventions/github-actions-conventions.yml
+        authentication: authentication/github-actions-authentication.yml
+        scopes: scopes/github-actions-scopes.yml
+        errors: errors/github-actions-error-codes.yml
+        lifecycle: lifecycle/github-actions-lifecycle.yml
+        rate_limits: rate-limits/github-actions-rate-limits.yml
+        plans: plans/github-actions-plans-pricing.yml
+        data_model: data-model/github-actions-data-model.yml
+        webhooks: asyncapi/github-actions-webhooks.yml
+        mcp: mcp/github-actions-mcp.yml
+        tool_crosswalk: mcp/github-actions-tool-crosswalk.yml
+        skills: skills/_index.yml
+  - target: $.info
+    update:
+      x-github-api-version-header: X-GitHub-Api-Version
+      x-github-default-api-version: '2022-11-28'
+      x-github-media-type: application/vnd.github+json
+      x-idempotency:
+        supported: false
+        coverage: none
+        note: No Idempotency-Key header exists on this API; POST operations are not replay-safe.
+      x-dry-run:
+        supported: false
+  - target: $.servers[0]
+    update:
+      x-rate-limit-headers:
+        - x-ratelimit-limit
+        - x-ratelimit-remaining
+        - x-ratelimit-used
+        - x-ratelimit-reset
+        - x-ratelimit-resource
+      x-request-id-header: X-GitHub-Request-Id
+      x-rate-limit-detail: rate-limits/github-actions-rate-limits.yml
+  - target: $.components.securitySchemes
+    update:
+      x-token-types:
+        - fine-grained-pat
+        - classic-pat
+        - oauth-user-token
+        - github-app-installation-token
+        - github-actions-job-token
+  - target: $.paths
+    update:
+      x-reversibility:
+        setGithubActionsPermissionsRepo:
+          operation: PUT /repos/{owner}/{repo}/actions/permissions
+          reversal: setGithubActionsPermissionsRepo
+          window: "unbounded \u2014 read getGithubActionsPermissionsRepo first"
+        setGithubActionsDefaultWorkflowPermissionsRepo:
+          operation: PUT /repos/{owner}/{repo}/actions/permissions/workflow
+          reversal: setGithubActionsDefaultWorkflowPermissionsRepo
+          window: "unbounded \u2014 read the matching get operation first"
+        setGithubActionsPermissionsOrg:
+          operation: PUT /orgs/{org}/actions/permissions
+          reversal: setGithubActionsPermissionsOrg
+          window: "unbounded \u2014 read getGithubActionsPermissionsOrg first"

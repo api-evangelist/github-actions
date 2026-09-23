@@ -4,84 +4,170 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: GitHub Actions
 providerId: github-actions
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-09-17'
+generated: '2026-09-17'
+method: probed
+source:
+  - https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
+  - https://api.github.com/rate_limit
 tags:
   - Rate Limiting
   - Quotas
   - Throttling
-description: Machine-readable rate limit definitions for the GitHub Actions API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+description: >-
+  Published GitHub REST API rate limits, which the Actions endpoints inherit,
+  read from GitHub's documentation and CONFIRMED against a live unauthenticated
+  response from https://api.github.com/rate_limit on 2026-09-17 (x-ratelimit-limit:
+  60, x-ratelimit-resource: core). REPLACES A SCAFFOLD: until this round this
+  file carried invented tiers — "free 10 requests/minute, 1,000/month",
+  "professional 100/minute" — that GitHub has never published. GitHub's limits
+  are per HOUR and keyed on the AUTHENTICATION METHOD, not on a purchased plan
+  tier, which is a materially different model from the one the scaffold
+  described.
+model: per-hour, keyed on authentication method
+observed:
+  url: https://api.github.com/rate_limit
+  checked: '2026-09-17'
+  unauthenticated_headers:
+    x-ratelimit-limit: '60'
+    x-ratelimit-remaining: '34'
+    x-ratelimit-used: '26'
+    x-ratelimit-resource: core
+    x-ratelimit-reset: '1789683711'
+  note: >-
+    The /rate_limit endpoint itself does not count against the limit and is the
+    correct way for an agent to check its budget before a polling loop.
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: x-ratelimit-limit
+  remaining: x-ratelimit-remaining
+  used: x-ratelimit-used
+  reset: x-ratelimit-reset
+  resource: x-ratelimit-resource
+  retryAfter: retry-after
+  note: >-
+    x-ratelimit-reset is a UTC epoch SECONDS value, not a duration.
+    x-ratelimit-resource names which bucket the request was charged to (core,
+    search, code_search, graphql, integration_manifest) — a header most
+    providers have no equivalent for, and the one that tells an agent WHICH
+    budget it just spent.
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  throttled: 403
+  throttledAlternate: 429
+  note: >-
+    Primary rate limit exhaustion returns 403 or 429 with x-ratelimit-remaining
+    at 0. Secondary rate limits return 403 or 429 with a retry-after header.
+    A 403 here is a rate limit, not an authorization failure — read the headers
+    before treating it as one.
+limit_count: 9
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - GitHub Actions API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
+  - name: Unauthenticated requests
+    scope: per-ip
+    metric: requests_per_hour
+    limit: 60
+    timeFrame: hour
+    verified: live probe of https://api.github.com/rate_limit
+    applies: [GitHub REST API, GitHub Actions API]
+  - name: Authenticated user (personal access token / OAuth user token)
+    scope: per-user
+    metric: requests_per_hour
+    limit: 5000
+    timeFrame: hour
+    applies: [GitHub REST API, GitHub Actions API]
+    note: Shared across the user's PATs and any app acting on their behalf.
+  - name: GitHub App or OAuth app owned by a GitHub Enterprise Cloud organization
+    scope: per-user
+    metric: requests_per_hour
+    limit: 15000
+    timeFrame: hour
+    applies: [GitHub REST API, GitHub Actions API]
+  - name: GitHub App installation access token
+    scope: per-installation
+    metric: requests_per_hour
+    limit: 5000
+    timeFrame: hour
+    applies: [GitHub REST API, GitHub Actions API]
+    note: >-
+      Scales with size — +50 requests/hour for each repository beyond 20 and
+      each user beyond 20, capped at 12,500/hour. 15,000/hour on GitHub
+      Enterprise Cloud.
+  - name: GITHUB_TOKEN inside a GitHub Actions workflow
+    scope: per-repository
+    metric: requests_per_hour
     limit: 1000
-    timeFrame: month
-    applies:
-      - GitHub Actions API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
+    timeFrame: hour
+    applies: [GitHub Actions API]
+    note: >-
+      15,000/hour per repository for resources belonging to a GitHub Enterprise
+      Cloud account. This is the limit that actually binds an Actions workflow
+      calling the API on itself, and it is the smallest of the authenticated
+      limits.
+  - name: Search endpoints
+    scope: per-user
     metric: requests_per_minute
+    limit: 30
+    timeFrame: minute
+    applies: [GitHub REST API]
+    note: >-
+      10/minute unauthenticated — confirmed live in the /rate_limit `search`
+      resource on 2026-09-17. Not used by the Actions endpoints; recorded because
+      it shares the same header surface and a client can be throttled on it.
+  - name: Git LFS (unauthenticated)
+    scope: per-ip
+    metric: requests_per_minute
+    limit: 300
+    timeFrame: minute
+    applies: [Git LFS]
+  - name: Git LFS (authenticated)
+    scope: per-user
+    metric: requests_per_minute
+    limit: 3000
+    timeFrame: minute
+    applies: [Git LFS]
+  - name: OAuth access token requests
+    scope: per-app
+    metric: requests_per_hour
+    limit: 2000
+    timeFrame: hour
+    applies: [OAuth apps, GitHub Apps]
+secondary_limits:
+  - name: Concurrent requests
     limit: 100
-    burst: 200
+    note: Shared across the REST API and the GraphQL API.
+  - name: Points per minute against a single endpoint (REST)
+    limit: 900
     timeFrame: minute
-    applies:
-      - GitHub Actions API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - GitHub Actions API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - GitHub Actions API
+    note: >-
+      Point-costed, not request-costed. Most GET/HEAD/OPTIONS requests cost 1
+      point; most POST/PATCH/PUT/DELETE cost 5. Some endpoints carry an
+      undisclosed higher cost. A write-heavy agent exhausts this five times
+      faster than a read-heavy one at the same request rate.
+  - name: CPU time
+    limit: 90 seconds of CPU time per 60 seconds of real time
+    note: No more than 60 seconds of that may be GraphQL. Roughly estimated by total response time.
+  - name: Content creation
+    limit: 80 per minute / 500 per hour
+    note: Counts actions taken in the web UI as well as through the REST and GraphQL APIs.
 policies:
+  - name: Conditional requests
+    description: >-
+      A request with If-None-Match (ETag) or If-Modified-Since that returns 304
+      Not Modified does NOT count against the primary rate limit. This is the
+      single largest saving available to a polling agent and is documented, not
+      inferred.
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: >-
+      Honour retry-after when present. Otherwise wait until x-ratelimit-reset.
+      If neither is present, exponential backoff with jitter, and never retry
+      more than once per minute against the same endpoint.
+  - name: Prefer webhooks over polling
+    description: >-
+      GitHub's own guidance: subscribe to workflow_run / workflow_job events
+      rather than polling run status. See asyncapi/github-actions-webhooks.yml.
+  - name: Getting a higher limit
+    description: >-
+      There is no self-serve purchase of a higher REST rate limit. Higher limits
+      come from the authentication method (a GitHub App installation) or from
+      being on GitHub Enterprise Cloud.
 maintainers:
   - type: GitHub
     name: GitHub, Inc.

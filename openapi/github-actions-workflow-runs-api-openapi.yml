@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: GitHub Actions Artifacts Workflow Runs API
+  title: GitHub Actions Workflow Runs API
   description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
   version: 1.0.0
   contact:
@@ -721,19 +721,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SimpleUser:
+    MinimalRepository:
       type: object
       properties:
-        login:
-          type: string
-          example: example_value
         id:
           type: integer
           example: abc123
         node_id:
           type: string
           example: '500123'
-        avatar_url:
+        name:
+          type: string
+          example: Example Title
+        full_name:
+          type: string
+          example: example_value
+        owner:
+          $ref: '#/components/schemas/SimpleUser'
+        private:
+          type: boolean
+          example: true
+        html_url:
           type: string
           format: uri
           example: https://www.example.com
@@ -741,44 +749,10 @@ components:
           type: string
           format: uri
           example: https://www.example.com
-        html_url:
+        description:
           type: string
-          format: uri
-          example: https://www.example.com
-        type:
-          type: string
-          example: example_value
-    WorkflowRunUsage:
-      type: object
-      properties:
-        billable:
-          type: object
-          properties:
-            UBUNTU:
-              type: object
-              properties:
-                total_ms:
-                  type: integer
-                jobs:
-                  type: integer
-            MACOS:
-              type: object
-              properties:
-                total_ms:
-                  type: integer
-                jobs:
-                  type: integer
-            WINDOWS:
-              type: object
-              properties:
-                total_ms:
-                  type: integer
-                jobs:
-                  type: integer
-          example: example_value
-        run_duration_ms:
-          type: integer
-          example: 10
+          nullable: true
+          example: A sample description.
     EnvironmentApproval:
       type: object
       properties:
@@ -818,40 +792,68 @@ components:
         comment:
           type: string
           example: example_value
-    SimpleCommit:
+    Deployment:
       type: object
       properties:
-        id:
+        url:
           type: string
+          format: uri
+          example: https://www.example.com
+        id:
+          type: integer
           example: abc123
-        tree_id:
+        node_id:
           type: string
           example: '500123'
-        message:
+        task:
           type: string
           example: example_value
-        timestamp:
+        environment:
+          type: string
+          example: example_value
+        description:
+          type: string
+          nullable: true
+          example: A sample description.
+        created_at:
           type: string
           format: date-time
           example: '2026-01-15T10:30:00Z'
-        author:
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    WorkflowRunUsage:
+      type: object
+      properties:
+        billable:
           type: object
           properties:
-            name:
-              type: string
-            email:
-              type: string
-              format: email
+            UBUNTU:
+              type: object
+              properties:
+                total_ms:
+                  type: integer
+                jobs:
+                  type: integer
+            MACOS:
+              type: object
+              properties:
+                total_ms:
+                  type: integer
+                jobs:
+                  type: integer
+            WINDOWS:
+              type: object
+              properties:
+                total_ms:
+                  type: integer
+                jobs:
+                  type: integer
           example: example_value
-        committer:
-          type: object
-          properties:
-            name:
-              type: string
-            email:
-              type: string
-              format: email
-          example: example_value
+        run_duration_ms:
+          type: integer
+          example: 10
     PendingDeployment:
       type: object
       properties:
@@ -895,27 +897,53 @@ components:
               reviewer:
                 $ref: '#/components/schemas/SimpleUser'
           example: []
-    MinimalRepository:
+    SimpleCommit:
       type: object
       properties:
+        id:
+          type: string
+          example: abc123
+        tree_id:
+          type: string
+          example: '500123'
+        message:
+          type: string
+          example: example_value
+        timestamp:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+          example: example_value
+        committer:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+          example: example_value
+    SimpleUser:
+      type: object
+      properties:
+        login:
+          type: string
+          example: example_value
         id:
           type: integer
           example: abc123
         node_id:
           type: string
           example: '500123'
-        name:
-          type: string
-          example: Example Title
-        full_name:
-          type: string
-          example: example_value
-        owner:
-          $ref: '#/components/schemas/SimpleUser'
-        private:
-          type: boolean
-          example: true
-        html_url:
+        avatar_url:
           type: string
           format: uri
           example: https://www.example.com
@@ -923,10 +951,13 @@ components:
           type: string
           format: uri
           example: https://www.example.com
-        description:
+        html_url:
           type: string
-          nullable: true
-          example: A sample description.
+          format: uri
+          example: https://www.example.com
+        type:
+          type: string
+          example: example_value
     WorkflowRun:
       type: object
       properties:
@@ -1048,45 +1079,7 @@ components:
           $ref: '#/components/schemas/MinimalRepository'
         head_commit:
           $ref: '#/components/schemas/SimpleCommit'
-    Deployment:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        id:
-          type: integer
-          example: abc123
-        node_id:
-          type: string
-          example: '500123'
-        task:
-          type: string
-          example: example_value
-        environment:
-          type: string
-          example: example_value
-        description:
-          type: string
-          nullable: true
-          example: A sample description.
-        created_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
   parameters:
-    runId:
-      name: run_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The unique identifier of the workflow run.
     perPage:
       name: per_page
       in: query
@@ -1095,13 +1088,13 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
-    repo:
-      name: repo
+    runId:
+      name: run_id
       in: path
       required: true
       schema:
-        type: string
-      description: The name of the repository without the .git extension.
+        type: integer
+      description: The unique identifier of the workflow run.
     attemptNumber:
       name: attempt_number
       in: path
@@ -1109,13 +1102,13 @@ components:
       schema:
         type: integer
       description: The attempt number of the workflow run.
-    page:
-      name: page
-      in: query
+    repo:
+      name: repo
+      in: path
+      required: true
       schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
+        type: string
+      description: The name of the repository without the .git extension.
     owner:
       name: owner
       in: path
@@ -1123,6 +1116,13 @@ components:
       schema:
         type: string
       description: The account owner of the repository.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
   securitySchemes:
     bearerAuth:
       type: http

@@ -31,9 +31,32 @@ tools:
 note: The Actions toolset consolidates the many REST operations in openapi/github-actions-openapi.yml
   behind four coarse-grained MCP tools; it is not a 1:1 operation-to-tool mapping.
 deployment:
-  mode: remote
+  mode: both
   endpoint: https://api.githubcopilot.com/mcp/
+  install: docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server
+  package: https://github.com/github/github-mcp-server
+  auth: oauth
   verified: probed
-  probe: gated
-  checked: '2026-08-12'
-  source: catalog MCP census
+  probe:
+    tools_list:
+      url: https://api.githubcopilot.com/mcp/
+      method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+      http_status: 401
+      body: 'bad request: missing required Authorization header'
+      note: >-
+        The live tool schemas are auth-gated. The tool list below is therefore
+        read verbatim from the server's own README (github/github-mcp-server,
+        main branch) rather than from an authenticated introspection.
+    protected_resource:
+      url: https://api.githubcopilot.com/.well-known/oauth-protected-resource/mcp
+      http_status: 200
+      file: well-known/github-actions-oauth-protected-resource.json
+      authorization_servers: [https://github.com/login/oauth]
+  checked: '2026-09-17'
+  release: v1.12.2 (2026-09-16)
+  note: >-
+    BOTH, not remote-only: GitHub hosts the server at
+    https://api.githubcopilot.com/mcp/ (HTTP transport, OAuth or PAT) AND ships
+    the same server as a self-hosted binary / ghcr.io image for MCP hosts that
+    cannot reach a remote server. An agent can call the hosted endpoint today
+    without anyone installing anything.

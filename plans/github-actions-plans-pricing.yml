@@ -4,143 +4,248 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: GitHub Actions
 providerId: github-actions
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags: []
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+modified: '2026-09-17'
+generated: '2026-09-17'
+method: searched
+source:
+  - https://docs.github.com/en/billing/concepts/product-billing/github-actions
+  - https://github.com/pricing
+tags:
+  - CI/CD
+  - Metered Billing
+  - Usage-Based
+description: >-
+  Published GitHub Actions plans and pricing, read from GitHub's own billing
+  documentation and pricing page on 2026-09-17. REPLACES A SCAFFOLD: until this
+  round this file carried invented placeholder tiers (a "Free" tier of 1,000
+  API requests/month at 10 requests/minute, a "Professional" tier priced TBD)
+  that GitHub has never published and that bear no relationship to how Actions
+  is sold. Actions is not priced per API request at all — the REST API is free
+  to call within the standard GitHub rate limits, and what is metered is
+  COMPUTE (runner minutes) and STORAGE (artifacts, caches, custom images).
+pricing_model: >-
+  Included allowance per GitHub plan, then usage-based overage. Standard
+  GitHub-hosted runners are free for public repositories, for GitHub Pages and
+  for Dependabot; larger runners are always charged, even on public
+  repositories. Minutes reset to the full allowance at the start of each
+  billing cycle; storage accrues hourly in GB-Hours.
+plan_count: 5
 plans:
-  - id: github-actions-free
-    name: Free
+  - id: github-free
+    name: GitHub Free
     type: freemium
-    description: Free entry tier for the GitHub Actions API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    price: '0.00'
+    currency: USD
+    billing_period: month
+    description: Free plan for individuals. Actions allowances apply to private repositories; public repositories run free on standard runners.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Actions minutes
+        name: actions_minutes
         type: quota
-        metric: requests
-        limit: 1000
+        metric: minutes
+        limit: 2000
         timeFrame: month
-        geo: global
-        domains:
-          - https://api.github.com
         unit: 1
         price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
+      - label: Artifact storage (shared with GitHub Packages)
+        name: artifact_storage
+        type: quota
+        metric: megabytes
+        limit: 500
+        timeFrame: month
+        unit: 1
+        price: '0.00'
+      - label: Cache storage (per repository)
+        name: cache_storage
+        type: quota
+        metric: gigabytes
         limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://api.github.com
+        timeFrame: month
         unit: 1
         price: '0.00'
-        userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: GitHub Actions API
-  - id: github-actions-pro
-    name: Professional
+      - name: Custom image storage
+        value: not applicable
+  - id: github-pro
+    name: GitHub Pro
     type: paid
-    description: Production tier for GitHub Actions. Provides higher quotas, priority support, and access
-      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+    price: '4.00'
+    currency: USD
+    billing_period: month
+    price_note: >-
+      Listed by GitHub as a personal plan; the $4/month figure is the
+      individual Pro price. The public pricing grid at github.com/pricing shows
+      Free, Team and Enterprise only, so this price is recorded from GitHub's
+      plan documentation rather than that grid.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
+      - label: Actions minutes
+        name: actions_minutes
         type: quota
-        metric: requests
-        limit: 100000
+        metric: minutes
+        limit: 3000
         timeFrame: month
-        geo: global
-        domains:
-          - https://api.github.com
         unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://api.github.com
+      - label: Artifact storage (shared with GitHub Packages)
+        name: artifact_storage
+        type: quota
+        metric: gigabytes
+        limit: 1
+        timeFrame: month
+        unit: 1
+      - label: Cache storage (per repository)
+        name: cache_storage
+        type: quota
+        metric: gigabytes
+        limit: 10
+        timeFrame: month
+        unit: 1
+    elements:
+      - name: Custom image storage
+        value: not applicable
+  - id: github-free-organizations
+    name: GitHub Free for organizations
+    type: freemium
+    price: '0.00'
+    currency: USD
+    billing_period: month
+    entries:
+      - label: Actions minutes
+        name: actions_minutes
+        type: quota
+        metric: minutes
+        limit: 2000
+        timeFrame: month
         unit: 1
         price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.github.com
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: GitHub Actions API
-  - id: github-actions-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for GitHub Actions. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
+      - label: Artifact storage (shared with GitHub Packages)
+        name: artifact_storage
         type: quota
-        metric: requests
-        limit: -1
+        metric: megabytes
+        limit: 500
         timeFrame: month
-        geo: configurable
-        domains:
-          - https://api.github.com
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://api.github.com
+        price: '0.00'
+      - label: Cache storage (per repository)
+        name: cache_storage
+        type: quota
+        metric: gigabytes
+        limit: 10
+        timeFrame: month
         unit: 1
-        price: custom
-        userMultiplied: false
+        price: '0.00'
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: GitHub Actions API
+      - name: Custom image storage
+        value: not applicable
+  - id: github-team
+    name: GitHub Team
+    type: paid
+    price: '4.00'
+    currency: USD
+    billing_period: month
+    price_unit: per user/month
+    price_note: Introductory rate is $4 USD per user/month for the first 12 months, per github.com/pricing.
+    entries:
+      - label: Actions minutes
+        name: actions_minutes
+        type: quota
+        metric: minutes
+        limit: 3000
+        timeFrame: month
+        unit: 1
+      - label: Artifact storage (shared with GitHub Packages)
+        name: artifact_storage
+        type: quota
+        metric: gigabytes
+        limit: 2
+        timeFrame: month
+        unit: 1
+      - label: Cache storage (per repository)
+        name: cache_storage
+        type: quota
+        metric: gigabytes
+        limit: 10
+        timeFrame: month
+        unit: 1
+      - label: Custom image storage
+        name: custom_image_storage
+        type: quota
+        metric: gigabytes
+        limit: 75
+        timeFrame: month
+        unit: 1
+  - id: github-enterprise-cloud
+    name: GitHub Enterprise Cloud
+    type: enterprise
+    price: '21.00'
+    currency: USD
+    billing_period: month
+    price_unit: per user/month
+    entries:
+      - label: Actions minutes
+        name: actions_minutes
+        type: quota
+        metric: minutes
+        limit: 50000
+        timeFrame: month
+        unit: 1
+      - label: Artifact storage (shared with GitHub Packages)
+        name: artifact_storage
+        type: quota
+        metric: gigabytes
+        limit: 50
+        timeFrame: month
+        unit: 1
+      - label: Cache storage (per repository)
+        name: cache_storage
+        type: quota
+        metric: gigabytes
+        limit: 10
+        timeFrame: month
+        unit: 1
+      - label: Custom image storage
+        name: custom_image_storage
+        type: quota
+        metric: gigabytes
+        limit: 150
+        timeFrame: month
+        unit: 1
+    elements:
+      - name: Higher REST API rate limit
+        value: 15,000 requests/hour for GitHub Apps and OAuth apps owned by the organization
+overage:
+  minutes:
+    unit: per minute
+    currency: USD
+    source: https://docs.github.com/en/billing/concepts/product-billing/github-actions
+    rates:
+      - {runner: Linux 1-core (x64), sku: actions_linux_slim, price: '0.002'}
+      - {runner: Linux 2-core (x64), sku: actions_linux, price: '0.006'}
+      - {runner: Linux 2-core (arm64), sku: actions_linux_arm, price: '0.005'}
+      - {runner: Windows 2-core (x64), sku: actions_windows, price: '0.010'}
+      - {runner: Windows 2-core (arm64), sku: actions_windows_arm, price: '0.010'}
+      - {runner: macOS 3-core or 4-core (M1 or Intel), sku: actions_macos, price: '0.062'}
+    note: Larger runners carry their own rates; see the Actions runner pricing page.
+  storage:
+    unit: per GB/month
+    currency: USD
+    rates:
+      - {type: Shared storage (artifacts and GitHub Packages), price: '0.25'}
+      - {type: Actions cache, price: '0.07'}
+      - {type: Custom image storage, price: '0.07'}
+    note: >-
+      Storage accrues hourly in GB-Hours. Deleting an artifact stops future
+      accrual but does not remove storage already accrued in the current cycle
+      — the same one-way property recorded in the reversibility block of
+      conventions/github-actions-conventions.yml.
+free_use:
+  - Public repositories using standard GitHub-hosted runners
+  - Self-hosted runners (no minute charge; you supply the machine)
+  - GitHub Pages builds
+  - Dependabot
+budget_controls:
+  blocked_without_payment_method: true
+  budgets: https://docs.github.com/en/billing/tutorials/set-up-budgets
+  alerts: Email notification at 90% and 100% of included usage in a billing period
 maintainers:
   - type: GitHub
     name: GitHub, Inc.

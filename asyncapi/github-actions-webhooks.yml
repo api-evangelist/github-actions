@@ -1,0 +1,141 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://docs.github.com/en/webhooks/webhook-events-and-payloads (event
+  catalog and delivery headers) and
+  https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com
+  (machine-readable JSON Schema per event + action, enumerated over the GitHub
+  contents API on 2026-09-17).
+description: >-
+  The event surface for GitHub Actions. GitHub publishes no AsyncAPI document —
+  probed and absent — but it does publish a complete, versioned, machine-readable
+  webhook contract: one JSON Schema per event AND per action type, maintained in
+  the octokit/webhooks repository and shipped to npm as @octokit/webhooks-schemas.
+  This file catalogues the nine events an Actions consumer subscribes to, their
+  action types as the schemas enumerate them, the delivery headers, and the
+  signing scheme. Actions is unusual in being both a webhook PRODUCER (run and
+  job lifecycle) and a webhook CONSUMER (repository_dispatch and workflow_dispatch
+  start workflows), and the deployment_protection_rule event is a two-way
+  callback, not a notification.
+asyncapi_spec:
+  published: false
+  probed: true
+  note: >-
+    No AsyncAPI document is published at any GitHub host, and none is referenced
+    from the webhooks documentation. The JSON Schema set below is the real
+    machine-readable event contract; nothing was generated to stand in for an
+    AsyncAPI that does not exist.
+transport:
+  protocol: HTTPS
+  method: POST
+  content_types: [application/json, application/x-www-form-urlencoded]
+  configuration_scopes: [repository, organization, enterprise, GitHub App, GitHub Marketplace]
+  docs: https://docs.github.com/en/webhooks/about-webhooks
+delivery_headers:
+  - {name: X-GitHub-Hook-ID, description: The unique identifier of the webhook.}
+  - {name: X-GitHub-Event, description: The name of the event that triggered the delivery.}
+  - {name: X-GitHub-Delivery, description: A globally unique GUID identifying the event.}
+  - {name: X-Hub-Signature, description: 'HMAC SHA-1 hex digest of the body, keyed with the webhook secret. Legacy; kept for compatibility.'}
+  - {name: X-Hub-Signature-256, description: 'HMAC SHA-256 hex digest of the body, keyed with the webhook secret. The recommended verification header.'}
+  - {name: User-Agent, description: Always prefixed GitHub-Hookshot/.}
+  - {name: X-GitHub-Hook-Installation-Target-Type, description: The type of resource the webhook was created on.}
+  - {name: X-GitHub-Hook-Installation-Target-ID, description: The identifier of the resource the webhook was created on.}
+security:
+  signing: HMAC SHA-256 over the raw request body, shared secret
+  header: X-Hub-Signature-256
+  verification_docs: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+  note: The secret is optional at configuration time; unsigned deliveries carry no signature header at all.
+redelivery:
+  supported: true
+  docs: https://docs.github.com/en/webhooks/testing-and-troubleshooting-webhooks/redelivering-webhooks
+  note: Failed deliveries can be redelivered by hand or automatically, and every delivery is inspectable for a retention window.
+events:
+  - name: workflow_run
+    direction: outbound
+    action_types: [completed, in_progress, requested]
+    description: A workflow run was requested, started, or finished.
+    permission: 'GitHub Apps need at least read access to the "Actions" repository permission.'
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/workflow_run
+    related_rest: [listWorkflowRuns, getWorkflowRun]
+  - name: workflow_job
+    direction: outbound
+    action_types: [completed, in_progress, queued, waiting]
+    description: >-
+      A job in a workflow run changed state. `queued` is the event self-hosted
+      runner autoscalers subscribe to; `waiting` means the job is blocked on a
+      deployment protection rule.
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/workflow_job
+    related_rest: [listJobsForWorkflowRun, getJobForWorkflowRun]
+  - name: workflow_dispatch
+    direction: inbound
+    action_types: []
+    description: >-
+      A workflow was manually triggered. The inbound twin of the REST
+      createWorkflowDispatch operation — the same event an agent raises by
+      calling the API.
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/workflow_dispatch
+    related_rest: [createWorkflowDispatch]
+  - name: check_run
+    direction: outbound
+    action_types: [completed, created, requested_action, rerequested]
+    description: >-
+      A check run was created, finished, re-requested, or a user clicked a
+      requested action. `rerequested` and `requested_action` are inbound
+      prompts to an app, not just notifications.
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/check_run
+  - name: check_suite
+    direction: outbound
+    action_types: [completed, requested, rerequested]
+    description: A check suite was requested, re-requested, or completed.
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/check_suite
+  - name: deployment
+    direction: outbound
+    action_types: [created]
+    description: A deployment was created, typically by a workflow job targeting an environment.
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/deployment
+  - name: deployment_status
+    direction: outbound
+    action_types: [created]
+    description: A deployment status was created.
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/deployment_status
+  - name: deployment_protection_rule
+    direction: bidirectional
+    action_types: [requested]
+    description: >-
+      A custom deployment protection rule was requested for an environment. The
+      payload carries deployment_callback_url, which the receiver POSTs back to
+      in order to approve or reject — this is a callback contract, not a
+      notification, and it is the event that lets an external system gate a
+      deployment.
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/deployment_protection_rule
+    related_rest: [reviewCustomGatesForRun]
+  - name: deployment_review
+    direction: outbound
+    action_types: [approved, rejected, requested]
+    description: A deployment review was requested, approved, or rejected.
+    schemas: https://github.com/octokit/webhooks/tree/main/payload-schemas/api.github.com/deployment_review
+    related_rest: [getPendingDeployments, reviewPendingDeployments]
+event_count: 9
+action_type_count: 20
+schema_registry:
+  repository: https://github.com/octokit/webhooks
+  path: payload-schemas/api.github.com
+  format: JSON Schema (draft-07)
+  package:
+    registry: npm
+    name: "@octokit/webhooks-schemas"
+    url: https://www.npmjs.com/package/@octokit/webhooks-schemas
+    version: 7.6.1
+    published: '2024-10-03'
+    note: >-
+      The published npm package is nearly two years behind the repository it is
+      generated from; consumers wanting current schemas read the repo directly.
+  typescript_types:
+    registry: npm
+    name: "@octokit/webhooks-types"
+    url: https://www.npmjs.com/package/@octokit/webhooks-types
+docs:
+  events: https://docs.github.com/en/webhooks/webhook-events-and-payloads
+  about: https://docs.github.com/en/webhooks/about-webhooks
+  best_practices: https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks
+  events_that_trigger_workflows: https://docs.github.com/en/actions/reference/events-that-trigger-workflows

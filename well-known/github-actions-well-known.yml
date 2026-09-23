@@ -1,32 +1,94 @@
-generated: '2026-06-20'
+generated: '2026-09-17'
 method: searched
-source: live probes of the GitHub hosts
+source: live probes of every host this record knows (github.com, api.github.com, docs.github.com, api.githubcopilot.com)
 description: >-
   Probe of the /.well-known/ discovery surface for the GitHub Actions API host
-  (api.github.com), the docs host (docs.github.com) and the primary web domain
-  (github.com). Only github.com publishes a security.txt (RFC 9116); the API host
-  exposes no OIDC/OAuth discovery documents at the well-known paths (GitHub's own
-  Actions OIDC provider lives at token.actions.githubusercontent.com, not on the
-  REST API host).
+  (api.github.com), the docs host (docs.github.com), the primary web domain
+  (github.com) and the GitHub MCP server host (api.githubcopilot.com, named by
+  mcp/github-actions-mcp.yml). Three real documents are served. github.com
+  publishes an RFC 9116 security.txt. The MCP host publishes an RFC 9728
+  OAuth protected-resource document at the path-suffixed well-known location
+  /.well-known/oauth-protected-resource/mcp, which names
+  https://github.com/login/oauth as its authorization server — and that
+  authorization server publishes RFC 8414 metadata at the path-suffixed
+  /.well-known/oauth-authorization-server/login/oauth. Both of those were
+  missed by earlier rounds, which probed only the bare well-known paths.
+  The bare paths 404 everywhere; the Actions OIDC provider
+  (token.actions.githubusercontent.com) is a separate workload-identity
+  surface reached from inside a workflow, not from the REST API host.
+path_echo_control: passed
+soft_404_control:
+  note: >-
+    Every host returned a distinct 404 for
+    /.well-known/github-actions-negative-control-7f3ab91c.json — github.com
+    and api.githubcopilot.com with plain 404 bodies, api.github.com with its
+    standard JSON error envelope, docs.github.com with its HTML 404 page. No
+    host echoes the requested path back as a document.
 hosts:
+  - host: https://github.com
+    documents:
+      - {path: /.well-known/security.txt, status: 200, file: github-actions-security.txt}
+      - {path: /.well-known/oauth-authorization-server/login/oauth, status: 200, file: github-actions-oauth-authorization-server.json}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 410}
+      - {path: /apis.yml, status: 406}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
   - host: https://api.github.com
     documents:
       - {path: /.well-known/security.txt, status: 404}
       - {path: /.well-known/openid-configuration, status: 404}
       - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
       - {path: /.well-known/api-catalog, status: 404}
       - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
   - host: https://docs.github.com
     documents:
       - {path: /.well-known/security.txt, status: 404}
       - {path: /.well-known/openid-configuration, status: 404}
       - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
       - {path: /.well-known/api-catalog, status: 404}
       - {path: /.well-known/ai-plugin.json, status: 404}
-  - host: https://github.com
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+  - host: https://api.githubcopilot.com
     documents:
-      - {path: /.well-known/security.txt, status: 200, file: github-actions-security.txt}
-      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-protected-resource/mcp, status: 200, file: github-actions-oauth-protected-resource.json}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
       - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/security.txt, status: 404}
       - {path: /.well-known/api-catalog, status: 404}
       - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+hit_count: 3
+a2a:
+  probed: true
+  result: none
+  note: >-
+    /.well-known/agent-card.json and /.well-known/agent.json were probed on
+    github.com, api.github.com, docs.github.com and api.githubcopilot.com on
+    2026-09-17. All eight returned 404. No a2a/ artifact is written — an agent
+    card is search-only and must never be authored on a provider's behalf.

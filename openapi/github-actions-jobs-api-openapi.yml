@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: GitHub Actions Artifacts Jobs API
+  title: GitHub Actions Jobs API
   description: REST API for managing GitHub Actions workflows, runs, artifacts, secrets, runners, caches, variables, permissions, and OIDC.
   version: 1.0.0
   contact:
@@ -268,6 +268,50 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    runId:
+      name: run_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The unique identifier of the workflow run.
+    attemptNumber:
+      name: attempt_number
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The attempt number of the workflow run.
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
   schemas:
     Job:
       type: object
@@ -408,50 +452,6 @@ components:
           format: date-time
           nullable: true
           example: '2026-01-15T10:30:00Z'
-  parameters:
-    runId:
-      name: run_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The unique identifier of the workflow run.
-    perPage:
-      name: per_page
-      in: query
-      schema:
-        type: integer
-        default: 30
-        maximum: 100
-      description: The number of results per page (max 100).
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
-    attemptNumber:
-      name: attempt_number
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The attempt number of the workflow run.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
-    owner:
-      name: owner
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The account owner of the repository.
   securitySchemes:
     bearerAuth:
       type: http
