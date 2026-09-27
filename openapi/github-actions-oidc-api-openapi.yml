@@ -131,13 +131,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    org:
-      name: org
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The organization name.
     repo:
       name: repo
       in: path
@@ -145,6 +138,13 @@ components:
       schema:
         type: string
       description: The name of the repository without the .git extension.
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
     owner:
       name: owner
       in: path

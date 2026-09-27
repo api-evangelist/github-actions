@@ -190,13 +190,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    org:
-      name: org
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The organization name.
     repo:
       name: repo
       in: path
@@ -204,6 +197,13 @@ components:
       schema:
         type: string
       description: The name of the repository without the .git extension.
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
     owner:
       name: owner
       in: path
@@ -237,18 +237,6 @@ components:
           type: string
           format: uri
           example: https://www.example.com
-    ActionsDefaultWorkflowPermissions:
-      type: object
-      properties:
-        default_workflow_permissions:
-          type: string
-          enum:
-          - read
-          - write
-          example: read
-        can_approve_pull_request_reviews:
-          type: boolean
-          example: true
     ActionsRepositoryPermissions:
       type: object
       properties:
@@ -266,6 +254,18 @@ components:
           type: string
           format: uri
           example: https://www.example.com
+    ActionsDefaultWorkflowPermissions:
+      type: object
+      properties:
+        default_workflow_permissions:
+          type: string
+          enum:
+          - read
+          - write
+          example: read
+        can_approve_pull_request_reviews:
+          type: boolean
+          example: true
   securitySchemes:
     bearerAuth:
       type: http

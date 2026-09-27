@@ -176,6 +176,20 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
+    variableName:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the variable.
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
     perPage:
       name: per_page
       in: query
@@ -184,20 +198,6 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
-    variableName:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the variable.
     owner:
       name: owner
       in: path

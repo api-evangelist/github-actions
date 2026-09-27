@@ -721,77 +721,49 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    MinimalRepository:
+    PendingDeployment:
       type: object
       properties:
-        id:
-          type: integer
-          example: abc123
-        node_id:
-          type: string
-          example: '500123'
-        name:
-          type: string
-          example: Example Title
-        full_name:
-          type: string
+        environment:
+          type: object
+          properties:
+            id:
+              type: integer
+            node_id:
+              type: string
+            name:
+              type: string
+            url:
+              type: string
+              format: uri
+            html_url:
+              type: string
+              format: uri
           example: example_value
-        owner:
-          $ref: '#/components/schemas/SimpleUser'
-        private:
+        wait_timer:
+          type: integer
+          example: 10
+        wait_timer_started_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-01-15T10:30:00Z'
+        current_user_can_approve:
           type: boolean
           example: true
-        html_url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        description:
-          type: string
-          nullable: true
-          example: A sample description.
-    EnvironmentApproval:
-      type: object
-      properties:
-        environments:
+        reviewers:
           type: array
           items:
             type: object
             properties:
-              id:
-                type: integer
-              node_id:
+              type:
                 type: string
-              name:
-                type: string
-              url:
-                type: string
-                format: uri
-              html_url:
-                type: string
-                format: uri
-              created_at:
-                type: string
-                format: date-time
-              updated_at:
-                type: string
-                format: date-time
+                enum:
+                - User
+                - Team
+              reviewer:
+                $ref: '#/components/schemas/SimpleUser'
           example: []
-        state:
-          type: string
-          enum:
-          - approved
-          - rejected
-          - pending
-          example: approved
-        user:
-          $ref: '#/components/schemas/SimpleUser'
-        comment:
-          type: string
-          example: example_value
     Deployment:
       type: object
       properties:
@@ -854,49 +826,45 @@ components:
         run_duration_ms:
           type: integer
           example: 10
-    PendingDeployment:
+    EnvironmentApproval:
       type: object
       properties:
-        environment:
-          type: object
-          properties:
-            id:
-              type: integer
-            node_id:
-              type: string
-            name:
-              type: string
-            url:
-              type: string
-              format: uri
-            html_url:
-              type: string
-              format: uri
-          example: example_value
-        wait_timer:
-          type: integer
-          example: 10
-        wait_timer_started_at:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-01-15T10:30:00Z'
-        current_user_can_approve:
-          type: boolean
-          example: true
-        reviewers:
+        environments:
           type: array
           items:
             type: object
             properties:
-              type:
+              id:
+                type: integer
+              node_id:
                 type: string
-                enum:
-                - User
-                - Team
-              reviewer:
-                $ref: '#/components/schemas/SimpleUser'
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              html_url:
+                type: string
+                format: uri
+              created_at:
+                type: string
+                format: date-time
+              updated_at:
+                type: string
+                format: date-time
           example: []
+        state:
+          type: string
+          enum:
+          - approved
+          - rejected
+          - pending
+          example: approved
+        user:
+          $ref: '#/components/schemas/SimpleUser'
+        comment:
+          type: string
+          example: example_value
     SimpleCommit:
       type: object
       properties:
@@ -930,33 +898,6 @@ components:
             email:
               type: string
               format: email
-          example: example_value
-    SimpleUser:
-      type: object
-      properties:
-        login:
-          type: string
-          example: example_value
-        id:
-          type: integer
-          example: abc123
-        node_id:
-          type: string
-          example: '500123'
-        avatar_url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        html_url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        type:
-          type: string
           example: example_value
     WorkflowRun:
       type: object
@@ -1079,7 +1020,73 @@ components:
           $ref: '#/components/schemas/MinimalRepository'
         head_commit:
           $ref: '#/components/schemas/SimpleCommit'
+    MinimalRepository:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: abc123
+        node_id:
+          type: string
+          example: '500123'
+        name:
+          type: string
+          example: Example Title
+        full_name:
+          type: string
+          example: example_value
+        owner:
+          $ref: '#/components/schemas/SimpleUser'
+        private:
+          type: boolean
+          example: true
+        html_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        description:
+          type: string
+          nullable: true
+          example: A sample description.
+    SimpleUser:
+      type: object
+      properties:
+        login:
+          type: string
+          example: example_value
+        id:
+          type: integer
+          example: abc123
+        node_id:
+          type: string
+          example: '500123'
+        avatar_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        html_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        type:
+          type: string
+          example: example_value
   parameters:
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
     perPage:
       name: per_page
       in: query
@@ -1088,27 +1095,6 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
-    runId:
-      name: run_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The unique identifier of the workflow run.
-    attemptNumber:
-      name: attempt_number
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The attempt number of the workflow run.
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
     owner:
       name: owner
       in: path
@@ -1116,6 +1102,20 @@ components:
       schema:
         type: string
       description: The account owner of the repository.
+    attemptNumber:
+      name: attempt_number
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The attempt number of the workflow run.
+    runId:
+      name: run_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The unique identifier of the workflow run.
     page:
       name: page
       in: query

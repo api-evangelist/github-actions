@@ -442,6 +442,43 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    runnerId:
+      name: runner_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
   schemas:
     RunnerApplication:
       type: object
@@ -480,6 +517,16 @@ components:
           - read-only
           - custom
           example: read-only
+    AuthenticationToken:
+      type: object
+      properties:
+        token:
+          type: string
+          example: example_value
+        expires_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
     SelfHostedRunner:
       type: object
       properties:
@@ -507,53 +554,6 @@ components:
           items:
             $ref: '#/components/schemas/RunnerLabel'
           example: []
-    AuthenticationToken:
-      type: object
-      properties:
-        token:
-          type: string
-          example: example_value
-        expires_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-  parameters:
-    perPage:
-      name: per_page
-      in: query
-      schema:
-        type: integer
-        default: 30
-        maximum: 100
-      description: The number of results per page (max 100).
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
-    owner:
-      name: owner
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The account owner of the repository.
-    runnerId:
-      name: runner_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique identifier of the self-hosted runner.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
   securitySchemes:
     bearerAuth:
       type: http

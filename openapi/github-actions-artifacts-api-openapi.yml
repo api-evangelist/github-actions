@@ -219,13 +219,20 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    page:
-      name: page
-      in: query
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    artifactId:
+      name: artifact_id
+      in: path
+      required: true
       schema:
         type: integer
-        default: 1
-      description: The page number of the results to fetch.
+      description: The unique identifier of the artifact.
     perPage:
       name: per_page
       in: query
@@ -234,20 +241,6 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
-    runId:
-      name: run_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The unique identifier of the workflow run.
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
     owner:
       name: owner
       in: path
@@ -255,13 +248,20 @@ components:
       schema:
         type: string
       description: The account owner of the repository.
-    artifactId:
-      name: artifact_id
+    runId:
+      name: run_id
       in: path
       required: true
       schema:
         type: integer
-      description: The unique identifier of the artifact.
+      description: The unique identifier of the workflow run.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
   schemas:
     Artifact:
       type: object
