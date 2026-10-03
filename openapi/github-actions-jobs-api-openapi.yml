@@ -269,13 +269,34 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    repo:
-      name: repo
+    runId:
+      name: run_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The unique identifier of the workflow run.
+    owner:
+      name: owner
       in: path
       required: true
       schema:
         type: string
-      description: The name of the repository without the .git extension.
+      description: The account owner of the repository.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    attemptNumber:
+      name: attempt_number
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The attempt number of the workflow run.
     perPage:
       name: per_page
       in: query
@@ -284,34 +305,13 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
-    owner:
-      name: owner
+    repo:
+      name: repo
       in: path
       required: true
       schema:
         type: string
-      description: The account owner of the repository.
-    attemptNumber:
-      name: attempt_number
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The attempt number of the workflow run.
-    runId:
-      name: run_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: The unique identifier of the workflow run.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
+      description: The name of the repository without the .git extension.
   schemas:
     JobStep:
       type: object

@@ -176,28 +176,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    variableName:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the variable.
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
-    perPage:
-      name: per_page
-      in: query
-      schema:
-        type: integer
-        default: 30
-        maximum: 100
-      description: The number of results per page (max 100).
     owner:
       name: owner
       in: path
@@ -212,6 +190,28 @@ components:
         type: integer
         default: 1
       description: The page number of the results to fetch.
+    variableName:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the variable.
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
   schemas:
     ActionsVariable:
       type: object

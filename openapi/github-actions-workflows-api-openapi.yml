@@ -306,45 +306,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
-    perPage:
-      name: per_page
-      in: query
-      schema:
-        type: integer
-        default: 30
-        maximum: 100
-      description: The number of results per page (max 100).
-    owner:
-      name: owner
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The account owner of the repository.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
-    workflowId:
-      name: workflow_id
-      in: path
-      required: true
-      schema:
-        oneOf:
-        - type: integer
-        - type: string
-      description: The ID of the workflow or the workflow file name.
   schemas:
     WorkflowUsage:
       type: object
@@ -368,42 +329,22 @@ components:
                 total_ms:
                   type: integer
           example: example_value
-    Workflow:
+    SimpleUser:
       type: object
       properties:
+        login:
+          type: string
+          example: example_value
         id:
           type: integer
-          description: Unique identifier of the workflow.
           example: abc123
         node_id:
           type: string
           example: '500123'
-        name:
+        avatar_url:
           type: string
-          description: The name of the workflow.
-          example: Example Title
-        path:
-          type: string
-          description: The path of the workflow file relative to the root of the repository.
-          example: example_value
-        state:
-          type: string
-          enum:
-          - active
-          - deleted
-          - disabled_fork
-          - disabled_inactivity
-          - disabled_manually
-          - unknown
-          example: active
-        created_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
+          format: uri
+          example: https://www.example.com
         url:
           type: string
           format: uri
@@ -412,43 +353,8 @@ components:
           type: string
           format: uri
           example: https://www.example.com
-        badge_url:
+        type:
           type: string
-          format: uri
-          example: https://www.example.com
-    SimpleCommit:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
-        tree_id:
-          type: string
-          example: '500123'
-        message:
-          type: string
-          example: example_value
-        timestamp:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        author:
-          type: object
-          properties:
-            name:
-              type: string
-            email:
-              type: string
-              format: email
-          example: example_value
-        committer:
-          type: object
-          properties:
-            name:
-              type: string
-            email:
-              type: string
-              format: email
           example: example_value
     WorkflowRun:
       type: object
@@ -571,6 +477,88 @@ components:
           $ref: '#/components/schemas/MinimalRepository'
         head_commit:
           $ref: '#/components/schemas/SimpleCommit'
+    SimpleCommit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        tree_id:
+          type: string
+          example: '500123'
+        message:
+          type: string
+          example: example_value
+        timestamp:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+          example: example_value
+        committer:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+          example: example_value
+    Workflow:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the workflow.
+          example: abc123
+        node_id:
+          type: string
+          example: '500123'
+        name:
+          type: string
+          description: The name of the workflow.
+          example: Example Title
+        path:
+          type: string
+          description: The path of the workflow file relative to the root of the repository.
+          example: example_value
+        state:
+          type: string
+          enum:
+          - active
+          - deleted
+          - disabled_fork
+          - disabled_inactivity
+          - disabled_manually
+          - unknown
+          example: active
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        html_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        badge_url:
+          type: string
+          format: uri
+          example: https://www.example.com
     MinimalRepository:
       type: object
       properties:
@@ -603,33 +591,45 @@ components:
           type: string
           nullable: true
           example: A sample description.
-    SimpleUser:
-      type: object
-      properties:
-        login:
-          type: string
-          example: example_value
-        id:
-          type: integer
-          example: abc123
-        node_id:
-          type: string
-          example: '500123'
-        avatar_url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        html_url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        type:
-          type: string
-          example: example_value
+  parameters:
+    workflowId:
+      name: workflow_id
+      in: path
+      required: true
+      schema:
+        oneOf:
+        - type: integer
+        - type: string
+      description: The ID of the workflow or the workflow file name.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
   securitySchemes:
     bearerAuth:
       type: http

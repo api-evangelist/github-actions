@@ -131,20 +131,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
-    org:
-      name: org
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The organization name.
     owner:
       name: owner
       in: path
@@ -152,21 +138,35 @@ components:
       schema:
         type: string
       description: The account owner of the repository.
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
   schemas:
+    OidcCustomSubOrg:
+      type: object
+      properties:
+        include_claim_keys:
+          type: array
+          items:
+            type: string
+          example: []
     OidcCustomSub:
       type: object
       properties:
         use_default:
           type: boolean
           example: true
-        include_claim_keys:
-          type: array
-          items:
-            type: string
-          example: []
-    OidcCustomSubOrg:
-      type: object
-      properties:
         include_claim_keys:
           type: array
           items:

@@ -230,6 +230,36 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    runnerGroupId:
+      name: runner_group_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner group.
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
   schemas:
     RunnerGroup:
       type: object
@@ -256,36 +286,6 @@ components:
         allows_public_repositories:
           type: boolean
           example: true
-  parameters:
-    org:
-      name: org
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The organization name.
-    perPage:
-      name: per_page
-      in: query
-      schema:
-        type: integer
-        default: 30
-        maximum: 100
-      description: The number of results per page (max 100).
-    runnerGroupId:
-      name: runner_group_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique identifier of the self-hosted runner group.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
   securitySchemes:
     bearerAuth:
       type: http

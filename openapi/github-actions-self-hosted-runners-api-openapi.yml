@@ -443,20 +443,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
-    runnerId:
-      name: runner_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique identifier of the self-hosted runner.
     owner:
       name: owner
       in: path
@@ -464,6 +450,20 @@ components:
       schema:
         type: string
       description: The account owner of the repository.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
+    runnerId:
+      name: runner_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner.
     perPage:
       name: per_page
       in: query
@@ -472,14 +472,39 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
-    page:
-      name: page
-      in: query
+    repo:
+      name: repo
+      in: path
+      required: true
       schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
+        type: string
+      description: The name of the repository without the .git extension.
   schemas:
+    AuthenticationToken:
+      type: object
+      properties:
+        token:
+          type: string
+          example: example_value
+        expires_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    RunnerLabel:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - read-only
+          - custom
+          example: read-only
     RunnerApplication:
       type: object
       properties:
@@ -502,31 +527,6 @@ components:
         sha256_checksum:
           type: string
           example: example_value
-    RunnerLabel:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: abc123
-        name:
-          type: string
-          example: Example Title
-        type:
-          type: string
-          enum:
-          - read-only
-          - custom
-          example: read-only
-    AuthenticationToken:
-      type: object
-      properties:
-        token:
-          type: string
-          example: example_value
-        expires_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
     SelfHostedRunner:
       type: object
       properties:
