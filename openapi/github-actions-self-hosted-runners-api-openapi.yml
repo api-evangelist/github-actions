@@ -442,91 +442,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    owner:
-      name: owner
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The account owner of the repository.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
-    runnerId:
-      name: runner_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique identifier of the self-hosted runner.
-    perPage:
-      name: per_page
-      in: query
-      schema:
-        type: integer
-        default: 30
-        maximum: 100
-      description: The number of results per page (max 100).
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
   schemas:
-    AuthenticationToken:
-      type: object
-      properties:
-        token:
-          type: string
-          example: example_value
-        expires_at:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-    RunnerLabel:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: abc123
-        name:
-          type: string
-          example: Example Title
-        type:
-          type: string
-          enum:
-          - read-only
-          - custom
-          example: read-only
-    RunnerApplication:
-      type: object
-      properties:
-        os:
-          type: string
-          example: example_value
-        architecture:
-          type: string
-          example: example_value
-        download_url:
-          type: string
-          format: uri
-          example: https://www.example.com
-        filename:
-          type: string
-          example: example_value
-        temp_download_token:
-          type: string
-          example: example_value
-        sha256_checksum:
-          type: string
-          example: example_value
     SelfHostedRunner:
       type: object
       properties:
@@ -554,6 +470,90 @@ components:
           items:
             $ref: '#/components/schemas/RunnerLabel'
           example: []
+    RunnerApplication:
+      type: object
+      properties:
+        os:
+          type: string
+          example: example_value
+        architecture:
+          type: string
+          example: example_value
+        download_url:
+          type: string
+          format: uri
+          example: https://www.example.com
+        filename:
+          type: string
+          example: example_value
+        temp_download_token:
+          type: string
+          example: example_value
+        sha256_checksum:
+          type: string
+          example: example_value
+    AuthenticationToken:
+      type: object
+      properties:
+        token:
+          type: string
+          example: example_value
+        expires_at:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    RunnerLabel:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        type:
+          type: string
+          enum:
+          - read-only
+          - custom
+          example: read-only
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 30
+        maximum: 100
+      description: The number of results per page (max 100).
+    runnerId:
+      name: runner_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner.
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
   securitySchemes:
     bearerAuth:
       type: http

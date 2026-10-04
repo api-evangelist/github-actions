@@ -190,23 +190,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ActionsRepositoryPermissions:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          example: true
-        allowed_actions:
-          type: string
-          enum:
-          - all
-          - local_only
-          - selected
-          example: all
-        selected_actions_url:
-          type: string
-          format: uri
-          example: https://www.example.com
     ActionsDefaultWorkflowPermissions:
       type: object
       properties:
@@ -244,14 +227,24 @@ components:
           type: string
           format: uri
           example: https://www.example.com
+    ActionsRepositoryPermissions:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        allowed_actions:
+          type: string
+          enum:
+          - all
+          - local_only
+          - selected
+          example: all
+        selected_actions_url:
+          type: string
+          format: uri
+          example: https://www.example.com
   parameters:
-    owner:
-      name: owner
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The account owner of the repository.
     org:
       name: org
       in: path
@@ -266,6 +259,13 @@ components:
       schema:
         type: string
       description: The name of the repository without the .git extension.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
   securitySchemes:
     bearerAuth:
       type: http

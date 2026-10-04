@@ -176,20 +176,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    owner:
-      name: owner
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The account owner of the repository.
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
     variableName:
       name: name
       in: path
@@ -212,6 +198,20 @@ components:
       schema:
         type: string
       description: The name of the repository without the .git extension.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
   schemas:
     ActionsVariable:
       type: object

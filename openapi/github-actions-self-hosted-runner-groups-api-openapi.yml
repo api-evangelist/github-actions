@@ -231,27 +231,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-      description: The page number of the results to fetch.
-    runnerGroupId:
-      name: runner_group_id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique identifier of the self-hosted runner group.
-    org:
-      name: org
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The organization name.
     perPage:
       name: per_page
       in: query
@@ -260,6 +239,27 @@ components:
         default: 30
         maximum: 100
       description: The number of results per page (max 100).
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
+    runnerGroupId:
+      name: runner_group_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique identifier of the self-hosted runner group.
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+      description: The page number of the results to fetch.
   schemas:
     RunnerGroup:
       type: object
