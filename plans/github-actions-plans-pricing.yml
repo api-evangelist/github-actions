@@ -253,3 +253,59 @@ maintainers:
     email: support@github.com
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units:
+  - compute
+  - data
+  plans:
+  - name: GitHub Free
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - compute
+    - data
+    - other
+    periods:
+    - month
+  - name: GitHub Pro
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - compute
+    - data
+    periods:
+    - month
+  - name: GitHub Free for organizations
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - compute
+    - data
+    - other
+    periods:
+    - month
+  - name: GitHub Team
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - compute
+    - data
+    periods:
+    - month
+  - name: GitHub Enterprise Cloud
+    access: enterprise
+    model: free
+    model_how: derived
+    units:
+    - compute
+    - data
+    periods:
+    - month
