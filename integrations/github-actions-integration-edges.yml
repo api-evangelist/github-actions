@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/github-actions/integrations
 - https://n8n.io/integrations/github-actions/
@@ -7,10 +7,3833 @@ source:
 - https://monid.ai/tools/github-actions
 checked:
 - https://composio.dev/toolkits/github-actions
+- https://github.com/marketplace?type=actions
 - https://monid.ai/tools/github-actions
 - https://n8n.io/integrations/github-actions/
 - https://zapier.com/apps/github-actions/integrations
 summary: null
-marketplace_apps: []
-edges: []
+marketplace_apps:
+- marketplace: own
+  channel: partner-built
+  app: github-actions
+  url: https://github.com/marketplace?type=actions
+  app_count: 34120
+  adapter: sweep-devtools.py:github-actions
+  listed: 1119
+  filter: verified-creator actions only
+  dropped_by_cap: 33001
+  publishers: 390
+  publishers_linked: 198
+  publishers_platform: 2
+  listings_partner_built: 1075
+  listings_platform_built: 44
+  note: one edge per linked publisher (listing_count on the edge); unlinked publishers counted, not written
+edges:
+- partner_name: 'GitHub Marketplace (actions): platform-built'
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: provider-built
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://github.com/marketplace?type=actions
+  listing_count: 44
+  publishers:
+  - GitHub
+  - GitHub Actions
+  apps:
+  - Checkout
+  - Cache
+  - GitHub Script
+  - Setup Node.js environment
+  - Upload a Build Artifact
+  platform_built: true
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+- partner_name: Microsoft Azure
+  partner: microsoft-azure
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/azure-login
+  partner_url: https://docs.microsoft.com/en-us/azure/
+  partner_domain: microsoft.com
+  listing_count: 50
+  apps:
+  - Azure Login
+  - Azure WebApp
+  - Deploy to Kubernetes cluster
+  - Helm tool installer
+  - Azure Functions Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Microsoft
+  partner: microsoft
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-msbuild
+  partner_url: https://opensource.microsoft.com
+  partner_domain: microsoft.com
+  listing_count: 32
+  apps:
+  - setup-msbuild
+  - Run Playwright tests
+  - powerplatform-actions
+  - gpt-review
+  - security-devops-action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: ServiceNow
+  partner: servicenow
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/servicenow-devops-change-automation
+  partner_url: https://www.servicenow.com
+  partner_domain: servicenow.com
+  listing_count: 17
+  apps:
+  - ServiceNow DevOps Change Automation
+  - ServiceNow CI/CD Instance Scan
+  - ServiceNow CI/CD Apply Changes
+  - ServiceNow CI/CD Run ATF Test Suite
+  - ServiceNow CI/CD Publish App
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Octopus Deploy
+  partner: octopus-deploy
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/install-octopus-cli
+  partner_url: https://octopus.com
+  partner_domain: octopus.com
+  listing_count: 13
+  apps:
+  - Install Octopus CLI
+  - Create Release in Octopus Deploy
+  - Push Package to Octopus Deploy
+  - Run Runbook in Octopus Deploy
+  - Push Build Information to Octopus Deploy
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: AccuKnox
+  partner: accuknox
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/accuknox-iac
+  partner_url: https://www.accuknox.com
+  partner_domain: accuknox.com
+  listing_count: 13
+  apps:
+  - AccuKnox IaC
+  - AccuKnox Container Scan
+  - AccuKnox DAST
+  - AccuKnox SAST
+  - AccuKnox Secret Scan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Datadog, Inc.
+  partner: datadog
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/datadog-synthetics-ci
+  partner_url: https://datadoghq.com
+  partner_domain: datadoghq.com
+  listing_count: 12
+  apps:
+  - Datadog Synthetics CI
+  - Ensure CI Success
+  - Configure Datadog Test Visibility
+  - Run python black code formatter
+  - Datadog Upload dSYMs
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Docker
+  partner: docker
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/build-and-push-docker-images
+  partner_url: https://www.docker.com
+  partner_domain: docker.com
+  listing_count: 10
+  apps:
+  - Build and push Docker images
+  - Docker Login
+  - Docker Setup Buildx
+  - Docker Metadata action
+  - Docker Setup QEMU
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: HashiCorp
+  partner: hashicorp
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/hashicorp-setup-terraform
+  partner_url: https://hashicorp.com
+  partner_domain: hashicorp.com
+  listing_count: 10
+  apps:
+  - HashiCorp - Setup Terraform
+  - HashiCorp Vault
+  - Setup HashiCorp Packer
+  - HashiCorp's Link Checker
+  - Setup HashiCorp Nomad Pack
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Veracode
+  partner: veracode
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/veracode-upload-and-scan
+  partner_url: https://www.veracode.com/
+  partner_domain: veracode.com
+  listing_count: 10
+  apps:
+  - Veracode Upload And Scan
+  - Veracode Static Analysis Pipeline Scan and SARIF import
+  - Veracode Dependency Scanning
+  - Veracode Pipeline-Scan
+  - Veracode DAST Essentials Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Red Hat GitHub Actions
+  partner: red-hat
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/buildah-build
+  partner_url: https://redhat.com
+  partner_domain: redhat.com
+  listing_count: 9
+  apps:
+  - Buildah Build
+  - Push To Registry
+  - Podman Login
+  - Source to Image Build
+  - OpenShift Tools Installer
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Depot
+  partner: depot-dev
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/build-docker-images-with-depot
+  partner_url: https://depot.dev
+  partner_domain: depot.dev
+  listing_count: 9
+  apps:
+  - Build Docker images with Depot
+  - Setup Depot
+  - Depot Bake
+  - Depot Pull
+  - Use Depot
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Contrast Security OSS
+  partner: contrast-security
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/contrast-scan-analyze
+  partner_url: https://www.contrastsecurity.com
+  partner_domain: contrastsecurity.com
+  listing_count: 9
+  apps:
+  - Contrast Scan Analyze
+  - Contrast Security SCA
+  - Contrast AI SmartFix
+  - Contrast Verify
+  - Contrast Security Azure Spring Cloud Deploy
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Postman CS Engineering
+  partner: postman
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/postman-enterprise-automation-api-onboarding
+  partner_url: https://postman.com
+  partner_domain: postman.com
+  listing_count: 9
+  apps:
+  - 'Postman Enterprise Automation: API Onboarding'
+  - 'Postman Enterprise Automation: Smoke Flow'
+  - 'Postman Enterprise Automation: Insights Linking'
+  - 'Postman Enterprise Automation: Service Token'
+  - 'Postman Enterprise Automation: Repo Sync'
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: International Business Machines
+  partner: ibm
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-to-ibm-cloud-foundry
+  partner_url: https://www.ibm.com/opensource/
+  partner_domain: ibm.com
+  listing_count: 8
+  apps:
+  - Deploy to IBM Cloud Foundry
+  - IBM Cloud CLI
+  - Code Engine GitHub Action
+  - Rational Functional Tester GitHub Action
+  - Rational Performance Tester GitHub Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Aqua Security
+  partner: aqua-security
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/aqua-security-trivy
+  partner_url: https://aquasec.com
+  partner_domain: aquasec.com
+  listing_count: 7
+  apps:
+  - Aqua Security Trivy
+  - Run tfsec PR commenter
+  - Run tfsec with sarif upload
+  - tfsec action
+  - Chain Bench action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Oracle GitHub Actions
+  partner: oracle
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-java-development-kits-built-by-oracle
+  partner_url: https://opensource.oracle.com
+  partner_domain: oracle.com
+  listing_count: 6
+  apps:
+  - Setup Java Development Kits built by Oracle
+  - Run an Oracle Cloud Infrastructure (OCI) CLI command
+  - Configure Kubectl for Oracle Container Engine for Kubernetes (OKE)
+  - Get or create an Oracle Cloud Infrastructure Registry (OCIR) repository
+  - Login to Oracle Cloud Infrastructure Registry (OCIR)
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: ProjectDiscovery
+  partner: projectdiscovery
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/naabu-action
+  partner_url: https://projectdiscovery.io/
+  partner_domain: projectdiscovery.io
+  listing_count: 6
+  apps:
+  - Naabu Action
+  - SubFinder Action
+  - Notify Action
+  - dnsx Action
+  - httpx Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Orca Security
+  partner: orca-security
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/orca-security-iac-security
+  partner_url: https://orca.security
+  partner_domain: orca.security
+  listing_count: 6
+  apps:
+  - Orca Security - IaC Security
+  - Orca Security - Container Image Scanning
+  - Orca Security - SCA / Secret Scanning
+  - Orca Security - Secret Detection (Git Repos)
+  - Orca Security - SCA Security
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Autify
+  partner: autify
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/run-test-on-autify-for-web
+  partner_url: https://autify.com/
+  partner_domain: autify.com
+  listing_count: 6
+  apps:
+  - Run test on Autify for Web
+  - Autify for Mobile Run Test Plan
+  - Setup Autify Command Line Interface (CLI)
+  - Run test on Autify for Mobile
+  - Upload build to Autify for Mobile
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sentry
+  partner: sentry-system
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sentry-release
+  partner_url: https://sentry.io
+  partner_domain: sentry.io
+  listing_count: 5
+  apps:
+  - Sentry Release
+  - action-github-app-token
+  - Only Robots
+  - action-migrations
+  - Sentry Prevent
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: ZAP
+  partner: owasp-zap
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/zap-full-scan
+  partner_url: https://zaproxy.org
+  partner_domain: zaproxy.org
+  listing_count: 5
+  apps:
+  - ZAP Full Scan
+  - ZAP Baseline Scan
+  - ZAP API Scan
+  - ZAP Automation Framework Scan
+  - ZAP MCP Scan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sourcegraph
+  partner: sourcegraph
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/codenotify
+  partner_url: https://sourcegraph.com
+  partner_domain: sourcegraph.com
+  listing_count: 5
+  apps:
+  - codenotify
+  - Sourcegraph Rust LSIF Indexer
+  - Sourcegraph Go LSIF Indexer
+  - Sourcegraph Dart LSIF Indexer
+  - Sourcegraph LSIF Uploader
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Buf
+  partner: buf
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/buf-action
+  partner_url: https://buf.build
+  partner_domain: buf.build
+  listing_count: 5
+  apps:
+  - Buf Action
+  - buf-setup
+  - buf-breaking
+  - buf-lint
+  - buf-push
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Checkmarx
+  partner: checkmarx
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/chainalert
+  partner_url: https://checkmarx.com
+  partner_domain: checkmarx.com
+  listing_count: 5
+  apps:
+  - ChainAlert
+  - DustiLock
+  - KICS Github Action
+  - Vorpal Github Action With reviewdog
+  - Checkmarx AST Github Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Astral
+  partner: astral
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/astral-sh-setup-uv
+  partner_url: https://astral.sh
+  partner_domain: astral.sh
+  listing_count: 4
+  apps:
+  - astral-sh/setup-uv
+  - ruff-action
+  - astral-sh/attest-action
+  - pyx-auth-action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: JFrog Ltd.
+  partner: jfrog
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/jfrog-boost
+  partner_url: https://jfrog.com
+  partner_domain: jfrog.com
+  listing_count: 4
+  apps:
+  - JFrog Boost
+  - Setup JFrog CLI
+  - JFrog Fly
+  - Deploy Update
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Codacy
+  partner: codacy
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/git-version
+  partner_url: https://www.codacy.com
+  partner_domain: codacy.com
+  listing_count: 4
+  apps:
+  - Git Version
+  - Codacy Coverage Reporter
+  - Codacy Analysis CLI
+  - Codacy CLI V2
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: MATLAB Actions
+  partner: matlab
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-matlab
+  partner_url: https://www.mathworks.com/solutions/continuous-integration.html
+  partner_domain: mathworks.com
+  listing_count: 4
+  apps:
+  - Setup MATLAB
+  - Run MATLAB Command
+  - Run MATLAB Tests
+  - Run MATLAB Build
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: New Relic
+  partner: new-relic
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/new-relic-application-deployment-marker
+  partner_url: https://newrelic.com
+  partner_domain: newrelic.com
+  listing_count: 4
+  apps:
+  - New Relic Application Deployment Marker
+  - Bi-directional Wiki Sync Action
+  - Repolinter Action
+  - Validate Nerdpack Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: LaunchDarkly
+  partner: launchdarkly
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/launchdarkly-code-references
+  partner_url: https://launchdarkly.com
+  partner_domain: launchdarkly.com
+  listing_count: 4
+  apps:
+  - LaunchDarkly Code References
+  - LaunchDarkly Code References in Pull Request
+  - LaunchDarkly Flags
+  - OctoSTS
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Augment Code
+  partner: augment-code
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/augment-review-pr
+  partner_url: https://augmentcode.com/
+  partner_domain: augmentcode.com
+  listing_count: 4
+  apps:
+  - Augment Review PR
+  - Augment Agent
+  - Augment Describe PR
+  - Augment Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: 42Crunch
+  partner: 42crunch
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/42crunch-rest-api-static-security-testing
+  partner_url: https://42crunch.com
+  partner_domain: 42crunch.com
+  listing_count: 4
+  apps:
+  - 42Crunch REST API Static Security Testing
+  - 42Crunch REST API Static Security Testing - Freemium
+  - 42Crunch API Conformance Scan
+  - 42Crunch REST API Dynamic Security Testing Freemium
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Grafana Labs
+  partner: grafana-com
+  partner_match: domain+verified
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/run-grafana-k6-tests
+  partner_url: https://grafana.com
+  partner_domain: grafana.com
+  listing_count: 4
+  apps:
+  - Run Grafana k6 tests
+  - Setup Grafana k6
+  - k6registry
+  - Setup xk6
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: PlanetScale
+  partner: planetscale
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-pscale
+  partner_url: https://planetscale.com
+  partner_domain: planetscale.com
+  listing_count: 4
+  apps:
+  - Setup pscale
+  - Deploy a Deploy Request
+  - Create Database Password
+  - Create Deploy Request
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Port
+  partner: port-io
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/ocean-sail
+  partner_url: https://port.io
+  partner_domain: port.io
+  listing_count: 4
+  apps:
+  - 🌊 Ocean Sail
+  - port-github-action
+  - Port Cookiecutter Action
+  - Port Sender
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Ansible
+  partner: ansible
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/run-ansible-lint
+  partner_url: https://www.ansible.com/
+  partner_domain: ansible.com
+  listing_count: 3
+  apps:
+  - run-ansible-lint
+  - ansible-content-actions
+  - Ansible Publish
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Pulumi
+  partner: pulumi
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/pulumi-cli-action
+  partner_url: https://pulumi.com/
+  partner_domain: pulumi.com
+  listing_count: 3
+  apps:
+  - Pulumi CLI Action
+  - Pulumi Auth Action
+  - esc-action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: sigstore
+  partner: sigstore
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/cosign-installer
+  partner_url: https://sigstore.dev
+  partner_domain: sigstore.dev
+  listing_count: 3
+  apps:
+  - cosign-installer
+  - gh-action-sigstore-python
+  - sigstore-conformance
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Chainguard
+  partner: chainguard
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/update-the-image-digest
+  partner_url: https://chainguard.dev
+  partner_domain: chainguard.dev
+  listing_count: 3
+  apps:
+  - Update the image digest
+  - Malcontent PR Diff Analyzer
+  - Setup chainctl
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Tenable
+  partner: tenable
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/terrascan-iac-scanner
+  partner_url: https://tenable.com
+  partner_domain: tenable.com
+  listing_count: 3
+  apps:
+  - Terrascan IaC scanner
+  - Accurics GitHub Action
+  - Tenable Cloud Security
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Doppler
+  partner: doppler
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/install-doppler-cli
+  partner_url: https://www.doppler.com
+  partner_domain: doppler.com
+  listing_count: 3
+  apps:
+  - Install Doppler CLI
+  - Fetch Doppler Secrets
+  - Go Supported Version Check
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Palo Alto Networks
+  partner: palo-alto-networks
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/prisma-cloud-scan
+  partner_url: https://www.paloaltonetworks.com
+  partner_domain: paloaltonetworks.com
+  listing_count: 3
+  apps:
+  - Prisma Cloud Scan
+  - Cortex Cloud Scan
+  - paloaltonetworks/cov
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Scaleway
+  partner: scaleway
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/scaleway-cli
+  partner_url: https://scaleway.com
+  partner_domain: scaleway.com
+  listing_count: 3
+  apps:
+  - Scaleway CLI
+  - Scaleway Secret Manager
+  - serverless-container-action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Honeycomb
+  partner: honeycomb
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/honeycomb-buildevents
+  partner_url: https://www.honeycomb.io
+  partner_domain: honeycomb.io
+  listing_count: 3
+  apps:
+  - Honeycomb Buildevents
+  - Create Asana Task
+  - Grit Check
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Hasura
+  partner: hasura
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/comment-progress
+  partner_url: https://hasura.io
+  partner_domain: hasura.io
+  listing_count: 3
+  apps:
+  - Comment Progress
+  - DDN Deployment
+  - Docs Assertion Tester
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: LocalStack
+  partner: localstack
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-localstack
+  partner_url: https://localstack.cloud
+  partner_domain: localstack.cloud
+  listing_count: 3
+  apps:
+  - Setup LocalStack
+  - LocalStack GitHub Actions Login
+  - Push Workflow Data to Tinybird
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: StackRox
+  partner: stackrox
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/kube-linter
+  partner_url: https://stackrox.io
+  partner_domain: stackrox.io
+  listing_count: 3
+  apps:
+  - kube-linter
+  - Install roxctl
+  - central-login
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Astronomer
+  partner: astronomer
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro
+  partner_url: https://astronomer.io
+  partner_domain: astronomer.io
+  listing_count: 3
+  apps:
+  - Deploy Apache Airflow DAGs to Astro
+  - Otto Review
+  - Setup Astro CLI
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Synopsys Inc.
+  partner: synopsys
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/detect-rapid-scan-action
+  partner_url: https://www.synopsys.com/
+  partner_domain: synopsys.com
+  listing_count: 3
+  apps:
+  - Detect Rapid Scan Action
+  - Synopsys Action
+  - Coverity json-output-v7 Report
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: CrowdStrike
+  partner: crowdstrike
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/crowdstrike-fcs-cli-github-action
+  partner_url: https://www.crowdstrike.com
+  partner_domain: crowdstrike.com
+  listing_count: 3
+  apps:
+  - CrowdStrike FCS CLI GitHub Action
+  - CrowdStrike Container Image Scan
+  - CrowdStrike Falconutil GitHub Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Hugging Face
+  partner: hugging-face
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sync-github-to-hugging-face-hub
+  partner_url: https://huggingface.co/
+  partner_domain: huggingface.co
+  listing_count: 3
+  apps:
+  - Sync GitHub to Hugging Face Hub
+  - Semver release @ Huggingface
+  - Helm Publish Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: DigiCert
+  partner: digicert
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/digicert-binary-signing
+  partner_url: https://digicert.com/
+  partner_domain: digicert.com
+  listing_count: 3
+  apps:
+  - DigiCert Binary Signing
+  - DigiCert® Container Signing Action
+  - GPG signing with Software Trust Manager
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sauce Labs
+  partner: sauce-labs
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sauce-connect-proxy-action
+  partner_url: https://saucelabs.com
+  partner_domain: saucelabs.com
+  listing_count: 3
+  apps:
+  - Sauce Connect Proxy Action
+  - Saucectl Run Action
+  - Sauce Security Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: authzed
+  partner: authzed
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/validate-spicedb-schema
+  partner_url: https://authzed.com
+  partner_domain: authzed.com
+  listing_count: 3
+  apps:
+  - Validate SpiceDB schema
+  - SpiceDB Test Server
+  - Run Authzed Test Server
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Socket
+  partner: socket
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/socket-basics-security-scanner
+  partner_url: https://socket.dev
+  partner_domain: socket.dev
+  listing_count: 3
+  apps:
+  - Socket Basics Security Scanner
+  - Security Scan and Comment Action
+  - Socket Security (Action)
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Adobe, Inc.
+  partner: adobe
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/aio-apps
+  partner_url: https://adobe.com
+  partner_domain: adobe.com
+  listing_count: 3
+  apps:
+  - AIO Apps
+  - AIO CLI Setup
+  - Update your package.json with an npm pre-release version, and update dependencies with pre-release versions
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Lokalise
+  partner: lokalise
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/pull-from-lokalise
+  partner_url: https://lokalise.com
+  partner_domain: lokalise.com
+  listing_count: 3
+  apps:
+  - Pull from Lokalise
+  - Push to Lokalise
+  - Install Lokalise CLI
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Pangea
+  partner: pangea
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/pangea-vault-secrets-action
+  partner_url: https://pangea.cloud
+  partner_domain: pangea.cloud
+  listing_count: 3
+  apps:
+  - Pangea Vault Secrets Action
+  - Log to Pangea
+  - Call Pangea API
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Portswigger Cloud
+  partner: portswigger
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/defectdojo-findings-threshold
+  partner_url: https://portswigger.net/
+  partner_domain: portswigger.net
+  listing_count: 3
+  apps:
+  - defectdojo findings threshold
+  - defectdojo import report
+  - defectdojo active findings
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Statsig
+  partner: statsig
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/statsig-github-sdk
+  partner_url: https://www.statsig.com/
+  partner_domain: statsig.com
+  listing_count: 3
+  apps:
+  - Statsig Github SDK
+  - kubectl via eksctl
+  - Statsig Github Code References
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: OpenText
+  partner: opentext-cybersecurity
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sdp-ci-integration
+  partner_url: https://opentext.com
+  partner_domain: opentext.com
+  listing_count: 3
+  apps:
+  - SDP CI Integration
+  - SDP-FT-MBT GitHub Action Integration
+  - OpenText Functional Testing GitHub Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Truffle Security
+  partner: truffle-security
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/trufflehog-oss
+  partner_url: https://trufflesecurity.com
+  partner_domain: trufflesecurity.com
+  listing_count: 2
+  apps:
+  - TruffleHog OSS
+  - TruffleHog Enterprise
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Anthropic
+  partner: anthropic
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/claude-code-action-official
+  partner_url: https://anthropic.com
+  partner_domain: anthropic.com
+  listing_count: 2
+  apps:
+  - Claude Code Action Official
+  - Claude Code Base Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Expo
+  partner: expo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/expo-github-action
+  partner_url: https://expo.dev
+  partner_domain: expo.dev
+  listing_count: 2
+  apps:
+  - Expo GitHub Action
+  - Expo Preview Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: The Ruby Programming Language
+  partner: ruby
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+  partner_url: https://www.ruby-lang.org/
+  partner_domain: ruby-lang.org
+  listing_count: 2
+  apps:
+  - Setup Ruby, JRuby and TruffleRuby
+  - Setup Ruby Pkgs
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Tailscale
+  partner: tailscale
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/connect-tailscale
+  partner_url: https://tailscale.com
+  partner_domain: tailscale.com
+  listing_count: 2
+  apps:
+  - Connect Tailscale
+  - Sync Tailscale ACLs
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Snyk
+  partner: snyk
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/snyk
+  partner_url: https://snyk.io/
+  partner_domain: snyk.io
+  listing_count: 2
+  apps:
+  - Snyk
+  - driftctl-action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: DigitalOcean
+  partner: digital-ocean
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/github-action-for-digitalocean-doctl
+  partner_url: https://digitalocean.com
+  partner_domain: digitalocean.com
+  listing_count: 2
+  apps:
+  - GitHub Action for DigitalOcean - doctl
+  - DigitalOcean App Platform deployment
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Open Source Security Foundation (OpenSSF)
+  partner: openssf
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/ossf-scorecard-action
+  partner_url: https://openssf.org
+  partner_domain: openssf.org
+  listing_count: 2
+  apps:
+  - OSSF Scorecard action
+  - OpenSSF Scorecard Monitor
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sonar
+  partner: sonar
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/official-sonarqube-scan
+  partner_url: https://www.sonarsource.com
+  partner_domain: sonarsource.com
+  listing_count: 2
+  apps:
+  - Official SonarQube Scan
+  - SonarQube Quality Gate Check
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: fly.io
+  partner: fly-io
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/github-action-for-flyctl
+  partner_url: https://fly.io
+  partner_domain: fly.io
+  listing_count: 2
+  apps:
+  - GitHub Action for flyctl
+  - PR Review Apps on fly.io
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: PortSwigger
+  partner: portswigger
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/dastardly-scan-action
+  partner_url: https://portswigger.net/
+  partner_domain: portswigger.net
+  listing_count: 2
+  apps:
+  - Dastardly Scan Action
+  - ci-driven-scan-github-action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Anchore, Inc.
+  partner: anchore
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/anchore-container-scan
+  partner_url: https://anchore.com/
+  partner_domain: anchore.com
+  listing_count: 2
+  apps:
+  - Anchore Container Scan
+  - Anchore SBOM Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Trunk.io
+  partner: trunk
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/trunk-check
+  partner_url: https://trunk.io
+  partner_domain: trunk.io
+  listing_count: 2
+  apps:
+  - Trunk Check
+  - trunk breakpoint
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: dagger
+  partner: dagger
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/dagger-for-github
+  partner_url: https://dagger.io
+  partner_domain: dagger.io
+  listing_count: 2
+  apps:
+  - Dagger for GitHub
+  - Checks for Github Actions
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: ReadMe
+  partner: readme
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/rdme-sync-to-readme
+  partner_url: https://readme.com
+  partner_domain: readme.com
+  listing_count: 2
+  apps:
+  - rdme 🦉 Sync to ReadMe
+  - Scheduled Milestones
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Vercel
+  partner: vercel
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/vercel-ai
+  partner_url: https://vercel.com
+  partner_domain: vercel.com
+  listing_count: 2
+  apps:
+  - vercel-ai
+  - Setup Turborepo Remote Cache
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: NuGet
+  partner: nuget
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-nuget-exe-for-use-with-actions
+  partner_url: https://nuget.org
+  partner_domain: nuget.org
+  listing_count: 2
+  apps:
+  - Setup NuGet.exe for use with actions
+  - NuGet Login
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: BrowserStack
+  partner: browserstack
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/browserstack-actions
+  partner_url: http://www.browserstack.com/
+  partner_domain: browserstack.com
+  listing_count: 2
+  apps:
+  - BrowserStack Actions
+  - BrowserStack Accessibility DevTools
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Databricks
+  partner: databricks
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/run-databricks-notebook
+  partner_url: https://databricks.com
+  partner_domain: databricks.com
+  listing_count: 2
+  apps:
+  - Run Databricks Notebook
+  - upload-dbfs-temp
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: HubSpot
+  partner: hubspot
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/hubspot-cms-deploy
+  partner_url: http://product.hubspot.com/
+  partner_domain: hubspot.com
+  listing_count: 2
+  apps:
+  - HubSpot CMS Deploy
+  - HubSpot Project Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: mabl
+  partner: mabl
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/run-mabl-tests
+  partner_url: https://mabl.com
+  partner_domain: mabl.com
+  listing_count: 2
+  apps:
+  - Run mabl tests
+  - Setup mabl CLI
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Snowflake
+  partner: snowflake
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/install-snowflake-cli
+  partner_url: https://snowflake.com
+  partner_domain: snowflake.com
+  listing_count: 2
+  apps:
+  - Install Snowflake CLI
+  - Snowflake Actions
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: RubyGems
+  partner: rubygems
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/release-gem
+  partner_url: https://rubygems.org
+  partner_domain: rubygems.org
+  listing_count: 2
+  apps:
+  - Release Gem
+  - Configure RubyGems Credentials
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Codefresh
+  partner: codefresh
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/codefresh-pipeline-runner
+  partner_url: http://www.codefresh.io
+  partner_domain: codefresh.io
+  listing_count: 2
+  apps:
+  - Codefresh pipeline runner
+  - codefresh-report-image
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: checkmarx-ts
+  partner: checkmarx
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/checkmarx-cxflow-action
+  partner_url: https://www.checkmarx.com
+  partner_domain: checkmarx.com
+  listing_count: 2
+  apps:
+  - Checkmarx CxFlow Action
+  - Checkmarx One++ GitHub Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Asana
+  partner: asana
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/attach-pull-request-to-asana-task
+  partner_url: https://asana.com
+  partner_domain: asana.com
+  listing_count: 2
+  apps:
+  - Attach pull request to Asana task
+  - Add comment to Asana Task
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Algolia
+  partner: algolia
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/algolia-crawler-automatic-crawl
+  partner_url: https://www.algolia.com
+  partner_domain: algolia.com
+  listing_count: 2
+  apps:
+  - Algolia Crawler Automatic Crawl
+  - setup-algolia-cli
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sysdig
+  partner: sysdig
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/kubernetes-security-config-watch
+  partner_url: https://sysdig.com
+  partner_domain: sysdig.com
+  listing_count: 2
+  apps:
+  - Kubernetes Security Config Watch
+  - Sysdig Secure Inline Scan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Embrace
+  partner: embrace
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/run-speedcurve-tests
+  partner_url: https://embrace.io/
+  partner_domain: embrace.io
+  listing_count: 2
+  apps:
+  - Run SpeedCurve Tests
+  - Upload Symbols to Embrace
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: DevCycle
+  partner: devcycle
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/devcycle-feature-flag-insights-for-pull-requests
+  partner_url: https://devcycle.com
+  partner_domain: devcycle.com
+  listing_count: 2
+  apps:
+  - DevCycle Feature Flag Insights for Pull Requests
+  - DevCycle Feature Flag Code Usages
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Coder
+  partner: coder
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-coder
+  partner_url: https://coder.com
+  partner_domain: coder.com
+  listing_count: 2
+  apps:
+  - Setup Coder
+  - Coder Create Task
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Apify
+  partner: apify
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/push-actor-to-apify
+  partner_url: https://apify.com/
+  partner_domain: apify.com
+  listing_count: 2
+  apps:
+  - Push Actor to Apify
+  - Setup Apify CLI
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Cloudsmith
+  partner: cloudsmith
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/cloudsmith-push
+  partner_url: https://cloudsmith.com
+  partner_domain: cloudsmith.com
+  listing_count: 2
+  apps:
+  - Cloudsmith Push
+  - Cloudsmith CLI Setup
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Plivo
+  partner: plivo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/plivo-sms
+  partner_url: https://www.plivo.com
+  partner_domain: plivo.com
+  listing_count: 2
+  apps:
+  - Plivo SMS
+  - Plivo Call
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Restack
+  partner: restack
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/update-json-file
+  partner_url: https://restack.io
+  partner_domain: restack.io
+  listing_count: 2
+  apps:
+  - Update Json File
+  - Update Json File values
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Rapid7
+  partner: rapid7
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/insightcloudsec-scan
+  partner_url: http://www.rapid7.com/
+  partner_domain: rapid7.com
+  listing_count: 2
+  apps:
+  - insightCloudSec Scan
+  - Rapid7 InsightAppSec Scan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Nobl9
+  partner: nobl9
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/nobl9-sloctl-action
+  partner_url: https://www.nobl9.com
+  partner_domain: nobl9.com
+  listing_count: 2
+  apps:
+  - Nobl9 sloctl action
+  - Annotate Nobl9 SLO
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Prisma
+  partner: prisma
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/create-prisma-postgres-database
+  partner_url: https://www.prisma.io
+  partner_domain: prisma.io
+  listing_count: 2
+  apps:
+  - Create Prisma Postgres Database
+  - Delete Prisma Postgres Database
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: BeyondTrust Corporation
+  partner: beyondtrust
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/secrets-safe-action
+  partner_url: https://beyondtrust.com/
+  partner_domain: beyondtrust.com
+  listing_count: 2
+  apps:
+  - Secrets Safe Action
+  - BeyondTrust Workload Credentials Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: PolyAPI
+  partner: polyapi
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/polyapi-deployment-action-typescript
+  partner_url: https://polyapi.io
+  partner_domain: polyapi.io
+  listing_count: 2
+  apps:
+  - PolyAPI Deployment Action (TypeScript)
+  - PolyAPI Deployment Action (Python)
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Cloudflare
+  partner: cloudflare
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-to-cloudflare-workers-with-wrangler
+  partner_url: https://www.cloudflare.com
+  partner_domain: cloudflare.com
+  listing_count: 1
+  apps:
+  - Deploy to Cloudflare Workers with Wrangler
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Cypress.io
+  partner: cypressio
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/cypress-io
+  partner_url: https://cypress.io
+  partner_domain: cypress.io
+  listing_count: 1
+  apps:
+  - Cypress.io
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Bun
+  partner: bun
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-bun
+  partner_url: https://bun.com/
+  partner_domain: bun.com
+  listing_count: 1
+  apps:
+  - Setup Bun
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Serverless
+  partner: concept-serverless
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/serverless
+  partner_url: https://serverless.com
+  partner_domain: serverless.com
+  listing_count: 1
+  apps:
+  - Serverless
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Ghost
+  partner: ghost-org
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-ghost-theme
+  partner_url: https://ghost.org
+  partner_domain: ghost.org
+  listing_count: 1
+  apps:
+  - Deploy Ghost Theme
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: GitGuardian
+  partner: gitguardian
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/gitguardian-shield-action
+  partner_url: https://gitguardian.com
+  partner_domain: gitguardian.com
+  listing_count: 1
+  apps:
+  - GitGuardian Shield Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Infracost
+  partner: infracost
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/infracost-actions
+  partner_url: https://infracost.io
+  partner_domain: infracost.io
+  listing_count: 1
+  apps:
+  - Infracost Actions
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Oracle
+  partner: oracle
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/macaron-security-analysis-action
+  partner_url: https://developer.oracle.com/open-source.html
+  partner_domain: oracle.com
+  listing_count: 1
+  apps:
+  - Macaron Security Analysis Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Supabase
+  partner: supabase
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/supabase-cli-action
+  partner_url: https://supabase.com
+  partner_domain: supabase.com
+  listing_count: 1
+  apps:
+  - Supabase CLI Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: WP Engine
+  partner: wpengine
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-wordpress-to-wp-engine
+  partner_url: https://wpengine.com
+  partner_domain: wpengine.com
+  listing_count: 1
+  apps:
+  - Deploy WordPress to WP Engine
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Nx
+  partner: nx-dev
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/nx-set-shas
+  partner_url: https://nx.dev
+  partner_domain: nx.dev
+  listing_count: 1
+  apps:
+  - Nx set SHAs
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Twilio Labs
+  partner: twilio
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/twilio-sms
+  partner_url: https://twilio.com/labs
+  partner_domain: twilio.com
+  listing_count: 1
+  apps:
+  - Twilio SMS
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Chromatic
+  partner: chromatic
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/publish-to-chromatic
+  partner_url: https://www.chromatic.com
+  partner_domain: chromatic.com
+  listing_count: 1
+  apps:
+  - Publish to Chromatic
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: VoidZero
+  partner: voidzero
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-vp
+  partner_url: https://voidzero.dev
+  partner_domain: voidzero.dev
+  listing_count: 1
+  apps:
+  - Setup vp
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: promptfoo
+  partner: promptfoo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/test-llm-outputs
+  partner_url: https://promptfoo.dev
+  partner_domain: promptfoo.dev
+  listing_count: 1
+  apps:
+  - Test LLM outputs
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Replicate
+  partner: replicate
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-cog
+  partner_url: https://replicate.com
+  partner_domain: replicate.com
+  listing_count: 1
+  apps:
+  - Setup Cog
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: FOSSA
+  partner: fossa
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/official-fossa-action
+  partner_url: http://fossa.com
+  partner_domain: fossa.com
+  listing_count: 1
+  apps:
+  - Official FOSSA Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Ionic
+  partner: ionic
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/trigger-mobile-builds-with-appflow
+  partner_url: https://ionic.io
+  partner_domain: ionic.io
+  listing_count: 1
+  apps:
+  - Trigger Mobile Builds with Appflow
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Teamwork.com
+  partner: teamwork
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/teamwork-github-sync
+  partner_url: https://www.teamwork.com/
+  partner_domain: teamwork.com
+  listing_count: 1
+  apps:
+  - Teamwork GitHub Sync
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Nightfall AI
+  partner: nightfall-ai
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/nightfall-dlp-action
+  partner_url: https://www.nightfall.ai
+  partner_domain: nightfall.ai
+  listing_count: 1
+  apps:
+  - Nightfall DLP Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Buildkite
+  partner: buildkite-com
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/trigger-buildkite-pipeline
+  partner_url: https://buildkite.com
+  partner_domain: buildkite.com
+  listing_count: 1
+  apps:
+  - Trigger Buildkite Pipeline
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Endor Labs
+  partner: endor-labs
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/endor-labs-scan
+  partner_url: https://www.endorlabs.com/
+  partner_domain: endorlabs.com
+  listing_count: 1
+  apps:
+  - Endor Labs Scan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: CircleCI Public
+  partner: circleci
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/trigger-circleci-pipeline
+  partner_url: https://circleci.com
+  partner_domain: circleci.com
+  listing_count: 1
+  apps:
+  - Trigger CircleCI Pipeline
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Linear
+  partner: linear-app
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/linear-release
+  partner_url: https://linear.app
+  partner_domain: linear.app
+  listing_count: 1
+  apps:
+  - Linear Release
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Bump.sh
+  partner: bump-sh
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/bump-sh-api-documentation-changelog
+  partner_url: https://bump.sh
+  partner_domain: bump.sh
+  listing_count: 1
+  apps:
+  - Bump.sh API Documentation & Changelog
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Prefect
+  partner: prefect
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-a-prefect-flow
+  partner_url: https://prefect.io
+  partner_domain: prefect.io
+  listing_count: 1
+  apps:
+  - Deploy a Prefect flow
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Armory
+  partner: armory
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/armory-continuous-deployment-as-a-service
+  partner_url: http://www.armory.io/
+  partner_domain: armory.io
+  listing_count: 1
+  apps:
+  - Armory Continuous Deployment-as-a-Service
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Theneo
+  partner: theneo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/theneo-api-documentation
+  partner_url: https://theneo.io/
+  partner_domain: theneo.io
+  listing_count: 1
+  apps:
+  - Theneo API Documentation
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sourcery
+  partner: sourceryai
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sourcery-action
+  partner_url: https://sourcery.ai
+  partner_domain: sourcery.ai
+  listing_count: 1
+  apps:
+  - Sourcery Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Nokia (Rapid)
+  partner: rapidapi
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/rapidapi-testing-trigger
+  partner_url: https://rapidapi.com
+  partner_domain: rapidapi.com
+  listing_count: 1
+  apps:
+  - RapidAPI Testing Trigger
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: StackHawk, Inc.
+  partner: stackhawk
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/stackhawk-hawkscan-action
+  partner_url: https://stackhawk.com
+  partner_domain: stackhawk.com
+  listing_count: 1
+  apps:
+  - StackHawk HawkScan Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Perforce Software
+  partner: perforce
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/perforce-helix-core-actions
+  partner_url: https://www.perforce.com
+  partner_domain: perforce.com
+  listing_count: 1
+  apps:
+  - Perforce Helix Core Actions
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Secure Code Warrior
+  partner: secure-code-warrior
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/add-secure-code-warrior-contextual-training-to-sarif
+  partner_url: https://securecodewarrior.com
+  partner_domain: securecodewarrior.com
+  listing_count: 1
+  apps:
+  - Add Secure Code Warrior contextual training to SARIF
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Unblocked
+  partner: unblocked
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-self-hosted-runners-to-ec2-spot-on-demand
+  partner_url: https://getunblocked.com
+  partner_domain: getunblocked.com
+  listing_count: 1
+  apps:
+  - Deploy self-hosted runners to EC2 (Spot/On-Demand)
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Speakeasy
+  partner: speakeasy
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/speakeasy-sdk-workflow-runner-action
+  partner_url: https://www.speakeasy.com
+  partner_domain: speakeasy.com
+  listing_count: 1
+  apps:
+  - Speakeasy SDK Workflow Runner Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Bearer by Cycode
+  partner: cycode
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/bearer-action
+  partner_url: https://cycode.com/cygives/
+  partner_domain: cycode.com
+  listing_count: 1
+  apps:
+  - Bearer Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: LeanIX GmbH
+  partner: leanix
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/nx-affected-dependencies-action
+  partner_url: http://www.leanix.net
+  partner_domain: leanix.net
+  listing_count: 1
+  apps:
+  - Nx affected dependencies action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Guardsquare
+  partner: guardsquare
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/appsweep-mobile-application-security-testing
+  partner_url: https://www.guardsquare.com
+  partner_domain: guardsquare.com
+  listing_count: 1
+  apps:
+  - AppSweep Mobile Application Security Testing
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: garden.io
+  partner: garden-io
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/garden-action
+  partner_url: https://garden.io
+  partner_domain: garden.io
+  listing_count: 1
+  apps:
+  - Garden Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Lacework, Inc.
+  partner: lacework
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/lw-scanner
+  partner_url: https://www.lacework.com
+  partner_domain: lacework.com
+  listing_count: 1
+  apps:
+  - lw-scanner
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Antithesis
+  partner: antithesis
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/antithesis-trigger-action
+  partner_url: https://www.antithesis.com/
+  partner_domain: antithesis.com
+  listing_count: 1
+  apps:
+  - Antithesis Trigger Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Soda - Data Quality Testing
+  partner: soda-data
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/soda-library-action
+  partner_url: https://www.soda.io
+  partner_domain: soda.io
+  listing_count: 1
+  apps:
+  - Soda Library Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: OpenText Application Security (Fortify)
+  partner: fortify
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/fortify-ast-scan
+  partner_url: https://www.opentext.com/products/application-security
+  partner_domain: opentext.com
+  listing_count: 1
+  apps:
+  - Fortify AST Scan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sonatype
+  partner: sonatype
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sonatype-github-actions
+  partner_url: https://www.sonatype.com
+  partner_domain: sonatype.com
+  listing_count: 1
+  apps:
+  - Sonatype GitHub Actions
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Pixee
+  partner: pixee-ai
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/upload-tool-results-to-pixeebot
+  partner_url: https://pixee.ai/
+  partner_domain: pixee.ai
+  listing_count: 1
+  apps:
+  - Upload Tool Results To Pixeebot
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Keeper Security
+  partner: keeper-security
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/keeper-secrets-manager-github-action
+  partner_url: https://keepersecurity.com
+  partner_domain: keepersecurity.com
+  listing_count: 1
+  apps:
+  - Keeper Secrets Manager Github Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: DataRobot - OSS
+  partner: datarobot
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/custom-models-action
+  partner_url: https://datarobot.com
+  partner_domain: datarobot.com
+  listing_count: 1
+  apps:
+  - Custom Models Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: PagerDuty
+  partner: pagerduty
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/pagerduty-change-events
+  partner_url: https://www.pagerduty.com/
+  partner_domain: pagerduty.com
+  listing_count: 1
+  apps:
+  - PagerDuty Change Events
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Postman Inc.
+  partner: postman
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/postman-cli
+  partner_url: https://www.postman.com/
+  partner_domain: postman.com
+  listing_count: 1
+  apps:
+  - Postman CLI
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Northflank Ltd
+  partner: northflank
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-to-northflank
+  partner_url: https://northflank.com
+  partner_domain: northflank.com
+  listing_count: 1
+  apps:
+  - Deploy to Northflank
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Dapr
+  partner: dapr
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/dapr-tool-installer
+  partner_url: https://dapr.io
+  partner_domain: dapr.io
+  listing_count: 1
+  apps:
+  - Dapr tool installer
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Scalr
+  partner: scalr
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/scalr-github-action
+  partner_url: http://scalr.com
+  partner_domain: scalr.com
+  listing_count: 1
+  apps:
+  - Scalr Github Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Formspree
+  partner: formspree
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/deploy-formspree-forms
+  partner_url: https://formspree.io
+  partner_domain: formspree.io
+  listing_count: 1
+  apps:
+  - Deploy Formspree Forms
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Taktile
+  partner: taktile
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/await-taktile-deployment
+  partner_url: https://www.taktile.com
+  partner_domain: taktile.com
+  listing_count: 1
+  apps:
+  - Await Taktile Deployment
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: nitric
+  partner: nitric
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/nitric-cli-automated-cloud-deployment
+  partner_url: https://nitric.io
+  partner_domain: nitric.io
+  listing_count: 1
+  apps:
+  - Nitric CLI - Automated Cloud Deployment
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: GoDaddy
+  partner: godaddy
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/tartufo-scan
+  partner_url: https://godaddy.com/engineering/
+  partner_domain: godaddy.com
+  listing_count: 1
+  apps:
+  - Tartufo Scan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Paperspace
+  partner: paperspace
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/paperspace-deploy
+  partner_url: https://www.paperspace.com
+  partner_domain: paperspace.com
+  listing_count: 1
+  apps:
+  - Paperspace Deploy
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Rainforest QA
+  partner: rainforest-qa
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/rainforest-qa-github-action
+  partner_url: https://www.rainforestqa.com/
+  partner_domain: rainforestqa.com
+  listing_count: 1
+  apps:
+  - Rainforest QA GitHub Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Rootly
+  partner: rootly
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/rootly-pulse
+  partner_url: https://rootly.com/
+  partner_domain: rootly.com
+  listing_count: 1
+  apps:
+  - rootly-pulse
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Drata
+  partner: drata
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/drata-compliance-as-code-action
+  partner_url: https://drata.com
+  partner_domain: drata.com
+  listing_count: 1
+  apps:
+  - Drata Compliance as Code Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: CyberArk
+  partner: cyberark
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/cyberark-conjur-secret-fetcher-action
+  partner_url: https://www.cyberark.com
+  partner_domain: cyberark.com
+  listing_count: 1
+  apps:
+  - CyberArk Conjur Secret Fetcher Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Mondoo Inc
+  partner: mondoo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/mondoo-action
+  partner_url: https://mondoo.com
+  partner_domain: mondoo.com
+  listing_count: 1
+  apps:
+  - Mondoo Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Beyond Identity
+  partner: beyond-identity
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/authorize-commit-signing
+  partner_url: https://beyondidentity.com
+  partner_domain: beyondidentity.com
+  listing_count: 1
+  apps:
+  - Authorize Commit Signing
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sideko, Inc.
+  partner: sideko
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sideko-sdk-update
+  partner_url: https://www.sideko.dev
+  partner_domain: sideko.dev
+  listing_count: 1
+  apps:
+  - Sideko SDK Update
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Faros AI
+  partner: faros
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/faros-cicd-github-action
+  partner_url: https://www.faros.ai
+  partner_domain: faros.ai
+  listing_count: 1
+  apps:
+  - faros-cicd-github-action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Akeyless Community
+  partner: akeyless
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/akeyless-authentication-and-fetching-secrets
+  partner_url: https://www.akeyless.io
+  partner_domain: akeyless.io
+  listing_count: 1
+  apps:
+  - Akeyless Authentication and fetching secrets
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Phrase
+  partner: phrase
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/phrase-cli-install
+  partner_url: https://phrase.com
+  partner_domain: phrase.com
+  listing_count: 1
+  apps:
+  - Phrase CLI install
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: LinearB
+  partner: linearb
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/gitstream-repo-agent
+  partner_url: https://linearb.io
+  partner_domain: linearb.io
+  listing_count: 1
+  apps:
+  - gitStream repo agent
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: dbt Labs
+  partner: dbt
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/dbt-cloud-job-action
+  partner_url: https://getdbt.com
+  partner_domain: getdbt.com
+  listing_count: 1
+  apps:
+  - dbt Cloud Job action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Zimperium
+  partner: zimperium
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/zimperium-zscan
+  partner_url: https://www.zimperium.com
+  partner_domain: zimperium.com
+  listing_count: 1
+  apps:
+  - Zimperium zScan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: mockoon
+  partner: mockoon
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/mockoon-cli
+  partner_url: https://mockoon.com
+  partner_domain: mockoon.com
+  listing_count: 1
+  apps:
+  - mockoon-cli
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: noteable
+  partner: noteable
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/run-noteable-notebook
+  partner_url: http://noteable.io
+  partner_domain: noteable.io
+  listing_count: 1
+  apps:
+  - run-noteable-notebook
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Spacelift
+  partner: spacelift
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/setup-spacectl
+  partner_url: https://spacelift.io
+  partner_domain: spacelift.io
+  listing_count: 1
+  apps:
+  - Setup Spacectl
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Lob
+  partner: lob
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sam-jackson-greeter
+  partner_url: https://lob.com
+  partner_domain: lob.com
+  listing_count: 1
+  apps:
+  - Sam Jackson Greeter
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Escape - Offensive security for the teams that are 100x outnumbered
+  partner: escape
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/escape-cli
+  partner_url: https://escape.tech
+  partner_domain: escape.tech
+  listing_count: 1
+  apps:
+  - Escape CLI
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Dashlane
+  partner: dashlane
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/load-secrets-from-dashlane
+  partner_url: https://www.dashlane.com/
+  partner_domain: dashlane.com
+  listing_count: 1
+  apps:
+  - Load secrets from Dashlane
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Atlan Pte Ltd.
+  partner: atlan
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/atlan-action
+  partner_url: https://atlan.com
+  partner_domain: atlan.com
+  listing_count: 1
+  apps:
+  - Atlan Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Apollo GraphQL
+  partner: apollo-graphql
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/apollo-federation-subgraph-compatibility
+  partner_url: https://apollographql.com
+  partner_domain: apollographql.com
+  listing_count: 1
+  apps:
+  - Apollo Federation Subgraph Compatibility
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Stacklok
+  partner: stacklok
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/frizbee-action
+  partner_url: https://stacklok.com
+  partner_domain: stacklok.com
+  listing_count: 1
+  apps:
+  - Frizbee Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Blacksmith
+  partner: blacksmith-sh
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/blacksmith-cache
+  partner_url: https://www.blacksmith.sh/
+  partner_domain: blacksmith.sh
+  listing_count: 1
+  apps:
+  - Blacksmith Cache
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: telnyx
+  partner: telnyx
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/telnyx-pr-reviewer
+  partner_url: https://telnyx.com
+  partner_domain: telnyx.com
+  listing_count: 1
+  apps:
+  - Telnyx PR Reviewer
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: OpsLevel
+  partner: opslevel
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/opslevel-report-deploy
+  partner_url: https://www.opslevel.com
+  partner_domain: opslevel.com
+  listing_count: 1
+  apps:
+  - OpsLevel - Report Deploy
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Athenian
+  partner: athenian
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/no-confusion
+  partner_url: https://athenian.com
+  partner_domain: athenian.com
+  listing_count: 1
+  apps:
+  - no-confusion
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Authentik Security
+  partner: authentik
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/configure-authentik-credentials-action-for-github-actions
+  partner_url: https://goauthentik.io/
+  partner_domain: goauthentik.io
+  listing_count: 1
+  apps:
+  - '"Configure authentik Credentials" Action for GitHub Actions'
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: OpenStatus
+  partner: openstatus
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/openstatus-synthetics-ci
+  partner_url: https://www.openstatus.dev
+  partner_domain: openstatus.dev
+  listing_count: 1
+  apps:
+  - OpenStatus Synthetics CI
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Swimm
+  partner: swimm
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/swimm-verify
+  partner_url: https://swimm.io/
+  partner_domain: swimm.io
+  listing_count: 1
+  apps:
+  - Swimm Verify
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: liblab
+  partner: liblab
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sdk-updates
+  partner_url: https://liblab.com
+  partner_domain: liblab.com
+  listing_count: 1
+  apps:
+  - SDK updates
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Check Point Software Technologies Ltd.
+  partner: checkpoint
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/cloudguard-code-security-scan
+  partner_url: https://www.checkpoint.com/
+  partner_domain: checkpoint.com
+  listing_count: 1
+  apps:
+  - CloudGuard Code Security Scan
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Appdome
+  partner: appdome
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/appdome-build-2secure
+  partner_url: http://www.appdome.com
+  partner_domain: appdome.com
+  listing_count: 1
+  apps:
+  - Appdome build-2secure
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Zuplo
+  partner: zuplo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/rate-my-openapi-action
+  partner_url: https://zuplo.com
+  partner_domain: zuplo.com
+  listing_count: 1
+  apps:
+  - Rate My OpenAPI Action
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Directus
+  partner: directus
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/npm-package-existence-checker
+  partner_url: https://directus.com
+  partner_domain: directus.com
+  listing_count: 1
+  apps:
+  - npm Package Existence Checker
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Aikido Security
+  partner: aikido-security
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/aikido-code-coverage
+  partner_url: https://www.aikido.dev
+  partner_domain: aikido.dev
+  listing_count: 1
+  apps:
+  - Aikido Code Coverage
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: WorkOS
+  partner: workos
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/install-workos-cli
+  partner_url: https://workos.com
+  partner_domain: workos.com
+  listing_count: 1
+  apps:
+  - Install WorkOS CLI
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Stream.Security
+  partner: stream-security
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/lightlytics-publisher
+  partner_url: https://www.stream.security
+  partner_domain: stream.security
+  listing_count: 1
+  apps:
+  - Lightlytics Publisher
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: GoCardless
+  partner: gocardless
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/publish-techdocs
+  partner_url: https://gocardless.com
+  partner_domain: gocardless.com
+  listing_count: 1
+  apps:
+  - Publish TechDocs
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sematext Group, Inc.
+  partner: sematext
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/sematext-synthetics-ci-cd
+  partner_url: https://sematext.com/
+  partner_domain: sematext.com
+  listing_count: 1
+  apps:
+  - Sematext Synthetics CI/CD
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Sigma Computing
+  partner: sigma-computing
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/dbt_semantics_to_sigma
+  partner_url: https://sigmacomputing.com
+  partner_domain: sigmacomputing.com
+  listing_count: 1
+  apps:
+  - dbt_semantics_to_sigma
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
 templates: []
