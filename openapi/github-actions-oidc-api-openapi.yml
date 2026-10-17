@@ -130,26 +130,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  schemas:
-    OidcCustomSubOrg:
-      type: object
-      properties:
-        include_claim_keys:
-          type: array
-          items:
-            type: string
-          example: []
-    OidcCustomSub:
-      type: object
-      properties:
-        use_default:
-          type: boolean
-          example: true
-        include_claim_keys:
-          type: array
-          items:
-            type: string
-          example: []
   parameters:
     org:
       name: org
@@ -172,6 +152,26 @@ components:
       schema:
         type: string
       description: The account owner of the repository.
+  schemas:
+    OidcCustomSubOrg:
+      type: object
+      properties:
+        include_claim_keys:
+          type: array
+          items:
+            type: string
+          example: []
+    OidcCustomSub:
+      type: object
+      properties:
+        use_default:
+          type: boolean
+          example: true
+        include_claim_keys:
+          type: array
+          items:
+            type: string
+          example: []
   securitySchemes:
     bearerAuth:
       type: http

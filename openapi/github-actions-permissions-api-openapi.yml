@@ -189,19 +189,29 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    org:
+      name: org
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The organization name.
+    repo:
+      name: repo
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The name of the repository without the .git extension.
+    owner:
+      name: owner
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The account owner of the repository.
   schemas:
-    ActionsDefaultWorkflowPermissions:
-      type: object
-      properties:
-        default_workflow_permissions:
-          type: string
-          enum:
-          - read
-          - write
-          example: read
-        can_approve_pull_request_reviews:
-          type: boolean
-          example: true
     ActionsOrganizationPermissions:
       type: object
       properties:
@@ -227,6 +237,18 @@ components:
           type: string
           format: uri
           example: https://www.example.com
+    ActionsDefaultWorkflowPermissions:
+      type: object
+      properties:
+        default_workflow_permissions:
+          type: string
+          enum:
+          - read
+          - write
+          example: read
+        can_approve_pull_request_reviews:
+          type: boolean
+          example: true
     ActionsRepositoryPermissions:
       type: object
       properties:
@@ -244,28 +266,6 @@ components:
           type: string
           format: uri
           example: https://www.example.com
-  parameters:
-    org:
-      name: org
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The organization name.
-    repo:
-      name: repo
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The name of the repository without the .git extension.
-    owner:
-      name: owner
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The account owner of the repository.
   securitySchemes:
     bearerAuth:
       type: http
