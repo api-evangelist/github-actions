@@ -229,6 +229,8 @@ apis:
   humanURL: https://docs.github.com/en/actions
   baseURL: https://api.github.com
   tags:
+  - OpenID Connect
+  tags_raw:
   - OIDC
   properties:
   - type: OpenAPI
