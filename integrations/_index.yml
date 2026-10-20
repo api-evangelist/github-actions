@@ -86,6 +86,18 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: github-actions-okteto
+  label: Okteto
+  partner: okteto
+  partner_name: Okteto
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/marketplace/actions/okteto-pipeline
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: github-actions-docker
   label: Docker
   partner: docker
@@ -446,6 +458,18 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: github-actions-the-helm-project
+  label: The Helm Project
+  partner: helm
+  partner_name: The Helm Project
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/marketplace/actions/helm-chart-releaser
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: github-actions-pulumi
   label: Pulumi
   partner: pulumi
@@ -490,18 +514,6 @@
   marketplace: own
   channel: partner-built
   evidence: https://github.com/marketplace/actions/terrascan-iac-scanner
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: github-actions-doppler
-  label: Doppler
-  partner: doppler
-  partner_name: Doppler
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://github.com/marketplace/actions/install-doppler-cli
   source: edge
   relationship: platform-app
   status: not-a-workflow
@@ -970,6 +982,18 @@
   marketplace: own
   channel: partner-built
   evidence: https://github.com/marketplace/actions/run-databricks-notebook
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: github-actions-doppler
+  label: Doppler
+  partner: doppler
+  partner_name: Doppler
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/marketplace/actions/install-doppler-cli
   source: edge
   relationship: platform-app
   status: not-a-workflow
@@ -2054,18 +2078,6 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
-- slug: github-actions-zimperium
-  label: Zimperium
-  partner: zimperium
-  partner_name: Zimperium
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://github.com/marketplace/actions/zimperium-zscan
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: github-actions-mockoon
   label: mockoon
   partner: mockoon
@@ -2074,6 +2086,18 @@
   marketplace: own
   channel: partner-built
   evidence: https://github.com/marketplace/actions/mockoon-cli
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: github-actions-zimperium
+  label: Zimperium
+  partner: zimperium
+  partner_name: Zimperium
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/marketplace/actions/zimperium-zscan
   source: edge
   relationship: platform-app
   status: not-a-workflow

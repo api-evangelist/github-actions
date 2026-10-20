@@ -17,15 +17,15 @@ marketplace_apps:
   channel: partner-built
   app: github-actions
   url: https://github.com/marketplace?type=actions
-  app_count: 34120
+  app_count: 34355
   adapter: sweep-devtools.py:github-actions
-  listed: 1119
+  listed: 1123
   filter: verified-creator actions only
-  dropped_by_cap: 33001
-  publishers: 390
-  publishers_linked: 198
+  dropped_by_cap: 33232
+  publishers: 392
+  publishers_linked: 200
   publishers_platform: 2
-  listings_partner_built: 1075
+  listings_partner_built: 1079
   listings_platform_built: 44
   note: one edge per linked publisher (listing_count on the edge); unlinked publishers counted, not written
 edges:
@@ -172,7 +172,7 @@ edges:
   evidence: https://github.com/marketplace/actions/datadog-synthetics-ci
   partner_url: https://datadoghq.com
   partner_domain: datadoghq.com
-  listing_count: 12
+  listing_count: 11
   apps:
   - Datadog Synthetics CI
   - Ensure CI Success
@@ -181,6 +181,28 @@ edges:
   - Datadog Upload dSYMs
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Okteto
+  partner: okteto
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/okteto-pipeline
+  partner_url: https://okteto.com
+  partner_domain: okteto.com
+  listing_count: 11
+  apps:
+  - Okteto Pipeline
+  - Okteto Build
+  - Activate Namespace
+  - Destroy Okteto Pipeline
+  - Delete Namespace
+  detected_by: sweep-devtools.py
+  detected: '2026-10-19'
   badges:
   - Verified creator
 - partner_name: Docker
@@ -572,8 +594,8 @@ edges:
   apps:
   - ChainAlert
   - DustiLock
-  - KICS Github Action
   - Vorpal Github Action With reviewdog
+  - KICS Github Action
   - Checkmarx AST Github Action
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
@@ -830,6 +852,26 @@ edges:
   detected: '2026-10-14'
   badges:
   - Verified creator
+- partner_name: The Helm Project
+  partner: helm
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/helm-chart-releaser
+  partner_url: https://helm.sh
+  partner_domain: helm.sh
+  listing_count: 3
+  apps:
+  - Helm Chart Releaser
+  - Kind Cluster
+  - Helm Chart Testing
+  detected_by: sweep-devtools.py
+  detected: '2026-10-19'
+  badges:
+  - Verified creator
 - partner_name: Pulumi
   partner: pulumi
   partner_match: domain
@@ -906,26 +948,6 @@ edges:
   - Terrascan IaC scanner
   - Accurics GitHub Action
   - Tenable Cloud Security
-  detected_by: sweep-devtools.py
-  detected: '2026-10-14'
-  badges:
-  - Verified creator
-- partner_name: Doppler
-  partner: doppler
-  partner_match: domain
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  relationship: platform-app
-  direction: partner-built
-  evidence: https://github.com/marketplace/actions/install-doppler-cli
-  partner_url: https://www.doppler.com
-  partner_domain: doppler.com
-  listing_count: 3
-  apps:
-  - Install Doppler CLI
-  - Fetch Doppler Secrets
-  - Go Supported Version Check
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
   badges:
@@ -1687,6 +1709,25 @@ edges:
   apps:
   - Run Databricks Notebook
   - upload-dbfs-temp
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Doppler
+  partner: doppler
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/install-doppler-cli
+  partner_url: https://www.doppler.com
+  partner_domain: doppler.com
+  listing_count: 2
+  apps:
+  - Install Doppler CLI
+  - Go Supported Version Check
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
   badges:
@@ -3332,24 +3373,6 @@ edges:
   detected: '2026-10-14'
   badges:
   - Verified creator
-- partner_name: Zimperium
-  partner: zimperium
-  partner_match: domain
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  relationship: platform-app
-  direction: partner-built
-  evidence: https://github.com/marketplace/actions/zimperium-zscan
-  partner_url: https://www.zimperium.com
-  partner_domain: zimperium.com
-  listing_count: 1
-  apps:
-  - Zimperium zScan
-  detected_by: sweep-devtools.py
-  detected: '2026-10-14'
-  badges:
-  - Verified creator
 - partner_name: mockoon
   partner: mockoon
   partner_match: domain
@@ -3364,6 +3387,24 @@ edges:
   listing_count: 1
   apps:
   - mockoon-cli
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+  badges:
+  - Verified creator
+- partner_name: Zimperium
+  partner: zimperium
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://github.com/marketplace/actions/zimperium-zscan
+  partner_url: https://www.zimperium.com
+  partner_domain: zimperium.com
+  listing_count: 1
+  apps:
+  - Zimperium zScan
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
   badges:
