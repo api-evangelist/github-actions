@@ -1,0 +1,115 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://github.com/pricing
+sources:
+- https://github.com/pricing
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T120612
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-10-28'
+  evidence: Self-hosted deployment Self-hosted GitHub for on-prem appliances or self-managed cloud tenants.
+    Free Not included Team Not included Enterprise Enterprise Server
+  managed_tier: Team
+published: true
+note: GitHub plans page; Actions minutes included per plan tier. Self-hosted via Enterprise Server listed
+  under Enterprise plan.
+plan_count: 5
+currency: USD
+plans:
+- name: Free
+  price_text: $ 0 USD
+  price: 0
+  currency: USD
+  period: month
+  included_quota: Unlimited public/private repositories, Dependabot security and version updates, 2,000
+    CI/CD minutes/month, 500MB of Packages storage, Issues & Projects, Community support
+- name: Team
+  price_text: $ 4 USD per user / month
+  price: 4
+  currency: USD
+  period: month
+  unit: per user
+  included_quota: Everything from Free, plus Codespaces access, 3,000 CI/CD minutes/month, 2GB of Packages
+    storage, web-based support
+- name: Enterprise
+  price_text: $ 21 USD per user / month
+  price: 21
+  currency: USD
+  period: month
+  unit: per user
+  included_quota: Everything from Team, plus Copilot access, 50,000 CI/CD minutes/month, 50GB of Packages
+    storage
+- name: GitHub Codespaces add-on
+  price_text: Starting at $0.18 per hour of compute and $0.07 per GB of storage.
+  currency: USD
+  period: per-use
+  unit: compute hour / GB storage
+- name: Git Large File Storage
+  price_text: $5 per month for 50 GB bandwidth and 50 GB of storage.
+  price: 5
+  currency: USD
+  period: month
+  unit: 50 GB bandwidth and 50 GB storage
+rate_limit_statements:
+- 2,000 minutes/month Free for public repositories
+- 3,000 minutes/month Free for public repositories
+- 50,000 minutes/month Free for public repositories
+- Get started for free with up to 2,000 completions per month.
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  - metered
+  - seat
+  units:
+  - data
+  - seat
+  plans:
+  - name: Free
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Team
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: GitHub Codespaces add-on
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Git Large File Storage
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - month
