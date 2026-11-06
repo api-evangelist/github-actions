@@ -233,6 +233,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/github-actions-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -618,6 +621,9 @@ artifacts:
   packages/github-actions-packages.yml:
     method: searched
     evidence: declared in the artifact
+  patterns/github-actions-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/github-actions-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -631,6 +637,9 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   rules/github-actions-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/github-actions-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/github-actions-spectral-rules.yml:
@@ -672,9 +681,15 @@ artifacts:
   sla/github-actions-sla.yml:
     method: generated
     evidence: declared in the artifact
+  vendors/github-actions-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
   vocabulary/github-actions-vocabulary.yaml:
     method: unknown
     evidence: no authorship recorded
+  vocabulary/github-actions-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
   well-known/github-actions-oauth-authorization-server.json:
     method: unknown
     evidence: no authorship recorded
